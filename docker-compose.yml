@@ -1,0 +1,10 @@
+services:
+  web:
+    build: .
+    container_name: sistema_financeiro_web
+    ports:
+      - "8080:80"
+    volumes:
+      - ./:/var/www/html/
+    env_file:
+      - .env

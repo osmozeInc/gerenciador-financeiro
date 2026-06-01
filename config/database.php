@@ -1,10 +1,10 @@
 <?php
 
-$host   = '';
-$db     = 'postgres';
-$user   = '';
-$pass   = '';
-$port   = '5432';
+$host   = getenv('DB_HOST');
+$db     = getenv('DB_NAME');
+$user   = getenv('DB_USER');
+$pass   = getenv('DB_PASS');
+$port   = getenv('DB_PORT');
 
 $dsn = "pgsql:host=$host;port=$port;dbname=$db;";
 
@@ -18,5 +18,4 @@ try {
 } catch (PDOException $e) {
     echo "Erro ao conectar ao banco de dados: " . $e->getMessage();
 }
-
 ?>
