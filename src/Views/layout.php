@@ -3,31 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <title>Gerenciador Financeiro</title>
-    <style>
-        /* Estilo super básico só para você visualizar a separação */
-        body { display: flex; font-family: sans-serif; margin: 0; height: 100vh; }
-        aside { width: 250px; background: #333; color: white; padding: 20px; }
-        aside a { color: white; text-decoration: none; display: block; margin: 10px 0; }
-        main { flex: 1; padding: 20px; background: #f4f4f4; }
-    </style>
+
+    <link rel="stylesheet" href="/assets/css/layout.css">
 </head>
 <body>
 
-    <aside>
-        <h2>Financeiro</h2>
-        <nav>
-            <a href="/home">Dashboard</a>
-            <a href="/transacoes">Lançamentos</a>
-        </nav>
+    <aside class="menu-lateral">
+        <?php include __DIR__ . '/partials/aside.php'; ?>
     </aside>
 
-    <?php 
-        if (isset($viewPath) && file_exists($viewPath)) {
-            require_once $viewPath;
-        } else {
-            echo "<p>Erro: View principal não encontrada.</p>";
-        }
-    ?>
+    <main class="conteudo-central">
+        <?php 
+            if (isset($viewPath) && file_exists($viewPath))
+                require_once $viewPath;
+        ?>
+    </main>
+
+    <footer class="rodape">
+        <?php require_once __DIR__ . '/partials/footer.php'; ?>
+    </footer>
+
 
 </body>
 </html>

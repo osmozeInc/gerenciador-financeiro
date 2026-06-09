@@ -6,11 +6,20 @@ class HomeController extends Controller {
     
     public function index() {
         $categoriaModel = new Categoria();
-        $CategoriasAWS = $categoriaModel->listarTodas();
+        // $CategoriasAWS = $categoriaModel->listarTodas();
+
+        $formatador = new NumberFormatter('pt_BR', NumberFormatter::CURRENCY);
 
         $dadosParaTela = [
             'nome_usuario' => 'Caio',
-            'categorias'  => $CategoriasAWS,
+            'sobrenome_usuario' => 'Mendes',
+            'receita_bruta' => 220000 / 100,
+            'despesa_bruta' => 153000 / 100,
+            'formatacao_real' => $formatador,
+            'cofre' => 500000 / 100,
+            'receita_total' => 600000 / 100,
+            'investidos' => 300000 / 100,
+            // 'categorias'  => $CategoriasAWS,
         ];
 
         $this->render('home', $dadosParaTela);

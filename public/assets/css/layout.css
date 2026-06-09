@@ -1,0 +1,127 @@
+@charset "UTF-8";
+/* CSS DOS ARQUIVOS DE LAYOUT (ASIDE, ESTRUTURA DA TAG MAIN, FOOTER) */
+/* tema claro - padrão */
+:root {
+  --bg-main: #e0e0e0;
+  --bg-aside: #f5f5f5;
+  --bg-cards: #fff;
+  --text-color: #000;
+  --text-color-secondary: #555;
+  --divisor-color: #ccc;
+}
+
+/* tema escuro */
+[data-theme=dark] {
+  --bg-main: #222;
+  --bg-aside: #333;
+  --bg-cards: #444;
+  --text-color: #fff;
+  --text-color-secondary: #ccc;
+  --divisor-color: #555;
+}
+
+body {
+  background-color: var(--bg-main);
+  margin: 0;
+  padding: 0;
+}
+
+/* ========== ASIDE ========== */
+.menu-lateral {
+  position: fixed;
+  width: 250px;
+  height: 100vh;
+  background: var(--bg-aside);
+  padding: 2rem;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  box-sizing: border-box;
+}
+
+/* ========== MAIN ========== */
+.conteudo-central {
+  margin-left: 250px;
+  padding: 1rem;
+}
+.conteudo-central .page-title {
+  font-size: 1.75rem;
+  margin: 1rem 2rem;
+}
+.conteudo-central .resumo-geral {
+  position: relative;
+  background-color: var(--bg-cards);
+  border-radius: 1rem;
+  padding: 1rem 0;
+}
+.conteudo-central .resumo-geral .titles-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.conteudo-central .resumo-geral .titles-grid .title {
+  font-size: 1.1rem;
+  margin: 0 0 1rem 1rem;
+}
+.conteudo-central .resumo-geral .resumo-geral-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-evenly;
+  padding: 0 1rem;
+}
+.conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container .receita-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container .despesa-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container .receita-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container .despesa-title {
+  width: -moz-max-content;
+  width: max-content;
+  font-size: 0.8rem;
+  margin: 0;
+  color: var(--text-color-secondary);
+}
+.conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container .receita-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container .despesa-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container .receita-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container .despesa-valor {
+  font-size: 1rem;
+  margin: 0 0 1rem 0;
+  font-weight: bold;
+}
+.conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container .receita-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container .receita-valor {
+  color: green;
+}
+.conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container .despesa-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container .despesa-valor {
+  color: red;
+}
+.conteudo-central .resumo-geral .resumo-geral-grid .resumo-total {
+  border-radius: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding: 0 1rem;
+}
+.conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .cofres-container, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .receita-container, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container {
+  display: flex;
+  flex-direction: column;
+}
+.conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .cofres-container .cofres-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .cofres-container .investimentos-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .cofres-container .receita-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .receita-container .cofres-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .receita-container .investimentos-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .receita-container .receita-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container .cofres-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container .investimentos-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container .receita-title {
+  width: -moz-max-content;
+  width: max-content;
+  font-size: 0.8rem;
+  margin: 0;
+  color: var(--text-color-secondary);
+}
+.conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .cofres-container .cofres-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .cofres-container .investimentos-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .cofres-container .receita-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .receita-container .cofres-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .receita-container .investimentos-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .receita-container .receita-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container .cofres-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container .investimentos-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container .receita-valor {
+  font-size: 1rem;
+  margin: 0 0 1rem 0;
+  font-weight: bold;
+}
+.conteudo-central .resumo-geral .divider {
+  width: 3px;
+  height: calc(100% - 2rem);
+  position: absolute;
+  left: 50%;
+  top: 1rem;
+  border-radius: 1rem;
+  background-color: var(--divisor-color);
+}/*# sourceMappingURL=layout.css.map */

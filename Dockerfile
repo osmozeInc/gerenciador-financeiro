@@ -1,11 +1,13 @@
 # usa a imagem oficial do php 8.2 com o servidor apache
 FROM php:8.2-apache
 
-# atualizamos os pacotes do linux interno e intalamos a biblioteca do postgreeSQL
-RUN apt-get update && apt-get install -y libpq-dev
+# atualiza e baixa os pacotes do linux
+RUN apt-get update && apt-get install -y \
+    libpq-dev \
+    libicu-dev
 
-# Intalamos a extensão PDO para conectar o PHP com o postgreeSQL
-RUN docker-php-ext-install pdo pdo_pgsql
+# Extensões do PHP
+RUN docker-php-ext-install pdo pdo_pgsql intl
 
 # Habilitamos o mod_rewrite do Apache (tecnicamente essencial para as rotas do padrão MVC)
 RUN a2enmod rewrite
