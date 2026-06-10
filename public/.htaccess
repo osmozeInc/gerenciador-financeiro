@@ -1,0 +1,10 @@
+RewriteEngine On
+
+# Se o usuário tentar acessar um arquivo que existe fisicamente (ex: layout.css, logo.png)
+RewriteCond %{REQUEST_FILENAME} !-f
+
+# E se o usuário tentar acessar uma pasta que existe fisicamente (ex: /assets)
+RewriteCond %{REQUEST_FILENAME} !-d
+
+# Caso contrário, pegue qualquer URL e jogue silenciosamente para o index.php processar
+RewriteRule ^(.*)$ index.php [QSA,L]
