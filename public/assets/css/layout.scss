@@ -5,7 +5,7 @@
 :root {
     --bg-main: #e0e0e0;
     --bg-aside: #f2f2f2;
-    --bg-cards: #fff;
+    --bg-padrao: #fff;
     --text-primary: #000;
     --text-secondary: #727272;
     --text-especial: #128d29;
@@ -16,7 +16,7 @@
 [data-theme="dark"] {
     --bg-main: #222;
     --bg-aside: #333;
-    --bg-cards: #444;
+    --bg-padrao: #444;
     --text-primary: #fff;
     --text-secondary: #ccc;
     --text-especial: #29e04b;
@@ -109,7 +109,7 @@ body {
             }
             
             .menu-item:hover {
-                background-color: var(--bg-cards);
+                background-color: var(--bg-padrao);
             }
             
             .submenu-item {
@@ -120,7 +120,7 @@ body {
             .menu-item.active, .submenu-item.active {
                 font-weight: bold;
                 color: var(--text-especial);
-                background-color: var(--bg-cards);
+                background-color: var(--bg-padrao);
 
                 .bi-chevron-right {
                     display: none;
@@ -133,7 +133,7 @@ body {
                 padding: 0.5rem .2rem 0.5rem .6rem;
                 border: 1px solid var(--text-secondary);
                 border-radius: .5rem;
-                background: var(--bg-cards);
+                background: var(--bg-padrao);
                 overflow: hidden;
                 margin-top: 1rem;
 
@@ -175,101 +175,122 @@ body {
 }
 
 
-
-/* ========== MAIN ========== */
+/* ========== LAYOUT ========== */
 
 .conteudo-central {
-    margin-left: 250px;
-    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100vh;
 
-    .page-title {
-        font-size: 1.75rem;
-        margin: 1rem 2rem;
+    /* configuração comum da main para todas as paginas */
+    main {  
+        margin-left: 250px;
+        padding: 2rem;
     }
 
-    .resumo-geral {
-        position: relative;
-        background-color: var(--bg-cards);
-        border-radius: 1rem;
-        padding: 1rem 0;
+    footer {
+        padding: 1rem;
+        text-align: center;
+        background-color: var(--bg-padrao);
+        color: var(--text-secondary);
+    }
+
+
+    .dashboard-main {
+            .page-title {
+                font-size: 1.75rem;
+                margin: 1rem 2rem;
+            }
         
-        .titles-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-
-            .title {
-                font-size: 1.1rem;
-                margin: 0 0 1rem 1rem;
-            }
-        }
-
-        .resumo-geral-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-
-            .resumo-mensal {
-                display: flex;
-                align-items: flex-end;
-                justify-content: space-evenly;
-                padding: 0 1rem;
-                
-                .receita-container, .despesa-container {
-                    display: flex;
-                    flex-direction: column;
-                    align-items: center;
-                    
-                    .receita-title, .despesa-title {
-                        width: max-content;
-                        font-size: .8rem;
-                        margin: 0;
-                        color: var(--text-secondary);
-                    }
-                    .receita-valor, .despesa-valor {
-                        font-size: 1rem;
-                        margin: 0 0 1rem 0;
-                        font-weight: bold;
-                    }
-                    .receita-valor { color: green; }
-                    .despesa-valor { color: red; }
-                }
-                
-            }
-
-            .resumo-total {
+            .resumo-geral {
+                position: relative;
+                background-color: var(--bg-padrao);
                 border-radius: 1rem;
-                display: flex;
-                flex-direction: column;
-                align-items: start;
-                padding: 0 1rem;
+                padding: 1rem 0;
                 
-                .cofres-container, .receita-container, .investimentos-container {
-                    display: flex;
-                    flex-direction: column;
-                    
-                    .cofres-title, .investimentos-title, .receita-title {
-                        width: max-content;
-                        font-size: .8rem;
-                        margin: 0;
-                        color: var(--text-secondary);
-                    }
-                    .cofres-valor, .investimentos-valor, .receita-valor {
-                        font-size: 1rem;
-                        margin: 0 0 1rem 0;
-                        font-weight: bold;
+                .titles-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+        
+                    .title {
+                        font-size: 1.1rem;
+                        margin: 0 0 1rem 1rem;
                     }
                 }
+        
+                .resumo-geral-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+        
+                    .resumo-mensal {
+                        display: flex;
+                        align-items: flex-end;
+                        justify-content: space-evenly;
+                        padding: 0 1rem;
+                        
+                        .receita-container, .despesa-container {
+                            display: flex;
+                            flex-direction: column;
+                            align-items: center;
+                            
+                            .receita-title, .despesa-title {
+                                width: max-content;
+                                font-size: .8rem;
+                                margin: 0;
+                                color: var(--text-secondary);
+                            }
+                            .receita-valor, .despesa-valor {
+                                font-size: 1rem;
+                                margin: 0 0 1rem 0;
+                                font-weight: bold;
+                            }
+                            .receita-valor { color: green; }
+                            .despesa-valor { color: red; }
+                        }
+                        
+                    }
+        
+                    .resumo-total {
+                        border-radius: 1rem;
+                        display: flex;
+                        flex-direction: column;
+                        align-items: start;
+                        padding: 0 1rem;
+                        
+                        .cofres-container, .receita-container, .investimentos-container {
+                            display: flex;
+                            flex-direction: column;
+                            
+                            .cofres-title, .investimentos-title, .receita-title {
+                                width: max-content;
+                                font-size: .8rem;
+                                margin: 0;
+                                color: var(--text-secondary);
+                            }
+                            .cofres-valor, .investimentos-valor, .receita-valor {
+                                font-size: 1rem;
+                                margin: 0 0 1rem 0;
+                                font-weight: bold;
+                            }
+                        }
+                    }
+        
+                }
+        
+                .divider {
+                    width: 3px;
+                    height: calc(100% - 2rem);
+                    position: absolute;        
+                    left: 50%;
+                    top: 1rem;
+                    border-radius: 1rem;
+                    background-color: var(--divisor-color);
+                }
             }
-
-        }
-
-        .divider {
-            width: 3px;
-            height: calc(100% - 2rem);
-            position: absolute;        
-            left: 50%;
-            top: 1rem;
-            border-radius: 1rem;
-            background-color: var(--divisor-color);
-        }
     }
 }
+
+
+/* ========== FOOTER ========== */
+

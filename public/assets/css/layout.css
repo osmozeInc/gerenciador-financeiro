@@ -4,7 +4,7 @@
 :root {
   --bg-main: #e0e0e0;
   --bg-aside: #f2f2f2;
-  --bg-cards: #fff;
+  --bg-padrao: #fff;
   --text-primary: #000;
   --text-secondary: #727272;
   --text-especial: #128d29;
@@ -15,7 +15,7 @@
 [data-theme=dark] {
   --bg-main: #222;
   --bg-aside: #333;
-  --bg-cards: #444;
+  --bg-padrao: #444;
   --text-primary: #fff;
   --text-secondary: #ccc;
   --text-especial: #29e04b;
@@ -98,7 +98,7 @@ body {
   font-size: 1rem;
 }
 .aside-container .menus-container .menu-container .menu-item:hover, .aside-container .menus-container .submenu-container .menu-item:hover {
-  background-color: var(--bg-cards);
+  background-color: var(--bg-padrao);
 }
 .aside-container .menus-container .menu-container .submenu-item, .aside-container .menus-container .submenu-container .submenu-item {
   justify-content: flex-start;
@@ -107,7 +107,7 @@ body {
 .aside-container .menus-container .menu-container .menu-item.active, .aside-container .menus-container .menu-container .submenu-item.active, .aside-container .menus-container .submenu-container .menu-item.active, .aside-container .menus-container .submenu-container .submenu-item.active {
   font-weight: bold;
   color: var(--text-especial);
-  background-color: var(--bg-cards);
+  background-color: var(--bg-padrao);
 }
 .aside-container .menus-container .menu-container .menu-item.active .bi-chevron-right, .aside-container .menus-container .menu-container .submenu-item.active .bi-chevron-right, .aside-container .menus-container .submenu-container .menu-item.active .bi-chevron-right, .aside-container .menus-container .submenu-container .submenu-item.active .bi-chevron-right {
   display: none;
@@ -118,7 +118,7 @@ body {
   padding: 0.5rem 0.2rem 0.5rem 0.6rem;
   border: 1px solid var(--text-secondary);
   border-radius: 0.5rem;
-  background: var(--bg-cards);
+  background: var(--bg-padrao);
   overflow: hidden;
   margin-top: 1rem;
 }
@@ -151,86 +151,99 @@ body {
   color: var(--text-secondary);
 }
 
-/* ========== MAIN ========== */
+/* ========== LAYOUT ========== */
 .conteudo-central {
-  margin-left: 250px;
-  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  /* configuração comum da main para todas as paginas */
 }
-.conteudo-central .page-title {
+.conteudo-central main {
+  margin-left: 250px;
+  padding: 2rem;
+}
+.conteudo-central footer {
+  padding: 1rem;
+  text-align: center;
+  background-color: var(--bg-padrao);
+  color: var(--text-secondary);
+}
+.conteudo-central .dashboard-main .page-title {
   font-size: 1.75rem;
   margin: 1rem 2rem;
 }
-.conteudo-central .resumo-geral {
+.conteudo-central .dashboard-main .resumo-geral {
   position: relative;
-  background-color: var(--bg-cards);
+  background-color: var(--bg-padrao);
   border-radius: 1rem;
   padding: 1rem 0;
 }
-.conteudo-central .resumo-geral .titles-grid {
+.conteudo-central .dashboard-main .resumo-geral .titles-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-.conteudo-central .resumo-geral .titles-grid .title {
+.conteudo-central .dashboard-main .resumo-geral .titles-grid .title {
   font-size: 1.1rem;
   margin: 0 0 1rem 1rem;
 }
-.conteudo-central .resumo-geral .resumo-geral-grid {
+.conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-.conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal {
+.conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-mensal {
   display: flex;
   align-items: flex-end;
   justify-content: space-evenly;
   padding: 0 1rem;
 }
-.conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container {
+.conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container {
   display: flex;
   flex-direction: column;
   align-items: center;
 }
-.conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container .receita-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container .despesa-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container .receita-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container .despesa-title {
+.conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container .receita-title, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container .despesa-title, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container .receita-title, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container .despesa-title {
   width: -moz-max-content;
   width: max-content;
   font-size: 0.8rem;
   margin: 0;
   color: var(--text-secondary);
 }
-.conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container .receita-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container .despesa-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container .receita-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container .despesa-valor {
+.conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container .receita-valor, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container .despesa-valor, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container .receita-valor, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container .despesa-valor {
   font-size: 1rem;
   margin: 0 0 1rem 0;
   font-weight: bold;
 }
-.conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container .receita-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container .receita-valor {
+.conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container .receita-valor, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container .receita-valor {
   color: green;
 }
-.conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container .despesa-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container .despesa-valor {
+.conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-mensal .receita-container .despesa-valor, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-mensal .despesa-container .despesa-valor {
   color: red;
 }
-.conteudo-central .resumo-geral .resumo-geral-grid .resumo-total {
+.conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total {
   border-radius: 1rem;
   display: flex;
   flex-direction: column;
   align-items: start;
   padding: 0 1rem;
 }
-.conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .cofres-container, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .receita-container, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container {
+.conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .cofres-container, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .receita-container, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container {
   display: flex;
   flex-direction: column;
 }
-.conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .cofres-container .cofres-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .cofres-container .investimentos-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .cofres-container .receita-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .receita-container .cofres-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .receita-container .investimentos-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .receita-container .receita-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container .cofres-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container .investimentos-title, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container .receita-title {
+.conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .cofres-container .cofres-title, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .cofres-container .investimentos-title, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .cofres-container .receita-title, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .receita-container .cofres-title, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .receita-container .investimentos-title, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .receita-container .receita-title, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container .cofres-title, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container .investimentos-title, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container .receita-title {
   width: -moz-max-content;
   width: max-content;
   font-size: 0.8rem;
   margin: 0;
   color: var(--text-secondary);
 }
-.conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .cofres-container .cofres-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .cofres-container .investimentos-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .cofres-container .receita-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .receita-container .cofres-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .receita-container .investimentos-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .receita-container .receita-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container .cofres-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container .investimentos-valor, .conteudo-central .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container .receita-valor {
+.conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .cofres-container .cofres-valor, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .cofres-container .investimentos-valor, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .cofres-container .receita-valor, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .receita-container .cofres-valor, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .receita-container .investimentos-valor, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .receita-container .receita-valor, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container .cofres-valor, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container .investimentos-valor, .conteudo-central .dashboard-main .resumo-geral .resumo-geral-grid .resumo-total .investimentos-container .receita-valor {
   font-size: 1rem;
   margin: 0 0 1rem 0;
   font-weight: bold;
 }
-.conteudo-central .resumo-geral .divider {
+.conteudo-central .dashboard-main .resumo-geral .divider {
   width: 3px;
   height: calc(100% - 2rem);
   position: absolute;
@@ -238,4 +251,6 @@ body {
   top: 1rem;
   border-radius: 1rem;
   background-color: var(--divisor-color);
-}/*# sourceMappingURL=layout.css.map */
+}
+
+/* ========== FOOTER ========== *//*# sourceMappingURL=layout.css.map */
