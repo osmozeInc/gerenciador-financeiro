@@ -29,6 +29,29 @@ body {
     padding: 0;
 }
 
+/* ========= HEADER ========= */
+
+header {
+    position: fixed;
+    width: calc(100% - 250px);
+    height: 40px;
+    margin-left: 250px;
+    padding: 1rem 2rem 1rem .5rem;
+    background-color: var(--bg-padrao);
+
+    h1 {
+        font-size: 1rem;
+        margin: 0;
+        color: var(--text-especial);
+    }
+
+    p {
+        font-size: .75rem;
+        margin: 0;
+        color: var(--text-secondary);
+    }
+}
+
 
 /* ========== ASIDE ========== */
 
@@ -184,7 +207,8 @@ body {
     min-height: 100vh;
 
     /* configuração comum da main para todas as paginas */
-    main {  
+    main { 
+        margin-top: 40px;
         margin-left: 250px;
         padding: 2rem;
     }
@@ -290,7 +314,3 @@ body {
             }
     }
 }
-
-
-/* ========== FOOTER ========== */
-

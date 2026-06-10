@@ -28,6 +28,26 @@ body {
   padding: 0;
 }
 
+/* ========= HEADER ========= */
+header {
+  position: fixed;
+  width: calc(100% - 250px);
+  height: 40px;
+  margin-left: 250px;
+  padding: 1rem 2rem 1rem 0.5rem;
+  background-color: var(--bg-padrao);
+}
+header h1 {
+  font-size: 1rem;
+  margin: 0;
+  color: var(--text-especial);
+}
+header p {
+  font-size: 0.75rem;
+  margin: 0;
+  color: var(--text-secondary);
+}
+
 /* ========== ASIDE ========== */
 .aside-container {
   position: fixed;
@@ -160,6 +180,7 @@ body {
   /* configuração comum da main para todas as paginas */
 }
 .conteudo-central main {
+  margin-top: 40px;
   margin-left: 250px;
   padding: 2rem;
 }
@@ -251,6 +272,4 @@ body {
   top: 1rem;
   border-radius: 1rem;
   background-color: var(--divisor-color);
-}
-
-/* ========== FOOTER ========== *//*# sourceMappingURL=layout.css.map */
+}/*# sourceMappingURL=layout.css.map */
