@@ -12,6 +12,30 @@ $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 if ($url === '/') 
     $url = '/home';
 
+$partesUrl = explode('/', trim($url, '/'));
+$rotaBase = $partesUrl[0];
+
+$nomeController = ucfirst($rotaBase) . 'Controller'; 
+$caminhoArquivo = '../src/Controllers/' . $nomeController . '.php';
+
+if (file_exists($caminhoArquivo)) {
+    require_once $caminhoArquivo;
+    
+    $controller = new $nomeController(); 
+    $controller->index();
+} else {
+    $nomeController = 'NotFoundedController'; 
+    $caminhoArquivo = '../src/Controllers/NotFoundedController.php';
+
+    require_once $caminhoArquivo;
+
+    $controller = new $nomeController(); 
+    $controller->index();
+}
+
+
+
+
 if ($url === '/' || $url === '/home') {
     require_once '../src/Controllers/HomeController.php';
     

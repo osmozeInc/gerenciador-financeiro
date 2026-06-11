@@ -1,7 +1,7 @@
 <?php
 require_once 'Controller.php';
 
-class InvestimentosController extends Controller {
+class NotFoundedController extends Controller {
     
     public function index() {
 
@@ -15,6 +15,6 @@ class InvestimentosController extends Controller {
             'investidos' => 300000 / 100
         ];
 
-        $this->render('investimentos', $dadosParaTela);
+        $this->render('404', $dadosParaTela);
     }
 }
