@@ -31,21 +31,53 @@ body {
 /* ========= HEADER ========= */
 header {
   position: fixed;
+  display: flex;
+  justify-content: space-between;
   width: calc(100% - 250px);
-  height: 40px;
+  box-sizing: border-box;
+  height: calc(40px + 2rem);
   margin-left: 250px;
-  padding: 1rem 2rem 1rem 0.5rem;
-  background-color: var(--bg-padrao);
+  background-color: var(--bg-aside);
+  z-index: 1;
 }
-header h1 {
-  font-size: 1rem;
+header hr {
+  position: absolute;
+  width: 2px;
+  height: 48px;
+  background-color: var(--divisor-color);
+  opacity: 1;
+  margin: 0.75rem 0;
+}
+header .texto-cabecalho {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 2rem 1rem 1rem;
+}
+header .texto-cabecalho h1 {
+  font-size: 1.4rem;
   margin: 0;
   color: var(--text-especial);
+  font-weight: 700;
 }
-header p {
-  font-size: 0.75rem;
+header .texto-cabecalho p {
+  font-size: 1rem;
   margin: 0;
   color: var(--text-secondary);
+  font-weight: 700;
+}
+header nav {
+  display: flex;
+  padding-right: 2rem;
+}
+header nav a {
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+  padding: 0.5rem 1.5rem 0 1.5rem;
+}
+header nav a.active {
+  color: var(--text-especial);
+  border-bottom: 2px solid var(--text-especial);
 }
 
 /* ========== ASIDE ========== */
@@ -74,8 +106,8 @@ header p {
 }
 .aside-container .logo-divider {
   width: 100%;
-  border: 1px solid var(--divisor-color);
-  opacity: 1;
+  height: 2px;
+  background-color: var(--divisor-color);
   margin: 0.5rem 0 1rem 0;
 }
 .aside-container .menus-container {
@@ -148,7 +180,7 @@ header p {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   border-radius: 50%;
   background-color: var(--text-especial);
   color: var(--bg-aside);
