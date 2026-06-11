@@ -2,8 +2,7 @@
 /* CSS DOS ARQUIVOS DE LAYOUT (ASIDE, ESTRUTURA DA TAG MAIN, FOOTER) */
 /* tema claro - padrão */
 :root {
-  --bg-main: #e0e0e0;
-  --bg-aside: #f2f2f2;
+  --bg-main: #eaeaea;
   --bg-padrao: #fff;
   --text-primary: #000;
   --text-secondary: #727272;
@@ -14,7 +13,6 @@
 /* tema escuro */
 [data-theme=dark] {
   --bg-main: #222;
-  --bg-aside: #333;
   --bg-padrao: #444;
   --text-primary: #fff;
   --text-secondary: #ccc;
@@ -37,12 +35,12 @@ header {
   box-sizing: border-box;
   height: calc(40px + 2rem);
   margin-left: 250px;
-  background-color: var(--bg-aside);
+  background-color: var(--bg-padrao);
   z-index: 1;
 }
 header hr {
   position: absolute;
-  width: 2px;
+  width: 1px;
   height: 48px;
   background-color: var(--divisor-color);
   opacity: 1;
@@ -72,6 +70,7 @@ header nav {
 header nav a {
   display: flex;
   align-items: center;
+  font-size: 1.1rem;
   font-weight: bold;
   padding: 0.5rem 1.5rem 0 1.5rem;
 }
@@ -85,9 +84,9 @@ header nav a.active {
   position: fixed;
   width: 250px;
   height: 100vh;
-  background: var(--bg-aside);
+  background: var(--bg-padrao);
   padding: 1rem;
-  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.5);
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.2);
   box-sizing: border-box;
 }
 .aside-container .logo-container {
@@ -104,9 +103,9 @@ header nav a.active {
   margin: 0 0 0 1rem;
   color: var(--text-especial);
 }
-.aside-container .logo-divider {
+.aside-container .logo-divider, .aside-container .divider {
   width: 100%;
-  height: 2px;
+  height: 1px;
   background-color: var(--divisor-color);
   margin: 0.5rem 0 1rem 0;
 }
@@ -159,7 +158,7 @@ header nav a.active {
 .aside-container .menus-container .menu-container .menu-item.active, .aside-container .menus-container .menu-container .submenu-item.active, .aside-container .menus-container .submenu-container .menu-item.active, .aside-container .menus-container .submenu-container .submenu-item.active {
   font-weight: bold;
   color: var(--text-especial);
-  background-color: var(--bg-padrao);
+  box-shadow: 2px 2px 4px -1px rgba(0, 0, 0, 0.1882352941);
 }
 .aside-container .menus-container .menu-container .menu-item.active .bi-chevron-right, .aside-container .menus-container .menu-container .submenu-item.active .bi-chevron-right, .aside-container .menus-container .submenu-container .menu-item.active .bi-chevron-right, .aside-container .menus-container .submenu-container .submenu-item.active .bi-chevron-right {
   display: none;
@@ -168,8 +167,9 @@ header nav a.active {
   display: flex;
   align-items: center;
   padding: 0.5rem 0.2rem 0.5rem 0.6rem;
-  border: 1px solid var(--text-secondary);
+  border: none;
   border-radius: 0.5rem;
+  box-shadow: 0 0 5px 1px rgba(0, 0, 0, 0.1882352941);
   background: var(--bg-padrao);
   overflow: hidden;
   margin-top: 1rem;
@@ -183,7 +183,7 @@ header nav a.active {
   font-size: 1.3rem;
   border-radius: 50%;
   background-color: var(--text-especial);
-  color: var(--bg-aside);
+  color: var(--bg-padrao);
   margin-right: 0.5rem;
 }
 .aside-container .menus-container .menu-container .user-button .user-text-container, .aside-container .menus-container .submenu-container .user-button .user-text-container {
@@ -221,6 +221,7 @@ header nav a.active {
   text-align: center;
   background-color: var(--bg-padrao);
   color: var(--text-secondary);
+  margin-left: 250px;
 }
 .conteudo-central .dashboard-main .page-title {
   font-size: 1.75rem;

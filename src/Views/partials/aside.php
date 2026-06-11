@@ -41,7 +41,7 @@ $urlAtual = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         </div>
     
         <div class="submenu-container">
-            <hr class="logo-divider">
+            <hr class="divider">
             <a href="" class="submenu-item">
                 <i class="bi bi-bell"></i>
                 <p class="submenu-item-text">Notificações</p>
