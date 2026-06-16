@@ -6,8 +6,10 @@
   --bg-padrao: #fff;
   --text-primary: #000;
   --text-secondary: #727272;
+  --text-contrast: #fff;
   --divisor-color: #727272;
   --border-color: #e5e7eb;
+  --progress-bg: #e5e7eb;
   --text-especial: #128d29;
   --text-danger: #ef4444;
   --text-invest: #2079df;
@@ -408,4 +410,133 @@ header nav a.active {
   font-weight: bold;
   background: #e5e7eb;
   color: var(--text-primary);
+}
+.conteudo-central .cofres-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.conteudo-central .cofres-container .actions-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+.conteudo-central .cofres-container .actions-grid .card {
+  background-color: var(--bg-padrao);
+  padding: 1.5rem;
+  border-radius: var(--card-radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+.conteudo-central .cofres-container .actions-grid .card h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+.conteudo-central .cofres-container .actions-grid .card .input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+.conteudo-central .cofres-container .actions-grid .card .input-group label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+.conteudo-central .cofres-container .actions-grid .card .input-group input, .conteudo-central .cofres-container .actions-grid .card .input-group select {
+  padding: 0.75rem;
+  border: 1px solid var(--divisor-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.2s;
+}
+.conteudo-central .cofres-container .actions-grid .card .input-group input:focus, .conteudo-central .cofres-container .actions-grid .card .input-group select:focus {
+  border-color: var(--text-secondary);
+}
+.conteudo-central .cofres-container .actions-grid .card .btn-submit {
+  padding: 0.75rem 1.5rem;
+  background-color: var(--text-primary);
+  color: var(--text-contrast);
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  width: 100%;
+}
+.conteudo-central .cofres-container .actions-grid .card .btn-submit.outline {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--text-primary);
+}
+.conteudo-central .cofres-container {
+  /* Grid de Cofres */
+}
+.conteudo-central .cofres-container .cofres-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+.conteudo-central .cofres-container .cofres-grid .cofre-card {
+  background-color: var(--bg-padrao);
+  border: 1px solid var(--border-color);
+  border-radius: var(--card-radius);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  position: relative;
+}
+.conteudo-central .cofres-container .cofres-grid .cofre-card .cofre-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.conteudo-central .cofres-container .cofres-grid .cofre-card .cofre-header .cofre-title {
+  font-weight: bold;
+  font-size: 1.1rem;
+}
+.conteudo-central .cofres-container .cofres-grid .cofre-card .cofre-header .cofre-local {
+  font-size: 0.75rem;
+  background-color: var(--text-invest);
+  color: var(--text-contrast);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  border: 1px solid var(--border-color);
+}
+.conteudo-central .cofres-container .cofres-grid .cofre-card .cofre-valores {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.conteudo-central .cofres-container .cofres-grid .cofre-card .cofre-valores .valor-atual {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--text-especial);
+}
+.conteudo-central .cofres-container .cofres-grid .cofre-card .cofre-valores .valor-meta {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+.conteudo-central .cofres-container .cofres-grid .cofre-card .progress-container {
+  width: 100%;
+  background-color: var(--progress-bg);
+  border-radius: 99px;
+  height: 8px;
+  overflow: hidden;
+}
+.conteudo-central .cofres-container .cofres-grid .cofre-card .progress-container .progress-bar {
+  height: 100%;
+  background-color: var(--text-especial);
+  transition: width 0.3s ease;
+}
+.conteudo-central .cofres-container .cofres-grid .cofre-card .progress-text {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-align: right;
+  margin-top: 0.25rem;
+  font-weight: bold;
+}
+.conteudo-central .cofres-container .cofres-grid .concluido {
+  border-color: var(--text-especial);
 }/*# sourceMappingURL=layout.css.map */

@@ -7,8 +7,10 @@
     --bg-padrao: #fff;
     --text-primary: #000;
     --text-secondary: #727272;
+    --text-contrast: #fff;
     --divisor-color: #727272;
     --border-color: #e5e7eb;
+    --progress-bg: #e5e7eb;
 
     --text-especial: #128d29;
     --text-danger: #ef4444;
@@ -132,7 +134,7 @@ header {
     }
 
     .menus-container {
-        height: calc(100% - 40px); // altura total - altura do logo
+        height: calc(100% - 40px);// altura total - altura do logo
         display: flex;
         flex-direction: column;
         justify-content: space-between;
@@ -378,15 +380,15 @@ header {
                 gap: 0.5rem;
             
                 .summary-title { 
-                    font-size: 0.875rem; 
-                    color: var(--text-secondary); 
-                    font-weight: 500; 
-                    text-transform: uppercase; 
+                    font-size: 0.875rem;
+                    color: var(--text-secondary);
+                    font-weight: 500;
+                    text-transform: uppercase;
                 }
     
                 .summary-value { 
-                    font-size: 1.75rem; 
-                    font-weight: bold; 
+                    font-size: 1.75rem;
+                    font-weight: bold;
                 }
             }
         }
@@ -409,39 +411,39 @@ header {
                 gap: 1rem;
             
                 .input-group { 
-                    display: flex; 
-                    flex-direction: column; 
-                    gap: 0.25rem; 
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.25rem;
     
                     label { 
-                        font-size: 0.875rem; 
-                        color: var(--text-secondary); 
-                        font-weight: 500; 
+                        font-size: 0.875rem;
+                        color: var(--text-secondary);
+                        font-weight: 500;
                     }
     
                     input, select {
-                        padding: 0.75rem; 
+                        padding: 0.75rem;
                         border: 1px solid var(--border-color);
-                        border-radius: 4px; 
-                        font-size: 1rem; 
+                        border-radius: 4px;
+                        font-size: 1rem;
                         outline: none;
                     }
                     
                     input:focus, select:focus { 
-                        border-color: var(--text-secondary); 
+                        border-color: var(--text-secondary);
                     }
                 }
             }
 
             .btn-submit {
-                margin-top: 1.5rem; 
+                margin-top: 1.5rem;
                 padding: 0.75rem 1.5rem;
-                background-color: var(--text-invest); 
+                background-color: var(--text-invest);
                 color: var(--bg-padrao);
-                border: none; 
-                border-radius: 4px; 
+                border: none;
+                border-radius: 4px;
                 font-weight: bold;
-                cursor: pointer; 
+                cursor: pointer;
                 width: 100%;
                 opacity: .85;
 
@@ -452,29 +454,175 @@ header {
         
             table { 
                 width: 100%;
-                border-collapse: collapse; 
-                margin-top: 1rem; 
+                border-collapse: collapse;
+                margin-top: 1rem;
                 
                 th, td { 
-                    padding: 1rem; 
-                    text-align: left; 
-                    border-bottom: 1px solid var(--divisor-color); 
+                    padding: 1rem;
+                    text-align: left;
+                    border-bottom: 1px solid var(--divisor-color);
                 }
                 th { 
-                    color: var(--text-secondary); 
-                    font-weight: 500; 
-                    font-size: 0.875rem; 
+                    color: var(--text-secondary);
+                    font-weight: 500;
+                    font-size: 0.875rem;
                 }
                 
                 .badge { 
-                    padding: 0.25rem 0.5rem; 
-                    border-radius: 4px; 
-                    font-size: 0.75rem; 
-                    font-weight: bold; 
-                    background: #e5e7eb; 
-                    color: var(--text-primary); 
+                    padding: 0.25rem 0.5rem;
+                    border-radius: 4px;
+                    font-size: 0.75rem;
+                    font-weight: bold;
+                    background: #e5e7eb;
+                    color: var(--text-primary);
                 }
             }
+        }
+    }
+
+    .cofres-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+    
+            .card {
+                background-color: var(--bg-padrao);
+                padding: 1.5rem;
+                border-radius: var(--card-radius);
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        
+                h2 {
+                    font-size: 1.25rem;
+                    margin-bottom: 1.5rem;
+                    color: var(--text-primary);
+                }
+        
+                .input-group { 
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.25rem;
+                    margin-bottom: 1rem;
+                    
+                    label { 
+                        font-size: 0.875rem;
+                        color: var(--text-secondary);
+                        font-weight: 500;
+                    }
+
+                    input, select {
+                        padding: 0.75rem;
+                        border: 1px solid var(--divisor-color);
+                        border-radius: 4px;
+                        font-size: 1rem;
+                        outline: none;
+                        transition: 0.2s;
+                    }
+
+                    input:focus, select:focus {
+                        border-color: var(--text-secondary);
+                    }
+                }
+                
+                .btn-submit {
+                    padding: 0.75rem 1.5rem;
+                    background-color: var(--text-primary);
+                    color: var(--text-contrast);
+                    border: none;
+                    border-radius: 4px;
+                    font-weight: bold;
+                    cursor: pointer;
+                    width: 100%;
+                    
+                    &.outline {
+                        background-color: transparent;
+                        color: var(--text-primary);
+                        border: 1px solid var(--text-primary);
+                    }
+                }
+            }
+        }
+
+        /* Grid de Cofres */
+        .cofres-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 1.5rem;
+    
+            .cofre-card {
+                background-color: var(--bg-padrao);
+                border: 1px solid var(--border-color);
+                border-radius: var(--card-radius);
+                padding: 1.5rem;
+                display: flex;
+                flex-direction: column;
+                gap: 1rem;
+                position: relative;
+                
+                .cofre-header { 
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: flex-start;
+                    
+                    .cofre-title { 
+                        font-weight: bold;
+                        font-size: 1.1rem;
+                    }
+        
+                    .cofre-local {
+                        font-size: 0.75rem;
+                        background-color: var(--text-invest);
+                        color: var(--text-contrast);
+                        padding: 0.25rem 0.5rem;
+                        border-radius: 4px;
+                        border: 1px solid var(--border-color);
+                    }
+                }
+
+                .cofre-valores { 
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: baseline;
+        
+                    .valor-atual { 
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                        color: var(--text-especial);
+                    }
+        
+                    .valor-meta { 
+                        font-size: 0.875rem;
+                        color: var(--text-secondary);
+                    }
+                }
+                
+                .progress-container { width: 100%;
+                    background-color: var(--progress-bg);
+                    border-radius: 99px;
+                    height: 8px;
+                    overflow: hidden;
+                    
+                    .progress-bar { 
+                        height: 100%;
+                        background-color: var(--text-especial);
+                        transition: width 0.3s ease;
+                    }
+                }
+
+                .progress-text { 
+                    font-size: 0.75rem;
+                    color: var(--text-secondary);
+                    text-align: right;
+                    margin-top: 0.25rem;
+                    font-weight: bold;
+                }
+            }
+            
+            .concluido { border-color: var(--text-especial);}
         }
     }
 }
