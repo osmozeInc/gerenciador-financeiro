@@ -7,7 +7,9 @@
   --text-primary: #000;
   --text-secondary: #727272;
   --text-especial: #128d29;
+  --text-danger: #ef4444;
   --divisor-color: #727272;
+  --card-radius: 12px;
 }
 
 /* tema escuro */
@@ -212,7 +214,7 @@ header nav a.active {
   /* configuração comum da main para todas as paginas */
 }
 .conteudo-central main {
-  margin-top: 40px;
+  margin-top: calc(40px + 2rem);
   margin-left: 250px;
   padding: 2rem;
 }
@@ -222,4 +224,83 @@ header nav a.active {
   background-color: var(--bg-padrao);
   color: var(--text-secondary);
   margin-left: 250px;
+}
+.conteudo-central .cofre-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+.conteudo-central .cofre-container .card {
+  background-color: var(--bg-padrao);
+  padding: 1.5rem;
+  border-radius: var(--card-radius);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+.conteudo-central .cofre-container .card h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+.conteudo-central .cofre-container .card .form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.conteudo-central .cofre-container .card .form-grid .input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.conteudo-central .cofre-container .card .form-grid .input-group label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+.conteudo-central .cofre-container .card .form-grid .input-group input, .conteudo-central .cofre-container .card .form-grid .input-group select {
+  padding: 0.75rem;
+  border: 1px solid var(--divisor-color);
+  border-radius: 4px;
+  font-size: 1rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.conteudo-central .cofre-container .card .form-grid .input-group input:focus, .conteudo-central .cofre-container .card .form-grid .input-group select:focus {
+  border-color: var(--text-secondary);
+}
+.conteudo-central .cofre-container .card .btn-submit {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--text-especial);
+  color: var(--bg-padrao);
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: opacity 0.2s;
+  width: 100%;
+  opacity: 0.8;
+}
+.conteudo-central .cofre-container .card .btn-submit:hover {
+  opacity: 1;
+}
+.conteudo-central .cofre-container .card table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+.conteudo-central .cofre-container .card table th, .conteudo-central .cofre-container .card table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--divisor-color);
+}
+.conteudo-central .cofre-container .card table th {
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+.conteudo-central .cofre-container .card table .badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: bold;
 }/*# sourceMappingURL=layout.css.map */

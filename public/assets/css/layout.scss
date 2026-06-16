@@ -8,7 +8,10 @@
     --text-primary: #000;
     --text-secondary: #727272;
     --text-especial: #128d29;
+    --text-danger: #ef4444;
     --divisor-color: #727272;
+
+    --card-radius: 12px;
 }
 
 /* tema escuro */
@@ -241,11 +244,11 @@ header {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    min-height: 100vh;
+    min-height: 100vh;  // resolver bug de tamanho de tela no scroll depois
 
     /* configuração comum da main para todas as paginas */
     main { 
-        margin-top: 40px;
+        margin-top: calc(40px + 2rem);
         margin-left: 250px;
         padding: 2rem;
     }
@@ -256,5 +259,98 @@ header {
         background-color: var(--bg-padrao);
         color: var(--text-secondary);
         margin-left: 250px;
+    }
+
+    .cofre-container {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+
+        .card {
+            background-color: var(--bg-padrao);
+            padding: 1.5rem;
+            border-radius: var(--card-radius);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    
+            h2 {
+                font-size: 1.25rem;
+                margin-bottom: 1.5rem;
+                color: var(--text-primary);
+            }
+            
+            .form-grid {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+                
+                .input-group {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.25rem;
+            
+                    label {
+                        font-size: 0.875rem;
+                        color: var(--text-secondary);
+                        font-weight: 500;
+                    }
+            
+                    input, select {
+                        padding: 0.75rem;
+                        border: 1px solid var(--divisor-color);
+                        border-radius: 4px;
+                        font-size: 1rem;
+                        outline: none;
+                        transition: border-color 0.2s;
+                    }
+            
+                    input:focus, select:focus {
+                        border-color: var(--text-secondary);
+                    }
+                }
+            }
+            
+            .btn-submit {
+                margin-top: 1.5rem;
+                padding: 0.75rem 1.5rem;
+                background-color: var(--text-especial);
+                color: var(--bg-padrao);
+                border: none;
+                border-radius: 4px;
+                font-weight: bold;
+                cursor: pointer;
+                transition: opacity 0.2s;
+                width: 100%;
+                opacity: 0.8;
+        
+                &:hover {
+                    opacity: 1;
+                }
+            }
+    
+            table {
+                width: 100%;
+                border-collapse: collapse;
+                margin-top: 1rem;
+                
+                th, td {
+                    padding: 1rem;
+                    text-align: left;
+                    border-bottom: 1px solid var(--divisor-color);
+                }
+        
+                th {
+                    color: var(--text-secondary);
+                    font-weight: 500;
+                    font-size: 0.875rem;
+                }
+        
+                .badge {
+                    padding: 0.25rem 0.5rem;
+                    border-radius: 99px;
+                    font-size: 0.75rem;
+                    font-weight: bold;
+                }
+            }
+        }
     }
 }
