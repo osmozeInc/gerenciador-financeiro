@@ -8,7 +8,6 @@ $urlAtual = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
         <h2>Pro Gestão</h2>
     </div>
     
-    
     <div class="menus-container">
         <div class="menu-container">
             <hr class="logo-divider">
@@ -42,14 +41,14 @@ $urlAtual = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     
         <div class="submenu-container">
             <hr class="divider">
-            <a href="" class="submenu-item">
+            <button href="" class="submenu-item" onclick="abrirModal('modal-notificacao')">
                 <i class="bi bi-bell"></i>
                 <p class="submenu-item-text">Notificações</p>
-            </a>
-            <a href="" class="submenu-item">
+            </button>
+            <button href="" class="submenu-item">
                 <i class="bi bi-gear"></i>
                 <p class="submenu-item-text">Configurações</p>
-            </a>
+            </button>
             <button class="user-button">
                 <i class="bi bi-person-fill"></i>
                 <div class="user-text-container">
@@ -59,5 +58,4 @@ $urlAtual = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
             </button>
         </div>
     </div>
-
 </aside>

@@ -145,6 +145,7 @@ header nav a.active {
   color: var(--text-primary);
   text-decoration: none;
   margin-bottom: 0.5rem;
+  cursor: pointer;
 }
 .aside-container .menus-container .menu-container .menu-item i, .aside-container .menus-container .menu-container .submenu-item i, .aside-container .menus-container .submenu-container .menu-item i, .aside-container .menus-container .submenu-container .submenu-item i {
   font-size: 1.1rem;
@@ -162,6 +163,9 @@ header nav a.active {
 .aside-container .menus-container .menu-container .submenu-item, .aside-container .menus-container .submenu-container .submenu-item {
   justify-content: flex-start;
   margin: 0;
+  background-color: var(--bg-padrao);
+  border: none;
+  text-align: left;
 }
 .aside-container .menus-container .menu-container .menu-item.active, .aside-container .menus-container .menu-container .submenu-item.active, .aside-container .menus-container .submenu-container .menu-item.active, .aside-container .menus-container .submenu-container .submenu-item.active {
   font-weight: bold;
@@ -325,9 +329,11 @@ header nav a.active {
   padding: 1.5rem;
   border: 1px solid var(--border-color);
   border-radius: var(--card-radius);
+  box-shadow: 0 1px 3px var(--card-shadow-color);
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
+  background-color: var(--bg-padrao);
 }
 .conteudo-central .investimentos-container .summary-grid .summary-box .summary-title {
   font-size: 0.875rem;
@@ -343,7 +349,7 @@ header nav a.active {
   background-color: var(--bg-padrao);
   padding: 1.5rem;
   border-radius: var(--card-radius);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px var(--card-shadow-color);
 }
 .conteudo-central .investimentos-container .card h2 {
   font-size: 1.25rem;
@@ -427,7 +433,7 @@ header nav a.active {
   background-color: var(--bg-padrao);
   padding: 1.5rem;
   border-radius: var(--card-radius);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 1px 3px var(--card-shadow-color);
 }
 .conteudo-central .cofres-container .actions-grid .card h2 {
   font-size: 1.25rem;
@@ -483,6 +489,7 @@ header nav a.active {
   background-color: var(--bg-padrao);
   border: 1px solid var(--border-color);
   border-radius: var(--card-radius);
+  box-shadow: 0 1px 3px var(--card-shadow-color);
   padding: 1.5rem;
   display: flex;
   flex-direction: column;
@@ -648,11 +655,12 @@ header nav a.active {
 .conteudo-central .contas-container .cards-grid .box-card .card-dates {
   display: flex;
   justify-content: space-between;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
   background: var(--bg-main);
   padding: 0.75rem;
   border-radius: 6px;
+  border: 1px solid var(--border-color);
 }
 .conteudo-central .contas-container .cards-grid .box-card .card-dates div {
   display: flex;
@@ -688,4 +696,179 @@ header nav a.active {
 .conteudo-central .contas-container .cards-grid .box-card .btn-action.primary:hover {
   opacity: 0.9;
   background-color: var(--text-especial);
+}
+
+/* ========== MODAIS ========== */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  font-family: "Segoe UI", system-ui, sans-serif;
+}
+.modal-backdrop .modal-container {
+  background-color: var(--bg-padrao);
+  padding: 1.5rem;
+  margin-left: 250px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 600px;
+  box-shadow: 0 4px 15px var(--card-shadow-color);
+}
+.modal-backdrop .modal-container h1 {
+  margin: 0 0 1.5rem 0;
+  color: var(--text-primary);
+  font-size: 1.8rem;
+}
+.modal-backdrop .modal-container .notificacoes-container {
+  display: flex;
+  flex-direction: column;
+}
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-body {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  margin-bottom: 3rem;
+}
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-body .notificacoes-header {
+  display: flex;
+  align-items: end;
+  gap: 2rem;
+  margin-bottom: 0.5rem;
+}
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-body .notificacoes-header h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.4rem;
+}
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-body .notificacao {
+  display: flex;
+  align-items: end;
+  margin-left: 1rem;
+}
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-body .notificacao .titulo {
+  width: 220px;
+  font-size: 1.2rem;
+}
+.modal-backdrop .modal-container .btn-container {
+  width: 100%;
+  display: flex;
+  justify-content: end;
+}
+.modal-backdrop .modal-container .btn-container .btn-fechar {
+  background-color: transparent;
+  border: none;
+  color: var(--text-primary);
+  font-size: 1.25rem;
+  cursor: pointer;
+}
+.modal-backdrop .modal-container .switch {
+  --switch-width: 46px;
+  --switch-height: 24px;
+  --switch-bg: rgb(131, 131, 131);
+  --switch-checked-bg: rgb(0, 218, 80);
+  --switch-offset: calc((var(--switch-height) - var(--circle-diameter)) / 2);
+  --switch-transition: all .2s cubic-bezier(0.27, 0.2, 0.25, 1.51);
+  /* circle */
+  --circle-diameter: 18px;
+  --circle-bg: #fff;
+  --circle-shadow: 1px 1px 2px rgba(146, 146, 146, 0.45);
+  --circle-checked-shadow: -1px 1px 2px rgba(163, 163, 163, 0.45);
+  --circle-transition: var(--switch-transition);
+  /* icon */
+  --icon-transition: all .2s cubic-bezier(0.27, 0.2, 0.25, 1.51);
+  --icon-cross-color: var(--switch-bg);
+  --icon-cross-size: 6px;
+  --icon-checkmark-color: var(--switch-checked-bg);
+  --icon-checkmark-size: 10px;
+  /* effect line */
+  --effect-width: calc(var(--circle-diameter) / 2);
+  --effect-height: calc(var(--effect-width) / 2 - 1px);
+  --effect-bg: var(--circle-bg);
+  --effect-border-radius: 1px;
+  --effect-transition: all .2s ease-in-out;
+}
+.modal-backdrop .modal-container .switch input {
+  display: none;
+}
+.modal-backdrop .modal-container .switch {
+  display: inline-block;
+}
+.modal-backdrop .modal-container .switch svg {
+  transition: var(--icon-transition);
+  position: absolute;
+  height: auto;
+}
+.modal-backdrop .modal-container .switch .checkmark {
+  width: var(--icon-checkmark-size);
+  color: var(--icon-checkmark-color);
+  transform: scale(0);
+}
+.modal-backdrop .modal-container .switch .cross {
+  width: var(--icon-cross-size);
+  color: var(--icon-cross-color);
+}
+.modal-backdrop .modal-container .switch .slider {
+  box-sizing: border-box;
+  width: var(--switch-width);
+  height: var(--switch-height);
+  background: var(--switch-bg);
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  transition: var(--switch-transition);
+  cursor: pointer;
+}
+.modal-backdrop .modal-container .switch .circle {
+  width: var(--circle-diameter);
+  height: var(--circle-diameter);
+  background: var(--circle-bg);
+  border-radius: inherit;
+  box-shadow: var(--circle-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: var(--circle-transition);
+  z-index: 1;
+  position: absolute;
+  left: var(--switch-offset);
+}
+.modal-backdrop .modal-container .switch .slider::before {
+  content: "";
+  position: absolute;
+  width: var(--effect-width);
+  height: var(--effect-height);
+  left: calc(var(--switch-offset) + var(--effect-width) / 2);
+  background: var(--effect-bg);
+  border-radius: var(--effect-border-radius);
+  transition: var(--effect-transition);
+}
+.modal-backdrop .modal-container .switch {
+  /* actions */
+}
+.modal-backdrop .modal-container .switch input:checked + .slider {
+  background: var(--switch-checked-bg);
+}
+.modal-backdrop .modal-container .switch input:checked + .slider .checkmark {
+  transform: scale(1);
+}
+.modal-backdrop .modal-container .switch input:checked + .slider .cross {
+  transform: scale(0);
+}
+.modal-backdrop .modal-container .switch input:checked + .slider::before {
+  left: calc(100% - var(--effect-width) - var(--effect-width) / 2 - var(--switch-offset));
+}
+.modal-backdrop .modal-container .switch input:checked + .slider .circle {
+  left: calc(100% - var(--circle-diameter) - var(--switch-offset));
+  box-shadow: var(--circle-checked-shadow);
+}
+.modal-backdrop.active {
+  display: flex;
 }/*# sourceMappingURL=layout.css.map */
