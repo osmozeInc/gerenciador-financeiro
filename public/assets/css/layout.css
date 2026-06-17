@@ -217,7 +217,6 @@ header nav a.active {
   flex-direction: column;
   justify-content: space-between;
   min-height: 100vh;
-  /* configuração comum da main para todas as paginas */
 }
 .conteudo-central main {
   margin-top: calc(40px + 2rem);
@@ -231,6 +230,186 @@ header nav a.active {
   background-color: var(--bg-padrao);
   color: var(--text-secondary);
   margin-left: 250px;
+}
+.conteudo-central .dashboard-container {
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+.conteudo-central .dashboard-container .kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.5rem;
+}
+.conteudo-central .dashboard-container .kpi-grid .kpi-card {
+  background-color: var(--bg-padrao);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--divisor-color);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+.conteudo-central .dashboard-container .kpi-grid .kpi-card .kpi-title {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.conteudo-central .dashboard-container .kpi-grid .kpi-card .kpi-value {
+  font-size: 1.75rem;
+  font-weight: 700;
+}
+.conteudo-central .dashboard-container .kpi-grid .kpi-card .kpi-trend {
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  display: inline-block;
+  align-self: flex-start;
+}
+.conteudo-central .dashboard-container .kpi-grid .kpi-card .trend-up {
+  background: #d1fae5;
+  color: var(--text-especial);
+}
+.conteudo-central .dashboard-container .kpi-grid .kpi-card .trend-down {
+  background: #fee2e2;
+  color: var(--text-danger);
+}
+.conteudo-central .dashboard-container .main-grid {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+.conteudo-central .dashboard-container .main-grid .card-section {
+  background-color: var(--bg-padrao);
+  padding: 1.5rem;
+  border-radius: var(--radius);
+  border: 1px solid var(--divisor-color);
+  margin-bottom: 1.5rem;
+}
+.conteudo-central .dashboard-container .main-grid .card-section .section-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 1.5rem;
+  align-items: center;
+}
+.conteudo-central .dashboard-container .main-grid .card-section .section-header h2 {
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+.conteudo-central .dashboard-container .main-grid .card-section .section-header .link-view-all {
+  color: var(--text-especial);
+  font-size: 0.875rem;
+  text-decoration: none;
+  font-weight: 600;
+}
+.conteudo-central .dashboard-container .main-grid .card-section .chart-container {
+  height: 200px;
+  display: flex;
+  align-items: flex-end;
+  gap: 2%;
+  padding-top: 1rem;
+  border-bottom: 1px solid var(--divisor-color);
+}
+.conteudo-central .dashboard-container .main-grid .card-section .chart-container .bar-group {
+  flex: 1;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  height: 100%;
+  position: relative;
+}
+.conteudo-central .dashboard-container .main-grid .card-section .chart-container .bar {
+  width: 40%;
+  border-radius: 4px 4px 0 0;
+  min-height: 5px;
+  transition: height 0.5s;
+}
+.conteudo-central .dashboard-container .main-grid .card-section .chart-container .bar.receita {
+  background-color: var(--text-especial);
+}
+.conteudo-central .dashboard-container .main-grid .card-section .chart-container .bar.despesa {
+  background-color: var(--text-danger);
+  opacity: 0.8;
+}
+.conteudo-central .dashboard-container .main-grid .card-section .chart-container .bar-label {
+  position: absolute;
+  bottom: -25px;
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  width: 100%;
+  text-align: center;
+}
+.conteudo-central .dashboard-container .main-grid .card-section .list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--divisor-color);
+}
+.conteudo-central .dashboard-container .main-grid .card-section .list-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+.conteudo-central .dashboard-container .main-grid .card-section .list-item .item-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.conteudo-central .dashboard-container .main-grid .card-section .list-item .item-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg-main);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+}
+.conteudo-central .dashboard-container .main-grid .card-section .list-item .item-details h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+}
+.conteudo-central .dashboard-container .main-grid .card-section .list-item .item-details p {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+.conteudo-central .dashboard-container .main-grid .card-section .list-item .item-value {
+  font-weight: 600;
+  text-align: right;
+}
+.conteudo-central .dashboard-container .main-grid .card-section .list-item .item-value.positivo {
+  color: var(--text-especial);
+}
+.conteudo-central .dashboard-container .main-grid .card-section .budget-row {
+  margin-bottom: 1rem;
+}
+.conteudo-central .dashboard-container .main-grid .card-section .budget-row .budget-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.875rem;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+.conteudo-central .dashboard-container .main-grid .card-section .budget-row .progress-bg {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-main);
+  border-radius: 4px;
+  overflow: hidden;
+}
+.conteudo-central .dashboard-container .main-grid .card-section .budget-row .progress-fill {
+  height: 100%;
+  border-radius: 4px;
+}
+@media (max-width: 992px) {
+  .conteudo-central .dashboard-container .main-grid {
+    grid-template-columns: 1fr;
+  }
 }
 .conteudo-central .transacoes-container {
   display: flex;
