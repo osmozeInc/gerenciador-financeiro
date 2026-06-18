@@ -18,6 +18,7 @@
     --text-warning: #f59e0b;
 
     --card-radius: 10px;
+    --btn-radius: 6px;
     --card-shadow-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -132,7 +133,11 @@ header {
         width: 100%;
         height: 1px;
         background-color: var(--divisor-color);
-        margin: .5rem 0 1rem 0;
+        margin-bottom: 1rem;
+    }
+
+    .divider {
+        margin-bottom: .5rem;
     }
 
     .menus-container {
@@ -188,6 +193,7 @@ header {
                 background-color: var(--bg-padrao);
                 border: none;
                 text-align: left;
+                padding:  .8rem .2rem;
             }
 
             .menu-item.active, .submenu-item.active {
@@ -862,6 +868,7 @@ header {
     .modal-container {
         background-color: var(--bg-padrao);
         padding: 1.5rem;
+        padding-bottom: 2rem;
         margin-left: 250px;
         border-radius: 8px;
         width: 90%;
@@ -877,8 +884,10 @@ header {
         .notificacoes-container {
             display: flex;
             flex-direction: column;
+            max-height: 50vh;
+            overflow-y: auto;
             
-            .notificacoes-body {
+            .notificacoes-group {
                 display: flex;
                 flex-direction: column;
                 gap: .8rem;
@@ -902,6 +911,12 @@ header {
                         width: 220px;
                         font-size: 1.2rem;
                     }
+
+                    .switch {
+                    --switch-width: 44px; 
+                    --switch-height: 20px;
+                    --circle-diameter: 16px;
+                    }
                 }
             }
         }
@@ -910,18 +925,33 @@ header {
             width: 100%;
             display: flex;
             justify-content: end;
+            margin-top: 1.5rem;
+            gap: 1rem;
             
-            .btn-fechar {
+            .btn-salvar, .btn-fechar {
                 background-color: transparent;
-                border: none;
                 color: var(--text-primary);
+                border-radius: var(--btn-radius);
+                border: 1px solid var(--border-color);
+                padding: 0.6rem 4rem;
                 font-size: 1.25rem;
                 cursor: pointer;
             }
+            
+            .btn-salvar{
+                width: 100%;
+                background-color: var(--text-especial);
+                color: var(--text-contrast);
+                border: none;
+            }
+
+            .btn-salvar:hover, .btn-fechar:hover {
+                box-shadow: 0 1px 2px var(--card-shadow-color);
+            }     
         }
 
         .switch {
-            --switch-width: 46px; --switch-height: 24px; --switch-bg: rgb(131, 131, 131); --switch-checked-bg: rgb(0, 218, 80); --switch-offset: calc((var(--switch-height) - var(--circle-diameter)) / 2); --switch-transition: all .2s cubic-bezier(0.27, 0.2, 0.25, 1.51);
+            --switch-width: 50px; --switch-height: 22px; --switch-bg: rgb(131, 131, 131); --switch-checked-bg: rgb(0, 218, 80); --switch-offset: calc((var(--switch-height) - var(--circle-diameter)) / 2); --switch-transition: all .2s cubic-bezier(0.27, 0.2, 0.25, 1.51);
             /* circle */
             --circle-diameter: 18px; --circle-bg: #fff; --circle-shadow: 1px 1px 2px rgba(146, 146, 146, 0.45); --circle-checked-shadow: -1px 1px 2px rgba(163, 163, 163, 0.45); --circle-transition: var(--switch-transition);
             /* icon */

@@ -15,6 +15,7 @@
   --text-invest: #2079df;
   --text-warning: #f59e0b;
   --card-radius: 10px;
+  --btn-radius: 6px;
   --card-shadow-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -115,7 +116,10 @@ header nav a.active {
   width: 100%;
   height: 1px;
   background-color: var(--divisor-color);
-  margin: 0.5rem 0 1rem 0;
+  margin-bottom: 1rem;
+}
+.aside-container .divider {
+  margin-bottom: 0.5rem;
 }
 .aside-container .menus-container {
   height: calc(100% - 40px);
@@ -166,6 +170,7 @@ header nav a.active {
   background-color: var(--bg-padrao);
   border: none;
   text-align: left;
+  padding: 0.8rem 0.2rem;
 }
 .aside-container .menus-container .menu-container .menu-item.active, .aside-container .menus-container .menu-container .submenu-item.active, .aside-container .menus-container .submenu-container .menu-item.active, .aside-container .menus-container .submenu-container .submenu-item.active {
   font-weight: bold;
@@ -893,6 +898,7 @@ header nav a.active {
 .modal-backdrop .modal-container {
   background-color: var(--bg-padrao);
   padding: 1.5rem;
+  padding-bottom: 2rem;
   margin-left: 250px;
   border-radius: 8px;
   width: 90%;
@@ -907,48 +913,68 @@ header nav a.active {
 .modal-backdrop .modal-container .notificacoes-container {
   display: flex;
   flex-direction: column;
+  max-height: 50vh;
+  overflow-y: auto;
 }
-.modal-backdrop .modal-container .notificacoes-container .notificacoes-body {
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
   margin-bottom: 3rem;
 }
-.modal-backdrop .modal-container .notificacoes-container .notificacoes-body .notificacoes-header {
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacoes-header {
   display: flex;
   align-items: end;
   gap: 2rem;
   margin-bottom: 0.5rem;
 }
-.modal-backdrop .modal-container .notificacoes-container .notificacoes-body .notificacoes-header h2 {
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacoes-header h2 {
   margin: 0;
   color: var(--text-primary);
   font-size: 1.4rem;
 }
-.modal-backdrop .modal-container .notificacoes-container .notificacoes-body .notificacao {
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao {
   display: flex;
   align-items: end;
   margin-left: 1rem;
 }
-.modal-backdrop .modal-container .notificacoes-container .notificacoes-body .notificacao .titulo {
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao .titulo {
   width: 220px;
   font-size: 1.2rem;
+}
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao .switch {
+  --switch-width: 44px;
+  --switch-height: 20px;
+  --circle-diameter: 16px;
 }
 .modal-backdrop .modal-container .btn-container {
   width: 100%;
   display: flex;
   justify-content: end;
+  margin-top: 1.5rem;
+  gap: 1rem;
 }
-.modal-backdrop .modal-container .btn-container .btn-fechar {
+.modal-backdrop .modal-container .btn-container .btn-salvar, .modal-backdrop .modal-container .btn-container .btn-fechar {
   background-color: transparent;
-  border: none;
   color: var(--text-primary);
+  border-radius: var(--btn-radius);
+  border: 1px solid var(--border-color);
+  padding: 0.6rem 4rem;
   font-size: 1.25rem;
   cursor: pointer;
 }
+.modal-backdrop .modal-container .btn-container .btn-salvar {
+  width: 100%;
+  background-color: var(--text-especial);
+  color: var(--text-contrast);
+  border: none;
+}
+.modal-backdrop .modal-container .btn-container .btn-salvar:hover, .modal-backdrop .modal-container .btn-container .btn-fechar:hover {
+  box-shadow: 0 1px 2px var(--card-shadow-color);
+}
 .modal-backdrop .modal-container .switch {
-  --switch-width: 46px;
-  --switch-height: 24px;
+  --switch-width: 50px;
+  --switch-height: 22px;
   --switch-bg: rgb(131, 131, 131);
   --switch-checked-bg: rgb(0, 218, 80);
   --switch-offset: calc((var(--switch-height) - var(--circle-diameter)) / 2);
