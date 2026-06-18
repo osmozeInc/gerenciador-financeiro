@@ -166,8 +166,8 @@
         const listDiv = document.getElementById('listaOrcamentos');
         listDiv.innerHTML = appState.orcamentos.map(o => {
             const pct = (o.gasto / o.limite) * 100;
-            let cor = 'var(--text-primary)';
-            if (pct > 80 && pct <= 100) cor = '#f59e0b'; // Amarelo alerta
+            let cor = 'var(--text-especial)'; // verde limite
+            if (pct > 60 && pct <= 100) cor = '#f59e0b'; // Amarelo alerta
             if (pct > 100) cor = 'var(--text-danger)'; // Vermelho estourado
 
             return `

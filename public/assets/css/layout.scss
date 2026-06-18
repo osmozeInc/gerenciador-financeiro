@@ -273,10 +273,9 @@ header {
     }
 
     .dashboard-container {
-        margin: 0 auto;
         display: flex;
         flex-direction: column;
-        gap: 1.5rem;
+        gap: 2rem;
     
         .kpi-grid {
             display: grid;
@@ -284,13 +283,18 @@ header {
             gap: 1.5rem;
         
             .kpi-card {
-                background-color: var(--bg-padrao); padding: 1.5rem;
-                border-radius: var(--radius); border: 1px solid var(--divisor-color);
-                display: flex; flex-direction: column; gap: 0.5rem;
+                background-color: var(--bg-padrao); 
+                padding: 1.5rem;
+                border-radius: var(--card-radius); 
+                display: flex; 
+                flex-direction: column; 
+                gap: 0.5rem;
+                box-shadow: 0 1px 3px var(--card-shadow-color);
     
                 .kpi-title { font-size: 0.875rem; color: var(--text-secondary); font-weight: 600; text-transform: uppercase; }
                 .kpi-value { font-size: 1.75rem; font-weight: 700; }
                 .kpi-trend { font-size: 0.75rem; font-weight: 600; padding: 0.25rem 0.5rem; border-radius: 4px; display: inline-block; align-self: flex-start; }
+
                 .trend-up { background: #d1fae5; color: var(--text-especial); }
                 .trend-down { background: #fee2e2; color: var(--text-danger); }
             }
@@ -304,8 +308,9 @@ header {
         
             .card-section {
                 background-color: var(--bg-padrao); padding: 1.5rem;
-                border-radius: var(--radius); border: 1px solid var(--divisor-color);
+                border-radius: var(--card-radius); 
                 margin-bottom: 1.5rem;
+                box-shadow: 0 1px 3px var(--card-shadow-color);
                 
                 .section-header { 
                     display: flex; 
@@ -944,4 +949,3 @@ header {
 
     &.active { display: flex; }
 }
-
