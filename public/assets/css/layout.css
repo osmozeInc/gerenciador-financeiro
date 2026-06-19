@@ -925,13 +925,13 @@ header nav a.active {
 .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacoes-header {
   display: flex;
   align-items: end;
-  gap: 2rem;
   margin-bottom: 0.5rem;
 }
 .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacoes-header h2 {
   margin: 0;
   color: var(--text-primary);
   font-size: 1.4rem;
+  width: 210px;
 }
 .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao {
   display: flex;
@@ -941,6 +941,10 @@ header nav a.active {
 .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao .titulo {
   width: 220px;
   font-size: 1.2rem;
+}
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao .travado {
+  opacity: 0.55;
+  pointer-events: none;
 }
 .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao .switch {
   --switch-width: 44px;
