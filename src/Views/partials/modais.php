@@ -4,7 +4,8 @@
 
 <article class="modal-backdrop" id="modal-notificacao">
     <div class="modal-container">
-        <h1>Notificações</h1>
+        <h1>Ajustes de Notificações <i class="bi bi-bell"></i></h1>
+        <hr>
 
         <div class="notificacoes-container">
             <div class="notificacoes-group">
@@ -148,7 +149,7 @@
         </div>
 
         <div class="btn-container">
-            <button class="btn-fechar" onclick="fecharModal('modal-notificacao')">Fechar</button>
+            <button class="btn-fechar" onclick="fecharModal('modal-notificacao')">Cancelar</button>
             <button class="btn-salvar" onclick="fecharModal('modal-notificacao')">Salvar</button>
         </div>
     </div>
@@ -201,3 +202,77 @@
     
     
 </script>
+
+
+<!-- MODAL DE CONFIGURAÇÕES -->
+
+<article class="modal-backdrop" id="modal-configuracoes">
+    <div class="modal-container">
+        <h1>Configurações</h1>
+        <hr>
+
+        <div class="configuracoes-container"> <!-- Mantive a classe para herdar seu CSS de scroll -->
+            
+            <!-- 
+            Preferências Visuais
+
+            <div class="config-header">
+                <h2>Preferências de Exibição</h2>
+            </div>
+            
+            <div class="config-group">
+                <div class="notificacao">
+                    <label class="titulo">Modo Escuro (Dark Mode)</label>
+                </div>
+                
+                <div class="notificacao">
+                    <label class="titulo">Ocultar valores ao iniciar</label>
+                </div>
+            </div>
+            -->
+            
+            <div class="config-group">
+                <div class="config-header">
+                    <h2>Sistema e Dados</h2>
+                </div>
+                
+                <div class="config">
+                    <label class="titulo">Moeda Principal</label>
+                    <select class="config-select">
+                        <option value="BRL">Real (R$)</option>
+                        <option value="USD">Dólar (US$)</option>
+                        <option value="EUR">Euro (€)</option>
+                    </select>
+                </div>
+                
+                <div class="config">
+                    <label class="titulo">Exportar Backup (CSV)</label>
+                    <button class="btn-config-action">Baixar Dados</button>
+                </div>
+            </div>
+
+            <!-- GRUPO 3: Cadastros Base (A crítica da 1ª tela resolvida aqui) -->
+            <div class="config-group">
+                <div class="config-header">
+                    <h2>Cadastros</h2>
+                </div>
+                
+                <div class="config">
+                    <label class="titulo">Categorias de Transação</label>
+                    <button class="btn-config-action outline">Gerenciar</button>
+                </div>
+
+                <div class="config">
+                    <label class="titulo">Formas de Pagamento</label>
+                    <button class="btn-config-action outline">Gerenciar</button>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="btn-container">
+            <button class="btn-fechar" onclick="fecharModal('modal-configuracoes')">Cancelar</button>
+            <button class="btn-salvar" onclick="salvarConfiguracoes()">Aplicar Alterações</button>
+        </div>
+    </div>
+</article>

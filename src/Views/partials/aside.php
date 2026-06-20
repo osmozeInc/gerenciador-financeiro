@@ -45,7 +45,7 @@ $urlAtual = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
                 <i class="bi bi-bell"></i>
                 <p class="submenu-item-text">Notificações</p>
             </button>
-            <button href="" class="submenu-item">
+            <button href="" class="submenu-item" onclick="abrirModal('modal-configuracoes')">
                 <i class="bi bi-gear"></i>
                 <p class="submenu-item-text">Configurações</p>
             </button>

@@ -902,54 +902,143 @@ header nav a.active {
   margin-left: 250px;
   border-radius: 8px;
   width: 90%;
-  max-width: 600px;
+  max-width: 700px;
   box-shadow: 0 4px 15px var(--card-shadow-color);
 }
 .modal-backdrop .modal-container h1 {
-  margin: 0 0 1.5rem 0;
+  margin: 0;
   color: var(--text-primary);
   font-size: 1.8rem;
+  font-weight: 600;
 }
-.modal-backdrop .modal-container .notificacoes-container {
+.modal-backdrop .modal-container i {
+  margin-left: 1rem;
+}
+.modal-backdrop .modal-container hr {
+  width: 90%;
+  margin: 1rem 0 0.5rem 0;
+}
+.modal-backdrop .modal-container .notificacoes-container, .modal-backdrop .modal-container .configuracoes-container {
   display: flex;
   flex-direction: column;
   max-height: 50vh;
   overflow-y: auto;
 }
-.modal-backdrop .modal-container .notificacoes-container .notificacoes-group {
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group, .modal-backdrop .modal-container .notificacoes-container .config-group, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group, .modal-backdrop .modal-container .configuracoes-container .config-group {
   display: flex;
   flex-direction: column;
   gap: 0.8rem;
   margin-bottom: 3rem;
 }
-.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacoes-header {
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacoes-header, .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config-header, .modal-backdrop .modal-container .notificacoes-container .config-group .notificacoes-header, .modal-backdrop .modal-container .notificacoes-container .config-group .config-header, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .notificacoes-header, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config-header, .modal-backdrop .modal-container .configuracoes-container .config-group .notificacoes-header, .modal-backdrop .modal-container .configuracoes-container .config-group .config-header {
   display: flex;
   align-items: end;
   margin-bottom: 0.5rem;
 }
-.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacoes-header h2 {
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacoes-header h2, .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config-header h2, .modal-backdrop .modal-container .notificacoes-container .config-group .notificacoes-header h2, .modal-backdrop .modal-container .notificacoes-container .config-group .config-header h2, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .notificacoes-header h2, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config-header h2, .modal-backdrop .modal-container .configuracoes-container .config-group .notificacoes-header h2, .modal-backdrop .modal-container .configuracoes-container .config-group .config-header h2 {
   margin: 0;
   color: var(--text-primary);
-  font-size: 1.4rem;
+  font-size: 1.3rem;
+  font-weight: 600;
   width: 210px;
 }
-.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao {
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao, .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config, .modal-backdrop .modal-container .notificacoes-container .config-group .notificacao, .modal-backdrop .modal-container .notificacoes-container .config-group .config, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .notificacao, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config, .modal-backdrop .modal-container .configuracoes-container .config-group .notificacao, .modal-backdrop .modal-container .configuracoes-container .config-group .config {
   display: flex;
   align-items: end;
   margin-left: 1rem;
 }
-.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao .titulo {
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao .titulo, .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config .titulo, .modal-backdrop .modal-container .notificacoes-container .config-group .notificacao .titulo, .modal-backdrop .modal-container .notificacoes-container .config-group .config .titulo, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .notificacao .titulo, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config .titulo, .modal-backdrop .modal-container .configuracoes-container .config-group .notificacao .titulo, .modal-backdrop .modal-container .configuracoes-container .config-group .config .titulo {
   width: 220px;
   font-size: 1.2rem;
 }
-.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao .travado {
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao .travado, .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config .travado, .modal-backdrop .modal-container .notificacoes-container .config-group .notificacao .travado, .modal-backdrop .modal-container .notificacoes-container .config-group .config .travado, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .notificacao .travado, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config .travado, .modal-backdrop .modal-container .configuracoes-container .config-group .notificacao .travado, .modal-backdrop .modal-container .configuracoes-container .config-group .config .travado {
   opacity: 0.55;
   pointer-events: none;
 }
-.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao .switch {
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao .switch, .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config .switch, .modal-backdrop .modal-container .notificacoes-container .config-group .notificacao .switch, .modal-backdrop .modal-container .notificacoes-container .config-group .config .switch, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .notificacao .switch, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config .switch, .modal-backdrop .modal-container .configuracoes-container .config-group .notificacao .switch, .modal-backdrop .modal-container .configuracoes-container .config-group .config .switch {
   --switch-width: 44px;
   --switch-height: 20px;
   --circle-diameter: 16px;
+}
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao .config-select, .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config .config-select, .modal-backdrop .modal-container .notificacoes-container .config-group .notificacao .config-select, .modal-backdrop .modal-container .notificacoes-container .config-group .config .config-select, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .notificacao .config-select, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config .config-select, .modal-backdrop .modal-container .configuracoes-container .config-group .notificacao .config-select, .modal-backdrop .modal-container .configuracoes-container .config-group .config .config-select {
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  border: 1px solid var(--divisor-color, #ccc);
+  background-color: transparent;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 0.95rem;
+  cursor: pointer;
+  outline: none;
+}
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao .btn-config-action, .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config .btn-config-action, .modal-backdrop .modal-container .notificacoes-container .config-group .notificacao .btn-config-action, .modal-backdrop .modal-container .notificacoes-container .config-group .config .btn-config-action, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .notificacao .btn-config-action, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config .btn-config-action, .modal-backdrop .modal-container .configuracoes-container .config-group .notificacao .btn-config-action, .modal-backdrop .modal-container .configuracoes-container .config-group .config .btn-config-action {
+  padding: 0.4rem 1rem;
+  border-radius: 6px;
+  border: none;
+  background-color: var(--text-especial);
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: 0.2s;
+}
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao .btn-config-action.outline, .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config .btn-config-action.outline, .modal-backdrop .modal-container .notificacoes-container .config-group .notificacao .btn-config-action.outline, .modal-backdrop .modal-container .notificacoes-container .config-group .config .btn-config-action.outline, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .notificacao .btn-config-action.outline, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config .btn-config-action.outline, .modal-backdrop .modal-container .configuracoes-container .config-group .notificacao .btn-config-action.outline, .modal-backdrop .modal-container .configuracoes-container .config-group .config .btn-config-action.outline {
+  background-color: transparent;
+  border: 1px solid var(--text-primary);
+  color: var(--text-primary);
+}
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao .btn-config-action:hover, .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config .btn-config-action:hover, .modal-backdrop .modal-container .notificacoes-container .config-group .notificacao .btn-config-action:hover, .modal-backdrop .modal-container .notificacoes-container .config-group .config .btn-config-action:hover, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .notificacao .btn-config-action:hover, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config .btn-config-action:hover, .modal-backdrop .modal-container .configuracoes-container .config-group .notificacao .btn-config-action:hover, .modal-backdrop .modal-container .configuracoes-container .config-group .config .btn-config-action:hover {
+  opacity: 0.8;
+}
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao .btn-config-action.outline:hover, .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config .btn-config-action.outline:hover, .modal-backdrop .modal-container .notificacoes-container .config-group .notificacao .btn-config-action.outline:hover, .modal-backdrop .modal-container .notificacoes-container .config-group .config .btn-config-action.outline:hover, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .notificacao .btn-config-action.outline:hover, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config .btn-config-action.outline:hover, .modal-backdrop .modal-container .configuracoes-container .config-group .notificacao .btn-config-action.outline:hover, .modal-backdrop .modal-container .configuracoes-container .config-group .config .btn-config-action.outline:hover {
+  background-color: var(--text-especial);
+  border: 1px solid var(--text-especial);
+  color: #fff;
+}
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config, .modal-backdrop .modal-container .notificacoes-container .config-group .config, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config, .modal-backdrop .modal-container .configuracoes-container .config-group .config {
+  justify-content: space-between;
+}
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config .titulo, .modal-backdrop .modal-container .notificacoes-container .config-group .config .titulo, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config .titulo, .modal-backdrop .modal-container .configuracoes-container .config-group .config .titulo {
+  width: -moz-max-content;
+  width: max-content;
+}
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config .config-select, .modal-backdrop .modal-container .notificacoes-container .config-group .config .config-select, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config .config-select, .modal-backdrop .modal-container .configuracoes-container .config-group .config .config-select {
+  width: 150px;
+  padding: 0.3rem 1rem;
+  border-radius: var(--btn-radius);
+  border: 1px solid var(--divisor-color);
+  background-color: transparent;
+  color: var(--text-primary);
+  font-family: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  outline: none;
+}
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config .btn-config-action, .modal-backdrop .modal-container .notificacoes-container .config-group .config .btn-config-action, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config .btn-config-action, .modal-backdrop .modal-container .configuracoes-container .config-group .config .btn-config-action {
+  width: 150px;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  border: none;
+  background-color: var(--text-especial);
+  color: #fff;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 1rem;
+  transition: 0.2s;
+}
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config .btn-config-action.outline, .modal-backdrop .modal-container .notificacoes-container .config-group .config .btn-config-action.outline, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config .btn-config-action.outline, .modal-backdrop .modal-container .configuracoes-container .config-group .config .btn-config-action.outline {
+  background-color: transparent;
+  border: 1px solid var(--text-primary);
+  color: var(--text-primary);
+}
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config .btn-config-action:hover, .modal-backdrop .modal-container .notificacoes-container .config-group .config .btn-config-action:hover, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config .btn-config-action:hover, .modal-backdrop .modal-container .configuracoes-container .config-group .config .btn-config-action:hover {
+  opacity: 0.8;
+}
+.modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config .btn-config-action.outline:hover, .modal-backdrop .modal-container .notificacoes-container .config-group .config .btn-config-action.outline:hover, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config .btn-config-action.outline:hover, .modal-backdrop .modal-container .configuracoes-container .config-group .config .btn-config-action.outline:hover {
+  background-color: var(--text-especial);
+  border: 1px solid var(--text-especial);
+  color: #fff;
+  opacity: 0.95;
 }
 .modal-backdrop .modal-container .btn-container {
   width: 100%;
@@ -983,19 +1072,16 @@ header nav a.active {
   --switch-checked-bg: rgb(0, 218, 80);
   --switch-offset: calc((var(--switch-height) - var(--circle-diameter)) / 2);
   --switch-transition: all .2s cubic-bezier(0.27, 0.2, 0.25, 1.51);
-  /* circle */
   --circle-diameter: 18px;
   --circle-bg: #fff;
   --circle-shadow: 1px 1px 2px rgba(146, 146, 146, 0.45);
   --circle-checked-shadow: -1px 1px 2px rgba(163, 163, 163, 0.45);
   --circle-transition: var(--switch-transition);
-  /* icon */
   --icon-transition: all .2s cubic-bezier(0.27, 0.2, 0.25, 1.51);
   --icon-cross-color: var(--switch-bg);
   --icon-cross-size: 6px;
   --icon-checkmark-color: var(--switch-checked-bg);
   --icon-checkmark-size: 10px;
-  /* effect line */
   --effect-width: calc(var(--circle-diameter) / 2);
   --effect-height: calc(var(--effect-width) / 2 - 1px);
   --effect-bg: var(--circle-bg);
