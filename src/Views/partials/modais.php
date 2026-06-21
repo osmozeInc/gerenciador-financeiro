@@ -199,8 +199,6 @@
             }
         });
     });
-    
-    
 </script>
 
 
@@ -276,3 +274,115 @@
         </div>
     </div>
 </article>
+
+
+<!-- MODAL DE CONTA DO USUÁRIO -->
+
+<article class="modal-backdrop" id="modal-conta">
+    <div class="modal-container">
+        
+        <!-- Cabeçalho (Inspirado na referência) -->
+        <div class="profile-badge-header">
+            <div class="avatar-circle">
+                <i class="bi bi-person-fill"></i>
+            </div>
+            <div class="profile-info">
+                <h2 id="userNameDisplay">Caio Monte</h2>
+                <p id="userEmailDisplay">caio.monte@example.com</p>
+            </div>
+        </div>
+
+        <div class="scroll-container">
+            
+            <div class="user-group">
+                <h2>Dados Pessoais</h2>
+                <div class="form-grid">
+                    <div class="input-group">
+                        <label>Nome Completo</label>
+                        <input type="text" id="inputNome" value="Caio Monte" class="user-input">
+                    </div>
+                    <div class="input-group">
+                        <label>E-mail</label>
+                        <input type="email" id="inputEmail" value="caio.monte@example.com" class="user-input">
+                    </div>
+                    <div class="input-group">
+                        <label>Telefone</label>
+                        <input type="tel" id="inputPhone" placeholder="(00) 00000-0000" class="user-input">
+                    </div>
+                </div>
+            </div>
+
+            <div class="user-group">
+                <h2>Preferências do App</h2>
+                
+                <div class="user-config">
+                    <label class="titulo-switch">Tema atual</label>
+                    <label class="switch-theme">
+                        <input checked="true" id="checkbox" type="checkbox" />
+                        <span class="slider">
+                            <div class="star star_1"></div>
+                            <div class="star star_2"></div>
+                            <div class="star star_3"></div>
+                            <svg viewBox="0 0 16 16" class="cloud_1 cloud"> <path transform="matrix(.77976 0 0 .78395-299.99-418.63)" fill="#fff" d="m391.84 540.91c-.421-.329-.949-.524-1.523-.524-1.351 0-2.451 1.084-2.485 2.435-1.395.526-2.388 1.88-2.388 3.466 0 1.874 1.385 3.423 3.182 3.667v.034h12.73v-.006c1.775-.104 3.182-1.584 3.182-3.395 0-1.747-1.309-3.186-2.994-3.379.007-.106.011-.214.011-.322 0-2.707-2.271-4.901-5.072-4.901-2.073 0-3.856 1.202-4.643 2.925"></path> </svg>
+                        </span>
+                    </label>
+                </div>
+                
+                <div class="user-config">
+                    <label class="titulo-switch">Saldos visiveis ao iniciar</label>
+                    <i class="bi bi-eye"></i>
+                    <i class="bi bi-eye-slash"></i>
+                </div>
+            </div>
+
+            <div class="user-group">
+                <h2>Segurança</h2>
+                <div class="user-config">
+                    <label class="titulo">Senha de Acesso</label>
+                    <button class="btn-user-action">Alterar Senha</button>
+                </div>
+                <div class="user-config">
+                    <label class="titulo">Autenticação em 2 Fatores (2FA)</label>
+                    <button class="btn-user-action">Configurar</button>
+                </div>
+            </div>
+
+            <div class="user-group" style="margin-bottom: 1rem;">
+                <h2>Login</h2>
+                <div class="user-config logout">
+                    <label>Sair</label>
+                    <i class="bi bi-box-arrow-right"></i>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="btn-container">
+            <button class="btn-fechar" onclick="fecharModal('modal-conta')">Cancelar</button>
+            <button class="btn-salvar" onclick="salvarDadosUsuario()">Salvar Dados</button>
+        </div>
+    </div>
+</article>
+
+<script>
+    // Lógica básica simulada para os alunos
+    function fazerLogout() {
+        if(confirm("Tem certeza que deseja sair?")) {
+            // Lógica de limpar tokens do localStorage iria aqui
+            alert("Sessão encerrada.");
+            window.location.href = "/login.html"; // Exemplo de redirecionamento
+        }
+    }
+
+    function salvarDadosUsuario() {
+        const nome = document.getElementById('inputNome').value;
+        const email = document.getElementById('inputEmail').value;
+        
+        // Atualiza a UI imediatamente (Optimistic UI Update)
+        document.getElementById('userNameDisplay').textContent = nome;
+        document.getElementById('userEmailDisplay').textContent = email;
+        
+        fecharModal('modal-conta');
+        // Toast notification entraria aqui
+    }
+</script>

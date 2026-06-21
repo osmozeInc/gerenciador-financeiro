@@ -190,6 +190,7 @@ header nav a.active {
   background: var(--bg-padrao);
   overflow: hidden;
   margin-top: 1rem;
+  cursor: pointer;
 }
 .aside-container .menus-container .menu-container .user-button .bi-person-fill, .aside-container .menus-container .submenu-container .user-button .bi-person-fill {
   width: 35px;
@@ -902,7 +903,7 @@ header nav a.active {
   margin-left: 250px;
   border-radius: 8px;
   width: 90%;
-  max-width: 700px;
+  max-width: 600px;
   box-shadow: 0 4px 15px var(--card-shadow-color);
 }
 .modal-backdrop .modal-container h1 {
@@ -952,7 +953,7 @@ header nav a.active {
   font-size: 1.2rem;
 }
 .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao .travado, .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config .travado, .modal-backdrop .modal-container .notificacoes-container .config-group .notificacao .travado, .modal-backdrop .modal-container .notificacoes-container .config-group .config .travado, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .notificacao .travado, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config .travado, .modal-backdrop .modal-container .configuracoes-container .config-group .notificacao .travado, .modal-backdrop .modal-container .configuracoes-container .config-group .config .travado {
-  opacity: 0.55;
+  opacity: 0.4;
   pointer-events: none;
 }
 .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .notificacao .switch, .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config .switch, .modal-backdrop .modal-container .notificacoes-container .config-group .notificacao .switch, .modal-backdrop .modal-container .notificacoes-container .config-group .config .switch, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .notificacao .switch, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config .switch, .modal-backdrop .modal-container .configuracoes-container .config-group .notificacao .switch, .modal-backdrop .modal-container .configuracoes-container .config-group .config .switch {
@@ -1029,7 +1030,6 @@ header nav a.active {
 .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config .btn-config-action.outline, .modal-backdrop .modal-container .notificacoes-container .config-group .config .btn-config-action.outline, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config .btn-config-action.outline, .modal-backdrop .modal-container .configuracoes-container .config-group .config .btn-config-action.outline {
   background-color: transparent;
   border: 1px solid var(--text-primary);
-  color: var(--text-primary);
 }
 .modal-backdrop .modal-container .notificacoes-container .notificacoes-group .config .btn-config-action:hover, .modal-backdrop .modal-container .notificacoes-container .config-group .config .btn-config-action:hover, .modal-backdrop .modal-container .configuracoes-container .notificacoes-group .config .btn-config-action:hover, .modal-backdrop .modal-container .configuracoes-container .config-group .config .btn-config-action:hover {
   opacity: 0.8;
@@ -1039,6 +1039,229 @@ header nav a.active {
   border: 1px solid var(--text-especial);
   color: #fff;
   opacity: 0.95;
+}
+.modal-backdrop .modal-container .profile-badge-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: var(--bg-main, #f3f4f6);
+  border-radius: 8px;
+  margin-bottom: 1.5rem;
+  border: 1px solid var(--divisor-color, #e5e7eb);
+}
+.modal-backdrop .modal-container .profile-badge-header .avatar-circle {
+  width: 50px;
+  height: 50px;
+  background-color: var(--text-especial, #128d29);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  font-size: 1.8rem;
+}
+.modal-backdrop .modal-container .profile-badge-header .avatar-circle .bi-person-fill {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0;
+}
+.modal-backdrop .modal-container .profile-badge-header .profile-info h2 {
+  margin: 0;
+  font-size: 1.25rem;
+  color: var(--text-primary);
+  font-weight: 600;
+}
+.modal-backdrop .modal-container .profile-badge-header .profile-info p {
+  margin: 0;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+.modal-backdrop .modal-container .scroll-container {
+  max-height: 55vh;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+.modal-backdrop .modal-container .scroll-container .user-group {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+.modal-backdrop .modal-container .scroll-container .user-group h2 {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0;
+  border-bottom: 1px solid var(--divisor-color);
+  padding-bottom: 0.5rem;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .form-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .form-grid .input-group:first-child {
+  grid-column: 1/-1;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .form-grid .input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .form-grid .input-group label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.modal-backdrop .modal-container .scroll-container .user-group .form-grid .user-input {
+  padding: 0.75rem;
+  border-radius: 6px;
+  border: 1px solid var(--divisor-color);
+  background-color: var(--bg-padrao, #fff);
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .form-grid .user-input:focus {
+  border-color: var(--text-especial);
+}
+.modal-backdrop .modal-container .scroll-container .user-group .user-config {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .user-config .titulo {
+  width: 270px;
+  font-size: 1rem;
+  font-weight: 600;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .user-config .titulo-switch {
+  width: -moz-max-content;
+  width: max-content;
+  font-size: 1rem;
+  font-weight: 600;
+  margin-right: 1.5rem;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .user-config .btn-user-action {
+  min-width: 150px;
+  padding: 0.4rem 1rem;
+  border-radius: var(--btn-radius);
+  border: 1px solid var(--text-primary);
+  background-color: transparent;
+  color: var(--text-primary);
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: 0.2s;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .user-config .btn-user-action:hover {
+  background-color: var(--text-especial);
+  border: 1px solid var(--text-especial);
+  color: #fff;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .user-config .switch-theme {
+  font-size: 12px;
+  position: relative;
+  display: inline-block;
+  width: 4em;
+  height: 2.2em;
+  border-radius: 30px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.modal-backdrop .modal-container .scroll-container .user-group .user-config .switch-theme input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .user-config .switch-theme .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #2a2a2a;
+  transition: 0.4s;
+  border-radius: 30px;
+  overflow: hidden;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .user-config .switch-theme .slider:before {
+  position: absolute;
+  content: "";
+  height: 1.2em;
+  width: 1.2em;
+  border-radius: 20px;
+  left: 0.5em;
+  bottom: 0.5em;
+  transition: 0.4s;
+  transition-timing-function: cubic-bezier(0.81, -0.04, 0.38, 1.5);
+  box-shadow: inset 8px -4px 0px 0px #fff;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .user-config .switch-theme input:checked + .slider {
+  background-color: #00a6ff;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .user-config .switch-theme input:checked + .slider:before {
+  transform: translateX(1.8em);
+  box-shadow: inset 15px -4px 0px 15px #ffcf48;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .user-config .switch-theme .star {
+  background-color: #fff;
+  border-radius: 50%;
+  position: absolute;
+  width: 5px;
+  transition: all 0.4s;
+  height: 5px;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .user-config .switch-theme .star_1 {
+  left: 2.5em;
+  top: 0.5em;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .user-config .switch-theme .star_2 {
+  left: 2.2em;
+  top: 1.2em;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .user-config .switch-theme .star_3 {
+  left: 3em;
+  top: 0.9em;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .user-config .switch-theme input:checked ~ .slider .star {
+  opacity: 0;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .user-config .switch-theme .cloud {
+  width: 3.5em;
+  position: absolute;
+  bottom: -1.4em;
+  left: -1.1em;
+  opacity: 0;
+  transition: all 0.4s;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .user-config .switch-theme input:checked ~ .slider .cloud {
+  opacity: 1;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .user-config i.bi-eye, .modal-backdrop .modal-container .scroll-container .user-group .user-config i.bi-eye-slash {
+  display: flex;
+  font-size: 1.8rem;
+  margin: 0;
+  cursor: pointer;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .logout {
+  display: flex;
+  align-items: center;
+  margin-left: 1rem;
+  color: var(--text-danger);
+  font-size: 1.5rem;
+  cursor: pointer;
+  width: -moz-max-content;
+  width: max-content;
+}
+.modal-backdrop .modal-container .scroll-container .user-group .logout label {
+  cursor: pointer;
 }
 .modal-backdrop .modal-container .btn-container {
   width: 100%;

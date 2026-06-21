@@ -49,7 +49,7 @@ $urlAtual = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
                 <i class="bi bi-gear"></i>
                 <p class="submenu-item-text">Configurações</p>
             </button>
-            <button class="user-button">
+            <button class="user-button" onclick="abrirModal('modal-conta')">
                 <i class="bi bi-person-fill"></i>
                 <div class="user-text-container">
                     <p class="user-name">Caio Monte</p>
