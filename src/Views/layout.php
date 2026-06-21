@@ -27,6 +27,6 @@
     <!-- Adiciona os modais na página, todos com display: none -->
     <?php require_once __DIR__ . '/partials/modais.php'; ?>
 
-    <script src="/assets/js/script.js"></script>
+    <script src="/assets/js/script.js?v=<?php echo time(); ?>" type="module"></script>
 </body>
 </html>

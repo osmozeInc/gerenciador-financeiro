@@ -149,8 +149,8 @@
         </div>
 
         <div class="btn-container">
-            <button class="btn-fechar" onclick="fecharModal('modal-notificacao')">Cancelar</button>
-            <button class="btn-salvar" onclick="fecharModal('modal-notificacao')">Salvar</button>
+            <button class="btn-fechar js-fechar-modal" data-target="modal-notificacao">Cancelar</button>
+            <button class="btn-salvar">Salvar</button>
         </div>
     </div>
 </article>
@@ -206,28 +206,11 @@
 
 <article class="modal-backdrop" id="modal-configuracoes">
     <div class="modal-container">
-        <h1>Configurações</h1>
+        <h1>Configurações do Sistema<i class="bi bi-gear"></i></h1>
         <hr>
 
-        <div class="configuracoes-container"> <!-- Mantive a classe para herdar seu CSS de scroll -->
+        <div class="configuracoes-container">
             
-            <!-- 
-            Preferências Visuais
-
-            <div class="config-header">
-                <h2>Preferências de Exibição</h2>
-            </div>
-            
-            <div class="config-group">
-                <div class="notificacao">
-                    <label class="titulo">Modo Escuro (Dark Mode)</label>
-                </div>
-                
-                <div class="notificacao">
-                    <label class="titulo">Ocultar valores ao iniciar</label>
-                </div>
-            </div>
-            -->
             
             <div class="config-group">
                 <div class="config-header">
@@ -249,7 +232,6 @@
                 </div>
             </div>
 
-            <!-- GRUPO 3: Cadastros Base (A crítica da 1ª tela resolvida aqui) -->
             <div class="config-group">
                 <div class="config-header">
                     <h2>Cadastros</h2>
@@ -257,20 +239,20 @@
                 
                 <div class="config">
                     <label class="titulo">Categorias de Transação</label>
-                    <button class="btn-config-action outline">Gerenciar</button>
+                    <button class="btn-config-action outline" data-target-close="modal-configuracoes" data-target="modal-categorias">Gerenciar</button>
                 </div>
 
                 <div class="config">
                     <label class="titulo">Formas de Pagamento</label>
-                    <button class="btn-config-action outline">Gerenciar</button>
+                    <button class="btn-config-action outline" data-target-close="modal-configuracoes" data-target="modal-pagamentos">Gerenciar</button>
                 </div>
             </div>
 
         </div>
 
         <div class="btn-container">
-            <button class="btn-fechar" onclick="fecharModal('modal-configuracoes')">Cancelar</button>
-            <button class="btn-salvar" onclick="salvarConfiguracoes()">Aplicar Alterações</button>
+            <button class="btn-fechar js-fechar-modal" data-target="modal-configuracoes">Cancelar</button>
+            <button class="btn-salvar">Salvar</button>
         </div>
     </div>
 </article>
@@ -330,18 +312,20 @@
                 
                 <div class="user-config">
                     <label class="titulo-switch">Saldos visiveis ao iniciar</label>
-                    <i class="bi bi-eye"></i>
-                    <i class="bi bi-eye-slash"></i>
+                    <span id="visibilidade">
+                        <i class="bi bi-eye" data-visibilidade="true"></i>
+                        <i class="bi bi-eye-slash escondido" data-visibilidade="false"></i>
+                    </span>
                 </div>
             </div>
 
             <div class="user-group">
                 <h2>Segurança</h2>
-                <div class="user-config">
+                <div class="user-config-btn">
                     <label class="titulo">Senha de Acesso</label>
                     <button class="btn-user-action">Alterar Senha</button>
                 </div>
-                <div class="user-config">
+                <div class="user-config-btn">
                     <label class="titulo">Autenticação em 2 Fatores (2FA)</label>
                     <button class="btn-user-action">Configurar</button>
                 </div>
@@ -358,31 +342,12 @@
         </div>
 
         <div class="btn-container">
-            <button class="btn-fechar" onclick="fecharModal('modal-conta')">Cancelar</button>
-            <button class="btn-salvar" onclick="salvarDadosUsuario()">Salvar Dados</button>
+            <button class="btn-fechar js-fechar-modal" data-target="modal-conta">Cancelar</button>
+            <button class="btn-salvar">Salvar Dados</button>
         </div>
     </div>
 </article>
 
 <script>
-    // Lógica básica simulada para os alunos
-    function fazerLogout() {
-        if(confirm("Tem certeza que deseja sair?")) {
-            // Lógica de limpar tokens do localStorage iria aqui
-            alert("Sessão encerrada.");
-            window.location.href = "/login.html"; // Exemplo de redirecionamento
-        }
-    }
 
-    function salvarDadosUsuario() {
-        const nome = document.getElementById('inputNome').value;
-        const email = document.getElementById('inputEmail').value;
-        
-        // Atualiza a UI imediatamente (Optimistic UI Update)
-        document.getElementById('userNameDisplay').textContent = nome;
-        document.getElementById('userEmailDisplay').textContent = email;
-        
-        fecharModal('modal-conta');
-        // Toast notification entraria aqui
-    }
 </script>

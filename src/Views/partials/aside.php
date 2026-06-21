@@ -41,15 +41,15 @@ $urlAtual = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
     
         <div class="submenu-container">
             <hr class="divider">
-            <button href="" class="submenu-item" onclick="abrirModal('modal-notificacao')">
+            <button href="" class="submenu-item js-abrir-modal" data-target="modal-notificacao">
                 <i class="bi bi-bell"></i>
                 <p class="submenu-item-text">Notificações</p>
             </button>
-            <button href="" class="submenu-item" onclick="abrirModal('modal-configuracoes')">
+            <button href="" class="submenu-item js-abrir-modal" data-target="modal-configuracoes">
                 <i class="bi bi-gear"></i>
                 <p class="submenu-item-text">Configurações</p>
             </button>
-            <button class="user-button" onclick="abrirModal('modal-conta')">
+            <button class="user-button js-abrir-modal" data-target="modal-conta">
                 <i class="bi bi-person-fill"></i>
                 <div class="user-text-container">
                     <p class="user-name">Caio Monte</p>

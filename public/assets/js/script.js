@@ -1,12 +1,10 @@
+import { definirTema, definirVisibilidadeDeValores } from "./modais.js";
 
-/* FUNÇÕES DE ABRIR E FECHAR MODAL */
+let tema = localStorage.getItem('tema');
 
-function abrirModal(idModal) {
-    document.getElementById(idModal).classList.add('active');
+if (!tema) {
+    definirTema('light');
+} else {
+    definirTema(tema);
 }
 
-function fecharModal(idModal, idFormulario) {
-    document.getElementById(idModal).classList.remove('active');
-
-    if (idFormulario) document.getElementById(idFormulario).reset();
-}
