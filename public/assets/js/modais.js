@@ -34,7 +34,7 @@ btnTrocarModal.forEach(btn => {
 const btnTema = document.querySelector('.switch-theme input');
 btnTema.addEventListener('click', () => {
     let tema = (btnTema.checked) ? "light" : "dark"
-    mudarTema(tema);
+    definirTema(tema);
 });
 
 // visibilidade dos saldos

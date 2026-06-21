@@ -36,9 +36,9 @@
                     <!-- Gerado via JS -->
                 </div>
 
-                <div style="display: flex; gap: 1rem; margin-top: 2rem; font-size: 0.8rem; justify-content: center;">
-                    <span style="display: flex; align-items: center; gap: 4px;"><div style="width: 10px; height: 10px; background: var(--text-especial); border-radius: 2px;"></div> Receitas</span>
-                    <span style="display: flex; align-items: center; gap: 4px;"><div style="width: 10px; height: 10px; background: var(--text-danger); border-radius: 2px;"></div> Despesas</span>
+                <div class="chart-legend">
+                    <span><div style="background: var(--text-especial);"></div> Receitas</span>
+                    <span><div style="background: var(--text-danger);"></div> Despesas</span>
                 </div>
             </div>
 
