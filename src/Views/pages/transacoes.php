@@ -13,13 +13,37 @@
                     <select class="js-abrir-modal-select" data-target="modal-nova-categoria" required>
                         <option value="" disabled selected>Selecione...</option>
                         <optgroup label="Receitas (R)">
-                            <option value="1" data-tipo="R">Salário</option>
-                            <option value="2" data-tipo="R">Freela</option>
+                            <?php foreach($categorias['R'] as $categoria): ?>
+                                <option value="<?= $categoria['id'] ?>">
+                                    <?= htmlspecialchars($categoria['nome']); ?>
+                                </option>
+                            <?php endforeach; ?>
                         </optgroup>
+
                         <optgroup label="Despesas (D)">
-                            <option value="3" data-tipo="D">Moradia</option>
-                            <option value="4" data-tipo="D">Alimentação</option>
+                            <?php foreach($categorias['D'] as $categoria): ?>
+                                <option value="<?= $categoria['id'] ?>">
+                                    <?= htmlspecialchars($categoria['nome']); ?>
+                                </option>
+                            <?php endforeach; ?>
                         </optgroup>
+
+                        <optgroup label="Receitas (I)">
+                            <?php foreach($categorias['I'] as $categoria): ?>
+                                <option value="<?= $categoria['id'] ?>">
+                                    <?= htmlspecialchars($categoria['nome']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </optgroup>
+
+                        <optgroup label="Receitas (C)">
+                            <?php foreach($categorias['C'] as $categoria): ?>
+                                <option value="<?= $categoria['id'] ?>">
+                                    <?= htmlspecialchars($categoria['nome']); ?>
+                                </option>
+                            <?php endforeach; ?>
+                        </optgroup>
+
                         <optgroup label="Ações">
                             <option value="new">+ Nova Categoria</option>
                         </optgroup>

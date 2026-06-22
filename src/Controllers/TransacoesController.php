@@ -1,18 +1,26 @@
 <?php
-require_once 'Controller.php';
+require_once __DIR__ . '/Controller.php';
+require_once __DIR__ . '/../Models/Categoria.php';
 
 class TransacoesController extends Controller {
     
     public function index() {
+        $categoriaModel = new Categoria();
+        $categorias = $categoriaModel->selectAllIdNomeTipo();
+
+        $categoriasAgrupadas = [
+            'R' => [], // Receitas
+            'D' => [], // Despesas
+            'I' => [], // Investimentos
+            'C' => []  // Cofres
+        ];
+
+        foreach ($categorias as $categoria) {
+            $categoriasAgrupadas[$categoria['tipo']][] = $categoria;
+        }
 
         $dadosParaTela = [
-            'nome_usuario' => 'Caio',
-            'sobrenome_usuario' => 'Mendes',
-            'receita_bruta' => 220000 / 100,
-            'despesa_bruta' => 153000 / 100,
-            'cofre' => 500000 / 100,
-            'receita_total' => 600000 / 100,
-            'investidos' => 300000 / 100
+            'categorias' => $categoriasAgrupadas
         ];
 
         $this->render('transacoes', $dadosParaTela);
