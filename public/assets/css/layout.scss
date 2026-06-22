@@ -435,23 +435,11 @@ header {
                 margin-bottom: 1.5rem;
                 color: var(--text-primary);
             }
-            
+
             .form-grid {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
                 gap: 1rem;
-                
-                .input-group {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 0.25rem;
-            
-                    label {
-                        font-size: 0.875rem;
-                        color: var(--text-secondary);
-                        font-weight: 500;
-                    }
-                }
             }
     
             table {
@@ -534,18 +522,6 @@ header {
                 display: grid;
                 grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
                 gap: 1rem;
-            
-                .input-group { 
-                    display: flex;
-                    flex-direction: column;
-                    gap: 0.25rem;
-    
-                    label { 
-                        font-size: 0.875rem;
-                        color: var(--text-secondary);
-                        font-weight: 500;
-                    }
-                }
             }
 
             .btn-submit { background-color: var(--bg-btn-invest); }
@@ -604,16 +580,7 @@ header {
                 }
         
                 .input-group { 
-                    display: flex;
-                    flex-direction: column;
-                    gap: 0.25rem;
                     margin-bottom: 1rem;
-                    
-                    label { 
-                        font-size: 0.875rem;
-                        color: var(--text-secondary);
-                        font-weight: 500;
-                    }
                 }
             }
         }
@@ -1014,18 +981,6 @@ header {
                             grid-column: 1 / -1; 
                         }
             
-                        .input-group {
-                            display: flex;
-                            flex-direction: column;
-                            gap: 0.25rem;
-                        }
-            
-                        .input-group label {
-                            font-size: 0.85rem;
-                            font-weight: 600;
-                            color: var(--text-secondary);
-                        }
-            
                         .user-input {
                             padding: 0.75rem;
                             border-radius: 6px;
@@ -1126,6 +1081,11 @@ header {
 
         }
 
+        .form-simple {
+            label { color: var(--text-primary); margin: 1rem 0 .5rem 0; }
+            input { width: 300px; border: 1px solid var(--divisor-color);  }
+        }
+
         .btn-container{
             width: 100%;
             display: flex;
@@ -1195,10 +1155,22 @@ header {
 
 
 /* ==== CLASSES GENÉRICAS ==== */
+    
+.input-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    label {
+        font-size: 0.875rem;
+        color: var(--text-secondary);
+        font-weight: 500;
+    }
+}
 
 input, select {
     padding: 0.75rem;
-    border: none;
+    border:  1px solid var(--bg-input);
     border-radius: var(--radius-input);
     font-size: 1rem;
     outline: none;
@@ -1208,7 +1180,7 @@ input, select {
     option, optgroup { background-color: var(--bg-padrao); }
     
     &:focus { 
-        border: 1px solid var(--border-color);
+        border: 1px solid var(--divisor-color);
     }
     
     &[type="date"]::-webkit-calendar-picker-indicator {

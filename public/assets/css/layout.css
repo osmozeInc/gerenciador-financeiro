@@ -498,16 +498,6 @@ header nav a.active {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
 }
-.conteudo-central .transacoes-container .card .form-grid .input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-.conteudo-central .transacoes-container .card .form-grid .input-group label {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-}
 .conteudo-central .transacoes-container .card table {
   width: 100%;
   border-collapse: collapse;
@@ -581,16 +571,6 @@ header nav a.active {
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 1rem;
 }
-.conteudo-central .investimentos-container .card .form-grid .input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-.conteudo-central .investimentos-container .card .form-grid .input-group label {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  font-weight: 500;
-}
 .conteudo-central .investimentos-container .card .btn-submit {
   background-color: var(--bg-btn-invest);
 }
@@ -645,15 +625,7 @@ header nav a.active {
   color: var(--text-primary);
 }
 .conteudo-central .cofres-container .actions-grid .card .input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
   margin-bottom: 1rem;
-}
-.conteudo-central .cofres-container .actions-grid .card .input-group label {
-  font-size: 0.875rem;
-  color: var(--text-secondary);
-  font-weight: 500;
 }
 .conteudo-central .cofres-container .cofres-grid {
   display: grid;
@@ -1075,16 +1047,6 @@ header nav a.active {
 .modal-backdrop .modal-container .scroll-container .user-group .form-grid .input-group:first-child {
   grid-column: 1/-1;
 }
-.modal-backdrop .modal-container .scroll-container .user-group .form-grid .input-group {
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-}
-.modal-backdrop .modal-container .scroll-container .user-group .form-grid .input-group label {
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-}
 .modal-backdrop .modal-container .scroll-container .user-group .form-grid .user-input {
   padding: 0.75rem;
   border-radius: 6px;
@@ -1236,6 +1198,14 @@ header nav a.active {
   transform: translateX(7px);
   transition: 0.5s;
 }
+.modal-backdrop .modal-container .form-simple label {
+  color: var(--text-primary);
+  margin: 1rem 0 0.5rem 0;
+}
+.modal-backdrop .modal-container .form-simple input {
+  width: 300px;
+  border: 1px solid var(--divisor-color);
+}
 .modal-backdrop .modal-container .btn-container {
   width: 100%;
   display: flex;
@@ -1373,9 +1343,20 @@ header nav a.active {
 }
 
 /* ==== CLASSES GENÉRICAS ==== */
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+.input-group label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  font-weight: 500;
+}
+
 input, select {
   padding: 0.75rem;
-  border: none;
+  border: 1px solid var(--bg-input);
   border-radius: var(--radius-input);
   font-size: 1rem;
   outline: none;
@@ -1386,7 +1367,7 @@ input option, input optgroup, select option, select optgroup {
   background-color: var(--bg-padrao);
 }
 input:focus, select:focus {
-  border: 1px solid var(--border-color);
+  border: 1px solid var(--divisor-color);
 }
 input[type=date]::-webkit-calendar-picker-indicator, select[type=date]::-webkit-calendar-picker-indicator {
   color-scheme: var(--tema-color);

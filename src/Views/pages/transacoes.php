@@ -10,7 +10,7 @@
                 
                 <div class="input-group">
                     <label for="categoria_id">Categoria</label>
-                    <select id="categoria_id" required>
+                    <select class="js-abrir-modal-select" data-target="modal-nova-categoria" required>
                         <option value="" disabled selected>Selecione...</option>
                         <optgroup label="Receitas (R)">
                             <option value="1" data-tipo="R">Salário</option>
@@ -38,11 +38,12 @@
 
                 <div class="input-group">
                     <label for="pagamento_id">Forma de Pagamento</label>
-                    <select id="pagamento_id" required>
+                    <select class="js-abrir-modal-select" data-target="modal-novo-pagamento" required>
                         <option value="" disabled selected>Selecione...</option>
                         <option value="1">PIX</option>
                         <option value="2">Cartão de Crédito</option>
                         <option value="3">Dinheiro</option>
+                        <option value="new">+ Novo Pagamento</option>
                     </select>
                 </div>
 
@@ -83,25 +84,6 @@
     const categoriaSelect = document.getElementById('categoria_id');
     const valorInput = document.getElementById('valor');
     const tabelaBody = document.getElementById('tabelaTransacoes');
-
-    // Lógica de Feedback Visual do Input de Valor
-    categoriaSelect.addEventListener('change', (e) => {
-        const selectedOption = e.target.options[e.target.selectedIndex];
-        
-        // Verifica se clicou em "+ Nova Categoria"
-        if(selectedOption.value === 'new') {
-            alert('Aqui abriria um modal para criar uma nova categoria.');
-            e.target.value = ""; // Reseta o select
-            valorInput.className = '';
-            return;
-        }
-
-        const tipo = selectedOption.getAttribute('data-tipo');
-        
-        // Limpa classes anteriores e aplica a cor correspondente
-        valorInput.className = '';
-        if(tipo) valorInput.classList.add(`tipo-${tipo}`);
-    });
 
     // Submissão e renderização na tabela
     form.addEventListener('submit', (e) => {

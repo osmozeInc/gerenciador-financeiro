@@ -26,11 +26,12 @@
                 
                 <div class="input-group">
                     <label for="tipo">Classe</label>
-                    <select id="tipo" required>
+                    <select class="js-abrir-modal-select" id="tipo" data-target="modal-nova-classe" required>
                         <option value="Ações">Ações</option>
                         <option value="FIIs">FIIs</option>
                         <option value="Renda Fixa">Renda Fixa</option>
                         <option value="Cripto">Criptomoedas</option>
+                        <option value="new">+ Nova Classe</option>
                     </select>
                 </div>
 

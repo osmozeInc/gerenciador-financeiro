@@ -348,6 +348,65 @@
     </div>
 </article>
 
-<script>
 
-</script>
+<!-- MODAL DE ADICIONAR CATEGORIA DE TRANSACOES -->
+
+<article class="modal-backdrop" id="modal-nova-categoria">
+    <div class="modal-container">
+        <h1>Nova Categoria</h1>
+        <hr>
+
+        <form class="form-simple" id="novaCategoriaForm">
+            <div class="input-group">
+                <label for="novaCategoria">Nome da Categoria</label>
+                <input type="text" id="novaCategoria" required>
+            </div>
+            <div class="btn-container">
+                <button class="btn-fechar js-fechar-modal" data-target="modal-nova-categoria">Cancelar</button>
+                <button class="btn-salvar">Adicionar</button>
+            </div>
+        </form>
+    </div>
+</article>
+
+
+<!-- MODAL DE ADICIONAR FORMA DE PAGAMENTO -->
+
+<article class="modal-backdrop" id="modal-novo-pagamento">
+    <div class="modal-container">
+        <h1>Nova Forma de Pagamento</h1>
+        <hr>
+
+        <form class="form-simple" id="novoPagamentoForm">
+            <div class="input-group">
+                <label for="novoPagamento">Nome do Pagamento</label>
+                <input type="text" id="novoPagamento" required>
+            </div>
+            <div class="btn-container">
+                <button class="btn-fechar js-fechar-modal" data-target="modal-novo-pagamento">Cancelar</button>
+                <button class="btn-salvar">Adicionar</button>
+            </div>
+        </form>
+    </div>
+</article>
+
+
+<!-- MODAL DE ADICIONAR ClASSE DE INVESTIMENTO -->
+
+<article class="modal-backdrop" id="modal-nova-classe">
+    <div class="modal-container">
+        <h1>Nova Categoria</h1>
+        <hr>
+
+        <form class="form-simple" id="novaClasseForm">
+            <div class="input-group">
+                <label for="novaClasse">Nome da Classe de Investimento</label>
+                <input type="text" id="novaClasse" required>
+            </div>
+            <div class="btn-container">
+                <button class="btn-fechar js-fechar-modal" data-target="modal-nova-classe">Cancelar</button>
+                <button class="btn-salvar">Adicionar</button>
+            </div>
+        </form>
+    </div>
+</article>

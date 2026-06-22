@@ -30,6 +30,19 @@ btnTrocarModal.forEach(btn => {
     });
 });
 
+// abrir modal dos selects
+const categoriaSelect = document.querySelectorAll('.js-abrir-modal-select');
+categoriaSelect.forEach(select => select.addEventListener('change', (e) => {
+    const selectedOption = e.target.options[e.target.selectedIndex];
+    const idModal = e.target.getAttribute('data-target');
+
+    if(selectedOption.value === 'new') {
+        abrirModal(idModal);
+        e.target.value = "";
+    }
+    })
+);
+
 // troca de tema
 const btnTema = document.querySelector('.switch-theme input');
 btnTema.addEventListener('click', () => {
