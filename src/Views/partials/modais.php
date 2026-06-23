@@ -358,12 +358,24 @@
 
         <form class="form-simple" id="novaCategoriaForm">
             <div class="input-group">
-                <label for="novaCategoria">Nome da Categoria</label>
-                <input type="text" id="novaCategoria" required>
+                <label for="nome">Nome da Categoria</label>
+                <input type="text" name="nome" required>
             </div>
+            
+            <div class="input-group">
+                <label for="tipo">Tipo da Categoria</label>
+                <select type="text" id="tipo" required>
+                    <option value="" disabled selected>Selecione...</option>
+                    <option value="R">Receita (R)</option>
+                    <option value="D">Despesa (D)</option>
+                    <option value="I">Investimento (I)</option>
+                    <option value="C">Cofre (C)</option>
+                </select>
+            </div>
+
             <div class="btn-container">
-                <button class="btn-fechar js-fechar-modal" data-target="modal-nova-categoria">Cancelar</button>
-                <button class="btn-salvar">Adicionar</button>
+                <button type="button" class="btn-fechar js-fechar-modal" data-target="modal-nova-categoria">Cancelar</button>
+                <button type="submit" class="btn-salvar">Adicionar</button>
             </div>
         </form>
     </div>

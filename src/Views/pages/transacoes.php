@@ -64,9 +64,13 @@
                     <label for="pagamento_id">Forma de Pagamento</label>
                     <select class="js-abrir-modal-select" data-target="modal-novo-pagamento" required>
                         <option value="" disabled selected>Selecione...</option>
-                        <option value="1">PIX</option>
-                        <option value="2">Cartão de Crédito</option>
-                        <option value="3">Dinheiro</option>
+                        
+                        <?php foreach($pagamentos as $pagamento): ?>
+                            <option value="<?= $pagamento['id'] ?>">
+                                <?= htmlspecialchars($pagamento['nome']); ?>
+                            </option>
+                        <?php endforeach; ?>
+
                         <option value="new">+ Novo Pagamento</option>
                     </select>
                 </div>

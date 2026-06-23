@@ -1,4 +1,4 @@
-import { definirTema, definirVisibilidadeDeValores } from "./modais.js";
+import { definirTema, definirVisibilidadeDeValores } from "/assets/js/modais.js";
 
 let tema = localStorage.getItem('tema');
 
@@ -7,4 +7,3 @@ if (!tema) {
 } else {
     definirTema(tema);
 }
-

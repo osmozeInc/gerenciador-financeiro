@@ -1082,8 +1082,14 @@ header {
         }
 
         .form-simple {
-            label { color: var(--text-primary); margin: 1rem 0 .5rem 0; }
-            input { width: 300px; border: 1px solid var(--divisor-color);  }
+            display: grid;
+
+            label { margin: 1rem 0 .5rem 0; }
+
+            &#novaCategoriaForm {
+                grid-template-columns: 3fr 2fr;
+                input { margin-right: 1.5rem; }
+            }
         }
 
         .btn-container{

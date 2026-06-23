@@ -1198,13 +1198,17 @@ header nav a.active {
   transform: translateX(7px);
   transition: 0.5s;
 }
+.modal-backdrop .modal-container .form-simple {
+  display: grid;
+}
 .modal-backdrop .modal-container .form-simple label {
-  color: var(--text-primary);
   margin: 1rem 0 0.5rem 0;
 }
-.modal-backdrop .modal-container .form-simple input {
-  width: 300px;
-  border: 1px solid var(--divisor-color);
+.modal-backdrop .modal-container .form-simple#novaCategoriaForm {
+  grid-template-columns: 3fr 2fr;
+}
+.modal-backdrop .modal-container .form-simple#novaCategoriaForm input {
+  margin-right: 1.5rem;
 }
 .modal-backdrop .modal-container .btn-container {
   width: 100%;

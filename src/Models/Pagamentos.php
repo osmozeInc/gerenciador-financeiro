@@ -1,10 +1,10 @@
 <?php
 require_once 'Model.php';
 
-class Categoria extends Model {
+class Pagamentos extends Model {
     
-    public function selectAllCategorias() {
-        $query = "SELECT * FROM categorias";
+    public function selectAllPagamentos() {
+        $query = "SELECT * FROM pagamentos";
         $stmt = $this->pdo->query($query);
         
         return $stmt->fetchAll(); 

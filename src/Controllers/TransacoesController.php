@@ -1,12 +1,16 @@
 <?php
 require_once __DIR__ . '/Controller.php';
 require_once __DIR__ . '/../Models/Categoria.php';
+require_once __DIR__ . '/../Models/Pagamentos.php';
 
 class TransacoesController extends Controller {
     
     public function index() {
         $categoriaModel = new Categoria();
-        $categorias = $categoriaModel->selectAllIdNomeTipo();
+        $pagamentosModel = new Pagamentos();
+
+        $categorias = $categoriaModel->selectAllCategorias();
+        $pagamentos = $pagamentosModel->selectAllPagamentos();
 
         $categoriasAgrupadas = [
             'R' => [], // Receitas
@@ -20,9 +24,12 @@ class TransacoesController extends Controller {
         }
 
         $dadosParaTela = [
-            'categorias' => $categoriasAgrupadas
+            'categorias' => $categoriasAgrupadas,
+            'pagamentos' => $pagamentos
         ];
 
         $this->render('transacoes', $dadosParaTela);
     }
+
+    
 }
