@@ -9,43 +9,34 @@ if (preg_match('/\.(?:png|jpg|jpeg|gif|css|js)$/', $_SERVER["REQUEST_URI"])) {
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 // Rota padrão
-if ($url === '/') 
+if ($url === '/') {
     $url = '/home';
+}
 
 $partesUrl = explode('/', trim($url, '/'));
-$rotaBase = $partesUrl[0];
+
+$rotaBase = $partesUrl[0]; 
+
+$metodoAcao = isset($partesUrl[1]) ? $partesUrl[1] : 'index'; 
 
 $nomeController = ucfirst($rotaBase) . 'Controller'; 
 $caminhoArquivo = '../src/Controllers/' . $nomeController . '.php';
 
 if (file_exists($caminhoArquivo)) {
     require_once $caminhoArquivo;
+    $controller = new $nomeController(); 
     
-    $controller = new $nomeController(); 
-    $controller->index();
+    if (method_exists($controller, $metodoAcao)) {
+        $controller->$metodoAcao();
+    } else {
+        chamarPagina404();
+    }
 } else {
-    $nomeController = 'NotFoundedController'; 
-    $caminhoArquivo = '../src/Controllers/NotFoundedController.php';
-
-    require_once $caminhoArquivo;
-
-    $controller = new $nomeController(); 
-    $controller->index();
+    chamarPagina404();
 }
 
-
-
-
-if ($url === '/' || $url === '/home') {
-    require_once '../src/Controllers/HomeController.php';
-    
-    $controller = new HomeController();
+function chamarPagina404() {
+    require_once '../src/Controllers/NotFoundedController.php';
+    $controller = new NotFoundedController(); 
     $controller->index();
-} elseif ($url === '/transacoes') {
-    require_once '../src/Controllers/TransacoesController.php';
-
-    $controller = new TransacoesController();
-    $controller->index();
-} else {
-    echo '404';
 }

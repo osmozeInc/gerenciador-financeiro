@@ -62,13 +62,13 @@ btnVisibilidade.forEach(btn => {
 
 /* FUNÇÕES DE ABRIR, FECHAR E TROCAR MODAL */
 
-function abrirModal(idModal) {
+export function abrirModal(idModal) {
     document.getElementById(idModal).classList.add('active');
 
     travarRolagemDaPagina();
 }
 
-function fecharModal(idModal, idFormulario) {
+export function fecharModal(idModal, idFormulario) {
     document.getElementById(idModal).classList.remove('active');
 
     if (idFormulario) document.getElementById(idFormulario).reset();

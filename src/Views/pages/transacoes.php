@@ -9,40 +9,13 @@
                 </div>
                 
                 <div class="input-group">
-                    <label for="categoria_id">Categoria</label>
-                    <select class="js-abrir-modal-select" data-target="modal-nova-categoria" required>
+                    <label for="categoria">Categoria</label>
+                    <select class="js-abrir-modal-select" id="categoria" data-target="modal-nova-categoria" required>
                         <option value="" disabled selected>Selecione...</option>
-                        <optgroup label="Receitas (R)">
-                            <?php foreach($categorias['R'] as $categoria): ?>
-                                <option value="<?= $categoria['id'] ?>">
-                                    <?= htmlspecialchars($categoria['nome']); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </optgroup>
-
-                        <optgroup label="Despesas (D)">
-                            <?php foreach($categorias['D'] as $categoria): ?>
-                                <option value="<?= $categoria['id'] ?>">
-                                    <?= htmlspecialchars($categoria['nome']); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </optgroup>
-
-                        <optgroup label="Receitas (I)">
-                            <?php foreach($categorias['I'] as $categoria): ?>
-                                <option value="<?= $categoria['id'] ?>">
-                                    <?= htmlspecialchars($categoria['nome']); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </optgroup>
-
-                        <optgroup label="Receitas (C)">
-                            <?php foreach($categorias['C'] as $categoria): ?>
-                                <option value="<?= $categoria['id'] ?>">
-                                    <?= htmlspecialchars($categoria['nome']); ?>
-                                </option>
-                            <?php endforeach; ?>
-                        </optgroup>
+                        <optgroup label="Receitas (R)"></optgroup>
+                        <optgroup label="Despesas (D)"></optgroup>
+                        <optgroup label="Investimentos (I)"></optgroup>
+                        <optgroup label="Cofres (C)"></optgroup>
 
                         <optgroup label="Ações">
                             <option value="new">+ Nova Categoria</option>
@@ -61,8 +34,8 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="pagamento_id">Forma de Pagamento</label>
-                    <select class="js-abrir-modal-select" data-target="modal-novo-pagamento" required>
+                    <label for="pagamento">Forma de Pagamento</label>
+                    <select class="js-abrir-modal-select" id="pagamento" data-target="modal-novo-pagamento" required>
                         <option value="" disabled selected>Selecione...</option>
                         
                         <?php foreach($pagamentos as $pagamento): ?>
@@ -103,5 +76,3 @@
         </table>
     </section>
 </main>
-
-<script type="module" src="/assets/js/transacoes.js"></script>

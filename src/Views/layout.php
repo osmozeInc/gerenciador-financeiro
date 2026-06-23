@@ -28,5 +28,6 @@
     <?php require_once __DIR__ . '/partials/modais.php'; ?>
 
     <script src="/assets/js/script.js?v=<?php echo time(); ?>" type="module"></script>
+    <script type="module" src="/assets/js/<?= $view; ?>.js"></script>
 </body>
 </html>
