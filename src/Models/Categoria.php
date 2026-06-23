@@ -9,4 +9,12 @@ class Categoria extends Model {
         
         return $stmt->fetchAll(); 
     }
+
+    public function insert($nome, $tipo) {
+        $query = "INSERT INTO categorias (nome, tipo) VALUES (:nome, :tipo)";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':nome', $nome);
+        $stmt->bindValue(':tipo', $tipo);
+        $stmt->execute();
+    }
 }
