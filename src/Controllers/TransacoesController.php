@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/Controller.php';
 require_once __DIR__ . '/../Models/Categoria.php';
-require_once __DIR__ . '/../Models/Pagamentos.php';
+require_once __DIR__ . '/../Models/Pagamento.php';
 
 class TransacoesController extends Controller {
     
@@ -14,10 +14,10 @@ class TransacoesController extends Controller {
         header('Content-Type: application/json');
 
         $categoriaModel = new Categoria();
-        $pagamentosModel = new Pagamentos();
+        $pagamentoModel = new Pagamento();
 
         $categorias = $categoriaModel->selectAllCategorias();
-        $pagamentos = $pagamentosModel->selectAllPagamentos();
+        $pagamentos = $pagamentoModel->selectAllPagamentos();
 
         $categoriasAgrupadas = ['R' => [], 'D' => [],  'I' => [], 'C' => []];
 

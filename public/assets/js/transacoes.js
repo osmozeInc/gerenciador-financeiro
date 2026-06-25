@@ -30,6 +30,22 @@ document.getElementById('novaCategoriaForm').addEventListener('submit', async fu
     }
 });
 
+// Salvar nova forma de pagamento
+document.getElementById('novoPagamentoForm').addEventListener('submit', async function(evento) {
+    evento.preventDefault(); 
+
+    const copoForm = new FormData(this);
+    const resposta = await apiFetch('/pagamento/salvar', 'POST', copoForm);
+
+    if (resposta && resposta.sucesso) {
+        fecharModal('modal-novo-pagamento');
+        this.reset();
+
+        const novosDados = await apiFetch('/transacoes/selectDados');
+        if (novosDados) preencherPagamentos(novosDados.pagamentos);
+    }
+});
+
 
 function preencherCategorias(categoriasArray) {
     const mapaGrupos = {
@@ -60,10 +76,9 @@ function preencherCategorias(categoriasArray) {
 }
 
 function preencherPagamentos(pagamentos) {
-    const select = document.getElementById('pagamento_id');
+    const select = document.getElementById('pagamento');
     if (!select) return;
 
-    // Redefine a casca mantendo estritamente o topo e a base
     select.innerHTML = '<option value="" disabled selected>Selecione...</option>';
 
     pagamentos.forEach(pag => {
@@ -73,7 +88,6 @@ function preencherPagamentos(pagamentos) {
         select.appendChild(option);
     });
 
-    // Re-injeta o gatilho de ação no final da lista
     const optionNovo = document.createElement('option');
     optionNovo.value = 'new';
     optionNovo.textContent = '+ Novo Pagamento';

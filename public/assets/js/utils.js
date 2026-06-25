@@ -10,6 +10,6 @@ export async function apiFetch(url, metodo = 'GET', corpo = null) {
     } catch (erro) {
         console.error(`Erro crítico de API (${url}):`, erro);
         alert('Falha de comunicação com o servidor.');
-        return null; // Retorna null para a página filha saber que deu errado
+        return null;
     }
 }

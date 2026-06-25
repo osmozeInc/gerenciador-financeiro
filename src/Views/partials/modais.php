@@ -392,11 +392,12 @@
         <form class="form-simple" id="novoPagamentoForm">
             <div class="input-group">
                 <label for="novoPagamento">Nome do Pagamento</label>
-                <input type="text" id="novoPagamento" required>
+                <input type="text" id="novoPagamento" name="nome" required>
             </div>
+
             <div class="btn-container">
-                <button class="btn-fechar js-fechar-modal" data-target="modal-novo-pagamento">Cancelar</button>
-                <button class="btn-salvar">Adicionar</button>
+                <button type="button" class="btn-fechar js-fechar-modal" data-target="modal-novo-pagamento">Cancelar</button>
+                <button type="submit" class="btn-salvar">Adicionar</button>
             </div>
         </form>
     </div>
