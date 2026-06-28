@@ -11,13 +11,13 @@ class CategoriaController extends Controller {
         $tipo = trim(filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_SPECIAL_CHARS));
 
         if (empty($nome) || empty($tipo)) {
-            echo json_encode(['sucesso' => false, 'mensagem' => 'Preencha todos os campos obrigatórios.']);
+            echo json_encode(['sucesso' => false, 'msgTipo' => 'warning', 'mensagem' => 'Preencha todos os campos obrigatórios!']);
             return;
         }
 
         $tiposPermitidos = ['R', 'D', 'I', 'C'];
         if (!in_array($tipo, $tiposPermitidos)) {
-            echo json_encode(['sucesso' => false, 'mensagem' => 'Tipo de categoria inválido.']);
+            echo json_encode(['sucesso' => false, 'msgTipo' => 'warning', 'mensagem' => 'Tipo de categoria inválido!']);
             return;
         }
 
@@ -26,10 +26,10 @@ class CategoriaController extends Controller {
             
             $categoriaModel->insert($nome, $tipo);
 
-            echo json_encode(['sucesso' => true]);
+            echo json_encode(['sucesso' => true, 'msgTipo' => 'success', 'mensagem' => 'Categoria cadastrada com sucesso!']);
             
         } catch (Exception $e) {
-            echo json_encode(['sucesso' => false, 'mensagem' => 'Erro interno ao salvar na base de dados.']);
+            echo json_encode(['sucesso' => false, 'msgTipo' => 'error', 'mensagem' => 'Erro interno ao salvar na base de dados.']);
         }
     }
 }

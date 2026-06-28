@@ -10,7 +10,7 @@ class PagamentoController extends Controller {
         $nome = trim(filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS));
 
         if (empty($nome)) {
-            echo json_encode(['sucesso' => false, 'mensagem' => 'Preencha todos os campos obrigatórios.']);
+            echo json_encode(['sucesso' => false, 'msgTipo' => 'warning', 'mensagem' => 'Preencha todos os campos obrigatórios!']);
             return;
         }
 
@@ -19,10 +19,10 @@ class PagamentoController extends Controller {
             
             $pagamentoModel->insert($nome); 
 
-            echo json_encode(['sucesso' => true]);
+            echo json_encode(['sucesso' => true, 'msgTipo' => 'success', 'mensagem' => 'Pagamento salvo com sucesso!']);
             
         } catch (Exception $e) {
-            echo json_encode(['sucesso' => false, 'mensagem' => 'Erro interno ao salvar na base de dados.']);
+            echo json_encode(['sucesso' => false, 'msgTipo' => 'error', 'mensagem' => 'Erro interno ao salvar na base de dados.']);
         }
     }
 }

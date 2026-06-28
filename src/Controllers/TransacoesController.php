@@ -57,7 +57,7 @@ class TransacoesController extends Controller {
             
             $transacaoModel->insert($descricao, $categoria, $valor, $data, $pagamento, $parcelas);
 
-            echo json_encode(['sucesso' => true, 'msgTipo' => 'success', 'mensagem' => 'Transação cadastrada com sucesso.']);
+            echo json_encode(['sucesso' => true, 'msgTipo' => 'success', 'mensagem' => 'Transação cadastrada com sucesso!']);
             
         } catch (Exception $e) {
             echo json_encode(['sucesso' => false, 'msgTipo' => 'danger', 'mensagem' => 'Erro interno ao salvar na base de dados.']);

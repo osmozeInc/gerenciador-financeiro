@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (dados) {
         preencherCategorias(dados.categorias);
         preencherPagamentos(dados.pagamentos);
-        preencherTransacoes(dados.transacoes, dados.categorias, dados.pagamentos);
+        preencherTransacoes(dados.transacoes);
     }
 });
 
@@ -24,6 +24,8 @@ document.getElementById('novaCategoriaForm').addEventListener('submit', async fu
     if (resposta && resposta.sucesso) {
         fecharModal('modal-nova-categoria', null);
         this.reset();
+
+        feedbackPopup(resposta.msgTipo, resposta.mensagem);
 
         const novosDados = await apiFetch('/transacoes/selectDados');
         if (novosDados) preencherCategorias(novosDados.categorias);
@@ -41,6 +43,8 @@ document.getElementById('novoPagamentoForm').addEventListener('submit', async fu
         fecharModal('modal-novo-pagamento');
         this.reset();
 
+        feedbackPopup(resposta.msgTipo, resposta.mensagem);
+
         const novosDados = await apiFetch('/transacoes/selectDados');
         if (novosDados) preencherPagamentos(novosDados.pagamentos);
     }
@@ -56,7 +60,12 @@ document.getElementById('transacaoForm').addEventListener('submit', async functi
 
     if (resposta && resposta.sucesso) {
         this.reset();
+
         feedbackPopup(resposta.msgTipo, resposta.mensagem);
+
+        const novosDados = await apiFetch('/transacoes/selectDados');
+        if (novosDados) preencherTransacoes(novosDados.transacoes);
+
     }
 });
 
@@ -108,7 +117,14 @@ function preencherPagamentos(pagamentos) {
     select.appendChild(optionNovo);
 }
 
-function preencherTransacoes(transacoes, categorias, pagamentos) {
+function preencherTransacoes(transacoes) {
+    const tabela = document.getElementById('tabelaTransacoes');
+    if (tabela) {
+        while (tabela.rows.length > 1) {
+            tabela.deleteRow(1);
+        }
+    }
+
     const tabela = document.getElementById('tabelaTransacoes');
     if (!tabela) return;
 
