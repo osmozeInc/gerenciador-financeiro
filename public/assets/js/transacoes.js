@@ -118,18 +118,19 @@ function preencherPagamentos(pagamentos) {
 }
 
 function preencherTransacoes(transacoes) {
+    
     const tabela = document.getElementById('tabelaTransacoes');
-    if (tabela) {
+    if (!tabela) return;
+
+    if (tabela.rows.length > 1) {
         while (tabela.rows.length > 1) {
             tabela.deleteRow(1);
         }
     }
 
-    const tabela = document.getElementById('tabelaTransacoes');
-    if (!tabela) return;
+    transacoes = transacoes.slice(0, 10);
 
     transacoes.forEach(trans => {
-
         const [ano, mes, dia] = trans.data_transacao.split('-');
         const dataFormatada = `${dia}/${mes}/${ano}`;
 
