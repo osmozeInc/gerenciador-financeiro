@@ -5,12 +5,12 @@
             <div class="form-grid">
                 <div class="input-group" style="grid-column: span 2;">
                     <label for="descricao">Descrição</label>
-                    <input type="text" id="descricao" required placeholder="Ex: Conta de Luz">
+                    <input type="text" id="descricao" name="descricao" required placeholder="Ex: Conta de Luz">
                 </div>
                 
                 <div class="input-group">
                     <label for="categoria">Categoria</label>
-                    <select class="js-abrir-modal-select" id="categoria" data-target="modal-nova-categoria" required>
+                    <select class="js-abrir-modal-select" id="categoria" name="categoria" data-target="modal-nova-categoria" required>
                         <option value="" disabled selected>Selecione...</option>
                         <optgroup label="Receitas (R)"></optgroup>
                         <optgroup label="Despesas (D)"></optgroup>
@@ -25,17 +25,17 @@
 
                 <div class="input-group">
                     <label for="valor">Valor (R$)</label>
-                    <input type="number" id="valor" step="0.01" min="0.01" required placeholder="0.00">
+                    <input type="number" id="valor" name="valor" step="0.01" min="0.01" required placeholder="0.00">
                 </div>
 
                 <div class="input-group">
                     <label for="data_transacao">Data</label>
-                    <input type="date" id="data_transacao" required>
+                    <input type="date" id="data" name="data" required>
                 </div>
 
                 <div class="input-group">
                     <label for="pagamento">Forma de Pagamento</label>
-                    <select class="js-abrir-modal-select" id="pagamento" data-target="modal-novo-pagamento" required>
+                    <select class="js-abrir-modal-select" id="pagamento" name="pagamento" data-target="modal-novo-pagamento" required>
                         <option value="" disabled selected>Selecione...</option>
                         <option value="new">+ Novo Pagamento</option>
                     </select>
@@ -43,7 +43,7 @@
 
                 <div class="input-group">
                     <label for="parcelas">Parcelas</label>
-                    <input type="number" id="parcelas" min="1" value="1" required>
+                    <input type="number" id="parcelas" name="parcelas" min="1" value="1" required>
                 </div>
             </div>
 
@@ -59,6 +59,7 @@
                     <th>Data</th>
                     <th>Descrição</th>
                     <th>Categoria</th>
+                    <th>Tipo</th>
                     <th>Pagamento</th>
                     <th>Parc.</th>
                     <th>Valor</th>

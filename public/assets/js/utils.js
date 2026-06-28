@@ -13,3 +13,7 @@ export async function apiFetch(url, metodo = 'GET', corpo = null) {
         return null;
     }
 }
+
+export function feedbackPopup(tipo, mensagem) {
+    
+}

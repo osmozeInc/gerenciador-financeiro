@@ -1,7 +1,7 @@
 import { abrirModal, fecharModal } from "/assets/js/modais.js";
-import { apiFetch } from "/assets/js/utils.js";
+import { apiFetch, feedbackPopup } from "/assets/js/utils.js";
 
-document.getElementById('data_transacao').valueAsDate = new Date();
+document.getElementById('data').valueAsDate = new Date();
 
 // Buscar dados ao carregar a página
 document.addEventListener('DOMContentLoaded', async function() {
@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     if (dados) {
         preencherCategorias(dados.categorias);
         preencherPagamentos(dados.pagamentos);
-        //preencherTransacoes(dados);
+        preencherTransacoes(dados.transacoes, dados.categorias, dados.pagamentos);
     }
 });
 
@@ -22,7 +22,7 @@ document.getElementById('novaCategoriaForm').addEventListener('submit', async fu
     const resposta = await apiFetch('/categoria/salvar', 'POST', copoForm);
 
     if (resposta && resposta.sucesso) {
-        fecharModal('modalNovaCategoria');
+        fecharModal('modal-nova-categoria', null);
         this.reset();
 
         const novosDados = await apiFetch('/transacoes/selectDados');
@@ -43,6 +43,20 @@ document.getElementById('novoPagamentoForm').addEventListener('submit', async fu
 
         const novosDados = await apiFetch('/transacoes/selectDados');
         if (novosDados) preencherPagamentos(novosDados.pagamentos);
+    }
+
+});
+
+// Salvar nova transação
+document.getElementById('transacaoForm').addEventListener('submit', async function(evento) {
+    evento.preventDefault(); 
+
+    const copoForm = new FormData(this);
+    const resposta = await apiFetch('/transacoes/salvar', 'POST', copoForm);
+
+    if (resposta && resposta.sucesso) {
+        this.reset();
+        feedbackPopup(resposta.msgTipo, resposta.mensagem);
     }
 });
 
@@ -92,4 +106,24 @@ function preencherPagamentos(pagamentos) {
     optionNovo.value = 'new';
     optionNovo.textContent = '+ Novo Pagamento';
     select.appendChild(optionNovo);
+}
+
+function preencherTransacoes(transacoes, categorias, pagamentos) {
+    const tabela = document.getElementById('tabelaTransacoes');
+    if (!tabela) return;
+
+    transacoes.forEach(trans => {
+
+        const [ano, mes, dia] = trans.data_transacao.split('-');
+        const dataFormatada = `${dia}/${mes}/${ano}`;
+
+        const linha = tabela.insertRow();
+        linha.insertCell().textContent = dataFormatada;
+        linha.insertCell().textContent = trans.descricao;
+        linha.insertCell().textContent = trans.categoria_nome;
+        linha.insertCell().textContent = trans.categoria_tipo;
+        linha.insertCell().textContent = trans.pagamento_nome;
+        linha.insertCell().textContent = trans.parcelas;
+        linha.insertCell().textContent = trans.valor;
+    });
 }

@@ -24,7 +24,7 @@ class CategoriaController extends Controller {
         try {
             $categoriaModel = new Categoria();
             
-            $categoriaModel->insert($nome, $tipo); 
+            $categoriaModel->insert($nome, $tipo);
 
             echo json_encode(['sucesso' => true]);
             
