@@ -8,7 +8,7 @@
     --bg-progress: #e5e7eb;
     --bg-input: #f3f4f6;
     --bg-btn-confirm: #128d29;
-    --bg-btn-invest: #2079df;
+    --bg-btn-invest: #085ec1;
     --bg-btn-warning: #da9011;
 
     --divisor-color: #727272;
@@ -438,7 +438,7 @@ header {
             background-color: var(--bg-padrao);
             padding: 1.5rem;
             border-radius: var(--radius-card);
-            box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+            box-shadow: 0 1px 3px var(--card-shadow-color);
     
             h2 {
                 font-size: 1.25rem;
@@ -451,6 +451,8 @@ header {
                 grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
                 gap: 1rem;
             }
+
+            .btn-invest { background-color: var(--bg-btn-invest); }
     
             table {
                 width: 100%;
@@ -461,6 +463,7 @@ header {
                     padding: 1rem;
                     text-align: left;
                     border-bottom: 1px solid var(--divisor-color);
+                    color: var(--text-primary);
                 }
         
                 th {
@@ -469,11 +472,13 @@ header {
                     font-size: 0.875rem;
                 }
         
-                .badge {
+                .badge { 
                     padding: 0.25rem 0.5rem;
-                    border-radius: 99px;
+                    border-radius: 4px;
                     font-size: 0.75rem;
                     font-weight: bold;
+                    background: var(--bg-badge);
+                    color: var(--text-primary);
                 }
             }
         }
@@ -512,54 +517,6 @@ header {
 
                     &.positivo  { color: var(--text-especial); }
                     &.negativo { color: var(--text-danger); }
-                }
-            }
-        }
-
-        .card {
-            background-color: var(--bg-padrao);
-            padding: 1.5rem;
-            border-radius: var(--radius-card);
-            box-shadow: 0 1px 3px var(--card-shadow-color);
-        
-            h2 {
-                font-size: 1.25rem;
-                margin-bottom: 1.5rem;
-                color: var(--text-primary);
-            }
-
-            .form-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-                gap: 1rem;
-            }
-
-            .btn-submit { background-color: var(--bg-btn-invest); }
-
-            table { 
-                width: 100%;
-                border-collapse: collapse;
-                margin-top: 1rem;
-                
-                th, td { 
-                    padding: 1rem;
-                    text-align: left;
-                    border-bottom: 1px solid var(--divisor-color);
-                    color: var(--text-primary)
-                }
-                th { 
-                    color: var(--text-secondary);
-                    font-weight: 500;
-                    font-size: 0.875rem;
-                }
-                
-                .badge { 
-                    padding: 0.25rem 0.5rem;
-                    border-radius: 4px;
-                    font-size: 0.75rem;
-                    font-weight: bold;
-                    background: var(--bg-badge);
-                    color: var(--text-primary);
                 }
             }
         }
@@ -1254,5 +1211,54 @@ input, select {
         background-color: transparent;
         color: var(--text-primary);
         border: 1px solid var(--text-primary);
+    }
+}
+
+.card {
+    background-color: var(--bg-padrao);
+    padding: 1.5rem;
+    border-radius: var(--radius-card);
+    box-shadow: 0 1px 3px var(--card-shadow-color);
+
+    h2 {
+        font-size: 1.25rem;
+        margin-bottom: 1.5rem;
+        color: var(--text-primary);
+    }
+
+    .form-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+
+    .btn-invest-submit { background-color: var(--bg-btn-invest); }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+        
+        th, td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--divisor-color);
+            color: var(--text-primary);
+        }
+
+        th {
+            color: var(--text-secondary);
+            font-weight: 500;
+            font-size: 0.875rem;
+        }
+
+        .badge { 
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            background: var(--bg-badge);
+            color: var(--text-primary);
+        }
     }
 }

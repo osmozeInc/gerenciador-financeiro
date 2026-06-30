@@ -7,7 +7,7 @@
   --bg-progress: #e5e7eb;
   --bg-input: #f3f4f6;
   --bg-btn-confirm: #128d29;
-  --bg-btn-invest: #2079df;
+  --bg-btn-invest: #085ec1;
   --bg-btn-warning: #da9011;
   --divisor-color: #727272;
   --border-color: #e5e7eb;
@@ -494,7 +494,7 @@ header nav a.active {
   background-color: var(--bg-padrao);
   padding: 1.5rem;
   border-radius: var(--radius-card);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 1px 3px var(--card-shadow-color);
 }
 .conteudo-central .transacoes-container .card h2 {
   font-size: 1.25rem;
@@ -506,6 +506,9 @@ header nav a.active {
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
 }
+.conteudo-central .transacoes-container .card .btn-invest {
+  background-color: var(--bg-btn-invest);
+}
 .conteudo-central .transacoes-container .card table {
   width: 100%;
   border-collapse: collapse;
@@ -515,6 +518,7 @@ header nav a.active {
   padding: 1rem;
   text-align: left;
   border-bottom: 1px solid var(--divisor-color);
+  color: var(--text-primary);
 }
 .conteudo-central .transacoes-container .card table th {
   color: var(--text-secondary);
@@ -523,9 +527,11 @@ header nav a.active {
 }
 .conteudo-central .transacoes-container .card table .badge {
   padding: 0.25rem 0.5rem;
-  border-radius: 99px;
+  border-radius: 4px;
   font-size: 0.75rem;
   font-weight: bold;
+  background: var(--bg-badge);
+  color: var(--text-primary);
 }
 .conteudo-central .investimentos-container {
   display: flex;
@@ -562,49 +568,6 @@ header nav a.active {
 }
 .conteudo-central .investimentos-container .summary-grid .summary-box .summary-value.negativo {
   color: var(--text-danger);
-}
-.conteudo-central .investimentos-container .card {
-  background-color: var(--bg-padrao);
-  padding: 1.5rem;
-  border-radius: var(--radius-card);
-  box-shadow: 0 1px 3px var(--card-shadow-color);
-}
-.conteudo-central .investimentos-container .card h2 {
-  font-size: 1.25rem;
-  margin-bottom: 1.5rem;
-  color: var(--text-primary);
-}
-.conteudo-central .investimentos-container .card .form-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 1rem;
-}
-.conteudo-central .investimentos-container .card .btn-submit {
-  background-color: var(--bg-btn-invest);
-}
-.conteudo-central .investimentos-container .card table {
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 1rem;
-}
-.conteudo-central .investimentos-container .card table th, .conteudo-central .investimentos-container .card table td {
-  padding: 1rem;
-  text-align: left;
-  border-bottom: 1px solid var(--divisor-color);
-  color: var(--text-primary);
-}
-.conteudo-central .investimentos-container .card table th {
-  color: var(--text-secondary);
-  font-weight: 500;
-  font-size: 0.875rem;
-}
-.conteudo-central .investimentos-container .card table .badge {
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.75rem;
-  font-weight: bold;
-  background: var(--bg-badge);
-  color: var(--text-primary);
 }
 .conteudo-central .cofres-container {
   display: flex;
@@ -1466,4 +1429,48 @@ input::placeholder, select::placeholder {
   background-color: transparent;
   color: var(--text-primary);
   border: 1px solid var(--text-primary);
+}
+
+.card {
+  background-color: var(--bg-padrao);
+  padding: 1.5rem;
+  border-radius: var(--radius-card);
+  box-shadow: 0 1px 3px var(--card-shadow-color);
+}
+.card h2 {
+  font-size: 1.25rem;
+  margin-bottom: 1.5rem;
+  color: var(--text-primary);
+}
+.card .form-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.card .btn-invest-submit {
+  background-color: var(--bg-btn-invest);
+}
+.card table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1rem;
+}
+.card table th, .card table td {
+  padding: 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--divisor-color);
+  color: var(--text-primary);
+}
+.card table th {
+  color: var(--text-secondary);
+  font-weight: 500;
+  font-size: 0.875rem;
+}
+.card table .badge {
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.75rem;
+  font-weight: bold;
+  background: var(--bg-badge);
+  color: var(--text-primary);
 }/*# sourceMappingURL=layout.css.map */
