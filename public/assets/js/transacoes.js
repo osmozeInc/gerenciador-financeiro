@@ -2,9 +2,24 @@ import { abrirModal, fecharModal } from "/assets/js/modais.js";
 
 import { apiFetch, feedbackPopup } from "/assets/js/utils.js";
 
-// 1. Ouvinte para exibir os blocos corretos de acordo com a Categoria
-document.getElementById('categoria_id').addEventListener('change', function() {
-    // Descobre a qual "optgroup" a opção selecionada pertence
+// preencher o formulário com a data atual
+document.getElementById('data').valueAsDate = new Date();
+
+// Buscar dados ao carregar a página
+document.addEventListener('DOMContentLoaded', async function() {
+    const dados = await apiFetch('/transacoes/selectDados');
+
+    console.log(dados);
+    
+    if (dados) {
+        preencherCategorias(dados.categorias);
+        preencherContas(dados.contas);
+        preencherTransacoes(dados.transacoes);
+    }
+});
+
+// exibir os blocos corretos de acordo com a Categoria
+document.getElementById('categoria_id').addEventListener('change', async function() {
     const optionSelecionada = this.options[this.selectedIndex];
     const labelGrupo = optionSelecionada.parentElement.getAttribute('label') || '';
 
@@ -33,29 +48,17 @@ document.getElementById('categoria_id').addEventListener('change', function() {
     } else if (tipo === 'C') {
         document.querySelector('.divisor-blocos').style.display = 'block';
         document.getElementById('bloco-cofre').style.display = 'grid';
+        
+        const cofres = await apiFetch('/cofres/selectDados');
+        if (cofres) preencherCofres(cofres.cofres);
     }
 });
 
-// 2. Ouvinte para habilitar/desabilitar a quantidade de parcelas
+// habilitar/desabilitar a quantidade de parcelas
 document.getElementById('parcelado').addEventListener('change', function() {
     const inputParcelas = document.getElementById('qtd_parcelas');
     inputParcelas.disabled = !this.checked;
     if (!this.checked) inputParcelas.value = 1; // Reseta se desmarcar
-});
-
-document.getElementById('data').valueAsDate = new Date();
-
-// Buscar dados ao carregar a página
-document.addEventListener('DOMContentLoaded', async function() {
-    const dados = await apiFetch('/transacoes/selectDados');
-
-    console.log(dados);
-
-    if (dados) {
-        preencherCategorias(dados.categorias);
-        preencherContas(dados.contas); // <-- Corrigido aqui
-        preencherTransacoes(dados.transacoes);
-    }
 });
 
 // Salvar nova categoria
@@ -95,6 +98,7 @@ document.getElementById('novoPagamentoForm').addEventListener('submit', async fu
     }
 });
 
+// Salvar nova transação
 document.getElementById('transacaoForm').addEventListener('submit', async function(evento) {
     evento.preventDefault();
 
@@ -111,6 +115,8 @@ document.getElementById('transacaoForm').addEventListener('submit', async functi
         if (novosDados) preencherTransacoes(novosDados.transacoes);
     }
 });
+
+
 
 function preencherCategorias(categoriasArray) {
     const mapaGrupos = {
@@ -184,5 +190,19 @@ function preencherTransacoes(transacoes) {
         // Formatação profissional de moeda para os alunos verem
         const valorFormatado = parseFloat(trans.valor_total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         linha.insertCell().textContent = valorFormatado;
+    });
+}
+
+function preencherCofres(Cofres) {
+    const select = document.getElementById('id_cofre');
+    if (!select) return;
+
+    select.innerHTML = '<option value="" disabled selected>Selecione...</option>';
+
+    Cofres.forEach(cofre => {
+        const option = document.createElement('option');
+        option.value = cofre.id;
+        option.textContent = cofre.nome;
+        select.appendChild(option);
     });
 }

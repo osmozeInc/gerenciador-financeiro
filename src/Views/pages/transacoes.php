@@ -102,5 +102,19 @@
     
     <section class="card">
         <h2>Transações Recentes</h2>
-        </section>
+        <table>
+            <thead>
+                <tr>
+                    <th>Data</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th>Tipo</th>
+                    <th>Pagamento</th>
+                    <th>Valor</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaTransacoes">
+            </tbody>
+        </table>
+</section>
 </main>

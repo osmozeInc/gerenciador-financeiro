@@ -38,8 +38,6 @@ class TransacoesController extends Controller {
     public function salvar() {
         header('Content-Type: application/json');
 
-        // 1. Captura os dados da Tabela Pai (Comuns a todos)
-        // OBS: Certifique-se de que o JS/HTML envie o 'tipo' e os nomes corretos dos inputs
         $descricao    = trim(filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
         $categoria_id = trim(filter_input(INPUT_POST, 'categoria_id', FILTER_SANITIZE_NUMBER_INT) ?? '');
         $conta_id     = trim(filter_input(INPUT_POST, 'conta_id', FILTER_SANITIZE_NUMBER_INT) ?? '');
@@ -67,7 +65,6 @@ class TransacoesController extends Controller {
 
         // 2. A Triagem (Captura e Validação Condicional)
         if ($tipo === 'D') {
-            // Se vier vazio/false, converte para 0. Se vier marcado, converte para 1.
             $parcelado = filter_input(INPUT_POST, 'parcelado', FILTER_VALIDATE_BOOLEAN) ? 1 : 0;
             $qtd_parcelas = trim(filter_input(INPUT_POST, 'qtd_parcelas', FILTER_SANITIZE_NUMBER_INT) ?? 1);
 
@@ -105,7 +102,6 @@ class TransacoesController extends Controller {
             $dadosFilha = ['id_cofre' => $id_cofre];
         }
 
-        // 3. Salva no Banco de Dados
         try {
             $transacaoModel = new Transacao();
             $transacaoModel->salvarTransacaoCompleta($dadosPai, $dadosFilha, $tipo);

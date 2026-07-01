@@ -1,20 +1,19 @@
 <?php
-require_once 'Controller.php';
+require_once __DIR__ . '/Controller.php';
+require_once __DIR__ . '/../Models/Cofre.php';
 
 class CofresController extends Controller {
     
-    public function index() {
+    public function selectDados() {
+        header('Content-Type: application/json');
 
-        $dadosParaTela = [
-            'nome_usuario' => 'Caio',
-            'sobrenome_usuario' => 'Mendes',
-            'receita_bruta' => 220000 / 100,
-            'despesa_bruta' => 153000 / 100,
-            'cofre' => 500000 / 100,
-            'receita_total' => 600000 / 100,
-            'investidos' => 300000 / 100
-        ];
+        $cofreModel = new Cofre();
 
-        $this->render('cofres', $dadosParaTela);
+        $cofre = $cofreModel->selectAllCofres();
+
+        echo json_encode([
+            'cofres' => $cofre
+        ]);
+        exit;
     }
 }
