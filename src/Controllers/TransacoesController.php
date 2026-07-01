@@ -14,11 +14,11 @@ class TransacoesController extends Controller {
         header('Content-Type: application/json');
 
         $categoriaModel = new Categoria();
-        $contaModel = new ContaMetodo(); // Nova classe
+        $contaModel = new ContaMetodo();
         $transacaoModel = new Transacao();
 
         $categorias = $categoriaModel->selectAllCategorias();
-        $contas = $contaModel->selectAllContas(); // Novo método
+        $contas = $contaModel->selectAllContas();
         $transacoes = $transacaoModel->selectAllTransacoes();
 
         $categoriasAgrupadas = ['R' => [], 'D' => [],  'I' => [], 'C' => []];
