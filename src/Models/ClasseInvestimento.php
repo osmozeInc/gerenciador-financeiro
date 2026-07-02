@@ -11,4 +11,12 @@ class ClasseInvestimento extends Model {
         $stmt = $this->pdo->query($query);
         return $stmt->fetchAll(PDO::FETCH_ASSOC); 
     }
+
+    public function insert($nome) {
+        $query = "INSERT INTO classes_investimento (nome) VALUES (:nome)";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':nome', $nome);
+        $stmt->execute();
+    }
+
 }

@@ -116,16 +116,36 @@ document.getElementById('novoPagamentoForm').addEventListener('submit', async fu
     evento.preventDefault();
 
     const copoForm = new FormData(this);
-    const resposta = await apiFetch('/pagamento/salvar', 'POST', copoForm);
+    const resposta = await apiFetch('/contaMetodo/salvar', 'POST', copoForm);
 
     if (resposta && resposta.sucesso) {
         this.reset();
 
         fecharModal('modal-novo-pagamento');
+        feedbackPopup(resposta.msgTipo, resposta.mensagem);
+
+        const novosDados = await apiFetch('/transacoes/selectDados');
+
+        if (novosDados) preencherPagamentos(novosDados.pagamentos);
+    }
+});
+
+// Salvar nova classe de investimento
+document.getElementById('novaClasseForm').addEventListener('submit', async function(evento) {
+    evento.preventDefault();
+
+    const copoForm = new FormData(this);
+    const resposta = await apiFetch('/classesInvestimento/salvar', 'POST', copoForm);
+
+    if (resposta && resposta.sucesso) {
+        this.reset();
+
+        fecharModal('modal-nova-classe');
 
         feedbackPopup(resposta.msgTipo, resposta.mensagem);
-        const novosDados = await apiFetch('/transacoes/selectDados');
-        if (novosDados) preencherPagamentos(novosDados.pagamentos);
+
+        const classes = await apiFetch('/classesInvestimento/selectDados');
+        if (classes) preencherClasses(classes.classes);
     }
 });
 
@@ -236,6 +256,11 @@ function preencherClasses(classes) {
         option.textContent = cofre.nome;
         select.appendChild(option);
     });
+
+    const optionNovo = document.createElement('option');
+    optionNovo.value = 'new';
+    optionNovo.textContent = '+ Nova Classe';
+    select.appendChild(optionNovo);
 }
 
 function preencherCofres(cofres) {

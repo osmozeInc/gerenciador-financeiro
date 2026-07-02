@@ -359,7 +359,7 @@
         <form class="form-simple" id="novaCategoriaForm">
             <div class="input-group">
                 <label for="nome">Nome da Categoria</label>
-                <input type="text" name="nome" required>
+                <input type="text" name="nome" id="nome" placeholder="Ex: Gasolina" required>
             </div>
             
             <div class="input-group">
@@ -391,8 +391,8 @@
 
         <form class="form-simple" id="novoPagamentoForm">
             <div class="input-group">
-                <label for="novoPagamento">Nome do Pagamento</label>
-                <input type="text" id="novoPagamento" name="nome" required>
+                <label for="novoPagamento">Nome do Método</label>
+                <input type="text" id="novoPagamento" name="nome" placeholder="Ex: Conta Corrente Nubank" required>
             </div>
 
             <div class="btn-container">
@@ -414,7 +414,7 @@
         <form class="form-simple" id="novaClasseForm">
             <div class="input-group">
                 <label for="novaClasse">Nome da Classe de Investimento</label>
-                <input type="text" id="novaClasse" required>
+                <input type="text" id="novaClasse" name="nome" placeholder="Ex: Criptomoeda" required>
             </div>
             <div class="btn-container">
                 <button class="btn-fechar js-fechar-modal" data-target="modal-nova-classe">Cancelar</button>
