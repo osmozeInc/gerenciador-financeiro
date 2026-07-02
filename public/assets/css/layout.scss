@@ -440,17 +440,8 @@ header {
             border-radius: var(--radius-card);
             box-shadow: 0 1px 3px var(--card-shadow-color);
     
-            h2 {
-                font-size: 1.25rem;
-                margin-bottom: 1.5rem;
-                color: var(--text-primary);
-            }
-
-            .form-grid {
-                display: grid;
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-                gap: 1rem;
-            }
+            h2 { font-size: 1.3rem; margin-bottom: 1.5rem; color: var(--text-primary); }
+            hr { display: none; width: 100%; margin: 2rem 0; background-color: var(--text-primary);}
 
             .btn-invest { background-color: var(--bg-btn-invest); }
     
@@ -1229,6 +1220,14 @@ input, select {
     .form-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+    }
+    
+    .form-grid-column {
+        min-width: max-content;
+        width: 30%;
+        display: grid;
+        grid-template-columns: 1fr;
         gap: 1rem;
     }
 

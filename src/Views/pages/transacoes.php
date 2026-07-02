@@ -44,13 +44,13 @@
                 </div>
             </div>
 
-            <hr class="divisor-blocos" style="margin: 20px 0; display: none;">
+            <hr class="divisor-blocos">
 
-            <div class="form-grid" id="bloco-despesa" style="display: none;">
+            <div class="form-grid-column bloco" id="bloco-despesa" style="display: none;">
                 <div class="input-group checkbox-group">
                     <label>
-                        <input type="checkbox" id="parcelado" name="parcelado" value="1">
                         Compra Parcelada?
+                    <input type="checkbox" id="parcelado" name="parcelado" value="1">
                     </label>
                 </div>
                 <div class="input-group">
@@ -59,7 +59,7 @@
                 </div>
             </div>
 
-            <div class="form-grid" id="bloco-investimento" style="display: none;">
+            <div class="form-grid bloco" id="bloco-investimento" style="display: none;">
                 <div class="input-group">
                     <label for="ativo">Ativo (Ticker)</label>
                     <input type="text" id="ativo" name="ativo" placeholder="Ex: MXRF11" style="text-transform: uppercase;">
@@ -87,7 +87,7 @@
                 </div>
             </div>
 
-            <div class="form-grid" id="bloco-cofre" style="display: none;">
+            <div class="form-grid bloco" id="bloco-cofre" style="display: none;">
                 <div class="input-group">
                     <label for="id_cofre">Selecione o Cofre Destino</label>
                     <select id="id_cofre" name="id_cofre">
@@ -96,7 +96,7 @@
                 </div>
             </div>
 
-            <button type="submit" class="btn-submit" style="margin-top: 20px;">Salvar Registro</button>
+            <button type="submit" class="btn-submit" id="btnSalvarTransacao" style="margin-top: 20px;">Salvar Registro</button>
         </form>
     </section>
     

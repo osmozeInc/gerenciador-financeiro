@@ -22,9 +22,11 @@ document.addEventListener('DOMContentLoaded', async function() {
 document.getElementById('categoria_id').addEventListener('change', async function() {
     const optionSelecionada = this.options[this.selectedIndex];
     const labelGrupo = optionSelecionada.parentElement.getAttribute('label') || '';
+    const divisor = document.querySelector('.divisor-blocos')
+    const botaoConfirm = document.getElementById('btnSalvarTransacao');
 
     let tipo = '';
-    if (labelGrupo.includes('(R)')) tipo = 'R';
+         if (labelGrupo.includes('(R)')) tipo = 'R';
     else if (labelGrupo.includes('(D)')) tipo = 'D';
     else if (labelGrupo.includes('(I)')) tipo = 'I';
     else if (labelGrupo.includes('(C)')) tipo = 'C';
@@ -32,25 +34,51 @@ document.getElementById('categoria_id').addEventListener('change', async functio
     // Preenche o input invisível que vai para o Controller!
     document.getElementById('tipo_transacao').value = tipo;
 
-    // Reseta a tela: Esconde todos os blocos adicionais e o divisor
-    document.querySelector('.divisor-blocos').style.display = 'none';
-    document.getElementById('bloco-despesa').style.display = 'none';
-    document.getElementById('bloco-investimento').style.display = 'none';
-    document.getElementById('bloco-cofre').style.display = 'none';
+    divisor.style.display = 'none';
+    document.querySelectorAll('.bloco')
+    .forEach(bloco => bloco.style.display = 'none');
 
-    // Exibe apenas o bloco correspondente à filha
-    if (tipo === 'D') {
-        document.querySelector('.divisor-blocos').style.display = 'block';
-        document.getElementById('bloco-despesa').style.display = 'grid'; // ou flex
-    } else if (tipo === 'I') {
-        document.querySelector('.divisor-blocos').style.display = 'block';
-        document.getElementById('bloco-investimento').style.display = 'grid';
-    } else if (tipo === 'C') {
-        document.querySelector('.divisor-blocos').style.display = 'block';
-        document.getElementById('bloco-cofre').style.display = 'grid';
+    if (tipo === 'R') {
+        mudarBtnSubmit();
+    }
+    else if (tipo === 'D') {
+        exibirBlocoEDivisor('bloco-despesa');
+        mudarBtnSubmit();
+    }
+    else if (tipo === 'I') {
+        exibirBlocoEDivisor('bloco-investimento');
+        mudarBtnSubmit();
+    }
+    else if (tipo === 'C') { 
+        exibirBlocoEDivisor('bloco-cofre');
+        mudarBtnSubmit();
         
         const cofres = await apiFetch('/cofres/selectDados');
         if (cofres) preencherCofres(cofres.cofres);
+    }
+
+    function exibirBlocoEDivisor(blocoId) {
+        divisor.style.display = 'block';
+        document.getElementById(blocoId).style.display = 'grid';
+    }
+
+    function mudarBtnSubmit() {
+        if (tipo === 'R') {
+            botaoConfirm.innerText = 'Salvar Receita';
+            botaoConfirm.classList.remove('btn-invest-submit');
+        }
+        else if (tipo === 'D') {
+            botaoConfirm.innerText = 'Salvar Despesa';
+            botaoConfirm.classList.remove('btn-invest-submit');
+        }
+        else if (tipo === 'I') {
+            botaoConfirm.innerText = 'Salvar Investimento';
+            botaoConfirm.classList.add('btn-invest-submit');
+        }
+        else if (tipo === 'C') {
+            botaoConfirm.innerText = 'Adicionar ao Cofre';
+            botaoConfirm.classList.add('btn-invest-submit');
+        } 
     }
 });
 

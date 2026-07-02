@@ -497,14 +497,15 @@ header nav a.active {
   box-shadow: 0 1px 3px var(--card-shadow-color);
 }
 .conteudo-central .transacoes-container .card h2 {
-  font-size: 1.25rem;
+  font-size: 1.3rem;
   margin-bottom: 1.5rem;
   color: var(--text-primary);
 }
-.conteudo-central .transacoes-container .card .form-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  gap: 1rem;
+.conteudo-central .transacoes-container .card hr {
+  display: none;
+  width: 100%;
+  margin: 2rem 0;
+  background-color: var(--text-primary);
 }
 .conteudo-central .transacoes-container .card .btn-invest {
   background-color: var(--bg-btn-invest);
@@ -1445,6 +1446,14 @@ input::placeholder, select::placeholder {
 .card .form-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+}
+.card .form-grid-column {
+  min-width: -moz-max-content;
+  min-width: max-content;
+  width: 30%;
+  display: grid;
+  grid-template-columns: 1fr;
   gap: 1rem;
 }
 .card .btn-invest-submit {
