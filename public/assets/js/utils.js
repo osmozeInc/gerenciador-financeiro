@@ -8,9 +8,10 @@ export async function apiFetch(url, metodo = 'GET', corpo = null) {
         const resposta = await fetch(url, opcoes);
         return await resposta.json();
     } catch (erro) {
-        console.error(`Erro crítico de API (${url}):`, erro);
-        alert('Falha de comunicação com o servidor.');
-        return null;
+        // console.error(`Erro crítico de API (${url}):`, erro);
+
+        const resposta = await fetch(url, opcoes);
+        return await resposta.json();
     }
 }
 

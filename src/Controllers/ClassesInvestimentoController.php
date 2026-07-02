@@ -4,25 +4,37 @@ require_once __DIR__ . '/../Models/ClasseInvestimento.php';
 
 class ClassesInvestimentoController extends Controller {
     
-    public function selectDados() {
-        header('Content-Type: application/json');
+public function selectDados() {
+    header('Content-Type: application/json');
 
+    try {
         $classesModel = new ClasseInvestimento();
-
         $classes = $classesModel->selectAllClasses();
 
         echo json_encode([
+            'resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['busca_com_sucesso'],
             'classes' => $classes
         ]);
-        exit;
+
+    } catch (Exception $e) {
+        http_response_code(500); 
+        
+        echo json_encode([
+            'resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['erro_interno'],
+            'detalhes' => $e->getMessage()
+        ]);
     }
-        public function salvar() {
+    
+    exit;
+}
+
+    public function salvar() {
         header('Content-Type: application/json');
 
         $nome = trim(filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
 
         if (empty($nome)) {
-            echo json_encode(['sucesso' => false, 'msgTipo' => 'warning', 'mensagem' => 'Preencha todos os campos obrigatórios!']);
+            echo json_encode(['resposta' => $this->mensagensModel['genericas']['formulario_incompleto']]);
             exit;
         }
 
@@ -30,10 +42,10 @@ class ClassesInvestimentoController extends Controller {
             $classeModel = new ClasseInvestimento();
             $classeModel->insert($nome);
 
-            echo json_encode(['sucesso' => true, 'msgTipo' => 'success', 'mensagem' => 'Tipo de conta salvo com sucesso!']);
+            echo json_encode(['resposta' => $this->mensagensModel['genericas']['salvo_com_sucesso']]);
             
         } catch (Exception $e) {
-            echo json_encode(['sucesso' => false, 'msgTipo' => 'error', 'mensagem' => 'Erro interno ao salvar na base de dados.']);
+            echo json_encode(['resposta' => $this->mensagensModel['genericas']['erro_interno']]);
         }
         
         exit;

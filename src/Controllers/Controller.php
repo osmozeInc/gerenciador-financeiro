@@ -1,6 +1,94 @@
 <?php
 
 class Controller {
+    protected $mensagensModel = [
+        'categoria' => [
+            'salvar' => [
+                'categoria_invalida' => [
+                    'sucesso' => false,
+                    'msgTipo' => 'warning',
+                    'mensagem' => 'Tipo de categoria inválido!'
+                ],
+                'salvo_com_sucesso' => [
+                    'sucesso' => true,
+                    'msgTipo' => 'success', 
+                    'mensagem' => 'Categoria cadastrada com sucesso!'
+                ],
+            ],
+        ],
+        'classesInvestimento' => [
+            'selecionar_dados' => [
+                'busca_com_sucesso' => [
+                    'sucesso' => true,
+                    'msgTipo' => 'success', 
+                    'mensagem' => 'Dados do banco de dados carregados com sucesso!'
+                ],
+            ],
+            'salvar' => [
+                'salvo_com_sucesso' => [
+                    'sucesso' => true,
+                    'msgTipo' => 'success', 
+                    'mensagem' => 'Tipo de conta salvo com sucesso!'
+                ],
+            ],
+            'deletar' => []
+        ],
+        'contaMetodo' => [
+            'salvar' => [
+                'salvo_com_sucesso' => [
+                    'sucesso' => true,
+                    'msgTipo' => 'success', 
+                    'mensagem' => 'Novo metodo salvo e disponível!'
+                ],
+            ],
+        ],
+        'transacao' => [
+            'salvar' => [
+                'salvo_com_sucesso' => [
+                    'sucesso' => true,
+                    'msgTipo' => 'success', 
+                    'mensagem' => 'Transação salva com sucesso!'
+                ],
+                'cofre_invalido' => [
+                    'sucesso' => false,
+                    'msgTipo' => 'warning', 
+                    'mensagem' => 'Selecione um cofre válido para a transação!'
+                ],
+            ],
+        ],
+        'genericas' => [
+            'formulario_incompleto' => [
+                'sucesso' => false,
+                'msgTipo' => 'warning', 
+                'mensagem' => 'Preencha todos os campos obrigatórios!'
+            ],
+            'erro_interno' => [
+                'sucesso' => false,
+                'msgTipo' => 'error', 
+                'mensagem' => 'Erro interno ao salvar na base de dados.'
+            ],
+        ],
+        'silenciosas' =>[
+            'selecionar_dados' => [
+                'busca_com_sucesso' => [
+                    'sucesso' => true,
+                    'msgTipo' => 'success', 
+                    'mensagem' => 'Dados do banco de dados carregados com sucesso!'
+                ],
+                'busca_vazia' => [
+                    'sucesso' => true,
+                    'msgTipo' => 'warning',
+                    'mensagem' => 'Nenhum dado encontrado.'
+                ],
+                'erro_interno' => [
+                    'sucesso' => false,
+                    'msgTipo' => 'error', 
+                    'mensagem' => 'Erro interno ao buscar dados na base de dados.'
+                ],
+            ]
+        ]
+    ];
+
     protected function render($view, $dados = []) {
         extract($dados);
 

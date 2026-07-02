@@ -1,7 +1,7 @@
 <?php
 require_once __DIR__ . '/Controller.php';
 require_once __DIR__ . '/../Models/Categoria.php';
-require_once __DIR__ . '/../Models/ContaMetodo.php'; // Arquivo renomeado
+require_once __DIR__ . '/../Models/ContaMetodo.php';
 require_once __DIR__ . '/../Models/Transacao.php';
 
 class TransacoesController extends Controller {
@@ -13,26 +13,36 @@ class TransacoesController extends Controller {
     public function selectDados() {
         header('Content-Type: application/json');
 
-        $categoriaModel = new Categoria();
-        $contaModel = new ContaMetodo();
-        $transacaoModel = new Transacao();
+        try {
+            $categoriaModel = new Categoria();
+            $contaModel = new ContaMetodo();
+            $transacaoModel = new Transacao();
 
-        $categorias = $categoriaModel->selectAllCategorias();
-        $contas = $contaModel->selectAllContas();
-        $transacoes = $transacaoModel->selectAllTransacoes();
+            $categorias = $categoriaModel->selectAllCategorias();
+            $contas = $contaModel->selectAllContas();
+            $transacoes = $transacaoModel->selectAllTransacoes();
 
-        $categoriasAgrupadas = ['R' => [], 'D' => [],  'I' => [], 'C' => []];
+            $categoriasAgrupadas = ['R' => [], 'D' => [],  'I' => [], 'C' => []];
 
-        foreach ($categorias as $categoria) {
-            $categoriasAgrupadas[$categoria['tipo']][] = $categoria;
+            foreach ($categorias as $categoria) {
+                $categoriasAgrupadas[$categoria['tipo']][] = $categoria;
+            }
+
+            echo json_encode([
+                'resposta'   => $this->mensagensModel['silenciosas']['selecionar_dados']['busca_com_sucesso'],
+                'categorias' => $categoriasAgrupadas,
+                'contas'     => $contas,
+                'transacoes' => $transacoes
+            ]);
+            
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode([
+                'resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['erro_interno'],
+                'detalhes' => $e->getMessage()
+            ]);
         }
-
-        echo json_encode([
-            'categorias' => $categoriasAgrupadas,
-            'contas'     => $contas, // Chave atualizada para o JS
-            'transacoes' => $transacoes
-        ]);
-        exit; // Quebra a execução para proteger o JSON
+        exit;
     }
 
     public function salvar() {
@@ -49,7 +59,9 @@ class TransacoesController extends Controller {
 
         // Validação Base
         if (empty($descricao) || empty($categoria_id) || empty($valor) || empty($data) || empty($tipo)) {
-            echo json_encode(['sucesso' => false, 'msgTipo' => 'warning', 'mensagem' => 'Preencha os dados principais da transação.']);
+            echo json_encode([
+                'resposta' => $mensagensModel['genericas']['formulario_incompleto']
+            ]);
             exit;
         }
 
@@ -80,7 +92,7 @@ class TransacoesController extends Controller {
             $preco      = trim(filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) ?? '');
 
             if (empty($ativo) || empty($quantidade) || empty($preco)) {
-                echo json_encode(['sucesso' => false, 'msgTipo' => 'warning', 'mensagem' => 'Preencha todos os dados específicos do investimento.']);
+                echo json_encode(['resposta' => $this->mensagensModel['genericas']['formulario_incompleto']]);
                 exit;
             }
 
@@ -95,7 +107,7 @@ class TransacoesController extends Controller {
             $id_cofre = trim(filter_input(INPUT_POST, 'id_cofre', FILTER_SANITIZE_NUMBER_INT) ?? '');
 
             if (empty($id_cofre)) {
-                echo json_encode(['sucesso' => false, 'msgTipo' => 'warning', 'mensagem' => 'Selecione o cofre de destino.']);
+                echo json_encode(['resposta' => $this->mensagensModel['transacoes']['salvar']['cofre_invalido']]);
                 exit;
             }
 
@@ -109,8 +121,7 @@ class TransacoesController extends Controller {
             echo json_encode(['sucesso' => true, 'msgTipo' => 'success', 'mensagem' => 'Transação cadastrada com sucesso!']);
             
         } catch (Exception $e) {
-            // Em ambiente de produção, não mostramos o erro do banco ($e->getMessage()) para o usuário por segurança
-            echo json_encode(['sucesso' => false, 'msgTipo' => 'danger', 'mensagem' => 'Erro interno ao salvar na base de dados.']);
+            echo json_encode(['resposta' => $this->mensagensModel['genericas']['erro_interno'] ]);
         }
         exit;
     }

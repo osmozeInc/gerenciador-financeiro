@@ -10,7 +10,7 @@ class ContaMetodoController extends Controller {
         $nome = trim(filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
 
         if (empty($nome)) {
-            echo json_encode(['sucesso' => false, 'msgTipo' => 'warning', 'mensagem' => 'Preencha todos os campos obrigatórios!']);
+            echo json_encode(['resposta' => $this->mensagensModel['genericas']['formulario_incompleto']]);
             exit;
         }
 
@@ -18,10 +18,10 @@ class ContaMetodoController extends Controller {
             $contaMetodoModel = new ContaMetodo();
             $contaMetodoModel->insert($nome); 
 
-            echo json_encode(['sucesso' => true, 'msgTipo' => 'success', 'mensagem' => 'Tipo de conta salvo com sucesso!']);
+            echo json_encode(['resposta' => $this->mensagensModel['contaMetodo']['salvar']['salvo_com_sucesso']]);
             
         } catch (Exception $e) {
-            echo json_encode(['sucesso' => false, 'msgTipo' => 'error', 'mensagem' => 'Erro interno ao salvar na base de dados.']);
+            echo json_encode(['resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['erro_interno']]);
         }
         
         exit;

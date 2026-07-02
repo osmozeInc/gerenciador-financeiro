@@ -9,9 +9,10 @@ document.getElementById('data').valueAsDate = new Date();
 document.addEventListener('DOMContentLoaded', async function() {
     const dados = await apiFetch('/transacoes/selectDados');
 
-    console.log(dados);
-    
     if (dados) {
+        if (dados.respostaSuccess)
+            feedbackPopup('success', 'Dados carregados com sucesso!');
+        
         preencherCategorias(dados.categorias);
         preencherContas(dados.contas);
         preencherTransacoes(dados.transacoes);
