@@ -15,6 +15,5 @@ class ContaMetodo extends Model {
         $stmt = $this->pdo->prepare($query);
         $stmt->bindValue(':nome', $nome);
         $stmt->execute();
-
     }
 }

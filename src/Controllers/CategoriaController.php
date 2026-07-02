@@ -29,8 +29,7 @@ class CategoriaController extends Controller {
             echo json_encode(['sucesso' => true, 'msgTipo' => 'success', 'mensagem' => 'Categoria cadastrada com sucesso!']);
             
         } catch (Exception $e) {
-            // Padronizado para 'danger'
-            echo json_encode(['sucesso' => false, 'msgTipo' => 'danger', 'mensagem' => 'Erro interno ao salvar na base de dados.']);
+            echo json_encode(['sucesso' => false, 'msgTipo' => 'error', 'mensagem' => 'Erro interno ao salvar na base de dados.']);
         }
         
         exit; // Trava de segurança final

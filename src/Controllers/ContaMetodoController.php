@@ -7,7 +7,6 @@ class ContaMetodoController extends Controller {
     public function salvar() {
         header('Content-Type: application/json');
 
-        // Blindagem contra null do PHP 8.1+
         $nome = trim(filter_input(INPUT_POST, 'nome', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
 
         if (empty($nome)) {
@@ -22,10 +21,9 @@ class ContaMetodoController extends Controller {
             echo json_encode(['sucesso' => true, 'msgTipo' => 'success', 'mensagem' => 'Tipo de conta salvo com sucesso!']);
             
         } catch (Exception $e) {
-            // Padronizado para 'danger'
-            echo json_encode(['sucesso' => false, 'msgTipo' => 'danger', 'mensagem' => 'Erro interno ao salvar na base de dados.']);
+            echo json_encode(['sucesso' => false, 'msgTipo' => 'error', 'mensagem' => 'Erro interno ao salvar na base de dados.']);
         }
         
-        exit; // Trava de segurança da API
+        exit;
     }
 }
