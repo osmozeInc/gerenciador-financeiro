@@ -67,12 +67,8 @@
                 
                 <div class="input-group">
                     <label for="classe">Classe</label>
-                    <select class="js-abrir-modal-select" id="classe" name="classe" data-target="modal-nova-classe">
+                    <select class="js-abrir-modal-select" id="id_classes" name="classe" data-target="modal-nova-classe">
                         <option value="" disabled selected>Selecione...</option>
-                        <option value="Ações">Ações</option>
-                        <option value="FIIs">FIIs</option>
-                        <option value="Renda Fixa">Renda Fixa</option>
-                        <option value="Cripto">Criptomoedas</option>
                     </select>
                 </div>
 
@@ -92,7 +88,7 @@
                     <label for="id_cofre">Selecione o Cofre Destino</label>
                     <select id="id_cofre" name="id_cofre">
                         <option value="" disabled selected>Selecione...</option>
-                        </select>
+                    </select>
                 </div>
             </div>
 

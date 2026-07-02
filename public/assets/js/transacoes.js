@@ -48,6 +48,9 @@ document.getElementById('categoria_id').addEventListener('change', async functio
     else if (tipo === 'I') {
         exibirBlocoEDivisor('bloco-investimento');
         mudarBtnSubmit();
+        
+        const classes = await apiFetch('/classesInvestimento/selectDados');
+        if (classes) preencherClasses(classes.classes);
     }
     else if (tipo === 'C') { 
         exibirBlocoEDivisor('bloco-cofre');
@@ -221,13 +224,27 @@ function preencherTransacoes(transacoes) {
     });
 }
 
-function preencherCofres(Cofres) {
+function preencherClasses(classes) {
+    const select = document.getElementById('id_classes');
+    if (!select) return;
+
+    select.innerHTML = '<option value="" disabled selected>Selecione...</option>';
+
+    classes.forEach(cofre => {
+        const option = document.createElement('option');
+        option.value = cofre.id;
+        option.textContent = cofre.nome;
+        select.appendChild(option);
+    });
+}
+
+function preencherCofres(cofres) {
     const select = document.getElementById('id_cofre');
     if (!select) return;
 
     select.innerHTML = '<option value="" disabled selected>Selecione...</option>';
 
-    Cofres.forEach(cofre => {
+    cofres.forEach(cofre => {
         const option = document.createElement('option');
         option.value = cofre.id;
         option.textContent = cofre.nome;
