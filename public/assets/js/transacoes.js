@@ -7,15 +7,17 @@ document.getElementById('data').valueAsDate = new Date();
 
 // Buscar dados ao carregar a página
 document.addEventListener('DOMContentLoaded', async function() {
-    const dados = await apiFetch('/transacoes/selectDados');
+    const json = await apiFetch('/transacoes/selectjson');
 
-    if (dados) {
-        if (dados.respostaSuccess)
-            feedbackPopup('success', 'Dados carregados com sucesso!');
+    if (json) {
+        if (!json.resposta.sucesso) {
+            feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
+            return;
+        }
         
-        preencherCategorias(dados.categorias);
-        preencherContas(dados.contas);
-        preencherTransacoes(dados.transacoes);
+        preencherCategorias(json.categorias);
+        preencherContas(json.contas);
+        preencherTransacoes(json.transacoes);
     }
 });
 
@@ -51,14 +53,28 @@ document.getElementById('categoria_id').addEventListener('change', async functio
         mudarBtnSubmit();
         
         const classes = await apiFetch('/classesInvestimento/selectDados');
-        if (classes) preencherClasses(classes.classes);
+        if (classes && classes.resposta) {
+            if (!classes.resposta.sucesso) {
+                feedbackPopup(classes.resposta.msgTipo, classes.resposta.mensagem);
+                return;
+            }
+
+            preencherClasses(classes.classes);
+        }
     }
     else if (tipo === 'C') { 
         exibirBlocoEDivisor('bloco-cofre');
         mudarBtnSubmit();
         
         const cofres = await apiFetch('/cofres/selectDados');
-        if (cofres) preencherCofres(cofres.cofres);
+        if (cofres && cofres.resposta) {
+            if (!cofres.resposta.sucesso) {
+                feedbackPopup(cofres.resposta.msgTipo, cofres.resposta.mensagem);
+                return;
+            }
+            
+            preencherCofres(cofres.cofres);
+        } 
     }
 
     function exibirBlocoEDivisor(blocoId) {
@@ -98,17 +114,18 @@ document.getElementById('novaCategoriaForm').addEventListener('submit', async fu
     evento.preventDefault();
 
     const copoForm = new FormData(this);
-    const resposta = await apiFetch('/categoria/salvar', 'POST', copoForm);
+    const json = await apiFetch('/categoria/salvar', 'POST', copoForm);
 
-    if (resposta && resposta.sucesso) {
+    if (json) {
         this.reset();
-
+        
         fecharModal('modal-nova-categoria', null);
-        feedbackPopup(resposta.msgTipo, resposta.mensagem);
+        feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
+        
+        if (!json.resposta.sucesso) return;
 
         const novosDados = await apiFetch('/transacoes/selectDados');
-
-        if (novosDados) preencherCategorias(novosDados.categorias);
+        if (novosDados && novosDados.categorias) preencherCategorias(novosDados.categorias);
     }
 });
 
@@ -117,16 +134,17 @@ document.getElementById('novoPagamentoForm').addEventListener('submit', async fu
     evento.preventDefault();
 
     const copoForm = new FormData(this);
-    const resposta = await apiFetch('/contaMetodo/salvar', 'POST', copoForm);
+    const json = await apiFetch('/contaMetodo/salvar', 'POST', copoForm);
 
-    if (resposta && resposta.sucesso) {
+    if (json) {
         this.reset();
 
         fecharModal('modal-novo-pagamento');
-        feedbackPopup(resposta.msgTipo, resposta.mensagem);
+        feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
+
+        if (!json.resposta.sucesso) return;
 
         const novosDados = await apiFetch('/transacoes/selectDados');
-
         if (novosDados) preencherPagamentos(novosDados.pagamentos);
     }
 });
@@ -136,14 +154,15 @@ document.getElementById('novaClasseForm').addEventListener('submit', async funct
     evento.preventDefault();
 
     const copoForm = new FormData(this);
-    const resposta = await apiFetch('/classesInvestimento/salvar', 'POST', copoForm);
+    const json = await apiFetch('/classesInvestimento/salvar', 'POST', copoForm);
 
-    if (resposta && resposta.sucesso) {
+    if (json) {
         this.reset();
 
         fecharModal('modal-nova-classe');
+        feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
 
-        feedbackPopup(resposta.msgTipo, resposta.mensagem);
+        if (!json.resposta.sucesso) return;
 
         const classes = await apiFetch('/classesInvestimento/selectDados');
         if (classes) preencherClasses(classes.classes);
@@ -155,15 +174,16 @@ document.getElementById('transacaoForm').addEventListener('submit', async functi
     evento.preventDefault();
 
     const copoForm = new FormData(this);
-    const resposta = await apiFetch('/transacoes/salvar', 'POST', copoForm);
+    const json = await apiFetch('/transacoes/salvar', 'POST', copoForm);
 
-    if (resposta && resposta.sucesso) {
+    if (json) {
         this.reset();
 
-        feedbackPopup(resposta.msgTipo, resposta.mensagem);
+        feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
 
+        if (!json.resposta.sucesso) return;
+        
         const novosDados = await apiFetch('/transacoes/selectDados');
-
         if (novosDados) preencherTransacoes(novosDados.transacoes);
     }
 });

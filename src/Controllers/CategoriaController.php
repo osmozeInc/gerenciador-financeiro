@@ -26,7 +26,7 @@ class CategoriaController extends Controller {
             $categoriaModel = new Categoria();
             $categoriaModel->insert($nome, $tipo);
 
-            echo json_encode(['resposta' => $this->mensagensModel['categoria']['salvar']['sucesso']]);
+            echo json_encode(['resposta' => $this->mensagensModel['categoria']['salvar']['salvo_com_sucesso']]);
             
         } catch (Exception $e) {
             echo json_encode(['resposta' => $this->mensagensModel['categoria']['salvar']['erro']]);

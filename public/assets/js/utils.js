@@ -1,8 +1,8 @@
 // ==================== utils.js ====================
 
 export async function apiFetch(url, metodo = 'GET', corpo = null) {
+    const opcoes = { method: metodo };
     try {
-        const opcoes = { method: metodo };
         if (corpo) opcoes.body = corpo;
 
         const resposta = await fetch(url, opcoes);
@@ -34,11 +34,6 @@ export function feedbackPopup(tipo, mensagem) {
     `;
 
     const popupFeedbackContainer = document.getElementById('popup-feedback-container');
-    
-    console.log(tipo, mensagem);
-    console.log(popupFeedbackContainer);
-    console.log(typeof popupFeedbackContainer);
-
     popupFeedbackContainer.classList.add('active');
     popupFeedbackContainer.appendChild(popup);
 
