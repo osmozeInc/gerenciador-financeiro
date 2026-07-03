@@ -9,11 +9,11 @@ class CategoriasController extends Controller {
 
         try {
             $categoriaModel = new Categoria();
-            $categoria = $categoriaModel->selectAllcategorias();
+            $categorias = $categoriaModel->selectAllcategorias();
             
             echo json_encode([
                 'resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['busca_com_sucesso'],
-                'categorias' => $categoria
+                'categorias' => $categorias
             ]);
         
         } catch (Exception $e) {

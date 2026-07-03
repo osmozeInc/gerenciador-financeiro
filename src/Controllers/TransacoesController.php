@@ -22,15 +22,9 @@ class TransacoesController extends Controller {
             $contas = $contaModel->selectAllContas();
             $transacoes = $transacaoModel->selectAllTransacoes();
 
-            $categoriasAgrupadas = ['R' => [], 'D' => [],  'I' => [], 'C' => []];
-
-            foreach ($categorias as $categoria) {
-                $categoriasAgrupadas[$categoria['tipo']][] = $categoria;
-            }
-
             echo json_encode([
                 'resposta'   => $this->mensagensModel['silenciosas']['selecionar_dados']['busca_com_sucesso'],
-                'categorias' => $categoriasAgrupadas,
+                'categorias' => $categorias,
                 'contas'     => $contas,
                 'transacoes' => $transacoes
             ]);
@@ -78,10 +72,8 @@ class TransacoesController extends Controller {
         $valor        = trim(filter_input(INPUT_POST, 'valor', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) ?? '');
         $data         = trim(filter_input(INPUT_POST, 'data', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
         
-        // Esta variável é o maestro da requisição. O JS precisa enviá-la no FormData.
         $tipo         = trim(filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_SPECIAL_CHARS) ?? ''); 
 
-        // Validação Base
         if (empty($descricao) || empty($categoria_id) || empty($valor) || empty($data) || empty($tipo)) {
             echo json_encode([
                 'resposta' => $mensagensModel['genericas']['formulario_incompleto']
@@ -91,7 +83,7 @@ class TransacoesController extends Controller {
 
         $dadosPai = [
             'categoria_id' => $categoria_id,
-            'conta_id'     => !empty($conta_id) ? $conta_id : null, // Conta pode ser nula para cofres
+            'conta_id'     => !empty($conta_id) ? $conta_id : null,
             'descricao'    => $descricao,
             'valor'        => $valor,
             'data'         => $data
@@ -99,7 +91,6 @@ class TransacoesController extends Controller {
 
         $dadosFilha = [];
 
-        // 2. A Triagem (Captura e Validação Condicional)
         if ($tipo === 'D') {
             $parcelado = filter_input(INPUT_POST, 'parcelado', FILTER_VALIDATE_BOOLEAN) ? 1 : 0;
             $qtd_parcelas = trim(filter_input(INPUT_POST, 'qtd_parcelas', FILTER_SANITIZE_NUMBER_INT) ?? 1);
@@ -131,7 +122,7 @@ class TransacoesController extends Controller {
             $id_cofre = trim(filter_input(INPUT_POST, 'id_cofre', FILTER_SANITIZE_NUMBER_INT) ?? '');
 
             if (empty($id_cofre)) {
-                echo json_encode(['resposta' => $this->mensagensModel['transacoes']['salvar']['cofre_invalido']]);
+                echo json_encode(['resposta' => $this->mensagensModel['transacao']['salvar']['cofre_invalido']]);
                 exit;
             }
 
@@ -142,7 +133,7 @@ class TransacoesController extends Controller {
             $transacaoModel = new Transacao();
             $transacaoModel->salvarTransacaoCompleta($dadosPai, $dadosFilha, $tipo);
 
-            echo json_encode(['sucesso' => true, 'msgTipo' => 'success', 'mensagem' => 'Transação cadastrada com sucesso!']);
+            echo json_encode(['resposta' => $this->mensagensModel['transacao']['salvar']['salvo_com_sucesso']]);
             
         } catch (Exception $e) {
             echo json_encode(['resposta' => $this->mensagensModel['genericas']['erro_interno'] ]);

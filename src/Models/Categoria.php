@@ -6,8 +6,15 @@ class Categoria extends Model {
     public function selectAllCategorias() {
         $query = "SELECT * FROM categorias";
         $stmt = $this->pdo->query($query);
+        $categorias = $stmt->fetchAll(); 
+
+        $categoriasAgrupadas = ['R' => [], 'D' => [],  'I' => [], 'C' => []];
+
+        foreach ($categorias as $categoria) {
+            $categoriasAgrupadas[$categoria['tipo']][] = $categoria;
+        }
         
-        return $stmt->fetchAll(); 
+        return $categoriasAgrupadas;
     }
 
     public function insert($nome, $tipo) {

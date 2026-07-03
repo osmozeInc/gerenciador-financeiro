@@ -42,7 +42,7 @@ public function selectDados() {
             $classeModel = new ClasseInvestimento();
             $classeModel->insert($nome);
 
-            echo json_encode(['resposta' => $this->mensagensModel['genericas']['salvo_com_sucesso']]);
+            echo json_encode(['resposta' => $this->mensagensModel['classesInvestimento']['salvar']['salvo_com_sucesso']]);
             
         } catch (Exception $e) {
             echo json_encode(['resposta' => $this->mensagensModel['genericas']['erro_interno']]);
