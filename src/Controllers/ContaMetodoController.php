@@ -3,6 +3,27 @@ require_once __DIR__ . '/Controller.php';
 require_once __DIR__ . '/../Models/ContaMetodo.php';
 
 class ContaMetodoController extends Controller {
+
+    public function selectDados() {
+        header('Content-Type: application/json');
+
+        try {
+            $contaMetodoModel = new ContaMetodo();
+            $contaMetodo = $contaMetodoModel->selectAllContas();
+            
+            echo json_encode([
+                'resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['busca_com_sucesso'],
+                'metodos' => $contaMetodo
+            ]);
+        
+        } catch (Exception $e) {
+            echo json_encode([
+                'resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['erro_interno'],
+                'detalhes' => $e->getMessage()
+            ]);
+        }
+        exit;
+    }
     
     public function salvar() {
         header('Content-Type: application/json');

@@ -18,5 +18,4 @@ class ClasseInvestimento extends Model {
         $stmt->bindValue(':nome', $nome);
         $stmt->execute();
     }
-
 }

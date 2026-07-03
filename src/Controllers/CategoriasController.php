@@ -2,7 +2,28 @@
 require_once __DIR__ . '/Controller.php';
 require_once __DIR__ . '/../Models/Categoria.php';
 
-class CategoriaController extends Controller {
+class CategoriasController extends Controller {
+
+    public function selectDados() {
+        header('Content-Type: application/json');
+
+        try {
+            $categoriaModel = new Categoria();
+            $categoria = $categoriaModel->selectAllcategorias();
+            
+            echo json_encode([
+                'resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['busca_com_sucesso'],
+                'categorias' => $categoria
+            ]);
+        
+        } catch (Exception $e) {
+            echo json_encode([
+                'resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['erro_interno'],
+                'detalhes' => $e->getMessage()
+            ]);
+        }
+        exit;
+    }
     
     public function salvar() {
         header('Content-Type: application/json');

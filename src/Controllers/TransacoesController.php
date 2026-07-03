@@ -44,6 +44,30 @@ class TransacoesController extends Controller {
         }
         exit;
     }
+    
+    public function selectTransacoes() {
+        header('Content-Type: application/json');
+
+        try {
+            $transacaoModel = new Transacao();
+
+            $transacoes = $transacaoModel->selectAllTransacoes();
+
+
+            echo json_encode([
+                'resposta'   => $this->mensagensModel['silenciosas']['selecionar_dados']['busca_com_sucesso'],
+                'transacoes' => $transacoes
+            ]);
+            
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode([
+                'resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['erro_interno'],
+                'detalhes' => $e->getMessage()
+            ]);
+        }
+        exit;
+    }
 
     public function salvar() {
         header('Content-Type: application/json');

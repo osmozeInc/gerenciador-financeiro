@@ -7,7 +7,7 @@ document.getElementById('data').valueAsDate = new Date();
 
 // Buscar dados ao carregar a página
 document.addEventListener('DOMContentLoaded', async function() {
-    const json = await apiFetch('/transacoes/selectjson');
+    const json = await apiFetch('/transacoes/selectDados');
 
     if (json) {
         if (!json.resposta.sucesso) {
@@ -16,7 +16,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
         
         preencherCategorias(json.categorias);
-        preencherContas(json.contas);
+        preencherMetodos(json.contas);
         preencherTransacoes(json.transacoes);
     }
 });
@@ -114,38 +114,38 @@ document.getElementById('novaCategoriaForm').addEventListener('submit', async fu
     evento.preventDefault();
 
     const copoForm = new FormData(this);
-    const json = await apiFetch('/categoria/salvar', 'POST', copoForm);
+    const jsonSalvar = await apiFetch('/categorias/salvar', 'POST', copoForm);
 
-    if (json) {
+    if (jsonSalvar) {
         this.reset();
         
         fecharModal('modal-nova-categoria', null);
-        feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
+        feedbackPopup(jsonSalvar.resposta.msgTipo, jsonSalvar.resposta.mensagem);
         
-        if (!json.resposta.sucesso) return;
+        if (!jsonSalvar.resposta.sucesso) return;
 
-        const novosDados = await apiFetch('/transacoes/selectDados');
-        if (novosDados && novosDados.categorias) preencherCategorias(novosDados.categorias);
+        const jsonCategorias = await apiFetch('/categorias/selectDados');
+        if (jsonCategorias && jsonCategorias.categorias) preencherCategorias(jsonCategorias.categorias);
     }
 });
 
-// Salvar nova forma de pagamento
+// Salvar novo metodo de pagamento
 document.getElementById('novoPagamentoForm').addEventListener('submit', async function(evento) {
     evento.preventDefault();
 
     const copoForm = new FormData(this);
-    const json = await apiFetch('/contaMetodo/salvar', 'POST', copoForm);
+    const jsonSalvar = await apiFetch('/contaMetodo/salvar', 'POST', copoForm);
 
-    if (json) {
+    if (jsonSalvar) {
         this.reset();
 
         fecharModal('modal-novo-pagamento');
-        feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
+        feedbackPopup(jsonSalvar.resposta.msgTipo, jsonSalvar.resposta.mensagem);
 
-        if (!json.resposta.sucesso) return;
+        if (!jsonSalvar.resposta.sucesso) return;
 
-        const novosDados = await apiFetch('/transacoes/selectDados');
-        if (novosDados) preencherPagamentos(novosDados.pagamentos);
+        const jsonMetodos = await apiFetch('/contaMetodo/selectDados');
+        if (jsonMetodos) preencherMetodos(jsonMetodos.metodos);
     }
 });
 
@@ -183,7 +183,7 @@ document.getElementById('transacaoForm').addEventListener('submit', async functi
 
         if (!json.resposta.sucesso) return;
         
-        const novosDados = await apiFetch('/transacoes/selectDados');
+        const novosDados = await apiFetch('/transacoes/selectTransacoes');
         if (novosDados) preencherTransacoes(novosDados.transacoes);
     }
 });
@@ -216,7 +216,7 @@ function preencherCategorias(categoriasArray) {
     }
 }
 
-function preencherContas(contas) {
+function preencherMetodos(contas) {
     // CORRIGIDO PARA #conta_id
     const select = document.getElementById('conta_id');
     if (!select) return;
