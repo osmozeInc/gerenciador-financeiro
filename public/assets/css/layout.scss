@@ -32,16 +32,12 @@
     --radius-input: 4px;
     --card-shadow-color: rgba(0, 0, 0, 0.3);
 
-    --bg-alert-success: #3bdf49;
-    --bg-alert-error: #ff8585;
-    --bg-alert-warning: #ffe479;
-    --bg-alert-info: #70b7f1;
+    --bg-alert-success: #12ca0c;
+    --bg-alert-error: #ff7b7b;
+    --bg-alert-warning: #fff679;
+    --bg-alert-info: #33c3e7;
+    --text-alert: #000000a0;
     
-    --text-alert-success: #00612f;
-    --text-alert-error: #6e0000;
-    --text-alert-warning: #8a5700;
-    --text-alert-info: #000ba0;
-
     --tema-color: light;
 }
 
@@ -1130,10 +1126,10 @@ header {
         & span i { font-size: 1.5rem; cursor: default; }
     }
 
-    & .success { background-color: var(--bg-alert-success); color: var(--text-alert-success); }
-    & .error { background-color: var(--bg-alert-error); color: var(--text-alert-error); }
-    & .warning { background-color: var(--bg-alert-warning); color: var(--text-alert-warning); }
-    & .info { background-color: var(--bg-alert-info); color: var(--text-alert-info); }
+    & .success { background-color: var(--bg-alert-success); color: var(--text-alert); }
+    & .error { background-color: var(--bg-alert-error); color: var(--text-alert); }
+    & .warning { background-color: var(--bg-alert-warning); color: var(--text-alert); }
+    & .info { background-color: var(--bg-alert-info); color: var(--text-alert); }
     &.active { display: flex; flex-direction: column-reverse; }
 }
 
