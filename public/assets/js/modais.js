@@ -111,8 +111,8 @@ export function definirTema(tema) {
 /* FUNÇÕES DE VISIBILIDADE DOS SALDOS */
 
 export function definirVisibilidadeDeValores(visibilidade) {
-    generic.toggleClassByQuery('.bi-eye', 'escondido');
-    generic.toggleClassByQuery('.bi-eye-slash', 'escondido');
+    generic.toggleClassByQuery('.bi-eye', 'hidden');
+    generic.toggleClassByQuery('.bi-eye-slash', 'hidden');
 
     if (visibilidade) {
         // esconder os saldos

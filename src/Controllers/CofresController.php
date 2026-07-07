@@ -5,7 +5,7 @@ require_once __DIR__ . '/../Models/Cofre.php';
 class CofresController extends Controller {
 
     public function index() {
-        $this->render('contas');
+        $this->render('cofres');
     }
     
     public function selectDados() {

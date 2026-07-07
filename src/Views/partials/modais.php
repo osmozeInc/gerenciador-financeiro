@@ -314,7 +314,7 @@
                     <label class="titulo-switch">Saldos visiveis ao iniciar</label>
                     <span id="visibilidade">
                         <i class="bi bi-eye" data-visibilidade="true"></i>
-                        <i class="bi bi-eye-slash escondido" data-visibilidade="false"></i>
+                        <i class="bi bi-eye-slash hidden" data-visibilidade="false"></i>
                     </span>
                 </div>
             </div>
