@@ -116,14 +116,7 @@ document.getElementById('novaCategoriaForm').addEventListener('submit', async fu
     const copoForm = new FormData(this);
     const jsonSalvar = await apiFetch('/categorias/salvar', 'POST', copoForm);
 
-    if (jsonSalvar) {
-        this.reset();
-        
-        fecharModal('modal-nova-categoria', null);
-        feedbackPopup(jsonSalvar.resposta.msgTipo, jsonSalvar.resposta.mensagem);
-        
-        if (!jsonSalvar.resposta.sucesso) return;
-
+    if (fecharModalExibirFeedback(jsonSalvar, 'modal-nova-categoria', this)) {
         const jsonCategorias = await apiFetch('/categorias/selectDados');
         if (jsonCategorias && jsonCategorias.categorias) preencherCategorias(jsonCategorias.categorias);
     }
@@ -136,14 +129,7 @@ document.getElementById('novoPagamentoForm').addEventListener('submit', async fu
     const copoForm = new FormData(this);
     const jsonSalvar = await apiFetch('/contaMetodo/salvar', 'POST', copoForm);
 
-    if (jsonSalvar) {
-        this.reset();
-
-        fecharModal('modal-novo-pagamento');
-        feedbackPopup(jsonSalvar.resposta.msgTipo, jsonSalvar.resposta.mensagem);
-
-        if (!jsonSalvar.resposta.sucesso) return;
-
+        if (fecharModalExibirFeedback(jsonSalvar, 'modal-novo-pagamento', this)) {
         const jsonMetodos = await apiFetch('/contaMetodo/selectDados');
         if (jsonMetodos) preencherMetodos(jsonMetodos.metodos);
     }
@@ -156,14 +142,7 @@ document.getElementById('novaClasseForm').addEventListener('submit', async funct
     const copoForm = new FormData(this);
     const json = await apiFetch('/classesInvestimento/salvar', 'POST', copoForm);
 
-    if (json) {
-        this.reset();
-
-        fecharModal('modal-nova-classe');
-        feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
-
-        if (!json.resposta.sucesso) return;
-
+    if (fecharModalExibirFeedback(jsonSalvar, 'modal-nova-classe', this)) {
         const classes = await apiFetch('/classesInvestimento/selectDados');
         if (classes) preencherClasses(classes.classes);
     }
@@ -174,21 +153,29 @@ document.getElementById('transacaoForm').addEventListener('submit', async functi
     evento.preventDefault();
 
     const copoForm = new FormData(this);
-    const json = await apiFetch('/transacoes/salvar', 'POST', copoForm);
+    const jsonSalvar = await apiFetch('/transacoes/salvar', 'POST', copoForm);
 
-    if (json) {
-        this.reset();
-
-        feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
-
-        if (!json.resposta.sucesso) return;
-        
+    if (fecharModalExibirFeedback(jsonSalvar, null, this)) {
         const novosDados = await apiFetch('/transacoes/selectTransacoes');
         if (novosDados) preencherTransacoes(novosDados.transacoes);
     }
 });
 
 
+
+function fecharModalExibirFeedback(json, idModal, formulario) {
+    if (!json || !formulario) return false;
+
+    feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
+
+    if (json.resposta.sucesso && formulario) 
+        formulario.reset();
+
+    if (json.resposta.sucesso && idModal) 
+        fecharModal(idModal, formulario);
+
+    return true;
+}
 
 function preencherCategorias(categoriasArray) {
     const mapaGrupos = {
