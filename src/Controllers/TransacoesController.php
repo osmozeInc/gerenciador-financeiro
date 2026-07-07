@@ -63,6 +63,84 @@ class TransacoesController extends Controller {
         exit;
     }
 
+    public function salvarReceita() {
+        header('Content-Type: application/json');
+
+        $descricao    = trim(filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
+        $categoria_id = trim(filter_input(INPUT_POST, 'categoria_id', FILTER_SANITIZE_NUMBER_INT) ?? '');
+        $conta_id     = trim(filter_input(INPUT_POST, 'conta_id', FILTER_SANITIZE_NUMBER_INT) ?? '');
+        $valor        = trim(filter_input(INPUT_POST, 'valor', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) ?? '');
+        $data         = trim(filter_input(INPUT_POST, 'data', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
+        
+        $tipo         = trim(filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_SPECIAL_CHARS) ?? ''); 
+
+        if (empty($descricao) || empty($categoria_id) || empty($valor) || empty($data) || empty($tipo)) {
+            echo json_encode([
+                'resposta' => $mensagensModel['genericas']['formulario_incompleto']
+            ]);
+            exit;
+        }
+
+        $dadosPai = [
+            'categoria_id' => $categoria_id,
+            'conta_id'     => !empty($conta_id) ? $conta_id : null,
+            'descricao'    => $descricao,
+            'valor'        => $valor,
+            'data'         => $data
+        ];
+
+        $dadosFilha = [];
+
+        if ($tipo === 'D') {
+            $parcelado = filter_input(INPUT_POST, 'parcelado', FILTER_VALIDATE_BOOLEAN) ? 1 : 0;
+            $qtd_parcelas = trim(filter_input(INPUT_POST, 'qtd_parcelas', FILTER_SANITIZE_NUMBER_INT) ?? 1);
+
+            $dadosFilha = [
+                'parcelado'    => $parcelado,
+                'qtd_parcelas' => $qtd_parcelas
+            ];
+        } 
+        elseif ($tipo === 'I') {
+            $ativo      = trim(filter_input(INPUT_POST, 'ativo', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
+            $classe     = trim(filter_input(INPUT_POST, 'classe', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
+            $quantidade = trim(filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) ?? '');
+            $preco      = trim(filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) ?? '');
+
+            if (empty($ativo) || empty($quantidade) || empty($preco)) {
+                echo json_encode(['resposta' => $this->mensagensModel['genericas']['formulario_incompleto']]);
+                exit;
+            }
+
+            $dadosFilha = [
+                'ativo'      => $ativo,
+                'classe'     => $classe,
+                'quantidade' => $quantidade,
+                'preco'      => $preco
+            ];
+        } 
+        elseif ($tipo === 'C') {
+            $id_cofre = trim(filter_input(INPUT_POST, 'id_cofre', FILTER_SANITIZE_NUMBER_INT) ?? '');
+
+            if (empty($id_cofre)) {
+                echo json_encode(['resposta' => $this->mensagensModel['transacao']['salvar']['cofre_invalido']]);
+                exit;
+            }
+
+            $dadosFilha = ['id_cofre' => $id_cofre];
+        }
+
+        try {
+            $transacaoModel = new Transacao();
+            $transacaoModel->salvarTransacaoCompleta($dadosPai, $dadosFilha, $tipo);
+
+            echo json_encode(['resposta' => $this->mensagensModel['transacao']['salvar']['salvo_com_sucesso']]);
+            
+        } catch (Exception $e) {
+            echo json_encode(['resposta' => $this->mensagensModel['genericas']['erro_interno'] ]);
+        }
+        exit;
+    }
+
     public function salvar() {
         header('Content-Type: application/json');
 

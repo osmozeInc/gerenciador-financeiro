@@ -2,9 +2,6 @@ import { abrirModal, fecharModal } from "/assets/js/modais.js";
 
 import { apiFetch, feedbackPopup } from "/assets/js/utils.js";
 
-// preencher o formulário com a data atual
-document.getElementById('data').valueAsDate = new Date();
-
 // Buscar dados ao carregar a página
 document.addEventListener('DOMContentLoaded', async function() {
     const json = await apiFetch('/transacoes/selectDados');
@@ -19,94 +16,53 @@ document.addEventListener('DOMContentLoaded', async function() {
         preencherMetodos(json.contas);
         preencherTransacoes(json.transacoes);
     }
+
+    atualizarDataAtual();
 });
 
-// exibir os blocos corretos de acordo com a Categoria
-document.getElementById('categoria_id').addEventListener('change', async function() {
-    const optionSelecionada = this.options[this.selectedIndex];
-    const labelGrupo = optionSelecionada.parentElement.getAttribute('label') || '';
-    const divisor = document.querySelector('.divisor-blocos')
-    const botaoConfirm = document.getElementById('btnSalvarTransacao');
+// exibir os blocos corretos de acordo com o botão clicado
+const btnsTipoTransacao = document.querySelectorAll('.btn-tipo-transacao')
+btnsTipoTransacao.forEach(btn => btn.addEventListener('click', async function() {
 
-    let tipo = '';
-         if (labelGrupo.includes('(R)')) tipo = 'R';
-    else if (labelGrupo.includes('(D)')) tipo = 'D';
-    else if (labelGrupo.includes('(I)')) tipo = 'I';
-    else if (labelGrupo.includes('(C)')) tipo = 'C';
+    // Se o botão já estiver ativo, desativa e reseta o formulário
+    if (this.classList.contains('active')) {
+        document.getElementById('aviso').classList.remove('hidden');
 
-    // Preenche o input invisível que vai para o Controller!
-    document.getElementById('tipo_transacao').value = tipo;
+        const idForm = this.getAttribute('data-idForm');
+        document.getElementById(idForm).classList.remove('visivel-block');
+        document.getElementById(idForm).reset();
 
-    divisor.style.display = 'none';
-    document.querySelectorAll('.bloco')
-    .forEach(bloco => bloco.style.display = 'none');
+        this.classList.remove('active');
+        btnsTipoTransacao.forEach(b => b.classList.remove('deactive'));
 
-    if (tipo === 'R') {
-        mudarBtnSubmit();
-    }
-    else if (tipo === 'D') {
-        exibirBlocoEDivisor('bloco-despesa');
-        mudarBtnSubmit();
-    }
-    else if (tipo === 'I') {
-        exibirBlocoEDivisor('bloco-investimento');
-        mudarBtnSubmit();
-        
-        const classes = await apiFetch('/classesInvestimento/selectDados');
-        if (classes && classes.resposta) {
-            if (!classes.resposta.sucesso) {
-                feedbackPopup(classes.resposta.msgTipo, classes.resposta.mensagem);
-                return;
-            }
+        return;
+    };
 
-            preencherClasses(classes.classes);
-        }
-    }
-    else if (tipo === 'C') { 
-        exibirBlocoEDivisor('bloco-cofre');
-        mudarBtnSubmit();
-        
-        const cofres = await apiFetch('/cofres/selectDados');
-        if (cofres && cofres.resposta) {
-            if (!cofres.resposta.sucesso) {
-                feedbackPopup(cofres.resposta.msgTipo, cofres.resposta.mensagem);
-                return;
-            }
-            
-            preencherCofres(cofres.cofres);
-        } 
-    }
+    // Se o botão nao estiver ativo:
+    btnsTipoTransacao.forEach(b => b.classList.remove('active'));
+    btnsTipoTransacao.forEach(b => b.classList.add('deactive'));
 
-    function exibirBlocoEDivisor(blocoId) {
-        divisor.style.display = 'block';
-        document.getElementById(blocoId).style.display = 'grid';
-    }
-
-    function mudarBtnSubmit() {
-        if (tipo === 'R') {
-            botaoConfirm.innerText = 'Salvar Receita';
-            botaoConfirm.classList.remove('btn-invest-submit');
-        }
-        else if (tipo === 'D') {
-            botaoConfirm.innerText = 'Salvar Despesa';
-            botaoConfirm.classList.remove('btn-invest-submit');
-        }
-        else if (tipo === 'I') {
-            botaoConfirm.innerText = 'Salvar Investimento';
-            botaoConfirm.classList.add('btn-invest-submit');
-        }
-        else if (tipo === 'C') {
-            botaoConfirm.innerText = 'Adicionar ao Cofre';
-            botaoConfirm.classList.add('btn-invest-submit');
-        } 
-    }
-});
+    document.querySelectorAll('form.visivel-block').forEach(form => form.classList.remove('visivel-block'));
+    
+    this.classList.add('active');
+    this.classList.remove('deactive');
+    
+    document.getElementById('aviso').classList.add('hidden');
+    
+    const idForm = this.getAttribute('data-idForm');
+    document.getElementById(idForm).classList.add('visivel-block');
+}));
 
 // habilitar/desabilitar a quantidade de parcelas
-document.getElementById('parcelado').addEventListener('change', function() {
-    const inputParcelas = document.getElementById('qtd_parcelas');
-    inputParcelas.disabled = !this.checked;
-    if (!this.checked) inputParcelas.value = 1; // Reseta se desmarcar
+const switchParcelado = document.getElementById('parcelado')
+switchParcelado.addEventListener('change', function() {
+    const inputParcelas = document.getElementById('input-parcelas');
+    
+    if (this.checked) {
+        inputParcelas.classList.remove('hidden');
+    } else {
+        inputParcelas.classList.add('hidden');
+    }
 });
 
 // Salvar nova categoria
@@ -149,11 +105,23 @@ document.getElementById('novaClasseForm').addEventListener('submit', async funct
 });
 
 // Salvar nova transação
-document.getElementById('transacaoForm').addEventListener('submit', async function(evento) {
+document.getElementById('receitaForm').addEventListener('submit', async function(evento) {
     evento.preventDefault();
 
     const copoForm = new FormData(this);
-    const jsonSalvar = await apiFetch('/transacoes/salvar', 'POST', copoForm);
+    const jsonSalvar = await apiFetch('/transacoes/salvarReceita', 'POST', copoForm);
+
+    if (fecharModalExibirFeedback(jsonSalvar, null, this)) {
+        const novosDados = await apiFetch('/transacoes/selectTransacoes');
+        if (novosDados) preencherTransacoes(novosDados.transacoes);
+    }
+});
+
+document.getElementById('despesaForm').addEventListener('submit', async function(evento) {
+    evento.preventDefault();
+
+    const copoForm = new FormData(this);
+    const jsonSalvar = await apiFetch('/transacoes/salvarDespesa', 'POST', copoForm);
 
     if (fecharModalExibirFeedback(jsonSalvar, null, this)) {
         const novosDados = await apiFetch('/transacoes/selectTransacoes');
@@ -282,5 +250,11 @@ function preencherCofres(cofres) {
         option.value = cofre.id;
         option.textContent = cofre.nome;
         select.appendChild(option);
+    });
+}
+
+function atualizarDataAtual() {
+    document.querySelectorAll('input[type="date"]').forEach(input => {
+        input.valueAsDate = new Date();
     });
 }
