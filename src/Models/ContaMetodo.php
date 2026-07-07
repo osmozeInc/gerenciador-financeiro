@@ -3,9 +3,11 @@ require_once 'Model.php';
 
 class ContaMetodo extends Model {
     
-    public function selectAllContas() {
-        $query = "SELECT * FROM contas_metodos";
-        $stmt = $this->pdo->query($query);
+    public function selectAllContas($tenantId) {
+        $query = "SELECT id, nome FROM contas_metodos where tenant_id = :tenant_id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':tenant_id', $tenantId);
+        $stmt->execute();
 
         return $stmt->fetchAll();
     }

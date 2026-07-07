@@ -1,6 +1,7 @@
 <?php
 
 class Controller {
+    protected $idUsuarioLogado = 1;
     protected $mensagensModel = [
         'categoria' => [
             'salvar' => [

@@ -3,7 +3,7 @@ require_once 'Model.php';
 
 class Transacao extends Model {
     
-    public function selectAllTransacoes() {
+    public function selectAllTransacoes($tenantId) {
         $query = "
             SELECT t.id, t.data_transacao, t.descricao, t.valor_total, 
                    c.nome AS categoria_nome, c.tipo AS categoria_tipo, 
@@ -11,10 +11,13 @@ class Transacao extends Model {
             FROM transacoes t 
             INNER JOIN categorias c ON t.id_categoria = c.id 
             LEFT JOIN contas_metodos cm ON t.id_conta_metodo = cm.id 
+            WHERE t.tenant_id = :tenant_id
             ORDER BY t.data_transacao DESC
         ";
         
-        $stmt = $this->pdo->query($query);
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':tenant_id', $tenantId);
+        $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC); 
     }
 

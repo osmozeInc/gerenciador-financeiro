@@ -16,6 +16,26 @@ class Categoria extends Model {
         
         return $categoriasAgrupadas;
     }
+    
+    public function selectCategoriasReceita($tenantId) {
+        $query = "select id, nome from categorias where tipo = 'R' and tenant_id = :tenant_id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':tenant_id', $tenantId);
+        $stmt->execute();
+        $categorias = $stmt->fetchAll(); 
+        
+        return $categorias;
+    }
+    
+    public function selectCategoriasDespesa($tenantId) {
+        $query = "select id, nome from categorias where tipo = 'D' and tenant_id = :tenant_id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':tenant_id', $tenantId);
+        $stmt->execute();
+        $categorias = $stmt->fetchAll();
+        
+        return $categorias;
+    }
 
     public function insert($nome, $tipo) {
         $query = "INSERT INTO categorias (nome, tipo) VALUES (:nome, :tipo)";

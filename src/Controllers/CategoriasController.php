@@ -24,6 +24,28 @@ class CategoriasController extends Controller {
         }
         exit;
     }
+
+    public function selectDadosReceita() {
+        header('Content-Type: application/json');
+
+        try {
+            $categoriaModel = new Categoria();
+            $categorias = $categoriaModel->selectCategoriasReceita($this->idUsuarioLogado);
+            
+            echo json_encode([
+                'resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['busca_com_sucesso'],
+                'categorias' => $categorias
+            ]);
+        
+        } catch (Exception $e) {
+            echo json_encode([
+                'resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['erro_interno'],
+                'detalhes' => $e->getMessage()
+            ]);
+        }
+        exit;
+    }
+
     
     public function salvar() {
         header('Content-Type: application/json');
