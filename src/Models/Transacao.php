@@ -21,52 +21,115 @@ class Transacao extends Model {
         return $stmt->fetchAll(PDO::FETCH_ASSOC); 
     }
 
-    public function salvarTransacaoCompleta($dadosPai, $dadosFilha, $tipo) {
+    public function salvarTransacaoReceita($dados) {
+        $query = "INSERT INTO transacoes (id_categoria, id_conta_metodo, descricao, data_transacao, valor_total, tenant_id) VALUES (:categoria, :conta, :descricao, :data, :valor, :tenant_id)";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':categoria', $dados['categoria_id']);
+        $stmt->bindValue(':conta', $dados['conta_id']);
+        $stmt->bindValue(':descricao', $dados['descricao']);
+        $stmt->bindValue(':valor', $dados['valor']);
+        $stmt->bindValue(':data', $dados['data']);
+        $stmt->bindValue(':tenant_id', $dados['tenant_id']);
+        $stmt->execute();
+    }
+
+    public function salvarTransacaoDespesa($dadosTransacao, $dadosDespesa) {
         try {
             $this->pdo->beginTransaction();
 
-            $sqlPai = "INSERT INTO transacoes (id_categoria, id_conta_metodo, descricao, valor_total, data_transacao) 
-                       VALUES (:categoria, :conta, :descricao, :valor, :data)";
-            $stmtPai = $this->pdo->prepare($sqlPai);
+            $sqlTransacao = "INSERT INTO transacoes (id_categoria, id_conta_metodo, descricao, data_transacao, valor_total, tenant_id) 
+                             VALUES (:categoria, :conta, :descricao, :data, :valor, :tenant_id)";
+            $stmtTransacao = $this->pdo->prepare($sqlTransacao);
             
-            $stmtPai->execute([
-                ':categoria' => $dadosPai['categoria_id'],
-                ':conta'     => $dadosPai['conta_id'],
-                ':descricao' => $dadosPai['descricao'],
-                ':valor'     => $dadosPai['valor'],
-                ':data'      => $dadosPai['data']
+            $stmtTransacao->execute([
+                ':categoria' => $dadosTransacao['categoria_id'],
+                ':conta'     => $dadosTransacao['conta_id'],
+                ':descricao' => $dadosTransacao['descricao'],
+                ':valor'     => $dadosTransacao['valor'],
+                ':data'      => $dadosTransacao['data'],
+                ':tenant_id' => $dadosTransacao['tenant_id']
             ]);
 
             $idTransacao = $this->pdo->lastInsertId();
 
-            if ($tipo === 'D') {
-                $sqlFilha = "INSERT INTO t_despesas (id_transacao, parcelado, qtd_parcelas) VALUES (?, ?, ?)";
-                $this->pdo->prepare($sqlFilha)->execute([
+            $sqlDespesa = "INSERT INTO t_despesas (id_transacao, parcelado, qtd_parcelas) VALUES (?, ?, ?)";
+                $this->pdo->prepare($sqlDespesa)->execute([
                     $idTransacao, 
-                    $dadosFilha['parcelado'], 
-                    $dadosFilha['qtd_parcelas']
+                    $dadosDespesa['parcelado'], 
+                    $dadosDespesa['qtd_parcelas']
                 ]);
-            } 
-            elseif ($tipo === 'I') {
-                $sqlFilha = "INSERT INTO t_investimentos (id_transacao, ativo, classe, quantidade, preco_unitario_compra) VALUES (?, ?, ?, ?, ?)";
-                $this->pdo->prepare($sqlFilha)->execute([
-                    $idTransacao, 
-                    $dadosFilha['ativo'], 
-                    $dadosFilha['classe'], 
-                    $dadosFilha['quantidade'], 
-                    $dadosFilha['preco']
-                ]);
-            } 
-            elseif ($tipo === 'C') {
-                $sqlFilha = "INSERT INTO t_cofres (id_transacao, id_cofre) VALUES (?, ?)";
-                $this->pdo->prepare($sqlFilha)->execute([
-                    $idTransacao, 
-                    $dadosFilha['id_cofre']
-                ]);
-            }
-            // Se for Receita ('R'), não tem tabela filha, apenas passa direto.
 
-            // Confirma a gravação final de tudo
+            $this->pdo->commit();
+            return $idTransacao;
+
+        } catch (PDOException $e) {
+            $this->pdo->rollBack();
+            throw $e;
+        }
+    }
+
+    public function salvarTransacaoInvestimento($dadosTransacao, $dadosInvestimento) {
+        try {
+            $this->pdo->beginTransaction();
+
+            $sqlTransacao = "INSERT INTO transacoes (id_categoria, id_conta_metodo, descricao, data_transacao, valor_total, tenant_id) 
+                             VALUES (:categoria, :conta, :descricao, :data, :valor, :tenant_id)";
+            $stmtTransacao = $this->pdo->prepare($sqlTransacao);
+            
+            $stmtTransacao->execute([
+                ':categoria' => $dadosTransacao['categoria_id'],
+                ':conta'     => $dadosTransacao['conta_id'],
+                ':descricao' => $dadosTransacao['descricao'],
+                ':valor'     => $dadosTransacao['valor'],
+                ':data'      => $dadosTransacao['data'],
+                ':tenant_id' => $dadosTransacao['tenant_id']
+            ]);
+
+            $idTransacao = $this->pdo->lastInsertId();
+
+            $sqlInvestimento = "INSERT INTO t_investimentos (id_transacao, ativo, classe, quantidade, preco_unitario_compra) VALUES (?, ?, ?, ?, ?)";
+                $this->pdo->prepare($sqlInvestimento)->execute([
+                    $idTransacao,
+                    $dadosInvestimento['ativo'],
+                    $dadosInvestimento['classe_id'],
+                    $dadosInvestimento['quantidade'],
+                    $dadosInvestimento['preco']
+                ]);
+
+            $this->pdo->commit();
+            return $idTransacao;
+
+        } catch (PDOException $e) {
+            $this->pdo->rollBack();
+            throw $e;
+        }
+    }
+
+    public function salvarTransacaoCofre($dadosTransacao, $dadosCofre) {
+        try {
+            $this->pdo->beginTransaction();
+
+            $sqlTransacao = "INSERT INTO transacoes (id_categoria, id_conta_metodo, descricao, data_transacao, valor_total, tenant_id) 
+                             VALUES (:categoria, :conta, :descricao, :data, :valor, :tenant_id)";
+            $stmtTransacao = $this->pdo->prepare($sqlTransacao);
+            
+            $stmtTransacao->execute([
+                ':categoria' => $dadosTransacao['categoria_id'],
+                ':conta'     => $dadosTransacao['conta_id'],
+                ':descricao' => $dadosTransacao['descricao'],
+                ':valor'     => $dadosTransacao['valor'],
+                ':data'      => $dadosTransacao['data'],
+                ':tenant_id' => $dadosTransacao['tenant_id']
+            ]);
+
+            $idTransacao = $this->pdo->lastInsertId();
+
+            $sqlCofre = "INSERT INTO t_cofres (id_transacao, id_cofre) VALUES (?, ?)";
+                $this->pdo->prepare($sqlCofre)->execute([
+                    $idTransacao,
+                    $dadosCofre['cofre_id']
+                ]);
+
             $this->pdo->commit();
             return $idTransacao;
 

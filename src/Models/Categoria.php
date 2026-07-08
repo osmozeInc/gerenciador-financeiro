@@ -44,4 +44,20 @@ class Categoria extends Model {
         $stmt->bindValue(':tipo', $tipo);
         $stmt->execute();
     }
+
+    public function getIdCategoriaInvestimento() {
+        $query = "SELECT id FROM categorias WHERE tipo = 'I' AND nome = 'Investimento' LIMIT 1";
+        $stmt = $this->pdo->query($query);
+        $categoria = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        return $categoria ? $categoria['id'] : null;
+    }
+
+    public function getIdCategoriaCofre() {
+        $query = "SELECT id FROM categorias WHERE tipo = 'C' AND nome = 'Cofre' LIMIT 1";
+        $stmt = $this->pdo->query($query);
+        $categoria = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        return $categoria ? $categoria['id'] : null;
+    }
 }

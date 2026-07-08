@@ -12,7 +12,6 @@
         <p id="aviso">Selecione o tipo de movimentação</p>
         
         <form id="receitaForm">
-            <input type="hidden" name="tipo" id="tipo_transacao" value="">
             <div class="form-grid" id="bloco-base">
                 <div class="input-group" style="grid-column: span 2;">
                     <label for="descricao">Descrição</label>
@@ -48,8 +47,6 @@
         </form>
         
         <form id="despesaForm">
-            <input type="hidden" name="tipo" id="tipo_transacao" value="">
-
             <div class="form-grid" id="bloco-base">
                 <div class="input-group" style="grid-column: span 2;">
                     <label for="descricao">Descrição</label>
@@ -98,8 +95,6 @@
         </form>
         
         <form id="investimentoForm">
-            <input type="hidden" name="tipo" id="tipo_transacao" value="">
-
             <div class="form-grid" id="bloco-base">
                 <div class="input-group" style="grid-column: span 2;">
                     <label for="descricao">Descrição</label>
@@ -145,8 +140,6 @@
         </form>
         
         <form id="cofreForm">
-            <input type="hidden" name="tipo" id="tipo_transacao" value="">
-
             <div class="form-grid" id="bloco-base">
                 <div class="input-group" style="grid-column: span 2;">
                     <label for="descricao">Descrição</label>

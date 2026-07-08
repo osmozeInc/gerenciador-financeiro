@@ -40,67 +40,26 @@ class TransacoesController extends Controller {
         $conta_id     = trim(filter_input(INPUT_POST, 'conta_id', FILTER_SANITIZE_NUMBER_INT) ?? '');
         $valor        = trim(filter_input(INPUT_POST, 'valor', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) ?? '');
         $data         = trim(filter_input(INPUT_POST, 'data', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
-        
-        $tipo         = trim(filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_SPECIAL_CHARS) ?? ''); 
 
-        if (empty($descricao) || empty($categoria_id) || empty($valor) || empty($data) || empty($tipo)) {
+        if (empty($descricao) || empty($categoria_id) || empty($conta_id) || empty($valor) || empty($data)) {
             echo json_encode([
                 'resposta' => $mensagensModel['genericas']['formulario_incompleto']
             ]);
             exit;
         }
 
-        $dadosPai = [
+        $dados = [
             'categoria_id' => $categoria_id,
-            'conta_id'     => !empty($conta_id) ? $conta_id : null,
+            'conta_id'     => $conta_id,
             'descricao'    => $descricao,
             'valor'        => $valor,
-            'data'         => $data
+            'data'         => $data,
+            'tenant_id'    => $this->idUsuarioLogado
         ];
-
-        $dadosFilha = [];
-
-        if ($tipo === 'D') {
-            $parcelado = filter_input(INPUT_POST, 'parcelado', FILTER_VALIDATE_BOOLEAN) ? 1 : 0;
-            $qtd_parcelas = trim(filter_input(INPUT_POST, 'qtd_parcelas', FILTER_SANITIZE_NUMBER_INT) ?? 1);
-
-            $dadosFilha = [
-                'parcelado'    => $parcelado,
-                'qtd_parcelas' => $qtd_parcelas
-            ];
-        } 
-        elseif ($tipo === 'I') {
-            $ativo      = trim(filter_input(INPUT_POST, 'ativo', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
-            $classe     = trim(filter_input(INPUT_POST, 'classe', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
-            $quantidade = trim(filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) ?? '');
-            $preco      = trim(filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) ?? '');
-
-            if (empty($ativo) || empty($quantidade) || empty($preco)) {
-                echo json_encode(['resposta' => $this->mensagensModel['genericas']['formulario_incompleto']]);
-                exit;
-            }
-
-            $dadosFilha = [
-                'ativo'      => $ativo,
-                'classe'     => $classe,
-                'quantidade' => $quantidade,
-                'preco'      => $preco
-            ];
-        } 
-        elseif ($tipo === 'C') {
-            $id_cofre = trim(filter_input(INPUT_POST, 'id_cofre', FILTER_SANITIZE_NUMBER_INT) ?? '');
-
-            if (empty($id_cofre)) {
-                echo json_encode(['resposta' => $this->mensagensModel['transacao']['salvar']['cofre_invalido']]);
-                exit;
-            }
-
-            $dadosFilha = ['id_cofre' => $id_cofre];
-        }
 
         try {
             $transacaoModel = new Transacao();
-            $transacaoModel->salvarTransacaoCompleta($dadosPai, $dadosFilha, $tipo);
+            $transacaoModel->salvarTransacaoReceita($dados);
 
             echo json_encode(['resposta' => $this->mensagensModel['transacao']['salvar']['salvo_com_sucesso']]);
             
@@ -110,7 +69,7 @@ class TransacoesController extends Controller {
         exit;
     }
 
-    public function salvar() {
+    public function salvarDespesa() {
         header('Content-Type: application/json');
 
         $descricao    = trim(filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
@@ -118,72 +77,145 @@ class TransacoesController extends Controller {
         $conta_id     = trim(filter_input(INPUT_POST, 'conta_id', FILTER_SANITIZE_NUMBER_INT) ?? '');
         $valor        = trim(filter_input(INPUT_POST, 'valor', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) ?? '');
         $data         = trim(filter_input(INPUT_POST, 'data', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
-        
-        $tipo         = trim(filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_SPECIAL_CHARS) ?? ''); 
 
-        if (empty($descricao) || empty($categoria_id) || empty($valor) || empty($data) || empty($tipo)) {
+        $parcelado    = filter_input(INPUT_POST, 'parcelado', FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE);
+        $qtd_parcelas = trim(filter_input(INPUT_POST, 'qtd_parcelas', FILTER_SANITIZE_NUMBER_INT) ?? 1);
+
+        if (empty($descricao) || empty($categoria_id) || empty($conta_id) || empty($valor) || empty($data) || is_null($parcelado)) {
             echo json_encode([
-                'resposta' => $mensagensModel['genericas']['formulario_incompleto']
+                'resposta' => $this->mensagensModel['genericas']['formulario_incompleto'],
             ]);
             exit;
         }
 
-        $dadosPai = [
+        $dadosTransacao = [
             'categoria_id' => $categoria_id,
-            'conta_id'     => !empty($conta_id) ? $conta_id : null,
+            'conta_id'     => $conta_id,
             'descricao'    => $descricao,
             'valor'        => $valor,
-            'data'         => $data
+            'data'         => $data,
+            'tenant_id'    => $this->idUsuarioLogado
         ];
 
-        $dadosFilha = [];
+        if (!$parcelado) $qtd_parcelas = null;
 
-        if ($tipo === 'D') {
-            $parcelado = filter_input(INPUT_POST, 'parcelado', FILTER_VALIDATE_BOOLEAN) ? 1 : 0;
-            $qtd_parcelas = trim(filter_input(INPUT_POST, 'qtd_parcelas', FILTER_SANITIZE_NUMBER_INT) ?? 1);
-
-            $dadosFilha = [
-                'parcelado'    => $parcelado,
-                'qtd_parcelas' => $qtd_parcelas
-            ];
-        } 
-        elseif ($tipo === 'I') {
-            $ativo      = trim(filter_input(INPUT_POST, 'ativo', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
-            $classe     = trim(filter_input(INPUT_POST, 'classe', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
-            $quantidade = trim(filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) ?? '');
-            $preco      = trim(filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) ?? '');
-
-            if (empty($ativo) || empty($quantidade) || empty($preco)) {
-                echo json_encode(['resposta' => $this->mensagensModel['genericas']['formulario_incompleto']]);
-                exit;
-            }
-
-            $dadosFilha = [
-                'ativo'      => $ativo,
-                'classe'     => $classe,
-                'quantidade' => $quantidade,
-                'preco'      => $preco
-            ];
-        } 
-        elseif ($tipo === 'C') {
-            $id_cofre = trim(filter_input(INPUT_POST, 'id_cofre', FILTER_SANITIZE_NUMBER_INT) ?? '');
-
-            if (empty($id_cofre)) {
-                echo json_encode(['resposta' => $this->mensagensModel['transacao']['salvar']['cofre_invalido']]);
-                exit;
-            }
-
-            $dadosFilha = ['id_cofre' => $id_cofre];
-        }
+        $dadosDespesa = [
+            'parcelado'    => $parcelado ? 1 : 0,
+            'qtd_parcelas' => $qtd_parcelas
+        ];
 
         try {
             $transacaoModel = new Transacao();
-            $transacaoModel->salvarTransacaoCompleta($dadosPai, $dadosFilha, $tipo);
+            $transacaoModel->salvarTransacaoDespesa($dadosTransacao, $dadosDespesa);
 
             echo json_encode(['resposta' => $this->mensagensModel['transacao']['salvar']['salvo_com_sucesso']]);
             
         } catch (Exception $e) {
-            echo json_encode(['resposta' => $this->mensagensModel['genericas']['erro_interno'] ]);
+            echo json_encode([
+                'resposta' => $this->mensagensModel['genericas']['erro_interno'],
+                'detalhes' => $e->getMessage()
+            ]);
+        }
+        exit;
+    }
+
+    public function salvarInvestimento() {
+        header('Content-Type: application/json');
+
+        $descricao    = trim(filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
+        $conta_id     = trim(filter_input(INPUT_POST, 'conta_id', FILTER_SANITIZE_NUMBER_INT) ?? '');
+        $data         = trim(filter_input(INPUT_POST, 'data', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
+
+        $ativo        = trim(filter_input(INPUT_POST, 'ativo', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
+        $classe_id    = trim(filter_input(INPUT_POST, 'classe', FILTER_SANITIZE_NUMBER_INT) ?? '');
+        $quantidade   = trim(filter_input(INPUT_POST, 'quantidade', FILTER_SANITIZE_NUMBER_INT) ?? '');
+        $preco        = trim(filter_input(INPUT_POST, 'preco', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) ?? '');
+
+        if (empty($descricao) || empty($conta_id) || empty($data) || empty($ativo) || empty($classe_id) || empty($quantidade) || empty($preco)) {
+            echo json_encode([
+                'resposta' => $this->mensagensModel['genericas']['formulario_incompleto'],
+            ]);
+            exit;
+        }
+
+        $categoriaModel = new Categoria();
+        $categoria_id = $categoriaModel->getIdCategoriaInvestimento();
+
+        $dadosTransacao = [
+            'categoria_id' => $categoria_id,
+            'conta_id'     => $conta_id,
+            'descricao'    => $descricao,
+            'valor'        => $preco * $quantidade,
+            'data'         => $data,
+            'tenant_id'    => $this->idUsuarioLogado
+        ];
+
+        $dadosInvestimento = [
+            'ativo'        => $ativo,
+            'classe_id'    => $classe_id,
+            'quantidade'   => $quantidade,
+            'preco'        => $preco
+        ];
+
+        try {
+            $transacaoModel = new Transacao();
+            $transacaoModel->salvarTransacaoInvestimento($dadosTransacao, $dadosInvestimento);
+
+            echo json_encode(['resposta' => $this->mensagensModel['transacao']['salvar']['salvo_com_sucesso']]);
+            
+        } catch (Exception $e) {
+            echo json_encode([
+                'resposta' => $this->mensagensModel['genericas']['erro_interno'],
+                'detalhes' => $e->getMessage()
+            ]);
+        }
+        exit;
+    }
+
+    public function salvarNoCofre() {
+        header('Content-Type: application/json');
+
+        $descricao    = trim(filter_input(INPUT_POST, 'descricao', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
+        $conta_id     = trim(filter_input(INPUT_POST, 'conta_id', FILTER_SANITIZE_NUMBER_INT) ?? '');
+        $valor        = trim(filter_input(INPUT_POST, 'valor', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) ?? '');
+        $data         = trim(filter_input(INPUT_POST, 'data', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
+
+        $cofre        = trim(filter_input(INPUT_POST, 'id_cofre', FILTER_SANITIZE_NUMBER_INT) ?? '');
+
+        if (empty($descricao) || empty($conta_id) || empty($valor) || empty($data) || empty($cofre)) {
+            echo json_encode([
+                'resposta' => $this->mensagensModel['genericas']['formulario_incompleto'],
+            ]);
+            exit;
+        }
+
+        $categoriaModel = new Categoria();
+        $categoria_id = $categoriaModel->getIdCategoriaCofre();
+
+        $dadosTransacao = [
+            'categoria_id' => $categoria_id,
+            'conta_id'     => $conta_id,
+            'descricao'    => $descricao,
+            'valor'        => $valor,
+            'data'         => $data,
+            'tenant_id'    => $this->idUsuarioLogado
+        ];
+
+        $dadosCofre = [
+            'cofre_id' => $cofre
+        ];
+
+        try {
+            $transacaoModel = new Transacao();
+            $transacaoModel->salvarTransacaoCofre($dadosTransacao, $dadosCofre);
+
+            echo json_encode(['resposta' => $this->mensagensModel['transacao']['salvar']['salvo_com_sucesso']]);
+            
+        } catch (Exception $e) {
+            echo json_encode([
+                'resposta' => $this->mensagensModel['genericas']['erro_interno'],
+                'detalhes' => $e->getMessage()
+            ]);
         }
         exit;
     }

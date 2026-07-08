@@ -18,7 +18,7 @@ document.addEventListener('DOMContentLoaded', async function() {
             return;
         }
             
-        preencherTransacoes(json.transacoes);
+        preencherTransacoes(json.transacoes, null);
     }
     catch (erro) {
         feedbackPopup('error', 'Ocorreu um erro ao buscar os dados.');
@@ -111,7 +111,7 @@ document.getElementById('novaClasseForm').addEventListener('submit', async funct
     }
 });
 
-// Salvar nova transação
+// Salvar nova transação de receita
 document.getElementById('receitaForm').addEventListener('submit', async function(evento) {
     evento.preventDefault();
 
@@ -120,10 +120,11 @@ document.getElementById('receitaForm').addEventListener('submit', async function
 
     if (fecharModalExibirFeedback(jsonSalvar, null, this)) {
         const novosDados = await apiFetch('/transacoes/selectTransacoes');
-        if (novosDados) preencherTransacoes(novosDados.transacoes);
+        if (novosDados) preencherTransacoes(novosDados.transacoes, 'R');
     }
 });
 
+// Salvar nova transação de despesa
 document.getElementById('despesaForm').addEventListener('submit', async function(evento) {
     evento.preventDefault();
 
@@ -132,7 +133,33 @@ document.getElementById('despesaForm').addEventListener('submit', async function
 
     if (fecharModalExibirFeedback(jsonSalvar, null, this)) {
         const novosDados = await apiFetch('/transacoes/selectTransacoes');
-        if (novosDados) preencherTransacoes(novosDados.transacoes);
+        if (novosDados) preencherTransacoes(novosDados.transacoes, 'D');
+    }
+});
+
+// Salvar nova transação de investimento
+document.getElementById('investimentoForm').addEventListener('submit', async function(evento) {
+    evento.preventDefault();
+
+    const copoForm = new FormData(this);
+    const jsonSalvar = await apiFetch('/transacoes/salvarInvestimento', 'POST', copoForm);
+
+    if (fecharModalExibirFeedback(jsonSalvar, null, this)) {
+        const novosDados = await apiFetch('/transacoes/selectTransacoes');
+        if (novosDados) preencherTransacoes(novosDados.transacoes, 'I');
+    }
+});
+
+// Salvar nova transação para o cofre
+document.getElementById('cofreForm').addEventListener('submit', async function(evento) {
+    evento.preventDefault();
+
+    const copoForm = new FormData(this);
+    const jsonSalvar = await apiFetch('/transacoes/salvarNoCofre', 'POST', copoForm);
+
+    if (fecharModalExibirFeedback(jsonSalvar, null, this)) {
+        const novosDados = await apiFetch('/transacoes/selectTransacoes');
+        if (novosDados) preencherTransacoes(novosDados.transacoes, 'C');
     }
 });
 
@@ -216,7 +243,7 @@ function preencherMetodos(metodos, tipo) {
     select.appendChild(optionNovo);
 }
 
-function preencherTransacoes(transacoes) {
+function preencherTransacoes(transacoes, tipo) {
     const tabela = document.getElementById('tabelaTransacoes');
     if (!tabela) return;
 
@@ -243,6 +270,8 @@ function preencherTransacoes(transacoes) {
         const valorFormatado = parseFloat(trans.valor_total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
         linha.insertCell().textContent = valorFormatado;
     });
+
+    atualizarDataAtual(tipo);
 }
 
 function preencherClasses(classes) {
@@ -273,6 +302,7 @@ function preencherCofres(cofres) {
 }
 
 function atualizarDataAtual(tipo) {
+    if (!tipo) return;
     const input = document.getElementById('data' + tipo);
     input.valueAsDate = new Date();
 }
