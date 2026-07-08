@@ -16,32 +16,31 @@
             <div class="form-grid" id="bloco-base">
                 <div class="input-group" style="grid-column: span 2;">
                     <label for="descricao">Descrição</label>
-                    <input type="text" id="descricao" name="descricao" required placeholder="Ex: Salário, Bolsa, Venda...">
+                    <input type="text" name="descricao" required placeholder="Ex: Salário, Bolsa, Venda...">
                 </div>
                 
                 <div class="input-group">
                     <label for="categoria_id">Categoria</label>
-                    <select class="js-abrir-modal-select" id="categoria_id" name="categoria_id" data-target="modal-nova-categoria" required>
+                    <select class="js-abrir-modal-select" id="categoriasR" name="categoria_id" data-target="modal-nova-categoria" required>
                         <option value="" disabled selected>Selecione...</option>
-                    </select>
+                        </select>
                 </div>
 
                 <div class="input-group">
                     <label for="conta_id">Conta de Origem/Destino</label>
-                    <select class="js-abrir-modal-select" id="conta_id" name="conta_id" data-target="modal-novo-pagamento" required>
+                    <select class="js-abrir-modal-select" id="metodoContaR" name="conta_id" data-target="modal-novo-pagamento" required>
                         <option value="" disabled selected>Selecione...</option>
-                        <option value="new">+ Nova Conta</option>
                     </select>
                 </div>
 
                 <div class="input-group">
                     <label for="valor">Valor Total (R$)</label>
-                    <input type="number" id="valor" name="valor" step="0.01" min="0.01" required placeholder="0.00">
+                    <input type="number" name="valor" step="0.01" min="0.01" required placeholder="0.00">
                 </div>
 
                 <div class="input-group">
                     <label for="data">Data</label>
-                    <input type="date" id="data" name="data" required>
+                    <input type="date" id="dataR" name="data" required>
                 </div>
             </div>
 
@@ -54,39 +53,31 @@
             <div class="form-grid" id="bloco-base">
                 <div class="input-group" style="grid-column: span 2;">
                     <label for="descricao">Descrição</label>
-                    <input type="text" id="descricao" name="descricao" required placeholder="Ex: Conta de Luz, Passeio em Família">
+                    <input type="text" name="descricao" required placeholder="Ex: Conta de Luz, Passeio em Família">
                 </div>
                 
                 <div class="input-group">
                     <label for="categoria_id">Categoria</label>
-                    <select class="js-abrir-modal-select" id="categoria_id" name="categoria_id" data-target="modal-nova-categoria" required>
+                    <select class="js-abrir-modal-select" id="categoriasD" name="categoria_id" data-target="modal-nova-categoria" required>
                         <option value="" disabled selected>Selecione...</option>
-                        <optgroup label="Receitas (R)"></optgroup>
-                        <optgroup label="Despesas (D)"></optgroup>
-                        <optgroup label="Investimentos (I)"></optgroup>
-                        <optgroup label="Cofres (C)"></optgroup>
-                        <optgroup label="Ações">
-                            <option value="new">+ Nova Categoria</option>
-                        </optgroup>
                     </select>
                 </div>
 
                 <div class="input-group">
                     <label for="conta_id">Conta de Origem/Destino</label>
-                    <select class="js-abrir-modal-select" id="conta_id" name="conta_id" data-target="modal-novo-pagamento" required>
+                    <select class="js-abrir-modal-select" id="metodoContaD" name="conta_id" data-target="modal-novo-pagamento" required>
                         <option value="" disabled selected>Selecione...</option>
-                        <option value="new">+ Nova Conta</option>
                     </select>
                 </div>
 
                 <div class="input-group">
                     <label for="valor">Valor Total (R$)</label>
-                    <input type="number" id="valor" name="valor" step="0.01" min="0.01" required placeholder="0.00">
+                    <input type="number" name="valor" step="0.01" min="0.01" required placeholder="0.00">
                 </div>
 
                 <div class="input-group">
                     <label for="data">Data</label>
-                    <input type="date" id="data" name="data" required>
+                    <input type="date" id="dataD" name="data" required>
                 </div>
                 
                 <div class="input-group checkbox-group">
@@ -112,20 +103,19 @@
             <div class="form-grid" id="bloco-base">
                 <div class="input-group" style="grid-column: span 2;">
                     <label for="descricao">Descrição</label>
-                    <input type="text" id="descricao" name="descricao" required placeholder="Ex: 10% do Salário, Dinheiro Sobrando">
+                    <input type="text" name="descricao" required placeholder="Ex: 10% do Salário, Dinheiro Sobrando">
                 </div>
                 
                 <div class="input-group">
                     <label for="conta_id">Conta de Origem/Destino</label>
-                    <select class="js-abrir-modal-select" id="conta_id" name="conta_id" data-target="modal-novo-pagamento" required>
+                    <select class="js-abrir-modal-select" id="metodoContaI" name="conta_id" data-target="modal-novo-pagamento" required>
                         <option value="" disabled selected>Selecione...</option>
-                        <option value="new">+ Nova Conta</option>
                     </select>
                 </div>
 
                 <div class="input-group">
                     <label for="data">Data</label>
-                    <input type="date" id="data" name="data" required>
+                    <input type="date" id="dataI" name="data" required>
                 </div>
 
                 <div class="input-group">
@@ -135,7 +125,7 @@
                 
                 <div class="input-group">
                     <label for="classe">Classe</label>
-                    <select class="js-abrir-modal-select" id="id_classes" name="classe" data-target="modal-nova-classe">
+                    <select class="js-abrir-modal-select" id="classeInvestimento" name="classe" data-target="modal-nova-classe">
                         <option value="" disabled selected>Selecione...</option>
                     </select>
                 </div>
@@ -160,32 +150,31 @@
             <div class="form-grid" id="bloco-base">
                 <div class="input-group" style="grid-column: span 2;">
                     <label for="descricao">Descrição</label>
-                    <input type="text" id="descricao" name="descricao" required placeholder="Ex: 10% do Salário, Dinheiro Sobrando">
+                    <input type="text" name="descricao" required placeholder="Ex: 10% do Salário, Dinheiro Sobrando">
                 </div>
                 
                 <div class="input-group">
                     <label for="conta_id">Conta de Origem/Destino</label>
-                    <select class="js-abrir-modal-select" id="conta_id" name="conta_id" data-target="modal-novo-pagamento" required>
+                    <select class="js-abrir-modal-select" id="metodoContaC" name="conta_id" data-target="modal-novo-pagamento" required>
                         <option value="" disabled selected>Selecione...</option>
-                        <option value="new">+ Nova Conta</option>
                     </select>
                 </div>
 
                 <div class="input-group">
                     <label for="data">Data</label>
-                    <input type="date" id="data" name="data" required>
+                    <input type="date" id="dataC" name="data" required>
                 </div>
 
                 <div class="input-group" style="grid-column: span 2;">
                     <label for="id_cofre">Selecione o Cofre Destino</label>
-                    <select id="id_cofre" name="id_cofre">
+                    <select id="cofresCofre" name="id_cofre">
                         <option value="" disabled selected>Selecione...</option>
                     </select>
                 </div>
 
                 <div class="input-group">
                     <label for="valor">Valor Total (R$)</label>
-                    <input type="number" id="valor" name="valor" step="0.01" min="0.01" required placeholder="0.00">
+                    <input type="number" name="valor" step="0.01" min="0.01" required placeholder="0.00">
                 </div>
             </div>
 

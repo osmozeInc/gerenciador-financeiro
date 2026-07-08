@@ -1,23 +1,28 @@
 import { abrirModal, fecharModal } from "/assets/js/modais.js";
-
 import { apiFetch, feedbackPopup } from "/assets/js/utils.js";
+
+let formAtualizados = {
+    'R': false,
+    'D': false,
+    'I': false,
+    'C': false
+}
 
 // Buscar dados ao carregar a página
 document.addEventListener('DOMContentLoaded', async function() {
-    const json = await apiFetch('/transacoes/selectDados');
-
-    if (json) {
+    try {
+        const json = await apiFetch('/transacoes/selectDadosTransacoes');
+        
         if (!json.resposta.sucesso) {
             feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
             return;
         }
-        
-        preencherCategorias(json.categorias);
-        preencherMetodos(json.contas);
+            
         preencherTransacoes(json.transacoes);
     }
-
-    atualizarDataAtual();
+    catch (erro) {
+        feedbackPopup('error', 'Ocorreu um erro ao buscar os dados.');
+    }
 });
 
 // exibir os blocos corretos de acordo com o botão clicado
@@ -51,6 +56,8 @@ btnsTipoTransacao.forEach(btn => btn.addEventListener('click', async function() 
     
     const idForm = this.getAttribute('data-idForm');
     document.getElementById(idForm).classList.add('visivel-block');
+
+    await receberDadosDoBotao(this);
 }));
 
 // habilitar/desabilitar a quantidade de parcelas
@@ -131,8 +138,40 @@ document.getElementById('despesaForm').addEventListener('submit', async function
 
 
 
+async function receberDadosDoBotao(botao) {
+    const tipo = botao.getAttribute('data-idForm').charAt(0).toUpperCase();
+    atualizarDataAtual(tipo);
+
+    if (formAtualizados[tipo]) return;
+
+    try {
+        if (tipo === 'R') {
+            const json = await apiFetch('/categorias/selectDadosReceita');
+            preencherCategorias(json.categorias, tipo);
+        } else if (tipo === 'D') {
+            const json = await apiFetch('/categorias/selectDadosDespesa');
+            preencherCategorias(json.categorias, tipo);
+        } else if (tipo === 'I') {
+            const json = await apiFetch('/classesInvestimento/selectDados');
+            preencherClasses(json.classes);
+        } else if (tipo === 'C') {
+            const json = await apiFetch('/cofres/selectDados');
+            preencherCofres(json.cofres);
+        }
+
+        const jsonMetodos = await apiFetch('/contaMetodo/selectDados');
+        preencherMetodos(jsonMetodos.metodos, tipo);
+        
+        formAtualizados[tipo] = true;
+    }
+    catch (erro) {
+        console.error(erro);
+        feedbackPopup('error', 'erro:' + erro);
+    }
+}
+
 function fecharModalExibirFeedback(json, idModal, formulario) {
-    if (!json || !formulario) return false;
+    if (!json) return false;
 
     feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
 
@@ -145,43 +184,29 @@ function fecharModalExibirFeedback(json, idModal, formulario) {
     return true;
 }
 
-function preencherCategorias(categoriasArray) {
-    const mapaGrupos = {
-        'R': 'Receitas (R)',
-        'D': 'Despesas (D)',
-        'I': 'Investimentos (I)',
-        'C': 'Cofres (C)'
-    };
+function preencherCategorias(jsonCategorias, tipo) {
+    const select = document.getElementById('categorias' + tipo);
 
-    for (const [tipo, tipoExato] of Object.entries(mapaGrupos)) {
-        // CORRIGIDO PARA #categoria_id
-        const optgroup = document.querySelector(`#categoria_id optgroup[label="${tipoExato}"]`);
-        
-        if (optgroup) {
-            optgroup.innerHTML = ''; 
-            if (categoriasArray[tipo] && categoriasArray[tipo].length > 0) {
-                categoriasArray[tipo].forEach(cat => {
-                    const option = document.createElement('option');
-                    option.value = cat.id;
-                    option.textContent = cat.nome;
-                    optgroup.appendChild(option);
-                });
-            }
-        }
-    }
+    jsonCategorias.forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat.id;
+        option.textContent = cat.nome;
+        select.appendChild(option);
+    });
+    
+    const optionNovo = document.createElement('option');
+    optionNovo.value = 'new';
+    optionNovo.textContent = '+ Nova Categoria';
+    select.appendChild(optionNovo);
 }
 
-function preencherMetodos(contas) {
-    // CORRIGIDO PARA #conta_id
-    const select = document.getElementById('conta_id');
-    if (!select) return;
+function preencherMetodos(metodos, tipo) {
+    const select = document.getElementById('metodoConta' + tipo);
 
-    select.innerHTML = '<option value="" disabled selected>Selecione...</option>';
-
-    contas.forEach(conta => {
+    metodos.forEach(metodo => {
         const option = document.createElement('option');
-        option.value = conta.id;
-        option.textContent = conta.nome;
+        option.value = metodo.id;
+        option.textContent = metodo.nome;
         select.appendChild(option);
     });
 
@@ -221,15 +246,12 @@ function preencherTransacoes(transacoes) {
 }
 
 function preencherClasses(classes) {
-    const select = document.getElementById('id_classes');
-    if (!select) return;
+    const select = document.getElementById('classeInvestimento');
 
-    select.innerHTML = '<option value="" disabled selected>Selecione...</option>';
-
-    classes.forEach(cofre => {
+    classes.forEach(classe => {
         const option = document.createElement('option');
-        option.value = cofre.id;
-        option.textContent = cofre.nome;
+        option.value = classe.id;
+        option.textContent = classe.nome;
         select.appendChild(option);
     });
 
@@ -240,10 +262,7 @@ function preencherClasses(classes) {
 }
 
 function preencherCofres(cofres) {
-    const select = document.getElementById('id_cofre');
-    if (!select) return;
-
-    select.innerHTML = '<option value="" disabled selected>Selecione...</option>';
+    const select = document.getElementById('cofresCofre');
 
     cofres.forEach(cofre => {
         const option = document.createElement('option');
@@ -253,8 +272,7 @@ function preencherCofres(cofres) {
     });
 }
 
-function atualizarDataAtual() {
-    document.querySelectorAll('input[type="date"]').forEach(input => {
-        input.valueAsDate = new Date();
-    });
+function atualizarDataAtual(tipo) {
+    const input = document.getElementById('data' + tipo);
+    input.valueAsDate = new Date();
 }

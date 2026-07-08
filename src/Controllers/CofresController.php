@@ -12,7 +12,7 @@ class CofresController extends Controller {
         header('Content-Type: application/json');
 
         $cofreModel = new Cofre();
-        $cofre = $cofreModel->selectAllCofres();
+        $cofre = $cofreModel->selectAllCofres($this->idUsuarioLogado);
 
         echo json_encode([
             'resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['busca_com_sucesso'],

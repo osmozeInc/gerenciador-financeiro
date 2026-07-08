@@ -9,7 +9,7 @@ class ContaMetodoController extends Controller {
 
         try {
             $contaMetodoModel = new ContaMetodo();
-            $contaMetodo = $contaMetodoModel->selectAllContas();
+            $contaMetodo = $contaMetodoModel->selectAllContas($this->idUsuarioLogado);
             
             echo json_encode([
                 'resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['busca_com_sucesso'],

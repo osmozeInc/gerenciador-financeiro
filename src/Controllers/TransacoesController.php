@@ -10,43 +10,12 @@ class TransacoesController extends Controller {
         $this->render('transacoes');
     }
     
-    public function selectDados() {
-        header('Content-Type: application/json');
-
-        try {
-            $categoriaModel = new Categoria();
-            $contaModel = new ContaMetodo();
-            $transacaoModel = new Transacao();
-
-            $categorias = $categoriaModel->selectAllCategorias();
-            $contas = $contaModel->selectAllContas();
-            $transacoes = $transacaoModel->selectAllTransacoes();
-
-            echo json_encode([
-                'resposta'   => $this->mensagensModel['silenciosas']['selecionar_dados']['busca_com_sucesso'],
-                'categorias' => $categorias,
-                'contas'     => $contas,
-                'transacoes' => $transacoes
-            ]);
-            
-        } catch (Exception $e) {
-            http_response_code(500);
-            echo json_encode([
-                'resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['erro_interno'],
-                'detalhes' => $e->getMessage()
-            ]);
-        }
-        exit;
-    }
-    
-    public function selectTransacoes() {
+    public function selectDadosTransacoes() {
         header('Content-Type: application/json');
 
         try {
             $transacaoModel = new Transacao();
-
-            $transacoes = $transacaoModel->selectAllTransacoes();
-
+            $transacoes = $transacaoModel->selectAllTransacoes($this->idUsuarioLogado);
 
             echo json_encode([
                 'resposta'   => $this->mensagensModel['silenciosas']['selecionar_dados']['busca_com_sucesso'],
@@ -61,7 +30,7 @@ class TransacoesController extends Controller {
             ]);
         }
         exit;
-    }
+    }    
 
     public function salvarReceita() {
         header('Content-Type: application/json');

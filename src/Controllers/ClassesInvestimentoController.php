@@ -9,7 +9,7 @@ public function selectDados() {
 
     try {
         $classesModel = new ClasseInvestimento();
-        $classes = $classesModel->selectAllClasses();
+        $classes = $classesModel->selectAllClasses($this->idUsuarioLogado);
 
         echo json_encode([
             'resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['busca_com_sucesso'],
