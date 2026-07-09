@@ -425,6 +425,70 @@
 </article>
 
 
+<!-- MODAL DE FILTROS DE TRANSACOES -->
+
+<article class="modal-backdrop" id="modal-filtro-transacoes">
+    <div class="modal-container">
+        
+        <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h1 style="margin: 0;">Selecione os Filtros</h1>
+            <i class="bi bi-x-lg js-fechar-modal" data-target="modal-filtro-transacoes" style="cursor: pointer; font-size: 1.3rem;"></i>
+        </div>
+        <hr>
+
+        <form class="form-simple" id="formFiltroTransacoes">
+            <div class="form-grid">
+                
+                <div class="input-group">
+                    <label for="filtroTipo">Tipo de Movimentação</label>
+                    <select id="filtroTipo">
+                        <option value="">Todos os Tipos</option>
+                        <option value="R">Receitas (R)</option>
+                        <option value="D">Despesas (D)</option>
+                        <option value="I">Investimentos (I)</option>
+                        <option value="C">Cofres (C)</option>
+                    </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="filtroCategoria">Categoria</label>
+                    <select id="filtroCategoria">
+                        <option value="">Todas as Categorias</option>
+                        </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="filtroConta">Conta / Forma de Pagamento</label>
+                    <select id="filtroConta">
+                        <option value="">Todas as Contas</option>
+                        </select>
+                </div>
+
+                <div class="input-group">
+                    <label for="filtroDataInicio">De (Data Início)</label>
+                    <input type="date" id="filtroDataInicio">
+                </div>
+
+                <div class="input-group">
+                    <label for="filtroDataFim">Até (Data Fim)</label>
+                    <input type="date" id="filtroDataFim">
+                </div>
+
+            </div>
+
+            <div class="btn-container" style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 0.5rem;">
+                <button type="button" class="btn-fechar js-fechar-modal" id="btnLimparFiltros" data-target="modal-filtro-transacoes">
+                    Limpar Filtros
+                </button>
+                <button type="submit" class="btn-salvar">
+                    Aplicar Filtro
+                </button>
+            </div>
+        </form>
+    </div>
+</article>
+
+
 <!-- FEEDBACK POPUP -->
 <div class="popup-feedback-container" id="popup-feedback-container">
 </div>

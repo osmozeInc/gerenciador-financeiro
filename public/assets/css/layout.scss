@@ -33,11 +33,11 @@
     --radius-input: 4px;
     --card-shadow-color: rgba(0, 0, 0, 0.3);
 
-    --bg-alert-success: #12ca0c;
+    --bg-alert-success: #1bb815;
     --bg-alert-error: #ff7b7b;
     --bg-alert-warning: #fff679;
     --bg-alert-info: #33c3e7;
-    --text-alert: #000000a0;
+    --text-alert: #000000b0;
     
     --tema-color: light;
 }
@@ -445,6 +445,7 @@ header {
                 
                 button {
                     background-color: var(--bg-padrao);
+                    color: var(--text-primary);
                     border: 1px solid var(--border-color);
                     padding: 0.4rem 2rem;
                     border-radius: var(--radius-btn);
@@ -459,12 +460,31 @@ header {
             }
 
             h2 { font-size: 1.3rem; margin-bottom: 1.5rem; color: var(--text-primary); }
-            p { font-size: .95rem; color: var(--text-secondary); margin-top: 0.25rem; width: 100%; text-align: center; margin: 0; }
             form { display: none; }
             .switch { width: min-content; display: flex; align-items: center;}
             .btn-submit { margin-top: 20px; }
             .btn-invest, .btn-cofre { background-color: var(--bg-btn-invest); }
     
+            .card-header{
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 1.5rem;
+                flex-wrap: wrap;
+                gap: 2rem;
+
+                .tools-container {
+                    display: flex;
+                    gap: 1rem;
+                    align-items: center;
+
+                    input { padding: 0.4rem 0.8rem; border-radius: var(--radius-btn); border: 1px solid var(--border-color); background: var(--bg-padrao); color: var(--text-primary); font-size: 1.1rem; }
+                    button {
+                        background: var(--bg-padrao); border: 1px solid var(--border-color); padding: 0.4rem 0.6rem; border-radius: var(--radius-btn); cursor: pointer; color: var(--text-primary); font-size: 1.1rem;
+                    }
+                }
+            }
+
             table {
                 width: 100%;
                 border-collapse: collapse;
@@ -490,6 +510,18 @@ header {
                     font-weight: bold;
                     background: var(--bg-badge);
                     color: var(--text-primary);
+                }
+            }
+
+            .badge-info {
+                text-align: center;
+                margin-top: 1.5rem;
+                padding: 1rem;
+                background-color: var(--bg-main);
+                border-radius: var(--radius-btn);
+                
+                p { margin: 0; font-size: .95rem; color: var(--text-primary); width: 100%; text-align: center; opacity: .85; 
+                    a { color: var(--text-primary); font-weight: 600; text-decoration: underline; }
                 }
             }
         }

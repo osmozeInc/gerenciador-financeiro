@@ -7,12 +7,14 @@ let formAtualizados = {
     'I': false,
     'C': false
 }
+let listaCompletaTransacoes = [];
 
 // Buscar dados ao carregar a página
 document.addEventListener('DOMContentLoaded', async function() {
     try {
         const json = await apiFetch('/transacoes/selectDadosTransacoes');
-        
+        listaCompletaTransacoes = json.transacoes;
+
         if (!json.resposta.sucesso) {
             feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
             return;
@@ -72,20 +74,55 @@ switchParcelado.addEventListener('change', function() {
     }
 });
 
-// Salvar nova categoria
-document.getElementById('novaCategoriaForm').addEventListener('submit', async function(evento) {
-    evento.preventDefault();
-
-    const copoForm = new FormData(this);
-    const jsonSalvar = await apiFetch('/categorias/salvar', 'POST', copoForm);
-
-    if (fecharModalExibirFeedback(jsonSalvar, 'modal-nova-categoria', this)) {
-        const jsonCategorias = await apiFetch('/categorias/selectDados');
-        if (jsonCategorias && jsonCategorias.categorias) preencherCategorias(jsonCategorias.categorias);
+// atualizar tabela de transações
+const btnAtualizarTabela = document.getElementById('btnRecarregarTabela');
+btnAtualizarTabela.addEventListener('click', async function() {
+    try {
+        const json = await apiFetch('/transacoes/selectDadosTransacoes');
+        preencherTransacoes(json.transacoes, null);
+        feedbackPopup('success', 'Tabela atualizada.');
+    }
+    catch (erro) {
+        feedbackPopup('error', 'Ocorreu um erro ao buscar os dados.');
     }
 });
 
-// Salvar novo metodo de pagamento
+// buscar na tabela de transações
+document.getElementById('inputPesquisaTabela').addEventListener('input', function() {
+    const termo = this.value.trim().toLowerCase();
+
+    if (termo === '') {
+        preencherTransacoes(listaCompletaTransacoes, null);
+        return;
+    }
+
+    const filtrados = listaCompletaTransacoes.filter(trans => {
+        const desc = (trans.descricao || '').toLowerCase();
+        const cat = (trans.categoria_nome || '').toLowerCase();
+        return desc.includes(termo) || cat.includes(termo);
+    });
+
+    preencherTransacoes(filtrados, null);
+});
+
+// Salvar nova categoria (atualizar funções)
+document.getElementById('novaCategoriaForm').addEventListener('submit', async function(evento) {
+    evento.preventDefault();
+
+    
+    const copoForm = new FormData(this);
+    const jsonSalvar = await apiFetch('/categorias/salvar', 'POST', copoForm);
+    
+    if (fecharModalExibirFeedback(jsonSalvar, 'modal-nova-categoria', this)) {
+        const jsonCategorias = await apiFetch('/categorias/selectDados');
+        const tipo = document.querySelector('.transacoes-container card form.visivel-block').getAttribute('data-idForm').charAt(0).toUpperCase();
+        console.log(tipo);
+        console.log(typeof tipo);
+        if (jsonCategorias && jsonCategorias.categorias) preencherCategorias(jsonCategorias.categorias, tipo);
+    }
+});
+
+// Salvar novo metodo de pagamento (atualizar funções)
 document.getElementById('novoPagamentoForm').addEventListener('submit', async function(evento) {
     evento.preventDefault();
 
@@ -107,7 +144,7 @@ document.getElementById('novaClasseForm').addEventListener('submit', async funct
 
     if (fecharModalExibirFeedback(jsonSalvar, 'modal-nova-classe', this)) {
         const classes = await apiFetch('/classesInvestimento/selectDados');
-        if (classes) preencherClasses(classes.classes);
+        if (classes) preencherClasses(classes.classes, 'I');
     }
 });
 
@@ -118,10 +155,15 @@ document.getElementById('receitaForm').addEventListener('submit', async function
     const copoForm = new FormData(this);
     const jsonSalvar = await apiFetch('/transacoes/salvarReceita', 'POST', copoForm);
 
-    if (fecharModalExibirFeedback(jsonSalvar, null, this)) {
-        const novosDados = await apiFetch('/transacoes/selectTransacoes');
-        if (novosDados) preencherTransacoes(novosDados.transacoes, 'R');
+    if (fecharModalExibirFeedback(jsonSalvar, null, this) /* && VERIFICAR SE O USUÁRIO QUER QUE ATUALIZE AUTOMATICAMENTE */) {
+        // const novosDados = await apiFetch('/transacoes/selectTransacoes');
+        // if (novosDados) preencherTransacoes(novosDados.transacoes, 'R');
     }
+    else {
+        // autualizarDataAtual('R');
+    }
+
+    atualizarDataAtual('R'); /* temporário */
 });
 
 // Salvar nova transação de despesa
@@ -131,10 +173,15 @@ document.getElementById('despesaForm').addEventListener('submit', async function
     const copoForm = new FormData(this);
     const jsonSalvar = await apiFetch('/transacoes/salvarDespesa', 'POST', copoForm);
 
-    if (fecharModalExibirFeedback(jsonSalvar, null, this)) {
-        const novosDados = await apiFetch('/transacoes/selectTransacoes');
-        if (novosDados) preencherTransacoes(novosDados.transacoes, 'D');
+    if (fecharModalExibirFeedback(jsonSalvar, null, this) /* && VERIFICAR SE O USUÁRIO QUER QUE ATUALIZE AUTOMATICAMENTE */) {
+        // const novosDados = await apiFetch('/transacoes/selectTransacoes');
+        // if (novosDados) preencherTransacoes(novosDados.transacoes, 'D');
     }
+    else {
+        // autualizarDataAtual('D');
+    }
+    
+    atualizarDataAtual('D'); /* temporário */
 });
 
 // Salvar nova transação de investimento
@@ -144,10 +191,15 @@ document.getElementById('investimentoForm').addEventListener('submit', async fun
     const copoForm = new FormData(this);
     const jsonSalvar = await apiFetch('/transacoes/salvarInvestimento', 'POST', copoForm);
 
-    if (fecharModalExibirFeedback(jsonSalvar, null, this)) {
-        const novosDados = await apiFetch('/transacoes/selectTransacoes');
-        if (novosDados) preencherTransacoes(novosDados.transacoes, 'I');
+    if (fecharModalExibirFeedback(jsonSalvar, null, this) /* && VERIFICAR SE O USUÁRIO QUER QUE ATUALIZE AUTOMATICAMENTE */) {
+        // const novosDados = await apiFetch('/transacoes/selectTransacoes');
+        // if (novosDados) preencherTransacoes(novosDados.transacoes, 'I');
     }
+    else {
+        // autualizarDataAtual('I');
+    }
+    
+    atualizarDataAtual('I'); /* temporário */
 });
 
 // Salvar nova transação para o cofre
@@ -157,10 +209,15 @@ document.getElementById('cofreForm').addEventListener('submit', async function(e
     const copoForm = new FormData(this);
     const jsonSalvar = await apiFetch('/transacoes/salvarNoCofre', 'POST', copoForm);
 
-    if (fecharModalExibirFeedback(jsonSalvar, null, this)) {
-        const novosDados = await apiFetch('/transacoes/selectTransacoes');
-        if (novosDados) preencherTransacoes(novosDados.transacoes, 'C');
+    if (fecharModalExibirFeedback(jsonSalvar, null, this) /* && VERIFICAR SE O USUÁRIO QUER QUE ATUALIZE AUTOMATICAMENTE */) {
+        // const novosDados = await apiFetch('/transacoes/selectTransacoes');
+        // if (novosDados) preencherTransacoes(novosDados.transacoes, 'C');
     }
+    else {
+        // autualizarDataAtual('C');
+    }
+    
+    atualizarDataAtual('C'); /* temporário */
 });
 
 
@@ -247,10 +304,7 @@ function preencherTransacoes(transacoes, tipo) {
     const tabela = document.getElementById('tabelaTransacoes');
     if (!tabela) return;
 
-    // Limpa a tabela preservando o cabeçalho (jeito mais performático)
     tabela.innerHTML = ''; 
-
-    transacoes = transacoes.slice(0, 10);
 
     transacoes.forEach(trans => {
         // Previne erro se a data vier nula do banco
@@ -306,3 +360,99 @@ function atualizarDataAtual(tipo) {
     const input = document.getElementById('data' + tipo);
     input.valueAsDate = new Date();
 }
+
+
+
+// let selectsFiltroCarregados = false;
+
+// document.getElementById('btnFiltrarTabela')?.addEventListener('click', async function() {
+//     // Evita fazer requisições repetidas ao banco se o usuário abrir o filtro várias vezes
+//     if (selectsFiltroCarregados) return;
+
+//     try {
+//         // Busca todas as categorias e contas usando suas rotas de API
+//         const jsonCat = await apiFetch('/categorias/selectDados'); // Ou sua rota equivalente
+//         const jsonMet = await apiFetch('/contaMetodo/selectDados');
+
+//         // Preenche Categoria de forma isolada
+//         if (jsonCat && jsonCat.categorias) {
+//             const selectCat = document.getElementById('filtroCategoria');
+//             selectCat.innerHTML = '<option value="">Todas as Categorias</option>';
+            
+//             // Garante leitura de array plano mesmo se o PHP mandar categorias agrupadas
+//             const arrayCat = Array.isArray(jsonCat.categorias) 
+//                 ? jsonCat.categorias 
+//                 : Object.values(jsonCat.categorias).flat();
+
+//             arrayCat.forEach(cat => {
+//                 const option = document.createElement('option');
+//                 option.value = cat.id;
+//                 option.textContent = cat.nome;
+//                 selectCat.appendChild(option);
+//             });
+//         }
+
+//         // Preenche Contas de forma isolada
+//         if (jsonMet && jsonMet.metodos) {
+//             const selectMet = document.getElementById('filtroConta');
+//             selectMet.innerHTML = '<option value="">Todas as Contas</option>';
+            
+//             jsonMet.metodos.forEach(met => {
+//                 const option = document.createElement('option');
+//                 option.value = met.id;
+//                 option.textContent = met.nome;
+//                 selectMet.appendChild(option);
+//             });
+//         }
+
+//         selectsFiltroCarregados = true;
+//     } catch (erro) {
+//         console.error("Erro ao popular modal de filtro:", erro);
+//     }
+// });
+
+// // =========================================================
+// // 2. APLICAR FILTRO (Em memória, super rápido)
+// // =========================================================
+// document.getElementById('formFiltroTransacoes')?.addEventListener('submit', function(e) {
+//     e.preventDefault();
+
+//     const tipo = document.getElementById('filtroTipo').value;
+//     const catId = document.getElementById('filtroCategoria').value;
+//     const contaId = document.getElementById('filtroConta').value;
+//     const dataInicio = document.getElementById('filtroDataInicio').value;
+//     const dataFim = document.getElementById('filtroDataFim').value;
+
+//     // Filtra o array global que guarda as 100 transações originais
+//     const filtrados = listaCompletaTransacoes.filter(trans => {
+//         if (tipo && trans.categoria_tipo !== tipo) return false;
+//         if (catId && String(trans.categoria_id) !== String(catId)) return false;
+//         if (contaId && String(trans.conta_id) !== String(contaId)) return false;
+//         if (dataInicio && trans.data_transacao < dataInicio) return false;
+//         if (dataFim && trans.data_transacao > dataFim) return false;
+        
+//         return true;
+//     });
+
+//     // Desenha a tabela com o resultado
+//     preencherTransacoes(filtrados, null);
+    
+//     // Fecha o modal via JS
+//     const modal = document.getElementById('modal-filtro-transacoes');
+//     if (modal) modal.style.display = 'none';
+// });
+
+// // =========================================================
+// // 3. LIMPAR FILTROS (Botão Outline)
+// // =========================================================
+// document.getElementById('btnLimparFiltros')?.addEventListener('click', function() {
+//     // Reseta todos os selects e inputs de data do modal
+//     document.getElementById('formFiltroTransacoes').reset();
+    
+//     // Devolve as 100 transações originais para a tela
+//     preencherTransacoes(listaCompletaTransacoes, null);
+    
+//     // Fecha o modal
+//     const modal = document.getElementById('modal-filtro-transacoes');
+//     if (modal) modal.style.display = 'none';
+// });

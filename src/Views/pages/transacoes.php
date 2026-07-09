@@ -9,7 +9,9 @@
             <button type="button" class="btn-tipo-transacao" data-idForm="cofreForm">Cofre</button>
         </div>
 
-        <p id="aviso">Selecione o tipo de movimentação</p>
+        <div class="badge-info" id="aviso">
+            <p>Selecione o tipo de movimentação</p>
+        </div>
         
         <form id="receitaForm">
             <div class="form-grid" id="bloco-base">
@@ -22,7 +24,7 @@
                     <label for="categoria_id">Categoria</label>
                     <select class="js-abrir-modal-select" id="categoriasR" name="categoria_id" data-target="modal-nova-categoria" required>
                         <option value="" disabled selected>Selecione...</option>
-                        </select>
+                    </select>
                 </div>
 
                 <div class="input-group">
@@ -176,7 +178,25 @@
     </section>
     
     <section class="card">
-        <h2>Transações Recentes</h2>
+        <div class="card-header">
+            <h2 style="margin: 0;">Transações Recentes</h2>
+            
+            <div class="tools-container">
+                <span style="position: relative;">
+                    <input type="text" id="inputPesquisaTabela" placeholder="Pesquisar...">
+                    <i class="bi bi-search" style="position: absolute; top: 50%; right: 12px; transform: translateY(-50%);"></i>
+                </span>
+                
+                <button type="button" id="btnRecarregarTabela" title="Recarregar">
+                    <i class="bi bi-arrow-repeat"></i>
+                </button>
+                
+                <button type="button" id="btnFiltrarTabela" class="js-abrir-modal" data-target="modal-filtro-transacoes" title="Filtrar">
+                    <i class="bi bi-funnel"></i>
+                </button>
+            </div>
+        </div>
+
         <table>
             <thead>
                 <tr>
@@ -191,5 +211,9 @@
             <tbody id="tabelaTransacoes">
             </tbody>
         </table>
-</section>
+
+        <div class="badge-info">
+            <p> Exibimos suas últimas 100 movimentações. Se não achou o que procura, <a href="/historico">busque no histórico completo</a>.</p>
+        </div>
+    </section>
 </main>
