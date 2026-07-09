@@ -12,7 +12,7 @@ class Transacao extends Model {
             INNER JOIN categorias c ON t.id_categoria = c.id 
             LEFT JOIN contas_metodos cm ON t.id_conta_metodo = cm.id 
             WHERE t.tenant_id = :tenant_id
-            ORDER BY t.data_transacao DESC
+            ORDER BY t.data_transacao DESC LIMIT 100
         ";
         
         $stmt = $this->pdo->prepare($query);
