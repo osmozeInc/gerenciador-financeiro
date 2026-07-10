@@ -131,9 +131,11 @@ document.getElementById('novoPagamentoForm').addEventListener('submit', async fu
     const copoForm = new FormData(this);
     const jsonSalvar = await apiFetch('/contaMetodo/salvar', 'POST', copoForm);
 
-        if (fecharModalExibirFeedback(jsonSalvar, 'modal-novo-pagamento', this)) {
+    if (fecharModalExibirFeedback(jsonSalvar, 'modal-novo-pagamento', this)) {
+        const tipo = document.getElementById('modal-novo-pagamento').getAttribute('data-tipo');
+
         const jsonMetodos = await apiFetch('/contaMetodo/selectDados');
-        if (jsonMetodos) preencherMetodos(jsonMetodos.metodos);
+        if (jsonMetodos) preencherMetodos(jsonMetodos.metodos, tipo);
     }
 });
 
@@ -144,7 +146,7 @@ document.getElementById('novaClasseForm').addEventListener('submit', async funct
     const copoForm = new FormData(this);
     const json = await apiFetch('/classesInvestimento/salvar', 'POST', copoForm);
 
-    if (fecharModalExibirFeedback(jsonSalvar, 'modal-nova-classe', this)) {
+    if (fecharModalExibirFeedback(json, 'modal-nova-classe', this)) {
         const classes = await apiFetch('/classesInvestimento/selectDados');
         if (classes) preencherClasses(classes.classes, 'I');
     }
@@ -401,6 +403,8 @@ function preencherCategorias(jsonCategorias, tipo) {
 
 function preencherMetodos(metodos, tipo) {
     const select = document.getElementById('metodoConta' + tipo);
+
+    select.innerHTML = '<option value="">Selecione...</option>';
 
     metodos.forEach(metodo => {
         const option = document.createElement('option');
