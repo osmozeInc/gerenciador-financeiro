@@ -30,7 +30,7 @@ export function feedbackPopup(tipo, mensagem) {
         <span>
             ${icone} ${mensagem}
         </span>
-        <i class="bi bi-x" btn-fechar-popup></i>
+        <i class="bi bi-x" onclick="removerPopupPeloX(this)"></i>
     `;
 
     const popupFeedbackContainer = document.getElementById('popup-feedback-container');
@@ -49,3 +49,13 @@ export function feedbackPopup(tipo, mensagem) {
 
     setTimeout(removerPopup, 4500);
 }
+
+ export function removerPopupPeloX(popup) {
+    if (popup.parentElement) {
+        popup.remove();
+        
+        if (popupFeedbackContainer.children.length === 0) {
+            popupFeedbackContainer.classList.remove('active');
+        }
+    }
+};

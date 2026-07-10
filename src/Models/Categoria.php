@@ -3,10 +3,12 @@ require_once 'Model.php';
 
 class Categoria extends Model {
     
-    public function selectAllCategorias() {
-        $query = "SELECT * FROM categorias";
-        $stmt = $this->pdo->query($query);
-        $categorias = $stmt->fetchAll(); 
+    public function selectAllCategorias($tenantId) {
+        $query = "SELECT id, nome, tipo FROM categorias WHERE tenant_id = :tenant_id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':tenant_id', $tenantId);
+        $stmt->execute();
+        $categorias = $stmt->fetchAll();
 
         $categoriasAgrupadas = ['R' => [], 'D' => [],  'I' => [], 'C' => []];
 

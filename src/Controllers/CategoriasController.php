@@ -9,7 +9,7 @@ class CategoriasController extends Controller {
 
         try {
             $categoriaModel = new Categoria();
-            $categorias = $categoriaModel->selectAllcategorias();
+            $categorias = $categoriaModel->selectAllcategorias($this->idUsuarioLogado);
             
             echo json_encode([
                 'resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['busca_com_sucesso'],

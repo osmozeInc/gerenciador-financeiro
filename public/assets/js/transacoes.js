@@ -1,11 +1,12 @@
 import { abrirModal, fecharModal } from "/assets/js/modais.js";
-import { apiFetch, feedbackPopup } from "/assets/js/utils.js";
+import { apiFetch, feedbackPopup, removerPopupPeloX} from "/assets/js/utils.js";
 
 let formAtualizados = {
     'R': false,
     'D': false,
     'I': false,
-    'C': false
+    'C': false,
+    'Modal': false
 }
 let listaCompletaTransacoes = [];
 
@@ -116,8 +117,6 @@ document.getElementById('novaCategoriaForm').addEventListener('submit', async fu
     if (fecharModalExibirFeedback(jsonSalvar, 'modal-nova-categoria', this)) {
         const jsonCategorias = await apiFetch('/categorias/selectDados');
         const tipo = document.querySelector('.transacoes-container card form.visivel-block').getAttribute('data-idForm').charAt(0).toUpperCase();
-        console.log(tipo);
-        console.log(typeof tipo);
         if (jsonCategorias && jsonCategorias.categorias) preencherCategorias(jsonCategorias.categorias, tipo);
     }
 });
@@ -220,6 +219,111 @@ document.getElementById('cofreForm').addEventListener('submit', async function(e
     atualizarDataAtual('C'); /* temporário */
 });
 
+// abre modal de filtro
+document.getElementById('btnFiltrarTabela').addEventListener('click', async function() {
+    if (formAtualizados['Modal']) return;
+
+    try {
+        const jsonCat = await apiFetch('/categorias/selectDados');
+        const jsonMet = await apiFetch('/contaMetodo/selectDados');
+
+        if(jsonCat && jsonCat.resposta.sucesso) {
+
+            const selectCat = document.getElementById('filtroCategoria');
+            selectCat.innerHTML = '<option value="">Todas as Categorias</option>';
+
+            const arrayJson = [jsonCat.categorias['R'], jsonCat.categorias['D'], jsonCat.categorias['I'], jsonCat.categorias['C']];
+
+            arrayJson.forEach(arrayCat => {
+                arrayCat.forEach(objCat => {
+                    const option = document.createElement('option');
+                    option.value = objCat.nome;
+                    option.textContent = objCat.nome;
+                    option.setAttribute('data-tipo', objCat.tipo);
+                    selectCat.appendChild(option);
+                })
+            });
+        }
+
+        if (jsonMet && jsonMet.resposta.sucesso) {
+            const selectMet = document.getElementById('filtroConta');
+            selectMet.innerHTML = '<option value="">Todas as Contas</option>';
+            
+            jsonMet.metodos.forEach(met => {
+                const option = document.createElement('option');
+                option.value = met.nome;
+                option.textContent = met.nome;
+                selectMet.appendChild(option);
+            });
+        }
+
+        formAtualizados['Modal'] = true;
+    } catch (erro) {
+        console.error("Erro ao popular modal de filtro:", erro);
+    }
+});
+
+// aplica filtros
+document.getElementById('formFiltroTransacoes').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const tipo = document.getElementById('filtroTipo').value;
+    const catId = document.getElementById('filtroCategoria').value;
+    const contaId = document.getElementById('filtroConta').value;
+    const dataInicio = document.getElementById('filtroDataInicio').value;
+    const dataFim = document.getElementById('filtroDataFim').value;
+
+    const filtrados = listaCompletaTransacoes.filter(trans => {
+        if (tipo && trans.categoria_tipo !== tipo) return false;
+        if (catId && String(trans.categoria_nome) !== String(catId)) return false;
+        if (contaId && String(trans.conta_nome) !== String(contaId)) return false;
+        if (dataInicio && trans.data_transacao < dataInicio) return false;
+        if (dataFim && trans.data_transacao > dataFim) return false;
+        
+        return true;
+    });
+
+    preencherTransacoes(filtrados, null);
+
+    const jsonArtificial = { resposta: { sucesso: true, msgTipo: 'info', mensagem: 'Filtros aplicados.' } };
+    fecharModalExibirFeedback(jsonArtificial, 'modal-filtro-transacoes', null);
+});
+
+// limpa filtros
+document.getElementById('btnLimparFiltros').addEventListener('click', function() {
+    document.getElementById('formFiltroTransacoes').reset();
+    
+    preencherTransacoes(listaCompletaTransacoes, null);
+});
+
+// altera a categoria de acordo com o tipo
+const selectTipo = document.getElementById('filtroTipo');
+selectTipo.addEventListener('change', function() {
+    const tipoSelecionado = this.value;
+    
+    Array.from(selectCat.options).forEach(option => {
+        if (option.value === "") return; 
+        
+        const tipoDaOpcao = option.getAttribute('data-tipo');
+        
+        if (tipoSelecionado === "" || tipoDaOpcao === tipoSelecionado) {
+            option.style.display = ''; 
+        } else {
+            option.style.display = 'none'; 
+        }
+    });
+
+    selectCat.value = ""; 
+});
+
+//altera o tipo de acordo com a categoria
+ const selectCat = document.getElementById('filtroCategoria');
+selectCat.addEventListener('change', function() {
+    const opcaoSelecionada = this.options[this.selectedIndex];
+    const tipoDaCategoria = opcaoSelecionada.getAttribute('data-tipo');
+    
+    if (tipoDaCategoria) selectTipo.value = tipoDaCategoria;
+});
 
 
 async function receberDadosDoBotao(botao) {
@@ -256,14 +360,15 @@ async function receberDadosDoBotao(botao) {
 
 function fecharModalExibirFeedback(json, idModal, formulario) {
     if (!json) return false;
+    let idFormulario = null;
 
     feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
 
-    if (json.resposta.sucesso && formulario) 
+    if (json.resposta.sucesso && formulario)
         formulario.reset();
 
     if (json.resposta.sucesso && idModal) 
-        fecharModal(idModal, formulario);
+        fecharModal(idModal, idFormulario);
 
     return true;
 }
@@ -360,99 +465,3 @@ function atualizarDataAtual(tipo) {
     const input = document.getElementById('data' + tipo);
     input.valueAsDate = new Date();
 }
-
-
-
-// let selectsFiltroCarregados = false;
-
-// document.getElementById('btnFiltrarTabela')?.addEventListener('click', async function() {
-//     // Evita fazer requisições repetidas ao banco se o usuário abrir o filtro várias vezes
-//     if (selectsFiltroCarregados) return;
-
-//     try {
-//         // Busca todas as categorias e contas usando suas rotas de API
-//         const jsonCat = await apiFetch('/categorias/selectDados'); // Ou sua rota equivalente
-//         const jsonMet = await apiFetch('/contaMetodo/selectDados');
-
-//         // Preenche Categoria de forma isolada
-//         if (jsonCat && jsonCat.categorias) {
-//             const selectCat = document.getElementById('filtroCategoria');
-//             selectCat.innerHTML = '<option value="">Todas as Categorias</option>';
-            
-//             // Garante leitura de array plano mesmo se o PHP mandar categorias agrupadas
-//             const arrayCat = Array.isArray(jsonCat.categorias) 
-//                 ? jsonCat.categorias 
-//                 : Object.values(jsonCat.categorias).flat();
-
-//             arrayCat.forEach(cat => {
-//                 const option = document.createElement('option');
-//                 option.value = cat.id;
-//                 option.textContent = cat.nome;
-//                 selectCat.appendChild(option);
-//             });
-//         }
-
-//         // Preenche Contas de forma isolada
-//         if (jsonMet && jsonMet.metodos) {
-//             const selectMet = document.getElementById('filtroConta');
-//             selectMet.innerHTML = '<option value="">Todas as Contas</option>';
-            
-//             jsonMet.metodos.forEach(met => {
-//                 const option = document.createElement('option');
-//                 option.value = met.id;
-//                 option.textContent = met.nome;
-//                 selectMet.appendChild(option);
-//             });
-//         }
-
-//         selectsFiltroCarregados = true;
-//     } catch (erro) {
-//         console.error("Erro ao popular modal de filtro:", erro);
-//     }
-// });
-
-// // =========================================================
-// // 2. APLICAR FILTRO (Em memória, super rápido)
-// // =========================================================
-// document.getElementById('formFiltroTransacoes')?.addEventListener('submit', function(e) {
-//     e.preventDefault();
-
-//     const tipo = document.getElementById('filtroTipo').value;
-//     const catId = document.getElementById('filtroCategoria').value;
-//     const contaId = document.getElementById('filtroConta').value;
-//     const dataInicio = document.getElementById('filtroDataInicio').value;
-//     const dataFim = document.getElementById('filtroDataFim').value;
-
-//     // Filtra o array global que guarda as 100 transações originais
-//     const filtrados = listaCompletaTransacoes.filter(trans => {
-//         if (tipo && trans.categoria_tipo !== tipo) return false;
-//         if (catId && String(trans.categoria_id) !== String(catId)) return false;
-//         if (contaId && String(trans.conta_id) !== String(contaId)) return false;
-//         if (dataInicio && trans.data_transacao < dataInicio) return false;
-//         if (dataFim && trans.data_transacao > dataFim) return false;
-        
-//         return true;
-//     });
-
-//     // Desenha a tabela com o resultado
-//     preencherTransacoes(filtrados, null);
-    
-//     // Fecha o modal via JS
-//     const modal = document.getElementById('modal-filtro-transacoes');
-//     if (modal) modal.style.display = 'none';
-// });
-
-// // =========================================================
-// // 3. LIMPAR FILTROS (Botão Outline)
-// // =========================================================
-// document.getElementById('btnLimparFiltros')?.addEventListener('click', function() {
-//     // Reseta todos os selects e inputs de data do modal
-//     document.getElementById('formFiltroTransacoes').reset();
-    
-//     // Devolve as 100 transações originais para a tela
-//     preencherTransacoes(listaCompletaTransacoes, null);
-    
-//     // Fecha o modal
-//     const modal = document.getElementById('modal-filtro-transacoes');
-//     if (modal) modal.style.display = 'none';
-// });

@@ -428,7 +428,7 @@
 <!-- MODAL DE FILTROS DE TRANSACOES -->
 
 <article class="modal-backdrop" id="modal-filtro-transacoes">
-    <div class="modal-container">
+    <div class="modal-container-filter">
         
         <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center;">
             <h1 style="margin: 0;">Selecione os Filtros</h1>
@@ -437,8 +437,8 @@
         <hr>
 
         <form class="form-simple" id="formFiltroTransacoes">
-            <div class="form-grid">
-                
+            <div class="form-flex">
+            
                 <div class="input-group">
                     <label for="filtroTipo">Tipo de Movimentação</label>
                     <select id="filtroTipo">
@@ -456,27 +456,28 @@
                         <option value="">Todas as Categorias</option>
                         </select>
                 </div>
+            </div>
 
-                <div class="input-group">
-                    <label for="filtroConta">Conta / Forma de Pagamento</label>
-                    <select id="filtroConta">
-                        <option value="">Todas as Contas</option>
-                        </select>
-                </div>
-
+            <div class="input-group">
+                <label for="filtroConta">Conta / Forma de Pagamento</label>
+                <select id="filtroConta">
+                    <option value="">Todas as Contas</option>
+                </select>
+            </div>
+            
+            <div class="form-flex">
                 <div class="input-group">
                     <label for="filtroDataInicio">De (Data Início)</label>
                     <input type="date" id="filtroDataInicio">
                 </div>
-
+                
                 <div class="input-group">
                     <label for="filtroDataFim">Até (Data Fim)</label>
                     <input type="date" id="filtroDataFim">
                 </div>
-
             </div>
 
-            <div class="btn-container" style="margin-top: 1.5rem; display: flex; justify-content: flex-end; gap: 0.5rem;">
+            <div class="btn-container">
                 <button type="button" class="btn-fechar js-fechar-modal" id="btnLimparFiltros" data-target="modal-filtro-transacoes">
                     Limpar Filtros
                 </button>
