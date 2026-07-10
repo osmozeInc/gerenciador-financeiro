@@ -1200,6 +1200,10 @@ header {
     display: flex !important;
 }
 
+.bloqueado {
+    pointer-events: none;
+}
+
 
 /* ==== CLASSES GENÉRICAS ==== */
     

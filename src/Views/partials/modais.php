@@ -364,12 +364,7 @@
             
             <div class="input-group">
                 <label for="tipo">Tipo da Categoria</label>
-                <select type="text" id="tipo" name="tipo" required>
-                    <option value="" disabled selected>Selecione...</option>
-                    <option value="R">Receita (R)</option>
-                    <option value="D">Despesa (D)</option>
-                    <option value="I">Investimento (I)</option>
-                    <option value="C">Cofre (C)</option>
+                <select type="text" id="tipoCategoriaModal" name="tipo" required>
                 </select>
             </div>
 

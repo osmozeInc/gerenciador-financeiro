@@ -1388,6 +1388,10 @@ header nav a.active {
   display: flex !important;
 }
 
+.bloqueado {
+  pointer-events: none;
+}
+
 /* ==== CLASSES GENÉRICAS ==== */
 .input-group {
   display: flex;

@@ -75,7 +75,10 @@ class CategoriasController extends Controller {
         $tipo = trim(filter_input(INPUT_POST, 'tipo', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
 
         if (empty($nome) || empty($tipo)) {
-            echo json_encode(['resposta' => $this->mensagensModel['categoria']['salvar']['formulario_incompleto']]);
+            echo json_encode([
+                'resposta' => $this->mensagensModel['genericas']['formulario_incompleto'],
+                'detalhes' => 'nome: ' . $nome . ', tipo: ' . $tipo
+            ]);
             exit;
         }
 
@@ -87,7 +90,7 @@ class CategoriasController extends Controller {
 
         try {
             $categoriaModel = new Categoria();
-            $categoriaModel->insert($nome, $tipo);
+            $categoriaModel->insert($nome, $tipo, $this->idUsuarioLogado);
 
             echo json_encode(['resposta' => $this->mensagensModel['categoria']['salvar']['salvo_com_sucesso']]);
             

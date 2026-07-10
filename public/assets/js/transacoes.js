@@ -110,13 +110,16 @@ document.getElementById('inputPesquisaTabela').addEventListener('input', functio
 document.getElementById('novaCategoriaForm').addEventListener('submit', async function(evento) {
     evento.preventDefault();
 
-    
     const copoForm = new FormData(this);
     const jsonSalvar = await apiFetch('/categorias/salvar', 'POST', copoForm);
     
     if (fecharModalExibirFeedback(jsonSalvar, 'modal-nova-categoria', this)) {
-        const jsonCategorias = await apiFetch('/categorias/selectDados');
-        const tipo = document.querySelector('.transacoes-container card form.visivel-block').getAttribute('data-idForm').charAt(0).toUpperCase();
+        const tipo = document.getElementById('modal-nova-categoria').getAttribute('data-tipo');
+        
+        let jsonCategorias;
+        console.log (tipo);
+        if (tipo === 'R') jsonCategorias = await apiFetch('/categorias/selectDadosReceita');
+        if (tipo === 'D') jsonCategorias = await apiFetch('/categorias/selectDadosDespesa');
         if (jsonCategorias && jsonCategorias.categorias) preencherCategorias(jsonCategorias.categorias, tipo);
     }
 });
@@ -360,21 +363,27 @@ async function receberDadosDoBotao(botao) {
 
 function fecharModalExibirFeedback(json, idModal, formulario) {
     if (!json) return false;
-    let idFormulario = null;
-
+    
     feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
 
-    if (json.resposta.sucesso && formulario)
-        formulario.reset();
+    if (json.resposta.sucesso) {   
+        
+        if (formulario)
+            formulario.reset();
+        
+        if (json.resposta.sucesso && idModal) 
+            fecharModal(idModal, null);
+        
+        return true;
+    }
 
-    if (json.resposta.sucesso && idModal) 
-        fecharModal(idModal, idFormulario);
-
-    return true;
+    return false;
 }
 
 function preencherCategorias(jsonCategorias, tipo) {
     const select = document.getElementById('categorias' + tipo);
+
+    select.innerHTML = '<option value="">Selecione...</option>';
 
     jsonCategorias.forEach(cat => {
         const option = document.createElement('option');
@@ -386,6 +395,7 @@ function preencherCategorias(jsonCategorias, tipo) {
     const optionNovo = document.createElement('option');
     optionNovo.value = 'new';
     optionNovo.textContent = '+ Nova Categoria';
+    optionNovo.setAttribute('data-tipo', tipo);
     select.appendChild(optionNovo);
 }
 
@@ -402,6 +412,7 @@ function preencherMetodos(metodos, tipo) {
     const optionNovo = document.createElement('option');
     optionNovo.value = 'new';
     optionNovo.textContent = '+ Nova Conta';
+    optionNovo.setAttribute('data-tipo', tipo);
     select.appendChild(optionNovo);
 }
 
@@ -446,6 +457,7 @@ function preencherClasses(classes) {
     const optionNovo = document.createElement('option');
     optionNovo.value = 'new';
     optionNovo.textContent = '+ Nova Classe';
+    optionNovo.setAttribute('data-tipo', 'I');
     select.appendChild(optionNovo);
 }
 

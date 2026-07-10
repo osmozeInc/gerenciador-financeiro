@@ -34,10 +34,12 @@ btnTrocarModal.forEach(btn => {
 const categoriaSelect = document.querySelectorAll('.js-abrir-modal-select');
 categoriaSelect.forEach(select => select.addEventListener('change', (e) => {
     const selectedOption = e.target.options[e.target.selectedIndex];
+    
     const idModal = e.target.getAttribute('data-target');
+    const tipo = selectedOption.getAttribute('data-tipo');
 
     if(selectedOption.value === 'new') {
-        abrirModal(idModal);
+        abrirModalPorOption(idModal, tipo);
         e.target.value = "";
     }
     })
@@ -74,6 +76,23 @@ export function fecharModal(idModal, idFormulario) {
     if (idFormulario) document.getElementById(idFormulario).reset();
 
     destravarRolagemDaPagina();
+}
+
+function abrirModalPorOption(idModal, tipo) {
+    document.getElementById(idModal).classList.add('active');
+    document.getElementById(idModal).setAttribute('data-tipo', tipo);
+    
+    if (tipo === 'R' || tipo === 'D') {
+        const select = document.getElementById('tipoCategoriaModal');
+        const option = document.createElement('option');
+        option.value = tipo;
+        option.textContent = tipo;
+        option.name = 'tipo';
+        option.selected = true;
+
+        select.appendChild(option);
+        select.classList.add('bloqueado');
+    }
 }
 
 function toggleModal(idModalFechar, idModalAbrir) {

@@ -39,11 +39,12 @@ class Categoria extends Model {
         return $categorias;
     }
 
-    public function insert($nome, $tipo) {
-        $query = "INSERT INTO categorias (nome, tipo) VALUES (:nome, :tipo)";
+    public function insert($nome, $tipo, $tenantId) {
+        $query = "INSERT INTO categorias (nome, tipo, tenant_id) VALUES (:nome, :tipo, :tenant_id)";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindValue(':nome', $nome);
         $stmt->bindValue(':tipo', $tipo);
+        $stmt->bindValue(':tenant_id', $tenantId);
         $stmt->execute();
     }
 
