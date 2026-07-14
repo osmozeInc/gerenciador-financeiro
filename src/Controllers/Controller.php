@@ -90,8 +90,7 @@ class Controller {
         ]
     ];
 
-    protected function render($view, $dados = []) {
-        extract($dados);
+    protected function render($view) {
 
         $viewPath = __DIR__ . "/../Views/pages/{$view}.php";
         $layoutPath = __DIR__ . '/../Views/layout.php';

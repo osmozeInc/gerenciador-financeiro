@@ -213,7 +213,7 @@
         </table>
 
         <div class="badge-info">
-            <p> Exibimos suas últimas 100 movimentações. Se não achou o que procura, <a href="/historico">busque no histórico completo</a>.</p>
+            <p> Exibimos suas últimas 100 movimentações. Se não achou o que procura, <a href="/historicoCompleto">busque no histórico completo</a>.</p>
         </div>
     </section>
 </main>
