@@ -10,6 +10,7 @@
   --bg-btn-invest: #085ec1;
   --bg-btn-warning: #da9011;
   --bg-btn-hover: #f3f4f6;
+  --bg-info: #f0f0f0;
   --divisor-color: #727272;
   --border-color: #e5e7eb;
   --text-primary: #000;
@@ -44,6 +45,8 @@
   --bg-btn-confirm: #128d29;
   --bg-btn-invest: #2079df;
   --bg-btn-warning: #da9011;
+  --bg-btn-hover: #212121;
+  --bg-info: #3f3f3f;
   --divisor-color: #e5e7eb;
   --border-color: #919191;
   --text-primary: #fff;
@@ -145,9 +148,10 @@ header nav a.active {
   border-radius: 0.5rem;
 }
 .aside-container .logo-container h2 {
-  font-size: 2rem;
+  font-size: 1.8rem;
   margin: 0 0 0 1rem;
   color: var(--text-especial);
+  text-wrap: nowrap;
 }
 .aside-container .logo-divider, .aside-container .divider {
   width: 100%;
@@ -517,6 +521,9 @@ header nav a.active {
   opacity: 1;
   border-color: var(--text-secondary);
 }
+.conteudo-central .transacoes-container .card .tipo-transacao button.active:hover {
+  background-color: var(--bg-padrao);
+}
 .conteudo-central .transacoes-container .card .tipo-transacao button.deactive {
   opacity: 0.5;
 }
@@ -570,6 +577,9 @@ header nav a.active {
   color: var(--text-primary);
   font-size: 1.1rem;
 }
+.conteudo-central .transacoes-container .card .card-header .tools-container i {
+  color: var(--text-primary);
+}
 .conteudo-central .transacoes-container .card table {
   width: 100%;
   border-collapse: collapse;
@@ -598,8 +608,9 @@ header nav a.active {
   text-align: center;
   margin-top: 1.5rem;
   padding: 1rem;
-  background-color: var(--bg-main);
+  background-color: var(--bg-info);
   border-radius: var(--radius-btn);
+  cursor: default;
 }
 .conteudo-central .transacoes-container .card .badge-info p {
   margin: 0;
@@ -1420,6 +1431,11 @@ input:focus, select:focus {
   border: 1px solid var(--divisor-color);
 }
 input[type=date]::-webkit-calendar-picker-indicator, select[type=date]::-webkit-calendar-picker-indicator {
+  color-scheme: var(--tema-color);
+}
+input[type=number], select[type=number] {
+  -webkit-appearance: none;
+  -moz-appearance: textfield;
   color-scheme: var(--tema-color);
 }
 input::-moz-placeholder, select::-moz-placeholder {

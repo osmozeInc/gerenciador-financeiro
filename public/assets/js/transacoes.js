@@ -106,7 +106,7 @@ document.getElementById('inputPesquisaTabela').addEventListener('input', functio
     preencherTransacoes(filtrados, null);
 });
 
-// Salvar nova categoria (atualizar funções)
+// Salvar nova categoria
 document.getElementById('novaCategoriaForm').addEventListener('submit', async function(evento) {
     evento.preventDefault();
 
@@ -122,9 +122,12 @@ document.getElementById('novaCategoriaForm').addEventListener('submit', async fu
         if (tipo === 'D') jsonCategorias = await apiFetch('/categorias/selectDadosDespesa');
         if (jsonCategorias && jsonCategorias.categorias) preencherCategorias(jsonCategorias.categorias, tipo);
     }
+    
+    formAtualizados['R'] = false;
+    formAtualizados['D'] = false;
 });
 
-// Salvar novo metodo de pagamento (atualizar funções)
+// Salvar novo metodo de pagamento
 document.getElementById('novoPagamentoForm').addEventListener('submit', async function(evento) {
     evento.preventDefault();
 
@@ -137,6 +140,11 @@ document.getElementById('novoPagamentoForm').addEventListener('submit', async fu
         const jsonMetodos = await apiFetch('/contaMetodo/selectDados');
         if (jsonMetodos) preencherMetodos(jsonMetodos.metodos, tipo);
     }
+
+    formAtualizados['R'] = false;
+    formAtualizados['D'] = false;
+    formAtualizados['I'] = false;
+    formAtualizados['C'] = false;
 });
 
 // Salvar nova classe de investimento
@@ -147,8 +155,12 @@ document.getElementById('novaClasseForm').addEventListener('submit', async funct
     const json = await apiFetch('/classesInvestimento/salvar', 'POST', copoForm);
 
     if (fecharModalExibirFeedback(json, 'modal-nova-classe', this)) {
+        const tipo = document.getElementById('modal-novo-pagamento').getAttribute('data-tipo');
+
         const classes = await apiFetch('/classesInvestimento/selectDados');
-        if (classes) preencherClasses(classes.classes, 'I');
+        if (classes) preencherClasses(classes.classes, tipo);
+
+        formAtualizados[tipo] = false;
     }
 });
 
