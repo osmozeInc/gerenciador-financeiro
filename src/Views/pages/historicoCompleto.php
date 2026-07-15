@@ -1,49 +1,68 @@
 <main class="historico-container">
-    <!-- Cabeçalho e Totalizador -->
+
     <section class="card header-historico">
         <div class="titulo-historico">
             <h2>Histórico Completo</h2>
             <p>Acompanhe todas as suas entradas, saídas, investimentos e cofres.</p>
         </div>
         <div class="totalizador-historico">
-            <span>Resultado do Filtro</span>
+            <span>Soma de todas as movimentações</span>
             <strong id="valor-total-filtro">R$ 0,00</strong>
         </div>
     </section>
 
-    <!-- Barra de Filtros Visível -->
-    <section class="card barra-filtros">
-        <div class="filtro-group search-group">
-            <i class="bi bi-search"></i>
-            <input type="text" id="filtro-busca" placeholder="Pesquisar por descrição...">
-        </div>
+    <section class="card">
+        <h2>Filtros</h2>
+            
+        <form class="barra-filtros">
+            <div class="search-group">
+                <span style="position: relative; grid-column: span 2;">
+                    <i class="bi bi-search"></i>
+                    <input type="text" id="filtro-busca" placeholder="Descrição...">
+                </span>
+                
+                <select id="filtroTipo">
+                    <option value="">Todos os Tipos</option>
+                    <option value="R">Receitas (R)</option>
+                    <option value="D">Despesas (D)</option>
+                    <option value="I">Investimentos (I)</option>
+                    <option value="C">Cofres (C)</option>
+                </select>
 
-        <div class="filtro-group">
-            <select id="filtro-mes">
-                <option value="todos">Todos os Meses</option>
-                <option value="07-2026" selected>Julho 2026</option>
-                <option value="06-2026">Junho 2026</option>
-            </select>
-        </div>
+                <select id="filtroCategoria">
+                    <option value="">Todas as Categorias</option>
+                </select>             
 
-        <div class="filtro-group">
-            <select id="filtro-tipo">
-                <option value="todos">Todos os Tipos</option>
-                <option value="R">Receitas</option>
-                <option value="D">Despesas</option>
-                <option value="I">Investimentos</option>
-                <option value="C">Cofres</option>
-            </select>
-        </div>
+                <select id="filtroConta">
+                    <option value="">Todas as Contas</option>
+                </select>
+        
+                <input type="date" id="filtroDataInicio">
+            
+                <input type="date" id="filtroDataFim">
+        
+                <input type="number" id="filtroValorPiso" placeholder="Valor Piso">
+            
+                <input type="number" id="filtroValorTeto" placeholder="Valor Teto">
+            </div>
 
-        <div class="filtro-acoes">
-            <button type="button" class="btn-acao outline" id="btn-limpar-filtros" title="Limpar Filtros">
-                <i class="bi bi-eraser"></i> Limpar
-            </button>
-            <button type="button" class="btn-acao primary" title="Exportar Extrato">
-                <i class="bi bi-download"></i> Exportar
-            </button>
-        </div>
+            <div class="filtro-acoes">
+
+                <button type="button" class="btn-acao export" title="Exportar Extrato">
+                    <i class="bi bi-download"></i> Exportar Tabela
+                </button>
+
+                <span>
+                    <button type="button" class="btn-acao clean" id="btn-limpar-filtros" title="Limpar Filtros">
+                        <i class="bi bi-eraser"></i> Limpar Filtros
+                    </button>
+                    <button type="button" class="btn-acao filter" title="Exportar Extrato">
+                        <i class="bi bi-funnel"></i> Aplicar Filtros
+                    </button>
+                </span>
+                
+            </div>
+        </form>
     </section>
 
     <!-- Tabela Infinita -->

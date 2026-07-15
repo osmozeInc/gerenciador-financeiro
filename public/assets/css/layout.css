@@ -906,17 +906,17 @@ header nav a.active {
   flex-direction: column;
   gap: 2rem;
 }
+.conteudo-central .historico-container h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+}
 .conteudo-central .historico-container .header-historico {
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
   gap: 1rem;
-}
-.conteudo-central .historico-container .header-historico .titulo-historico h2 {
-  margin: 0;
-  color: var(--text-primary);
-  font-size: 1.5rem;
 }
 .conteudo-central .historico-container .header-historico .titulo-historico p {
   margin: 0.25rem 0 0 0;
@@ -944,51 +944,38 @@ header nav a.active {
 .conteudo-central .historico-container .header-historico .totalizador-historico.negativo strong {
   color: var(--text-danger);
 }
-.conteudo-central .historico-container .barra-filtros {
+.conteudo-central .historico-container .barra-filtros, .conteudo-central .historico-container form {
   display: flex;
   gap: 1rem;
   flex-wrap: wrap;
   align-items: center;
 }
-.conteudo-central .historico-container .barra-filtros .filtro-group {
-  flex: 1;
-  min-width: 180px;
-}
-.conteudo-central .historico-container .barra-filtros .filtro-group select, .conteudo-central .historico-container .barra-filtros .filtro-group input {
+.conteudo-central .historico-container .barra-filtros .search-group, .conteudo-central .historico-container form .search-group {
   width: 100%;
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--divisor-color);
-  border-radius: 6px;
-  background-color: var(--bg-main);
-  color: var(--text-primary);
-  font-size: 0.95rem;
-  outline: none;
-  transition: 0.2s;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
 }
-.conteudo-central .historico-container .barra-filtros .filtro-group select:focus, .conteudo-central .historico-container .barra-filtros .filtro-group input:focus {
-  border-color: var(--text-secondary);
-  background-color: var(--bg-padrao);
-}
-.conteudo-central .historico-container .barra-filtros .filtro-group.search-group {
-  flex: 2;
-  min-width: 250px;
-  position: relative;
-}
-.conteudo-central .historico-container .barra-filtros .filtro-group.search-group i {
+.conteudo-central .historico-container .barra-filtros .search-group i, .conteudo-central .historico-container form .search-group i {
   position: absolute;
   left: 1rem;
   top: 50%;
   transform: translateY(-50%);
   color: var(--text-secondary);
 }
-.conteudo-central .historico-container .barra-filtros .filtro-group.search-group input {
+.conteudo-central .historico-container .barra-filtros .search-group span input, .conteudo-central .historico-container form .search-group span input {
   padding-left: 2.5rem;
+  box-sizing: border-box;
+  width: 100%;
 }
-.conteudo-central .historico-container .barra-filtros .filtro-acoes {
+.conteudo-central .historico-container .barra-filtros .filtro-acoes, .conteudo-central .historico-container .barra-filtros span, .conteudo-central .historico-container form .filtro-acoes, .conteudo-central .historico-container form span {
   display: flex;
-  gap: 0.5rem;
+  gap: 1rem;
+  justify-content: space-between;
+  width: 100%;
 }
-.conteudo-central .historico-container .barra-filtros .filtro-acoes .btn-acao {
+.conteudo-central .historico-container .barra-filtros .filtro-acoes .btn-acao, .conteudo-central .historico-container .barra-filtros span .btn-acao, .conteudo-central .historico-container form .filtro-acoes .btn-acao, .conteudo-central .historico-container form span .btn-acao {
   padding: 0.75rem 1rem;
   border-radius: 6px;
   font-weight: 600;
@@ -998,21 +985,30 @@ header nav a.active {
   display: flex;
   align-items: center;
   gap: 0.5rem;
+  min-width: 200px;
 }
-.conteudo-central .historico-container .barra-filtros .filtro-acoes .btn-acao.outline {
-  background: transparent;
-  border: 1px solid var(--divisor-color);
-  color: var(--text-primary);
-}
-.conteudo-central .historico-container .barra-filtros .filtro-acoes .btn-acao.outline:hover {
-  background: var(--bg-main);
-}
-.conteudo-central .historico-container .barra-filtros .filtro-acoes .btn-acao.primary {
+.conteudo-central .historico-container .barra-filtros .filtro-acoes .btn-acao.export, .conteudo-central .historico-container .barra-filtros span .btn-acao.export, .conteudo-central .historico-container form .filtro-acoes .btn-acao.export, .conteudo-central .historico-container form span .btn-acao.export {
   background: var(--text-primary);
   border: none;
   color: var(--bg-padrao);
 }
-.conteudo-central .historico-container .barra-filtros .filtro-acoes .btn-acao.primary:hover {
+.conteudo-central .historico-container .barra-filtros .filtro-acoes .btn-acao.export:hover, .conteudo-central .historico-container .barra-filtros span .btn-acao.export:hover, .conteudo-central .historico-container form .filtro-acoes .btn-acao.export:hover, .conteudo-central .historico-container form span .btn-acao.export:hover {
+  opacity: 0.9;
+}
+.conteudo-central .historico-container .barra-filtros .filtro-acoes .btn-acao.clean, .conteudo-central .historico-container .barra-filtros span .btn-acao.clean, .conteudo-central .historico-container form .filtro-acoes .btn-acao.clean, .conteudo-central .historico-container form span .btn-acao.clean {
+  background: transparent;
+  border: 1px solid var(--divisor-color);
+  color: var(--text-primary);
+}
+.conteudo-central .historico-container .barra-filtros .filtro-acoes .btn-acao.clean:hover, .conteudo-central .historico-container .barra-filtros span .btn-acao.clean:hover, .conteudo-central .historico-container form .filtro-acoes .btn-acao.clean:hover, .conteudo-central .historico-container form span .btn-acao.clean:hover {
+  background: var(--bg-main);
+}
+.conteudo-central .historico-container .barra-filtros .filtro-acoes .btn-acao.filter, .conteudo-central .historico-container .barra-filtros span .btn-acao.filter, .conteudo-central .historico-container form .filtro-acoes .btn-acao.filter, .conteudo-central .historico-container form span .btn-acao.filter {
+  background: var(--bg-btn-confirm);
+  border: none;
+  color: var(--text-contrast);
+}
+.conteudo-central .historico-container .barra-filtros .filtro-acoes .btn-acao.filter:hover, .conteudo-central .historico-container .barra-filtros span .btn-acao.filter:hover, .conteudo-central .historico-container form .filtro-acoes .btn-acao.filter:hover, .conteudo-central .historico-container form span .btn-acao.filter:hover {
   opacity: 0.9;
 }
 .conteudo-central .historico-container .tabela-wrapper {
@@ -1608,7 +1604,7 @@ header nav a.active {
 }
 
 .bloqueado {
-  pointer-events: none;
+  pointer-events: none !important;
 }
 
 /* ==== CLASSES GENÉRICAS ==== */
