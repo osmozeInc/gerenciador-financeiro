@@ -194,6 +194,10 @@
                 <button type="button" id="btnFiltrarTabela" class="js-abrir-modal" data-target="modal-filtro-transacoes" title="Filtrar">
                     <i class="bi bi-funnel"></i>
                 </button>
+                
+                <a href="/historicoCompleto" title="Histórico Completo">
+                    <i class="bi bi-clock-history"></i>
+                </a>
             </div>
         </div>
 

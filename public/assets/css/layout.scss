@@ -487,7 +487,7 @@ header {
                     align-items: center;
 
                     input { padding: 0.4rem 0.8rem; border-radius: var(--radius-btn); border: 1px solid var(--border-color); background: var(--bg-padrao); color: var(--text-primary); font-size: 1.1rem; }
-                    button { background: var(--bg-padrao); border: 1px solid var(--border-color); padding: 0.4rem 0.6rem; border-radius: var(--radius-btn); cursor: pointer; color: var(--text-primary); font-size: 1.1rem; }
+                    button, a { background: var(--bg-padrao); border: 1px solid var(--border-color); padding: 0.4rem 0.6rem; border-radius: var(--radius-btn); cursor: pointer; color: var(--text-primary); font-size: 1.1rem; }
                     i { color: var(--text-primary); }
                 }
             }

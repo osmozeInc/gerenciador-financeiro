@@ -571,7 +571,7 @@ header nav a.active {
   color: var(--text-primary);
   font-size: 1.1rem;
 }
-.conteudo-central .transacoes-container .card .card-header .tools-container button {
+.conteudo-central .transacoes-container .card .card-header .tools-container button, .conteudo-central .transacoes-container .card .card-header .tools-container a {
   background: var(--bg-padrao);
   border: 1px solid var(--border-color);
   padding: 0.4rem 0.6rem;
