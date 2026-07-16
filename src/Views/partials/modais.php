@@ -13,31 +13,31 @@
                 <div class="notificacoes-header">
                     <h2>Alertas de Prazos</h2>
                     <label class="switch">
-                        <input checked="" type="checkbox" id="AlertasPrazos">
+                        <input checked="" type="checkboxModal" id="AlertasPrazosModal">
                         <div class="slider"> <div class="circle"> <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path data-original="#000000" fill="currentColor" d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"></path> </g> </svg> <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path class="" data-original="#000000" fill="currentColor" d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"></path> </g> </svg> </div> </div>
                     </label>
                 </div>
                 
-                <div class="notificacao" data-idHeader="AlertasPrazos">
+                <div class="notificacao" data-idHeader="AlertasPrazosModal">
                     <label class="titulo">Vencimento de Faturas</label>
                     <label class="switch">
-                        <input checked="" type="checkbox">
+                        <input checked="" type="checkboxModal">
                         <div class="slider"> <div class="circle"> <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path data-original="#000000" fill="currentColor" d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"></path> </g> </svg> <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path class="" data-original="#000000" fill="currentColor" d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"></path> </g> </svg> </div> </div>
                     </label>
                 </div>
                 
-                <div class="notificacao" data-idHeader="AlertasPrazos">
+                <div class="notificacao" data-idHeader="AlertasPrazosModal">
                     <label class="titulo">Risco de Inadiplência</label>
                     <label class="switch">
-                        <input checked="" type="checkbox">
+                        <input checked="" type="checkboxModal">
                         <div class="slider"> <div class="circle"> <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path data-original="#000000" fill="currentColor" d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"></path> </g> </svg> <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path class="" data-original="#000000" fill="currentColor" d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"></path> </g> </svg> </div> </div>
                     </label>
                 </div>
 
-                <div class="notificacao" data-idHeader="AlertasPrazos">
+                <div class="notificacao" data-idHeader="AlertasPrazosModal">
                     <label class="titulo">Estouro de Orçamento</label>
                     <label class="switch">
-                        <input checked="" type="checkbox">
+                        <input checked="" type="checkboxModal">
                         <div class="slider"> <div class="circle"> <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path data-original="#000000" fill="currentColor" d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"></path> </g> </svg> <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path class="" data-original="#000000" fill="currentColor" d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"></path> </g> </svg> </div> </div>
                     </label>
                 </div>
@@ -48,23 +48,23 @@
                 <div class="notificacoes-header">
                     <h2>Alertas Positivos</h2>
                     <label class="switch">
-                        <input checked="" type="checkbox" id="AlertasPositivos">
+                        <input checked="" type="checkboxModal" id="AlertasPositivosModal">
                         <div class="slider"> <div class="circle"> <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path data-original="#000000" fill="currentColor" d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"></path> </g> </svg> <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path class="" data-original="#000000" fill="currentColor" d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"></path> </g> </svg> </div> </div>
                     </label>
                 </div>
                 
-                <div class="notificacao" data-idHeader="AlertasPositivos">
+                <div class="notificacao" data-idHeader="AlertasPositivosModal">
                     <label class="titulo">Fechamento Positivo</label>
                     <label class="switch">
-                        <input checked="" type="checkbox">
+                        <input checked="" type="checkboxModal">
                         <div class="slider"> <div class="circle"> <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path data-original="#000000" fill="currentColor" d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"></path> </g> </svg> <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path class="" data-original="#000000" fill="currentColor" d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"></path> </g> </svg> </div> </div>
                     </label>
                 </div>
                 
-                <div class="notificacao" data-idHeader="AlertasPositivos">
+                <div class="notificacao" data-idHeader="AlertasPositivosModal">
                     <label class="titulo">Cofre Completo</label>
                     <label class="switch">
-                        <input checked="" type="checkbox">
+                        <input checked="" type="checkboxModal">
                         <div class="slider"> <div class="circle"> <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path data-original="#000000" fill="currentColor" d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"></path> </g> </svg> <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path class="" data-original="#000000" fill="currentColor" d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"></path> </g> </svg> </div> </div>
                     </label>
                 </div>
@@ -74,39 +74,39 @@
                 <div class="notificacoes-header">
                     <h2>Movimentações</h2>
                     <label class="switch">
-                        <input checked="" type="checkbox" id="movimentacoes">
+                        <input checked="" type="checkboxModal" id="movimentacoesModal">
                         <div class="slider"> <div class="circle"> <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path data-original="#000000" fill="currentColor" d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"></path> </g> </svg> <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path class="" data-original="#000000" fill="currentColor" d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"></path> </g> </svg> </div> </div>
                     </label>
                 </div>
                 
-                <div class="notificacao" data-idHeader="movimentacoes">
+                <div class="notificacao" data-idHeader="movimentacoesModal">
                     <label class="titulo">Qualquer Entrada</label>
                     <label class="switch">
-                        <input checked="" type="checkbox">
+                        <input checked="" type="checkboxModal">
                         <div class="slider"> <div class="circle"> <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path data-original="#000000" fill="currentColor" d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"></path> </g> </svg> <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path class="" data-original="#000000" fill="currentColor" d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"></path> </g> </svg> </div> </div>
                     </label>
                 </div>
                 
-                <div class="notificacao" data-idHeader="movimentacoes">
+                <div class="notificacao" data-idHeader="movimentacoesModal">
                     <label class="titulo">Entradas Altas</label>
                     <label class="switch">
-                        <input checked="" type="checkbox">
+                        <input checked="" type="checkboxModal">
                         <div class="slider"> <div class="circle"> <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path data-original="#000000" fill="currentColor" d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"></path> </g> </svg> <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path class="" data-original="#000000" fill="currentColor" d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"></path> </g> </svg> </div> </div>
                     </label>
                 </div>
                 
-                <div class="notificacao" data-idHeader="movimentacoes">
+                <div class="notificacao" data-idHeader="movimentacoesModal">
                     <label class="titulo">Qualquer Saida</label>
                     <label class="switch">
-                        <input checked="" type="checkbox">
+                        <input checked="" type="checkboxModal">
                         <div class="slider"> <div class="circle"> <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path data-original="#000000" fill="currentColor" d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"></path> </g> </svg> <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path class="" data-original="#000000" fill="currentColor" d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"></path> </g> </svg> </div> </div>
                     </label>
                 </div>
                 
-                <div class="notificacao" data-idHeader="movimentacoes">
+                <div class="notificacao" data-idHeader="movimentacoesModal">
                     <label class="titulo">Saidas Altas</label>
                     <label class="switch">
-                        <input checked="" type="checkbox">
+                        <input checked="" type="checkboxModal">
                         <div class="slider"> <div class="circle"> <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path data-original="#000000" fill="currentColor" d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"></path> </g> </svg> <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path class="" data-original="#000000" fill="currentColor" d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"></path> </g> </svg> </div> </div>
                     </label>
                 </div>
@@ -116,31 +116,31 @@
                 <div class="notificacoes-header">
                     <h2>Segurança</h2>
                     <label class="switch">
-                        <input checked="" type="checkbox" id="seguranca">
+                        <input checked="" type="checkboxModal" id="segurancaModal">
                         <div class="slider"> <div class="circle"> <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path data-original="#000000" fill="currentColor" d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"></path> </g> </svg> <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path class="" data-original="#000000" fill="currentColor" d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"></path> </g> </svg> </div> </div>
                     </label>
                 </div>
                 
-                <div class="notificacao" data-idHeader="seguranca">
+                <div class="notificacao" data-idHeader="segurancaModal">
                     <label class="titulo">Novo Login</label>
                     <label class="switch">
-                        <input checked="" type="checkbox">
+                        <input checked="" type="checkboxModal">
                         <div class="slider"> <div class="circle"> <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path data-original="#000000" fill="currentColor" d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"></path> </g> </svg> <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path class="" data-original="#000000" fill="currentColor" d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"></path> </g> </svg> </div> </div>
                     </label>
                 </div>
                 
-                <div class="notificacao" data-idHeader="seguranca">
+                <div class="notificacao" data-idHeader="segurancaModal">
                     <label class="titulo">Transação Suspeita</label>
                     <label class="switch">
-                        <input checked="" type="checkbox">
+                        <input checked="" type="checkboxModal">
                         <div class="slider"> <div class="circle"> <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path data-original="#000000" fill="currentColor" d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"></path> </g> </svg> <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path class="" data-original="#000000" fill="currentColor" d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"></path> </g> </svg> </div> </div>
                     </label>
                 </div>
                 
-                <div class="notificacao" data-idHeader="seguranca">
+                <div class="notificacao" data-idHeader="segurancaModal">
                     <label class="titulo">Transação Duplicada</label>
                     <label class="switch">
-                        <input checked="" type="checkbox">
+                        <input checked="" type="checkboxModal">
                         <div class="slider"> <div class="circle"> <svg class="cross" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 365.696 365.696" y="0" x="0" height="6" width="6" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path data-original="#000000" fill="currentColor" d="M243.188 182.86 356.32 69.726c12.5-12.5 12.5-32.766 0-45.247L341.238 9.398c-12.504-12.503-32.77-12.503-45.25 0L182.86 122.528 69.727 9.374c-12.5-12.5-32.766-12.5-45.247 0L9.375 24.457c-12.5 12.504-12.5 32.77 0 45.25l113.152 113.152L9.398 295.99c-12.503 12.503-12.503 32.769 0 45.25L24.48 356.32c12.5 12.5 32.766 12.5 45.247 0l113.132-113.132L295.99 356.32c12.503 12.5 32.769 12.5 45.25 0l15.081-15.082c12.5-12.504 12.5-32.77 0-45.25zm0 0"></path> </g> </svg> <svg class="checkmark" xml:space="preserve" style="enable-background:new 0 0 512 512" viewBox="0 0 24 24" y="0" x="0" height="10" width="10" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" xmlns="http://www.w3.org/2000/svg"> <g> <path class="" data-original="#000000" fill="currentColor" d="M9.707 19.121a.997.997 0 0 1-1.414 0l-5.646-5.647a1.5 1.5 0 0 1 0-2.121l.707-.707a1.5 1.5 0 0 1 2.121 0L9 14.171l9.525-9.525a1.5 1.5 0 0 1 2.121 0l.707.707a1.5 1.5 0 0 1 0 2.121z"></path> </g> </svg> </div> </div>
                     </label>
                 </div>
@@ -187,9 +187,9 @@
         });
     }
 
-    const idsCheckBox = ['AlertasPrazos', 'AlertasPositivos', 'movimentacoes', 'seguranca'];
+    const idscheckboxModal = ['AlertasPrazosModal', 'AlertasPositivosModal', 'movimentacoesModal', 'segurancaModal'];
 
-    idsCheckBox.forEach(id => {
+    idscheckboxModal.forEach(id => {
         const input = document.getElementById(id);
         input.addEventListener('change', function() {
             if (input.checked) {
@@ -269,8 +269,8 @@
                 <i class="bi bi-person-fill"></i>
             </div>
             <div class="profile-info">
-                <h2 id="userNameDisplay">Caio Monte</h2>
-                <p id="userEmailDisplay">caio.monte@example.com</p>
+                <h2 id="userNameDisplayModal">Caio Monte</h2>
+                <p id="userEmailDisplayModal">caio.monte@example.com</p>
             </div>
         </div>
 
@@ -281,15 +281,15 @@
                 <div class="form-grid">
                     <div class="input-group">
                         <label>Nome Completo</label>
-                        <input type="text" id="inputNome" value="Caio Monte" class="user-input">
+                        <input type="text" id="userInputNomeModal" value="Caio Monte" class="user-input">
                     </div>
                     <div class="input-group">
                         <label>E-mail</label>
-                        <input type="email" id="inputEmail" value="caio.monte@example.com" class="user-input">
+                        <input type="email" id="usarInputEmailModal" value="caio.monte@example.com" class="user-input">
                     </div>
                     <div class="input-group">
                         <label>Telefone</label>
-                        <input type="tel" id="inputPhone" placeholder="(00) 00000-0000" class="user-input">
+                        <input type="tel" id="userInputPhoneModal" placeholder="(00) 00000-0000" class="user-input">
                     </div>
                 </div>
             </div>
@@ -300,7 +300,7 @@
                 <div class="user-config">
                     <label class="titulo-switch">Tema atual</label>
                     <label class="switch-theme">
-                        <input checked="true" id="checkbox" type="checkbox" />
+                        <input checked="true" id="checkboxModal" type="checkboxModal" />
                         <span class="slider">
                             <div class="star star_1"></div>
                             <div class="star star_2"></div>
@@ -312,7 +312,7 @@
                 
                 <div class="user-config">
                     <label class="titulo-switch">Saldos visiveis ao iniciar</label>
-                    <span id="visibilidade">
+                    <span id="visibilidadeModal">
                         <i class="bi bi-eye" data-visibilidade="true"></i>
                         <i class="bi bi-eye-slash hidden" data-visibilidade="false"></i>
                     </span>
@@ -358,8 +358,8 @@
 
         <form class="form-simple" id="novaCategoriaForm">
             <div class="input-group">
-                <label for="nome">Nome da Categoria</label>
-                <input type="text" name="nome" id="nome" placeholder="Ex: Gasolina" required>
+                <label for="nomeModal">Nome da Categoria</label>
+                <input type="text" name="nome" id="CategoriaNomeModal" placeholder="Ex: Gasolina" required>
             </div>
             
             <div class="input-group">
@@ -384,10 +384,10 @@
         <h1>Nova Forma de Pagamento</h1>
         <hr>
 
-        <form class="form-simple" id="novoPagamentoForm">
+        <form class="form-simple" id="novoPagamentoModalForm">
             <div class="input-group">
-                <label for="novoPagamento">Nome do Método</label>
-                <input type="text" id="novoPagamento" name="nome" placeholder="Ex: Conta Corrente Nubank" required>
+                <label for="novoPagamentoModal">Nome do Método</label>
+                <input type="text" id="novoPagamentoModal" name="nome" placeholder="Ex: Conta Corrente Nubank" required>
             </div>
 
             <div class="btn-container">
@@ -406,10 +406,10 @@
         <h1>Nova Categoria</h1>
         <hr>
 
-        <form class="form-simple" id="novaClasseForm">
+        <form class="form-simple" id="novaClasseModalForm">
             <div class="input-group">
-                <label for="novaClasse">Nome da Classe de Investimento</label>
-                <input type="text" id="novaClasse" name="nome" placeholder="Ex: Criptomoeda" required>
+                <label for="novaClasseModal">Nome da Classe de Investimento</label>
+                <input type="text" id="novaClasseModal" name="nome" placeholder="Ex: Criptomoeda" required>
             </div>
             <div class="btn-container">
                 <button class="btn-fechar js-fechar-modal" data-target="modal-nova-classe">Cancelar</button>
@@ -435,8 +435,8 @@
             <div class="form-flex">
             
                 <div class="input-group">
-                    <label for="filtroTipo">Tipo de Movimentação</label>
-                    <select id="filtroTipo">
+                    <label for="filtroTipoModal">Tipo de Movimentação</label>
+                    <select id="filtroTipoModal">
                         <option value="">Todos os Tipos</option>
                         <option value="R">Receitas (R)</option>
                         <option value="D">Despesas (D)</option>
@@ -446,34 +446,34 @@
                 </div>
 
                 <div class="input-group">
-                    <label for="filtroCategoria">Categoria</label>
-                    <select id="filtroCategoria">
+                    <label for="filtroCategoriaModal">Categoria</label>
+                    <select id="filtroCategoriaModal">
                         <option value="">Todas as Categorias</option>
                         </select>
                 </div>
             </div>
 
             <div class="input-group">
-                <label for="filtroConta">Conta / Forma de Pagamento</label>
-                <select id="filtroConta">
+                <label for="filtroContaModal">Conta / Forma de Pagamento</label>
+                <select id="filtroContaModal">
                     <option value="">Todas as Contas</option>
                 </select>
             </div>
             
             <div class="form-flex">
                 <div class="input-group">
-                    <label for="filtroDataInicio">De (Data Início)</label>
-                    <input type="date" id="filtroDataInicio">
+                    <label for="filtroDataInicioModal">De (Data Início)</label>
+                    <input type="date" id="filtroDataInicioModal">
                 </div>
                 
                 <div class="input-group">
-                    <label for="filtroDataFim">Até (Data Fim)</label>
-                    <input type="date" id="filtroDataFim">
+                    <label for="filtroDataFimModal">Até (Data Fim)</label>
+                    <input type="date" id="filtroDataFimModal">
                 </div>
             </div>
 
             <div class="btn-container">
-                <button type="button" class="btn-fechar js-fechar-modal" id="btnLimparFiltros" data-target="modal-filtro-transacoes">
+                <button type="button" class="btn-fechar js-fechar-modal" id="btnLimparFiltrosModal" data-target="modal-filtro-transacoes">
                     Limpar Filtros
                 </button>
                 <button type="submit" class="btn-salvar">

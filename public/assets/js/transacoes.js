@@ -1,5 +1,5 @@
 import { abrirModal, fecharModal } from "/assets/js/modais.js";
-import { apiFetch, feedbackPopup, removerPopupPeloX} from "/assets/js/utils.js";
+import { apiFetch, feedbackPopup, removerPopupPeloX, fecharModalExibirFeedback} from "/assets/js/utils.js";
 
 let formAtualizados = {
     'R': false,
@@ -128,7 +128,7 @@ document.getElementById('novaCategoriaForm').addEventListener('submit', async fu
 });
 
 // Salvar novo metodo de pagamento
-document.getElementById('novoPagamentoForm').addEventListener('submit', async function(evento) {
+document.getElementById('novoPagamentoModalForm').addEventListener('submit', async function(evento) {
     evento.preventDefault();
 
     const copoForm = new FormData(this);
@@ -148,7 +148,7 @@ document.getElementById('novoPagamentoForm').addEventListener('submit', async fu
 });
 
 // Salvar nova classe de investimento
-document.getElementById('novaClasseForm').addEventListener('submit', async function(evento) {
+document.getElementById('novaClasseModalForm').addEventListener('submit', async function(evento) {
     evento.preventDefault();
 
     const copoForm = new FormData(this);
@@ -246,7 +246,7 @@ document.getElementById('btnFiltrarTabela').addEventListener('click', async func
 
         if(jsonCat && jsonCat.resposta.sucesso) {
 
-            const selectCat = document.getElementById('filtroCategoria');
+            const selectCat = document.getElementById('filtroCategoriaModal');
             selectCat.innerHTML = '<option value="">Todas as Categorias</option>';
 
             const arrayJson = [jsonCat.categorias['R'], jsonCat.categorias['D'], jsonCat.categorias['I'], jsonCat.categorias['C']];
@@ -263,7 +263,7 @@ document.getElementById('btnFiltrarTabela').addEventListener('click', async func
         }
 
         if (jsonMet && jsonMet.resposta.sucesso) {
-            const selectMet = document.getElementById('filtroConta');
+            const selectMet = document.getElementById('filtroContaModal');
             selectMet.innerHTML = '<option value="">Todas as Contas</option>';
             
             jsonMet.metodos.forEach(met => {
@@ -284,11 +284,11 @@ document.getElementById('btnFiltrarTabela').addEventListener('click', async func
 document.getElementById('formFiltroTransacoes').addEventListener('submit', function(e) {
     e.preventDefault();
 
-    const tipo = document.getElementById('filtroTipo').value;
-    const catId = document.getElementById('filtroCategoria').value;
-    const contaId = document.getElementById('filtroConta').value;
-    const dataInicio = document.getElementById('filtroDataInicio').value;
-    const dataFim = document.getElementById('filtroDataFim').value;
+    const tipo = document.getElementById('filtroTipoModal').value;
+    const catId = document.getElementById('filtroCategoriaModal').value;
+    const contaId = document.getElementById('filtroContaModal').value;
+    const dataInicio = document.getElementById('filtroDataInicioModal').value;
+    const dataFim = document.getElementById('filtroDataFimModalModal').value;
 
     const filtrados = listaTransacoes.filter(trans => {
         if (tipo && trans.categoria_tipo !== tipo) return false;
@@ -307,14 +307,14 @@ document.getElementById('formFiltroTransacoes').addEventListener('submit', funct
 });
 
 // limpa filtros
-document.getElementById('btnLimparFiltros').addEventListener('click', function() {
+document.getElementById('btnLimparFiltrosModal').addEventListener('click', function() {
     document.getElementById('formFiltroTransacoes').reset();
     
     preencherTransacoes(listaTransacoes, null);
 });
 
 // altera a categoria de acordo com o tipo
-const selectTipo = document.getElementById('filtroTipo');
+const selectTipo = document.getElementById('filtroTipoModal');
 selectTipo.addEventListener('change', function() {
     const tipoSelecionado = this.value;
     
@@ -334,7 +334,7 @@ selectTipo.addEventListener('change', function() {
 });
 
 //altera o tipo de acordo com a categoria
- const selectCat = document.getElementById('filtroCategoria');
+ const selectCat = document.getElementById('filtroCategoriaModal');
 selectCat.addEventListener('change', function() {
     const opcaoSelecionada = this.options[this.selectedIndex];
     const tipoDaCategoria = opcaoSelecionada.getAttribute('data-tipo');
@@ -373,25 +373,6 @@ async function receberDadosDoBotao(botao) {
         console.error(erro);
         feedbackPopup('error', 'erro:' + erro);
     }
-}
-
-function fecharModalExibirFeedback(json, idModal, formulario) {
-    if (!json) return false;
-    
-    feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
-
-    if (json.resposta.sucesso) {   
-        
-        if (formulario)
-            formulario.reset();
-        
-        if (json.resposta.sucesso && idModal) 
-            fecharModal(idModal, null);
-        
-        return true;
-    }
-
-    return false;
 }
 
 function preencherCategorias(jsonCategorias, tipo) {
