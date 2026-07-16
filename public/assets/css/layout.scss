@@ -23,9 +23,11 @@
     --text-danger: #ef4444;
     --text-invest: #2079df;
     --text-warning: #f59e0b;
+    --text-cofre: #8b5cf6;
 
     --bg-badge-success: #d1fae5;
     --bg-badge-danger: #fee2e2;
+    --bg-badge-invest: #e0e7ff;
     --bg-badge-warning: #fef3c7;
     --bg-badge: #e5e7eb;
 
@@ -46,7 +48,7 @@
 /* tema escuro */
 [data-theme="dark"] {
     --bg-main: #212121;
-    --bg-padrao: #555;
+    --bg-padrao: #444;
     --bg-progress: #919191;
     --bg-input: #666;
     --bg-btn-confirm: #128d29;
@@ -61,10 +63,11 @@
     --text-primary: #fff;
     --text-secondary: #ccc;
     --text-contrast: #fff;
-    --text-especial: #22b13c;
+    --text-especial: #2cb946;
     --text-danger: #f05858;
-    --text-invest: #4284cf;
+    --text-invest: #2b9ed8;
     --text-warning: #e69d20;
+    --text-cofre: #a886f6;
 
     --bg-badge-success: #d1fae5;
     --bg-badge-danger: #fee2e2;
@@ -516,19 +519,6 @@ header {
                     color: var(--text-primary);
                 }
             }
-
-            .badge-info {
-                text-align: center;
-                margin-top: 1.5rem;
-                padding: 1rem;
-                background-color: var(--bg-info);
-                border-radius: var(--radius-btn);
-                cursor: default;
-                
-                p { margin: 0; font-size: .95rem; color: var(--text-primary); width: 100%; text-align: center; opacity: .85; 
-                    a { color: var(--text-primary); font-weight: 600; text-decoration: underline; }
-                }
-            }
         }
     }
 
@@ -822,7 +812,6 @@ header {
 
         .barra-filtros, form {
             display: flex;
-            gap: 1rem;
             flex-wrap: wrap;
             align-items: center;
 
@@ -845,7 +834,7 @@ header {
 
                 .btn-acao {
                     padding: 0.75rem 1rem;
-                    border-radius: 6px;
+                    border-radius: var(--radius-btn);
                     font-weight: 600;
                     font-size: 0.95rem;
                     cursor: pointer;
@@ -868,76 +857,68 @@ header {
         }
 
         .tabela-wrapper {
-            padding: 0; // Remove padding para a tabela encostar nas bordas
-            overflow: hidden;
+            padding: 0;
             display: flex;
             flex-direction: column;
 
             .tabela-scroll {
-                max-height: 60vh; // Trava a altura para rolar só a tabela
+                max-height: 80vh; // Trava a altura para rolar só a tabela
                 overflow-y: auto;
                 
                 /* Customização fina da barra de rolagem no webkit */
                 &::-webkit-scrollbar { width: 8px; }
                 &::-webkit-scrollbar-track { background: var(--bg-padrao); }
                 &::-webkit-scrollbar-thumb { background: var(--divisor-color); border-radius: 4px; }
+    
+                table {
+                    width: 100%;
+                    border-collapse: collapse;
+                    text-align: left;
+                    margin: 0;
+        
+                    thead th {
+                        position: sticky;
+                        top: 0px;
+                        padding: 1rem;
+                        font-size: 0.85rem;
+                        background-color: var(--bg-padrao);
+                        color: var(--text-secondary);
+                        text-transform: uppercase;
+                        border-bottom: 2px solid var(--divisor-color);
+                        z-index: 2;
+                    }
+    
+                    tbody td {
+                        padding: 1rem;
+                        border-bottom: 1px solid var(--divisor-color);
+                        font-size: 0.95rem;
+                        vertical-align: middle;
+                    }
+    
+                    tbody tr {
+                        transition: background-color 0.1s;
+                        &:hover { background-color: var(--bg-input); }
+                    }
+    
+                    .col-valor { text-align: right; font-weight: 600; }
+                    .col-acoes { text-align: center; }
+    
+                    .tipo-R { color: var(--text-especial); }
+                    .tipo-D { color: var(--text-danger); }
+                    .tipo-I { color: var(--text-invest); }
+                    .tipo-C { color: var(--text-cofre); }
+    
+                    .btn-linha {
+                        background: transparent; border: none; color: var(--text-secondary);
+                        cursor: pointer; padding: 0.4rem; border-radius: 4px; transition: 0.2s;
+                        &:hover { background: var(--divisor-color); color: var(--text-primary); }
+                        &.edit:hover { background: var(--bg-badge-invest); color: var(--text-invest); }
+                        &.delete:hover { background: var(--bg-badge-danger); color: var(--text-danger); }
+                    }
+                }
             }
 
-            .tabela-historico {
-                width: 100%;
-                border-collapse: collapse;
-                text-align: left;
-
-                thead th {
-                    position: sticky;
-                    top: 0;
-                    background-color: var(--bg-main);
-                    padding: 1rem;
-                    font-size: 0.85rem;
-                    color: var(--text-secondary);
-                    text-transform: uppercase;
-                    border-bottom: 2px solid var(--divisor-color);
-                    z-index: 2;
-                }
-
-                tbody td {
-                    padding: 1rem;
-                    border-bottom: 1px solid var(--divisor-color);
-                    font-size: 0.95rem;
-                    vertical-align: middle;
-                }
-
-                tbody tr {
-                    transition: background-color 0.1s;
-                    &:hover { background-color: var(--bg-main); }
-                }
-
-                // Tipografia e Cores específicas da tabela
-                .col-valor { text-align: right; font-weight: 600; }
-                .col-acoes { text-align: center; }
-
-                .tipo-R { color: var(--text-especial); }
-                .tipo-D { color: var(--text-primary); } /* Mantém neutro, vermelho só no ícone se quiser */
-                .tipo-I { color: #3b82f6; }
-                .tipo-C { color: #8b5cf6; }
-
-                // Botões de Ação na linha
-                .btn-linha {
-                    background: transparent; border: none; color: var(--text-secondary);
-                    cursor: pointer; padding: 0.4rem; border-radius: 4px; transition: 0.2s;
-                    &:hover { background: var(--divisor-color); color: var(--text-primary); }
-                    &.delete:hover { background: #fee2e2; color: var(--text-danger); }
-                }
-            }
-
-            .badge-info {
-                padding: 1rem;
-                background: var(--bg-main);
-                text-align: center;
-                font-size: 0.85rem;
-                color: var(--text-secondary);
-                border-top: 1px solid var(--divisor-color);
-            }
+            .badge-info { margin: 1.5rem 2rem; }
         }
     }
 }
@@ -1456,6 +1437,19 @@ input, select {
             font-weight: bold;
             background: var(--bg-badge);
             color: var(--text-primary);
+        }
+    }
+
+    .badge-info {
+        text-align: center;
+        margin-top: 1.5rem;
+        padding: 1rem;
+        background-color: var(--bg-info);
+        border-radius: var(--radius-btn);
+        cursor: default;
+        
+        p { margin: 0; font-size: .95rem; color: var(--text-primary); width: 100%; text-align: center; opacity: .85; 
+            a { color: var(--text-primary); font-weight: 600; text-decoration: underline; }
         }
     }
 }
