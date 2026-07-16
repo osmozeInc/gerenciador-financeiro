@@ -50,7 +50,7 @@ export function feedbackPopup(tipo, mensagem) {
     setTimeout(removerPopup, 4500);
 }
 
- export function removerPopupPeloX(popup) {
+export function removerPopupPeloX(popup) {
     if (popup.parentElement) {
         popup.remove();
         

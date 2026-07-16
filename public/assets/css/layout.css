@@ -936,7 +936,7 @@ header nav a.active {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 1rem;
-  margin: 1rem 0;
+  margin: 1rem 0 1.5rem 0;
 }
 .conteudo-central .historico-container .barra-filtros .search-group i, .conteudo-central .historico-container form .search-group i {
   position: absolute;

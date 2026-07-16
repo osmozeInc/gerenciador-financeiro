@@ -1,5 +1,5 @@
 import { abrirModal, fecharModal } from "/assets/js/modais.js";
-import { apiFetch, feedbackPopup, removerPopupPeloX, fecharModalExibirFeedback} from "/assets/js/utils.js";
+import { apiFetch, feedbackPopup, removerPopupPeloX} from "/assets/js/utils.js";
 
 let formAtualizados = {
     'R': false,
@@ -288,7 +288,7 @@ document.getElementById('formFiltroTransacoes').addEventListener('submit', funct
     const catId = document.getElementById('filtroCategoriaModal').value;
     const contaId = document.getElementById('filtroContaModal').value;
     const dataInicio = document.getElementById('filtroDataInicioModal').value;
-    const dataFim = document.getElementById('filtroDataFimModalModal').value;
+    const dataFim = document.getElementById('filtroDataFimModal').value;
 
     const filtrados = listaTransacoes.filter(trans => {
         if (tipo && trans.categoria_tipo !== tipo) return false;
@@ -373,6 +373,25 @@ async function receberDadosDoBotao(botao) {
         console.error(erro);
         feedbackPopup('error', 'erro:' + erro);
     }
+}
+
+function fecharModalExibirFeedback(json, idModal, formulario) {
+    if (!json) return false;
+    
+    feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
+
+    if (json.resposta.sucesso) {   
+        
+        if (formulario)
+            formulario.reset();
+        
+        if (json.resposta.sucesso && idModal) 
+            fecharModal(idModal, null);
+        
+        return true;
+    }
+
+    return false;
 }
 
 function preencherCategorias(jsonCategorias, tipo) {

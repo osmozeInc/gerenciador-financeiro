@@ -7,14 +7,14 @@
         </div>
         <div class="totalizador-historico">
             <span>Soma de todas as movimentações</span>
-            <strong id="valor-total-filtro">R$ 0,00</strong>
+            <strong id="valorTotal">R$ 0,00</strong>
         </div>
     </section>
 
     <section class="card">
         <h2>Filtros</h2>
             
-        <form class="barra-filtros">
+        <form class="barra-filtros" id="formFiltros">
             <div class="search-group">
                 <span style="position: relative; grid-column: span 2;">
                     <i class="bi bi-search"></i>
@@ -41,13 +41,12 @@
             
                 <input type="date" id="filtroDataFim">
         
-                <input type="number" id="filtroValorPiso" placeholder="Valor Piso">
+                <input type="number" id="filtroValorPiso" placeholder="Valor Mínimo">
             
-                <input type="number" id="filtroValorTeto" placeholder="Valor Teto">
+                <input type="number" id="filtroValorTeto" placeholder="Valor Máximo">
             </div>
 
             <div class="filtro-acoes">
-
                 <button type="button" class="btn-acao export" title="Exportar Extrato">
                     <i class="bi bi-download"></i> Exportar Tabela
                 </button>
@@ -56,11 +55,10 @@
                     <button type="button" class="btn-acao clean" id="btn-limpar-filtros" title="Limpar Filtros">
                         <i class="bi bi-eraser"></i> Limpar Filtros
                     </button>
-                    <button type="button" class="btn-acao filter" title="Exportar Extrato">
+                    <button type="submit" class="btn-acao filter" title="Exportar Extrato">
                         <i class="bi bi-funnel"></i> Aplicar Filtros
                     </button>
-                </span>
-                
+                </span>              
             </div>
         </form>
     </section>
