@@ -8,13 +8,13 @@ let formAtualizados = {
     'C': false,
     'Modal': false
 }
-let listaCompletaTransacoes = [];
+let listaTransacoes = [];
 
 // Buscar dados ao carregar a página
 document.addEventListener('DOMContentLoaded', async function() {
     try {
-        const json = await apiFetch('/transacoes/selectDadosTransacoes');
-        listaCompletaTransacoes = json.transacoes;
+        const json = await apiFetch('/transacoes/selectDados100Transacoes');
+        listaTransacoes = json.transacoes;
 
         if (!json.resposta.sucesso) {
             feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
@@ -79,7 +79,7 @@ switchParcelado.addEventListener('change', function() {
 const btnAtualizarTabela = document.getElementById('btnRecarregarTabela');
 btnAtualizarTabela.addEventListener('click', async function() {
     try {
-        const json = await apiFetch('/transacoes/selectDadosTransacoes');
+        const json = await apiFetch('/transacoes/selectDados100Transacoes');
         preencherTransacoes(json.transacoes, null);
         feedbackPopup('success', 'Tabela atualizada.');
     }
@@ -93,11 +93,11 @@ document.getElementById('inputPesquisaTabela').addEventListener('input', functio
     const termo = this.value.trim().toLowerCase();
 
     if (termo === '') {
-        preencherTransacoes(listaCompletaTransacoes, null);
+        preencherTransacoes(listaTransacoes, null);
         return;
     }
 
-    const filtrados = listaCompletaTransacoes.filter(trans => {
+    const filtrados = listaTransacoes.filter(trans => {
         const desc = (trans.descricao || '').toLowerCase();
         const cat = (trans.categoria_nome || '').toLowerCase();
         return desc.includes(termo) || cat.includes(termo);
@@ -290,7 +290,7 @@ document.getElementById('formFiltroTransacoes').addEventListener('submit', funct
     const dataInicio = document.getElementById('filtroDataInicio').value;
     const dataFim = document.getElementById('filtroDataFim').value;
 
-    const filtrados = listaCompletaTransacoes.filter(trans => {
+    const filtrados = listaTransacoes.filter(trans => {
         if (tipo && trans.categoria_tipo !== tipo) return false;
         if (catId && String(trans.categoria_nome) !== String(catId)) return false;
         if (contaId && String(trans.conta_nome) !== String(contaId)) return false;
@@ -310,7 +310,7 @@ document.getElementById('formFiltroTransacoes').addEventListener('submit', funct
 document.getElementById('btnLimparFiltros').addEventListener('click', function() {
     document.getElementById('formFiltroTransacoes').reset();
     
-    preencherTransacoes(listaCompletaTransacoes, null);
+    preencherTransacoes(listaTransacoes, null);
 });
 
 // altera a categoria de acordo com o tipo
