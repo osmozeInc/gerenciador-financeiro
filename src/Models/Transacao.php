@@ -156,4 +156,12 @@ class Transacao extends Model {
             throw $e;
         }
     }
+
+    public function deletarTransacao($id, $tenantId) {
+        $query = "DELETE FROM transacoes WHERE id = :id AND tenant_id = :tenant_id";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':tenant_id', $tenantId);
+        $stmt->execute();
+    }
 }

@@ -27,7 +27,11 @@ if (file_exists($caminhoArquivo)) {
     $controller = new $nomeController(); 
     
     if (method_exists($controller, $metodoAcao)) {
-        $controller->$metodoAcao();
+        
+        $parametro = isset($partesUrl[2]) ? $partesUrl[2] : null;
+
+        $controller->$metodoAcao($parametro);
+        
     } else {
         chamarPagina404();
     }

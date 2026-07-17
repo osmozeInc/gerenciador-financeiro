@@ -8,10 +8,15 @@ export async function apiFetch(url, metodo = 'GET', corpo = null) {
         const resposta = await fetch(url, opcoes);
         return await resposta.json();
     } catch (erro) {
-        // console.error(`Erro crítico de API (${url}):`, erro);
-
-        const resposta = await fetch(url, opcoes);
-        return await resposta.json();
+        console.error(`Erro crítico de API (${url}):`, erro);
+        
+        return {
+            resposta: {
+                sucesso: false,
+                msgTipo: 'danger',
+                mensagem: 'Erro de comunicação com o servidor ou falha na rede.'
+            }
+        };
     }
 }
 
@@ -59,3 +64,9 @@ export function removerPopupPeloX(popup) {
         }
     }
 };
+
+export async function deletarTransacao(idTransacao) {
+    const json = await apiFetch(`/transacoes/deletar/${idTransacao}`, 'DELETE');
+
+    return json;
+}

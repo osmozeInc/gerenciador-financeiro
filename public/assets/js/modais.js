@@ -1,34 +1,40 @@
-import * as generic from "./generic.js"
-
 /* ESCUTAS DO JS */
 
 // abrir modais
-const btnAbrirModal = document.querySelectorAll('.js-abrir-modal');
-btnAbrirModal.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const idModal = btn.getAttribute('data-target');
+document.body.addEventListener('click', (e) => {
+    const btnAbrirModal = e.target.closest('.js-abrir-modal');
+    if (btnAbrirModal) {
+        const idModal = btnAbrirModal.getAttribute('data-target');
         abrirModal(idModal);
-    });
-});
+        return;
+    }
 
-// fechar modais
-const btnFecharModal = document.querySelectorAll('.js-fechar-modal');
-btnFecharModal.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const idModal = btn.getAttribute('data-target');
+    // fechar modais
+    const btnFecharModal = e.target.closest('.js-fechar-modal');
+    if (btnFecharModal) {
+        const idModal = btnFecharModal.getAttribute('data-target');
         fecharModal(idModal);
-    });
+        return;
+    }
+
+    // trocar modais
+    const btnTrocarModal = e.target.closest('.js-trocar-modal');
+    if (btnTrocarModal) {
+        const idModalFechar = btnTrocarModal.getAttribute('data-target-close');
+        const idModalAbrir = btnTrocarModal.getAttribute('data-target');
+        toggleModal(idModalFechar, idModalAbrir);
+        return;
+    }
+
+    const btnAbrirModalValue = e.target.closest('.js-abrir-modal-passando-value');
+    if (btnAbrirModalValue) {
+        const value = btnAbrirModalValue.getAttribute('value');
+        const idModal = btnAbrirModalValue.getAttribute('data-target');
+        abrirModalPorValue(idModal, value);
+        return;
+    }
 });
 
-// trocar modais
-const btnTrocarModal = document.querySelectorAll('.js-trocar-modal');
-btnTrocarModal.forEach(btn => {
-    btn.addEventListener('click', () => {
-        const idModalFechar = btn.getAttribute('data-target-close');
-        const idModalAbrir = btn.getAttribute('data-target');
-        toggleModal(idModalFechar, idModalAbrir);
-    });
-});
 
 // abrir modal dos selects
 const categoriaSelect = document.querySelectorAll('.js-abrir-modal-select');
@@ -68,6 +74,11 @@ export function abrirModal(idModal) {
     document.getElementById(idModal).classList.add('active');
 
     travarRolagemDaPagina();
+}
+
+export function abrirModalPorValue(idModal, value) {
+    abrirModal(idModal);
+    document.querySelector(`#${idModal} form`).setAttribute('data-idTransacao', value);
 }
 
 export function fecharModal(idModal, idFormulario) {
@@ -111,6 +122,15 @@ function destravarRolagemDaPagina() {
     document.body.classList.remove('travar-scroll');
 }
 
+export function toggleClassById(idElemento, classCss) {
+    document.getElementById(idElemento).classList.toggle(classCss);
+}
+
+export function toggleClassByQuery(classElement, classCss) {
+    document.querySelector(classElement).classList.toggle(classCss);
+}
+
+
 
 /* FUNÇÕES DE TROCA DE TEMA */
 
@@ -130,8 +150,8 @@ export function definirTema(tema) {
 /* FUNÇÕES DE VISIBILIDADE DOS SALDOS */
 
 export function definirVisibilidadeDeValores(visibilidade) {
-    generic.toggleClassByQuery('.bi-eye', 'hidden');
-    generic.toggleClassByQuery('.bi-eye-slash', 'hidden');
+    toggleClassByQuery('.bi-eye', 'hidden');
+    toggleClassByQuery('.bi-eye-slash', 'hidden');
 
     if (visibilidade) {
         // esconder os saldos

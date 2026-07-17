@@ -1,5 +1,5 @@
 import { abrirModal, fecharModal } from "/assets/js/modais.js";
-import { apiFetch, feedbackPopup, removerPopupPeloX} from "/assets/js/utils.js";
+import { apiFetch, feedbackPopup, removerPopupPeloX, deletarTransacao} from "/assets/js/utils.js";
 
 let listaTransacoesCompleta;
 let saldoTotal;
@@ -97,15 +97,34 @@ document.getElementById('formFiltros')?.addEventListener('submit', function(e) {
     feedbackPopup('info', `${filtrados.length} transações encontradas.`);
 });
 
-// BÔNUS DIDÁTICO: Ação do botão "Limpar Filtros" que estava órfão no seu HTML
 document.getElementById('btn-limpar-filtros')?.addEventListener('click', function() {
-    // Reseta o formulário fisicamente na tela
     document.getElementById('formFiltros').reset();
     
-    // Devolve a lista master original sem filtros para a tabela
     preencherTransacoes(listaTransacoesCompleta);
     feedbackPopup('info', 'Filtros removidos.');
 });
+
+document.querySelector('#modal-excluir-transacao form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const id = this.getAttribute('data-idTransacao');
+
+    const jsonResposta = await deletarTransacao(id);
+    if (!jsonResposta.resposta.sucesso) {
+        feedbackPopup(jsonResposta.resposta.msgTipo, jsonResposta.resposta.mensagem);
+        return;
+    }
+    feedbackPopup(jsonResposta.resposta.msgTipo, jsonResposta.resposta.mensagem);
+
+    const jsonTransacoes = await apiFetch('/transacoes/selectDadosTransacoes');        
+    if (!jsonTransacoes.resposta.sucesso) {
+        feedbackPopup(jsonTransacoes.resposta.msgTipo, json.resposta.mensagem);
+        return;
+    }
+    preencherTransacoes(jsonTransacoes.transacoes);
+
+    fecharModal('modal-excluir-transacao');
+})
 
 
 function preencherTransacoes(transacoes) {
@@ -137,8 +156,8 @@ function preencherTransacoes(transacoes) {
         const tdAcoes = linha.insertCell();
         tdAcoes.classList.add('col-acoes');
         tdAcoes.innerHTML = `
-            <button value="${trans.id_transacao}" class="btn-linha edit js-abrir-modal" data-target="modal-editar-transacao" title="Editar"><i class="bi bi-pencil"></i></button>
-            <button value="${trans.id_transacao}" class="btn-linha delete js-abrir-modal" data-target="modal-excluir-transacao" title="Excluir"><i class="bi bi-trash3"></i></button>
+            <button value="${trans.id}" class="btn-linha edit js-abrir-modal-passando-value" data-target="modal-editar-transacao" title="Editar"><i class="bi bi-pencil"></i></button>
+            <button value="${trans.id}" class="btn-linha delete js-abrir-modal-passando-value" data-target="modal-excluir-transacao" title="Excluir"><i class="bi bi-trash3"></i></button>
         `;
     });
 

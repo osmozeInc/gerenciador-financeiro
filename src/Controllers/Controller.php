@@ -56,6 +56,28 @@ class Controller {
                     'mensagem' => 'Selecione um cofre válido para a transação!'
                 ],
             ],
+            'deletar' => [
+                'deletado_com_sucesso' => [
+                    'sucesso' => true,
+                    'msgTipo' => 'success', 
+                    'mensagem' => 'Transação deletada com sucesso!'
+                ],
+                'erro_ao_deletar' => [
+                    'sucesso' => false,
+                    'msgTipo' => 'danger', 
+                    'mensagem' => 'Erro ao deletar transação'
+                ],
+                'id_invalido' => [
+                    'sucesso' => false,
+                    'msgTipo' => 'warning',
+                    'mensagem' => 'ID da transação não foi informado ou é inválido.'
+                ],
+                'metodo_invalido' => [
+                    'sucesso' => false,
+                    'msgTipo' => 'warning',
+                    'mensagem' => 'Selecione um metodo de investimento valido.'
+                ]
+            ],
         ],
         'genericas' => [
             'formulario_incompleto' => [

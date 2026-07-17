@@ -241,4 +241,30 @@ class TransacoesController extends Controller {
         }
         exit;
     }
+
+    public function deletar($id = null) {
+        header('Content-Type: application/json');
+
+        if ($id === null || !is_numeric($id)) {
+            http_response_code(400);
+            echo json_encode([ 'resposta' => $this->mensagensModel['transacao']['deletar']['id_invalido'] ]);
+            return;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
+            http_response_code(405);
+            echo json_encode([ 'resposta' => $this->mensagensModel['transacao']['deletar']['metodo_invalido'] ]);
+            return;
+        }
+
+        try {
+            $transacaoModel = new Transacao();
+            $transacaoModel->deletarTransacao($id, $this->idUsuarioLogado);
+
+            echo json_encode([ 'resposta' => $this->mensagensModel['transacao']['deletar']['deletado_com_sucesso'] ]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode([ 'resposta' => $this->mensagensModel['transacao']['deletar']['erro_ao_deletar'] ]);
+        }
+    }
 }
