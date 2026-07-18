@@ -64,7 +64,7 @@ class Controller {
                 ],
                 'erro_ao_deletar' => [
                     'sucesso' => false,
-                    'msgTipo' => 'danger', 
+                    'msgTipo' => 'error', 
                     'mensagem' => 'Erro ao deletar transação'
                 ],
                 'id_invalido' => [
@@ -78,6 +78,23 @@ class Controller {
                     'mensagem' => 'Selecione um metodo de investimento valido.'
                 ]
             ],
+            'buscar' => [
+                'busca_com_sucesso' => [
+                    'sucesso' => true,
+                    'msgTipo' => 'success', 
+                    'mensagem' => 'Dados do banco de dados carregados com sucesso!'
+                ],
+                'busca_vazia' => [
+                    'sucesso' => true,
+                    'msgTipo' => 'warning',
+                    'mensagem' => 'Nenhum dado encontrado.'
+                ],
+                'erro_interno' => [
+                    'sucesso' => false,
+                    'msgTipo' => 'error', 
+                    'mensagem' => 'Erro ao buscar dados.'
+                ]
+            ]
         ],
         'genericas' => [
             'formulario_incompleto' => [

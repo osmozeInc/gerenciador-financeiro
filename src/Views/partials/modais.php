@@ -485,7 +485,189 @@
 </article>
 
 
-<!-- MODAL DE EXCLUIR TRANSAÇÃO -->
+<!-- MODAL DE EDIÇÃO DINÂMICA DE TRANSAÇÕES falta padronizar IDs -->
+
+<article class="modal-backdrop" id="modal-editar-transacao">
+    <div class="modal-container-filter">
+        
+        <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center;">
+            <h1 style="margin: 0;">Editar <span id="badgeTipoEdicao" style="font-size: 1.1rem; color: var(--text-especial);"></span></h1>
+            <i class="bi bi-x-lg js-fechar-modal" data-target="modal-editar-transacao" style="cursor: pointer; font-size: 1.3rem;"></i>
+        </div>
+        <hr>
+
+        <!-- 1. EDITAR RECEITA -->
+        <form class="form-simple form-edicao hidden" id="editReceitaForm">
+            <input type="hidden" name="id_transacao">
+            <div class="form-flex">
+                <div class="input-group" style="width: 100%;">
+                    <label>Descrição</label>
+                    <input type="text" name="descricao" required>
+                </div>
+            </div>
+            <div class="form-flex">
+                <div class="input-group">
+                    <label>Categoria</label>
+                    <select name="categoria_id" id="editCategoriasR" required>
+                        <option value="" disabled selected>Pesquisando...</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Conta de Destino</label>
+                    <select name="conta_id" id="editMetodoContaR" required></select>
+                </div>
+            </div>
+            <div class="form-flex">
+                <div class="input-group">
+                    <label>Valor Total (R$)</label>
+                    <input type="number" name="valor" step="0.01" min="0.01" required>
+                </div>
+                <div class="input-group">
+                    <label>Data</label>
+                    <input type="date" name="data" required>
+                </div>
+            </div>
+            <div class="btn-container">
+                <button type="button" class="btn-fechar js-fechar-modal" data-target="modal-editar-transacao">Cancelar</button>
+                <button type="submit" class="btn-salvar">Salvar Alterações</button>
+            </div>
+        </form>
+
+        <!-- 2. EDITAR DESPESA -->
+        <form class="form-simple form-edicao hidden" id="editDespesaForm">
+            <input type="hidden" name="id_transacao">
+            <div class="form-flex">
+                <div class="input-group" style="width: 100%;">
+                    <label>Descrição</label>
+                    <input type="text" name="descricao" required>
+                </div>
+            </div>
+            <div class="form-flex">
+                <div class="input-group">
+                    <label>Categoria</label>
+                    <select name="categoria_id" id="editCategoriasD" required>
+                        <option value="" disabled selected>Pesquisando...</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Conta de Origem</label>
+                    <select name="conta_id" id="editMetodoContaD" required></select>
+                </div>
+            </div>
+            <div class="form-flex">
+                <div class="input-group">
+                    <label>Valor Total (R$)</label>
+                    <input type="number" name="valor" step="0.01" min="0.01" required>
+                </div>
+                <div class="input-group">
+                    <label>Data</label>
+                    <input type="date" name="data" required>
+                </div>
+            </div>
+            <div class="form-flex">
+                <div class="input-group checkbox-group">
+                    <label>Compra Parcelada?</label>
+                    <label class="switch">
+                        <input type="checkbox" name="parcelado" id="editParcelado">
+                        <div class="slider"><div class="circle"></div></div>
+                    </label>
+                </div>
+                <div class="input-group hidden" id="editInputParcelas">
+                    <label>Qtd. Parcelas</label>
+                    <input type="number" name="qtd_parcelas" min="1">
+                </div>
+            </div>
+            <div class="btn-container">
+                <button type="button" class="btn-fechar js-fechar-modal" data-target="modal-editar-transacao">Cancelar</button>
+                <button type="submit" class="btn-salvar">Salvar Alterações</button>
+            </div>
+        </form>
+
+        <!-- 3. EDITAR INVESTIMENTO -->
+        <form class="form-simple form-edicao hidden" id="editInvestimentoForm">
+            <input type="hidden" name="id_transacao">
+            <div class="form-flex">
+                <div class="input-group" style="width: 100%;">
+                    <label>Descrição</label>
+                    <input type="text" name="descricao" required>
+                </div>
+            </div>
+            <div class="form-flex">
+                <div class="input-group">
+                    <label>Conta de Origem</label>
+                    <select name="conta_id" id="editMetodoContaI" required></select>
+                </div>
+                <div class="input-group">
+                    <label>Data</label>
+                    <input type="date" name="data" required>
+                </div>
+            </div>
+            <div class="form-flex">
+                <div class="input-group">
+                    <label>Ativo (Ticker)</label>
+                    <input type="text" name="ativo" style="text-transform: uppercase;">
+                </div>
+                <div class="input-group">
+                    <label>Classe</label>
+                    <select name="classe" id="editClasseInvestimento"></select>
+                </div>
+            </div>
+            <div class="form-flex">
+                <div class="input-group">
+                    <label>Quantidade</label>
+                    <input type="number" name="quantidade" step="0.01" min="0.01">
+                </div>
+                <div class="input-group">
+                    <label>Preço Unitário (R$)</label>
+                    <input type="number" name="preco" step="0.01" min="0.01">
+                </div>
+            </div>
+            <div class="btn-container">
+                <button type="button" class="btn-fechar js-fechar-modal" data-target="modal-editar-transacao">Cancelar</button>
+                <button type="submit" class="btn-salvar">Salvar Alterações</button>
+            </div>
+        </form>
+
+        <!-- 4. EDITAR COFRE -->
+        <form class="form-simple form-edicao hidden" id="editCofreForm">
+            <input type="hidden" name="id_transacao">
+            <div class="form-flex">
+                <div class="input-group" style="width: 100%;">
+                    <label>Descrição</label>
+                    <input type="text" name="descricao" required>
+                </div>
+            </div>
+            <div class="form-flex">
+                <div class="input-group">
+                    <label>Conta de Origem</label>
+                    <select name="conta_id" id="editMetodoContaC" required></select>
+                </div>
+                <div class="input-group">
+                    <label>Cofre Destino</label>
+                    <select name="id_cofre" id="editCofresCofre" required></select>
+                </div>
+            </div>
+            <div class="form-flex">
+                <div class="input-group">
+                    <label>Valor Total (R$)</label>
+                    <input type="number" name="valor" step="0.01" min="0.01" required>
+                </div>
+                <div class="input-group">
+                    <label>Data</label>
+                    <input type="date" name="data" required>
+                </div>
+            </div>
+            <div class="btn-container">
+                <button type="button" class="btn-fechar js-fechar-modal" data-target="modal-editar-transacao">Cancelar</button>
+                <button type="submit" class="btn-salvar">Salvar Alterações</button>
+            </div>
+        </form>
+
+    </div>
+</article>
+
+
+<!-- MODAL DE EXCLUIR TRANSAÇÃO falta padronizar IDs -->
 
 <article class="modal-backdrop" id="modal-excluir-transacao">
     <div class="modal-container">

@@ -242,6 +242,39 @@ class TransacoesController extends Controller {
         exit;
     }
 
+    public function buscar($id = null) {
+        header('Content-Type: application/json');
+
+        if ($id === null || !is_numeric($id)) {
+            http_response_code(400);
+            echo json_encode([ 'resposta' => $this->mensagensModel['transacao']['deletar']['id_invalido'] ]);
+            return;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            http_response_code(405);
+            echo json_encode([ 'resposta' => $this->mensagensModel['transacao']['deletar']['metodo_invalido'] ]);
+            return;
+        }
+
+        try {
+            $transacaoModel = new Transacao();
+            $transacao = $transacaoModel->buscarTransacao($id, $this->idUsuarioLogado);
+
+            echo json_encode([ 
+                'resposta' => $this->mensagensModel['transacao']['buscar']['busca_com_sucesso'],
+                'transacao' => $transacao
+                ]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode([ 
+                'resposta' => $this->mensagensModel['transacao']['buscar']['erro_interno'],
+                'detalhes' => $e->getMessage()
+                ]);
+        }
+    }
+
+
     public function deletar($id = null) {
         header('Content-Type: application/json');
 
@@ -268,3 +301,4 @@ class TransacoesController extends Controller {
         }
     }
 }
+

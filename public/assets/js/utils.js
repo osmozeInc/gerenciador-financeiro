@@ -65,8 +65,12 @@ export function removerPopupPeloX(popup) {
     }
 };
 
+export async function buscarTransacao(idTransacao) {
+    const json = await apiFetch(`/transacoes/buscar/${idTransacao}`, 'GET');
+    return json;
+}
+
 export async function deletarTransacao(idTransacao) {
     const json = await apiFetch(`/transacoes/deletar/${idTransacao}`, 'DELETE');
-
     return json;
 }

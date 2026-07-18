@@ -1,3 +1,5 @@
+import { feedbackPopup, buscarTransacao } from "./utils.js";
+
 /* ESCUTAS DO JS */
 
 // abrir modais
@@ -76,7 +78,7 @@ export function abrirModal(idModal) {
     travarRolagemDaPagina();
 }
 
-export function abrirModalPorValue(idModal, value) {
+function abrirModalPorValue(idModal, value) {
     abrirModal(idModal);
     document.querySelector(`#${idModal} form`).setAttribute('data-idTransacao', value);
 }

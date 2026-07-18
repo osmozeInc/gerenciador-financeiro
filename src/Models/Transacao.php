@@ -157,6 +157,39 @@ class Transacao extends Model {
         }
     }
 
+    public function buscarTransacao($id, $tenantId) {
+        $query = "
+        SELECT 
+            t.*, 
+            c.nome AS categoria_nome,
+            c.tipo AS categoria_tipo,
+            cm.id AS metodo_id,
+            cm.nome AS metodo_nome,
+            des.parcelado,
+            des.qtd_parcelas,
+            inv.ativo,
+            inv.classe,
+            inv.quantidade,
+            inv.preco_unitario,
+            tcof.id_cofre,
+            cof.nome
+
+        FROM transacoes t
+        INNER JOIN categorias c ON t.id_categoria = c.id
+        LEFT JOIN contas_metodos cm ON t.id_conta_metodo = cm.id
+        LEFT JOIN t_despesas des ON t.id = id_transacao
+        LEFT JOIN t_investimentos inv ON t.id = inv.id_transacao
+        LEFT JOIN t_cofres tcof ON t.id = tcof.id_transacao
+        LEFT JOIN cofres cof ON tcof.id_cofre = cof.id
+        WHERE t.id = :id AND t.tenant_id = :tenant_id;
+        ";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':tenant_id', $tenantId);
+        $stmt->execute();
+        return $stmt->fetch();
+    }
+
     public function deletarTransacao($id, $tenantId) {
         $query = "DELETE FROM transacoes WHERE id = :id AND tenant_id = :tenant_id";
         $stmt = $this->pdo->prepare($query);

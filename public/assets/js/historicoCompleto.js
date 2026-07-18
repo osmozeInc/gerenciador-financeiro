@@ -1,5 +1,5 @@
 import { abrirModal, fecharModal } from "/assets/js/modais.js";
-import { apiFetch, feedbackPopup, removerPopupPeloX, deletarTransacao} from "/assets/js/utils.js";
+import { apiFetch, feedbackPopup, removerPopupPeloX, buscarTransacao, deletarTransacao} from "/assets/js/utils.js";
 
 let listaTransacoesCompleta;
 let saldoTotal;
@@ -63,6 +63,31 @@ selectCat.addEventListener('change', function() {
     const tipoDaCategoria = opcaoSelecionada.getAttribute('data-tipo');
     
     if (tipoDaCategoria) selectTipo.value = tipoDaCategoria;
+});
+
+// habilitar/desabilitar a quantidade de parcelas
+const switchParcelado = document.getElementById('editParcelado')
+switchParcelado.addEventListener('change', function() {
+    const inputParcelas = document.getElementById('editInputParcelas');
+    
+    if (this.checked) {
+        inputParcelas.classList.remove('hidden');
+    } else {
+        inputParcelas.classList.add('hidden');
+    }
+});
+
+// abrir modal e exibir o form correto
+document.body.addEventListener('click', (e) => {
+    const btnAbrirModalTipo = e.target.closest('.js-abrir-modal-passando-tipo');
+    if (btnAbrirModalTipo) {
+        const value = btnAbrirModalTipo.getAttribute('value');
+        const tipo = btnAbrirModalTipo.getAttribute('data-tipo');
+        const idModal = btnAbrirModalTipo.getAttribute('data-target');
+        
+        abrirModal(idModal);
+        exibirFormCorreto(tipo, value);
+    }
 });
 
 document.getElementById('formFiltros')?.addEventListener('submit', function(e) {
@@ -156,7 +181,7 @@ function preencherTransacoes(transacoes) {
         const tdAcoes = linha.insertCell();
         tdAcoes.classList.add('col-acoes');
         tdAcoes.innerHTML = `
-            <button value="${trans.id}" class="btn-linha edit js-abrir-modal-passando-value" data-target="modal-editar-transacao" title="Editar"><i class="bi bi-pencil"></i></button>
+            <button value="${trans.id}" class="btn-linha edit js-abrir-modal-passando-tipo" data-tipo="${trans.categoria_tipo}" data-target="modal-editar-transacao" title="Editar"><i class="bi bi-pencil"></i></button>
             <button value="${trans.id}" class="btn-linha delete js-abrir-modal-passando-value" data-target="modal-excluir-transacao" title="Excluir"><i class="bi bi-trash3"></i></button>
         `;
     });
@@ -193,4 +218,149 @@ function preencherMetodos(metodos) {
         option.textContent = metodo.nome;
         select.appendChild(option);
     });
+}
+
+function preencherCategoriasModal(categorias, idSelect) {
+    const select = document.getElementById(idSelect);
+
+    categorias.forEach(cat => {
+        const option = document.createElement('option');
+        option.value = cat.nome;
+        option.textContent = cat.nome;
+        option.setAttribute('data-tipo', cat.tipo);
+        select.appendChild(option);
+    });
+}
+
+function preencherMetodosModal(metodos, idSelect) {
+    const select = document.getElementById(idSelect);
+    metodos.forEach(metodo => {
+        const option = document.createElement('option');
+        option.value = metodo.nome;
+        option.textContent = metodo.nome;
+        select.appendChild(option);
+    });
+}
+
+function preencherClassesModal(classes) {
+    const select = document.getElementById('editClasseInvestimento');
+
+    classes.forEach(classe => {
+        const option = document.createElement('option');
+        option.value = classe.id;
+        option.textContent = classe.nome;
+        select.appendChild(option);
+    });
+}
+
+function preencherCofresModal(cofres) {
+    const select = document.getElementById('editCofresCofre');
+
+    cofres.forEach(cofre => {
+        const option = document.createElement('option');
+        option.value = cofre.id;
+        option.textContent = cofre.nome;
+        select.appendChild(option);
+    });
+}
+
+async function exibirFormCorreto(tipo, idTransacao) {
+
+    const config = {
+        'R': { idForm: 'editReceitaForm',      titulo: '(Receita)' },
+        'D': { idForm: 'editDespesaForm',      titulo: '(Despesa)' },
+        'I': { idForm: 'editInvestimentoForm', titulo: '(Investimento)' },
+        'C': { idForm: 'editCofreForm',        titulo: '(Cofre)' }
+    };
+
+    const cfg = config[tipo];
+    if (!cfg) return;
+
+    document.querySelectorAll('.form-edicao').forEach(f => {
+        f.classList.add('hidden');
+        f.reset();
+    });
+
+    const formAtivo = document.getElementById(cfg.idForm);
+    formAtivo.classList.remove('hidden');
+
+    document.getElementById('badgeTipoEdicao').textContent = cfg.titulo;
+
+    const jsonTransacao = await buscarTransacao(idTransacao);
+    if (!jsonTransacao || !jsonTransacao.resposta.sucesso) {
+        feedbackPopup('error', 'Erro ao carregar dados para edição.');
+        return;
+    }
+
+    if (tipo === 'R' || tipo === 'D') {    
+        let jsonCategoria;
+
+        if (tipo === 'R') jsonCategoria = await apiFetch(`/categorias/selectDadosReceita`);
+        if (tipo === 'D') jsonCategoria = await apiFetch(`/categorias/selectDadosDespesa`);
+
+        if (!jsonCategoria || !jsonCategoria.resposta.sucesso) {
+            feedbackPopup('error', 'Erro ao carregar categorias.');
+            return;
+        }
+
+        else preencherCategoriasModal(jsonCategoria.categorias, `editCategorias${tipo}`);
+    }
+    
+    const jsonMetodos = await apiFetch('/contaMetodo/selectDados');
+    if (!jsonMetodos || !jsonMetodos.resposta.sucesso) {
+        feedbackPopup('error', 'Erro ao carregar formas de pagamento.');
+        return;
+    }
+    preencherMetodosModal(jsonMetodos.metodos, `editMetodoConta${tipo}`);
+
+    const t = jsonTransacao.transacao;
+
+    const setVal = (seletor, valor) => {
+        const input = formAtivo.querySelector(seletor);
+        if (input && valor !== null && valor !== undefined) input.value = valor;
+    };
+
+    setVal('[name="id_transacao"]', t.id ?? t.id_transacao);
+    setVal('[name="descricao"]',    t.descricao);
+    setVal('[name="data"]',         t.data_transacao);
+    setVal('[name="valor"]',        t.valor_total ?? t.valor);
+    setVal('[name="conta_id"]',     t.metodo_nome ?? t.metodo_id);
+    setVal('[name="categoria_id"]', t.categoria_nome ?? t.categoria_id);
+
+    // 6. Preenchimento Específico por Tipo (Alinhado exatamente com o seu SQL)
+    if (tipo === 'D') {
+        const checkParcelado = formAtivo.querySelector('[name="parcelado"]');
+        const divParcelas = document.getElementById('editInputParcelas');
+        
+        checkParcelado.checked = t.parcelado === 1 || t.parcelado === true || t.qtd_parcelas > 1;
+        divParcelas.classList.toggle('hidden', !checkParcelado.checked);
+        
+        if (checkParcelado.checked) setVal('[name="qtd_parcelas"]', t.qtd_parcelas);
+    } 
+    else if (tipo === 'I') {
+        const jsonClasses = await apiFetch('/classesInvestimento/selectDados');
+        if (!jsonClasses || !jsonClasses.resposta.sucesso) {
+            feedbackPopup('error', 'Erro ao carregar classes de investimento.');
+            return;
+        }
+        preencherClassesModal(jsonClasses.classes);
+
+        setVal('[name="ativo"]',      t.ativo);
+        setVal('[name="classe"]',     t.classe);
+        setVal('[name="quantidade"]', t.quantidade);
+        setVal('[name="preco"]',      t.preco_unitario); // Corrigido: no seu SQL é preco_unitario
+    } 
+    else if (tipo === 'C') {
+        const jsonCofres = await apiFetch('/cofres/selectDados');
+        if (!jsonCofres || !jsonCofres.resposta.sucesso) {
+            feedbackPopup('error', 'Erro ao carregar cofres.');
+            return;
+        }
+        preencherCofresModal(jsonCofres.cofres);
+
+        setVal('[name="id_cofre"]',   t.id_cofre);
+    }
+
+    // 7. Abre o modal
+    abrirModal('modal-editar-transacao');
 }
