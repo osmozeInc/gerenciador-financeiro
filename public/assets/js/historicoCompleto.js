@@ -267,10 +267,10 @@ function preencherCofresModal(cofres) {
 async function exibirFormCorreto(tipo, idTransacao) {
 
     const config = {
-        'R': { idForm: 'editReceitaForm',      titulo: '(Receita)' },
-        'D': { idForm: 'editDespesaForm',      titulo: '(Despesa)' },
-        'I': { idForm: 'editInvestimentoForm', titulo: '(Investimento)' },
-        'C': { idForm: 'editCofreForm',        titulo: '(Cofre)' }
+        'R': { idForm: 'editReceitaForm',      titulo: 'Receita' },
+        'D': { idForm: 'editDespesaForm',      titulo: 'Despesa' },
+        'I': { idForm: 'editInvestimentoForm', titulo: 'Investimento' },
+        'C': { idForm: 'editCofreForm',        titulo: 'Cofre' }
     };
 
     const cfg = config[tipo];

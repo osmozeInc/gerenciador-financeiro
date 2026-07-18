@@ -331,7 +331,7 @@
                 </div>
             </div>
 
-            <div class="user-group" style="margin-bottom: 1rem;">
+            <div class="user-group-login">
                 <h2>Login</h2>
                 <div class="user-config logout">
                     <label>Sair</label>
@@ -425,9 +425,9 @@
 <article class="modal-backdrop" id="modal-filtro-transacoes">
     <div class="modal-container-filter">
         
-        <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center;">
-            <h1 style="margin: 0;">Selecione os Filtros</h1>
-            <i class="bi bi-x-lg js-fechar-modal" data-target="modal-filtro-transacoes" style="cursor: pointer; font-size: 1.3rem;"></i>
+        <div class="modal-header">
+            <h1>Selecione os Filtros</h1>
+            <i class="bi bi-x-lg js-fechar-modal" data-target="modal-filtro-transacoes"></i>
         </div>
         <hr>
 
@@ -490,9 +490,9 @@
 <article class="modal-backdrop" id="modal-editar-transacao">
     <div class="modal-container-filter">
         
-        <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center;">
-            <h1 style="margin: 0;">Editar <span id="badgeTipoEdicao" style="font-size: 1.1rem; color: var(--text-especial);"></span></h1>
-            <i class="bi bi-x-lg js-fechar-modal" data-target="modal-editar-transacao" style="cursor: pointer; font-size: 1.3rem;"></i>
+        <div class="modal-header">
+            <h1>Editar <span id="badgeTipoEdicao"></span></h1>
+            <i class="bi bi-x-lg js-fechar-modal" data-target="modal-editar-transacao"></i>
         </div>
         <hr>
 
@@ -500,7 +500,7 @@
         <form class="form-simple form-edicao hidden" id="editReceitaForm">
             <input type="hidden" name="id_transacao">
             <div class="form-flex">
-                <div class="input-group" style="width: 100%;">
+                <div class="input-group">
                     <label>Descrição</label>
                     <input type="text" name="descricao" required>
                 </div>
@@ -537,7 +537,7 @@
         <form class="form-simple form-edicao hidden" id="editDespesaForm">
             <input type="hidden" name="id_transacao">
             <div class="form-flex">
-                <div class="input-group" style="width: 100%;">
+                <div class="input-group">
                     <label>Descrição</label>
                     <input type="text" name="descricao" required>
                 </div>
@@ -587,7 +587,7 @@
         <form class="form-simple form-edicao hidden" id="editInvestimentoForm">
             <input type="hidden" name="id_transacao">
             <div class="form-flex">
-                <div class="input-group" style="width: 100%;">
+                <div class="input-group">
                     <label>Descrição</label>
                     <input type="text" name="descricao" required>
                 </div>
@@ -605,7 +605,7 @@
             <div class="form-flex">
                 <div class="input-group">
                     <label>Ativo (Ticker)</label>
-                    <input type="text" name="ativo" style="text-transform: uppercase;">
+                    <input type="text" name="ativo" class="uppercase">
                 </div>
                 <div class="input-group">
                     <label>Classe</label>
@@ -632,7 +632,7 @@
         <form class="form-simple form-edicao hidden" id="editCofreForm">
             <input type="hidden" name="id_transacao">
             <div class="form-flex">
-                <div class="input-group" style="width: 100%;">
+                <div class="input-group">
                     <label>Descrição</label>
                     <input type="text" name="descricao" required>
                 </div>
@@ -670,19 +670,19 @@
 <!-- MODAL DE EXCLUIR TRANSAÇÃO falta padronizar IDs -->
 
 <article class="modal-backdrop" id="modal-excluir-transacao">
-    <div class="modal-container">
+    <div class="modal-delete-container">
         
-        <div class="modal-header" style="display: flex; justify-content: space-between; align-items: center;">
-            <h1 style="margin: 0; color: var(--text-danger, #ef4444);">Excluir Movimentação</h1>
-            <i class="bi bi-x-lg js-fechar-modal" data-target="modal-excluir-transacao" style="cursor: pointer; font-size: 1.3rem;"></i>
+        <div class="modal-header">
+            <h1>Excluir Movimentação</h1>
+            <i class="bi bi-x-lg js-fechar-modal" data-target="modal-excluir-transacao"></i>
         </div>
         <hr>
 
-        <div style="margin: 1.5rem 0;">
-            <p style="font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem; font-weight: 500;">
+        <div class="modal-content">
+            <p class="assunto">
                 Tem certeza que deseja excluir esta movimentação?
             </p>
-            <p style="font-size: 0.95rem; color: var(--text-secondary);">
+            <p class="corpo">
                 Esta ação não poderá ser desfeita e afetará o saldo atual da sua conta e do seu histórico.
             </p>
             
@@ -693,7 +693,7 @@
             <button type="button" class="btn-fechar js-fechar-modal" data-target="modal-excluir-transacao">
                 Cancelar
             </button>
-            <button type="submit" class="btn-salvar" id="btnConfirmarExclusao" style="background-color: var(--text-danger, #ef4444);">
+            <button type="submit" class="btn-excluir" id="btnConfirmarExclusao">
                 Sim, Excluir
             </button>
         </form>
