@@ -74,3 +74,11 @@ export async function deletarTransacao(idTransacao) {
     const json = await apiFetch(`/transacoes/deletar/${idTransacao}`, 'DELETE');
     return json;
 }
+
+export function exibirLoaderTabela() {
+    document.querySelector('.loader-table').classList.remove('hidden');
+}
+
+export function esconderLoaderTabela() {
+    document.querySelector('.loader-table').classList.add('hidden');
+}

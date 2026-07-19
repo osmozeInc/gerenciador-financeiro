@@ -496,6 +496,10 @@
         </div>
         <hr>
 
+        <div class="loader-modal-container">
+            <div class="loader"></div>
+        </div>
+
         <!-- 1. EDITAR RECEITA -->
         <form class="form-simple form-edicao hidden" id="editReceitaForm">
             <input type="hidden" name="id_transacao">
