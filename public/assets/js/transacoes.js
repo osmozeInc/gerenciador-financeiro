@@ -77,9 +77,12 @@ switchParcelado.addEventListener('change', function() {
     }
 });
 
-// atualizar tabela de transações
+// recarregar tabela de transações
 const btnAtualizarTabela = document.getElementById('btnRecarregarTabela');
 btnAtualizarTabela.addEventListener('click', async function() {
+    document.getElementById('tabelaTransacoes').innerHTML = '';
+    utils.exibirLoaderTabela();
+
     try {
         const json = await utils.apiFetch('/transacoes/selectDados100Transacoes');
         preencherTransacoes(json.transacoes, null);
@@ -88,6 +91,8 @@ btnAtualizarTabela.addEventListener('click', async function() {
     catch (erro) {
         utils.feedbackPopup('error', 'Ocorreu um erro ao buscar os dados.');
     }
+
+    utils.esconderLoaderTabela();
 });
 
 // buscar na tabela de transações
@@ -108,12 +113,12 @@ document.getElementById('inputPesquisaTabela').addEventListener('input', functio
     preencherTransacoes(filtrados, null);
 });
 
-// Salvar nova categoria //usar Promise.all
+// Salvar nova categoria
 document.getElementById('novaCategoriaForm').addEventListener('submit', async function(evento) {
     evento.preventDefault();
 
-    const copoForm = new FormData(this);
-    const jsonSalvar = await utils.apiFetch('/categorias/salvar', 'POST', copoForm);
+    const corpoForm = new FormData(this);
+    const jsonSalvar = await utils.apiFetch('/categorias/salvar', 'POST', corpoForm);
     
     if (fecharModalExibirFeedback(jsonSalvar, 'modal-nova-categoria', this)) {
         const tipo = document.getElementById('modal-nova-categoria').getAttribute('data-tipo');
@@ -133,8 +138,8 @@ document.getElementById('novaCategoriaForm').addEventListener('submit', async fu
 document.getElementById('novoPagamentoModalForm').addEventListener('submit', async function(evento) {
     evento.preventDefault();
 
-    const copoForm = new FormData(this);
-    const jsonSalvar = await utils.apiFetch('/contaMetodo/salvar', 'POST', copoForm);
+    const corpoForm = new FormData(this);
+    const jsonSalvar = await utils.apiFetch('/contaMetodo/salvar', 'POST', corpoForm);
 
     if (fecharModalExibirFeedback(jsonSalvar, 'modal-novo-pagamento', this)) {
         const tipo = document.getElementById('modal-novo-pagamento').getAttribute('data-tipo');
@@ -153,8 +158,8 @@ document.getElementById('novoPagamentoModalForm').addEventListener('submit', asy
 document.getElementById('novaClasseModalForm').addEventListener('submit', async function(evento) {
     evento.preventDefault();
 
-    const copoForm = new FormData(this);
-    const json = await utils.apiFetch('/classesInvestimento/salvar', 'POST', copoForm);
+    const corpoForm = new FormData(this);
+    const json = await utils.apiFetch('/classesInvestimento/salvar', 'POST', corpoForm);
 
     if (fecharModalExibirFeedback(json, 'modal-nova-classe', this)) {
         const tipo = document.getElementById('modal-novo-pagamento').getAttribute('data-tipo');
@@ -170,8 +175,8 @@ document.getElementById('novaClasseModalForm').addEventListener('submit', async 
 document.getElementById('receitaForm').addEventListener('submit', async function(evento) {
     evento.preventDefault();
 
-    const copoForm = new FormData(this);
-    const jsonSalvar = await utils.apiFetch('/transacoes/salvarReceita', 'POST', copoForm);
+    const corpoForm = new FormData(this);
+    const jsonSalvar = await utils.apiFetch('/transacoes/salvarReceita', 'POST', corpoForm);
 
     if (fecharModalExibirFeedback(jsonSalvar, null, this) /* && VERIFICAR SE O USUÁRIO QUER QUE ATUALIZE AUTOMATICAMENTE */) {
         // const novosDados = await utils.apiFetch('/transacoes/selectTransacoes');
@@ -188,8 +193,8 @@ document.getElementById('receitaForm').addEventListener('submit', async function
 document.getElementById('despesaForm').addEventListener('submit', async function(evento) {
     evento.preventDefault();
 
-    const copoForm = new FormData(this);
-    const jsonSalvar = await utils.apiFetch('/transacoes/salvarDespesa', 'POST', copoForm);
+    const corpoForm = new FormData(this);
+    const jsonSalvar = await utils.apiFetch('/transacoes/salvarDespesa', 'POST', corpoForm);
 
     if (fecharModalExibirFeedback(jsonSalvar, null, this) /* && VERIFICAR SE O USUÁRIO QUER QUE ATUALIZE AUTOMATICAMENTE */) {
         // const novosDados = await utils.apiFetch('/transacoes/selectTransacoes');
@@ -206,8 +211,8 @@ document.getElementById('despesaForm').addEventListener('submit', async function
 document.getElementById('investimentoForm').addEventListener('submit', async function(evento) {
     evento.preventDefault();
 
-    const copoForm = new FormData(this);
-    const jsonSalvar = await utils.apiFetch('/transacoes/salvarInvestimento', 'POST', copoForm);
+    const corpoForm = new FormData(this);
+    const jsonSalvar = await utils.apiFetch('/transacoes/salvarInvestimento', 'POST', corpoForm);
 
     if (fecharModalExibirFeedback(jsonSalvar, null, this) /* && VERIFICAR SE O USUÁRIO QUER QUE ATUALIZE AUTOMATICAMENTE */) {
         // const novosDados = await utils.apiFetch('/transacoes/selectTransacoes');
@@ -224,8 +229,8 @@ document.getElementById('investimentoForm').addEventListener('submit', async fun
 document.getElementById('cofreForm').addEventListener('submit', async function(evento) {
     evento.preventDefault();
 
-    const copoForm = new FormData(this);
-    const jsonSalvar = await utils.apiFetch('/transacoes/salvarNoCofre', 'POST', copoForm);
+    const corpoForm = new FormData(this);
+    const jsonSalvar = await utils.apiFetch('/transacoes/salvarNoCofre', 'POST', corpoForm);
 
     if (fecharModalExibirFeedback(jsonSalvar, null, this) /* && VERIFICAR SE O USUÁRIO QUER QUE ATUALIZE AUTOMATICAMENTE */) {
         // const novosDados = await utils.apiFetch('/transacoes/selectTransacoes');
@@ -243,8 +248,10 @@ document.getElementById('btnFiltrarTabela').addEventListener('click', async func
     if (formAtualizados['Modal']) return;
 
     try {
-        const jsonCat = await utils.apiFetch('/categorias/selectDados');
-        const jsonMet = await utils.apiFetch('/contaMetodo/selectDados');
+        const [jsonCat, jsonMet] = await Promise.all([
+            utils.apiFetch('/categorias/selectDados'),
+            utils.apiFetch('/contaMetodo/selectDados')
+        ]);
 
         if(jsonCat && jsonCat.resposta.sucesso) {
 
@@ -336,7 +343,7 @@ selectTipo.addEventListener('change', function() {
 });
 
 //altera o tipo de acordo com a categoria
- const selectCat = document.getElementById('filtroCategoriaModal');
+const selectCat = document.getElementById('filtroCategoriaModal');
 selectCat.addEventListener('change', function() {
     const opcaoSelecionada = this.options[this.selectedIndex];
     const tipoDaCategoria = opcaoSelecionada.getAttribute('data-tipo');
@@ -352,22 +359,32 @@ async function receberDadosDoBotao(botao) {
     if (formAtualizados[tipo]) return;
 
     try {
-        if (tipo === 'R') {
-            const json = await utils.apiFetch('/categorias/selectDadosReceita');
-            preencherCategorias(json.categorias, tipo);
-        } else if (tipo === 'D') {
-            const json = await utils.apiFetch('/categorias/selectDadosDespesa');
-            preencherCategorias(json.categorias, tipo);
-        } else if (tipo === 'I') {
-            const json = await utils.apiFetch('/classesInvestimento/selectDados');
-            preencherClasses(json.classes);
-        } else if (tipo === 'C') {
-            const json = await utils.apiFetch('/cofres/selectDados');
-            preencherCofres(json.cofres);
+        // 1. Mapeamos qual é o endpoint do primeiro select de acordo com a aba
+        const rotasEspecificas = {
+            'R': '/categorias/selectDadosReceita',
+            'D': '/categorias/selectDadosDespesa',
+            'I': '/classesInvestimento/selectDados',
+            'C': '/cofres/selectDados'
+        };
+
+        const rotaAlvo = rotasEspecificas[tipo];
+
+        // 2. DISPARO EM PARALELO: Busca o select específico E as contas em tempo simultâneo!
+        const [jsonEspecifico, jsonMetodos] = await Promise.all([
+            rotaAlvo ? utils.apiFetch(rotaAlvo) : Promise.resolve(null),
+            utils.apiFetch('/contaMetodo/selectDados')
+        ]);
+
+        // 3. Preenchemos os selects com os dados que chegaram juntos
+        if (jsonEspecifico) {
+            if (tipo === 'R' || tipo === 'D') preencherCategorias(jsonEspecifico.categorias, tipo);
+            else if (tipo === 'I') preencherClasses(jsonEspecifico.classes);
+            else if (tipo === 'C') preencherCofres(jsonEspecifico.cofres);
         }
 
-        const jsonMetodos = await utils.apiFetch('/contaMetodo/selectDados');
-        preencherMetodos(jsonMetodos.metodos, tipo);
+        if (jsonMetodos) {
+            preencherMetodos(jsonMetodos.metodos, tipo);
+        }
         
         formAtualizados[tipo] = true;
     }
