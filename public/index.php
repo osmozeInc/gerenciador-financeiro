@@ -2,13 +2,12 @@
 ini_set('display_errors', 1);
 error_reporting(E_ALL);
 
-if (preg_match('/\.(?:png|jpg|jpeg|gif|css|js)$/', $_SERVER["REQUEST_URI"])) {
+if (preg_match('/\.(?:png|jpg|jpeg|gif|webp|css|js|ico|svg|woff|woff2|ttf|eot)$/i', $_SERVER["REQUEST_URI"])) {
     return false;
 }
 
 $url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
-// Rota padrão
 if ($url === '/') {
     $url = '/home';
 }

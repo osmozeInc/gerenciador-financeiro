@@ -216,6 +216,10 @@
             </tbody>
         </table>
 
+        <div class="loader-table">
+            <div class="loader"></div>
+        </div>
+
         <div class="badge-info">
             <p> Exibimos suas últimas 100 movimentações. Se não achou o que procura, <a href="/historicoCompleto">busque no histórico completo</a>.</p>
         </div>

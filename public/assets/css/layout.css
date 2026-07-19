@@ -36,6 +36,7 @@
   --bg-alert-warning: #fff679;
   --bg-alert-info: #33c3e7;
   --text-alert: #000000b0;
+  --loader: #333;
   --tema-color: light;
 }
 
@@ -67,6 +68,7 @@
   --radius-card: 10px;
   --radius-btn: 6px;
   --card-shadow-color: rgba(0, 0, 0, 0.3);
+  --loader: #e0e0e0;
   --tema-color: dark;
 }
 
@@ -1502,6 +1504,15 @@ header nav a.active {
   cursor: pointer;
   font-size: 1.3rem;
 }
+.modal-backdrop .modal-container-filter .loader-modal-container, .modal-backdrop .modal-delete-container .loader-modal-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  min-width: 100%;
+  min-height: 450px;
+}
 .modal-backdrop .modal-container-filter .modal-content, .modal-backdrop .modal-delete-container .modal-content {
   margin: 1.5rem 0;
 }
@@ -1625,6 +1636,12 @@ header nav a.active {
 }
 
 /* ==== CLASSES GENÉRICAS ==== */
+.loader-table {
+  display: flex;
+  justify-content: center;
+  margin: 3rem 0;
+}
+
 .input-group {
   display: flex;
   flex-direction: column;
@@ -1853,4 +1870,22 @@ input::placeholder, select::placeholder {
 .switch input:checked + .slider .circle {
   left: calc(100% - var(--circle-diameter) - var(--switch-offset));
   box-shadow: var(--circle-checked-shadow);
+}
+
+.loader {
+  width: 45px;
+  height: 40px;
+  background: linear-gradient(rgba(0, 0, 0, 0) 16.6666666667%, var(--loader) 0 50%, rgba(0, 0, 0, 0) 0), linear-gradient(rgba(0, 0, 0, 0) 33.3333333333%, var(--loader) 0 66.6666666667%, rgba(0, 0, 0, 0) 0), linear-gradient(rgba(0, 0, 0, 0) 50%, var(--loader) 0 83.3333333333%, rgba(0, 0, 0, 0) 0);
+  background-size: 10px 400%;
+  background-repeat: no-repeat;
+  animation: matrix 1s infinite linear;
+}
+
+@keyframes matrix {
+  0% {
+    background-position: 0% 100%, 50% 100%, 100% 100%;
+  }
+  100% {
+    background-position: 0% 0%, 50% 0%, 100% 0%;
+  }
 }/*# sourceMappingURL=layout.css.map */

@@ -64,25 +64,29 @@
     </section>
 
     <section class="card tabela-wrapper">
-        <div class="tabela-scroll">
-            <table>
-                <thead>
-                    <tr>
-                        <th style="border-radius: 10px 0 0 0;">Data</th>
-                        <th>Descrição</th>
-                        <th>Categoria</th>
-                        <th>Conta</th>
-                        <th class="col-valor">Valor</th>
-                        <th class="col-acoes">Ações</th>
-                    </tr>
-                </thead>
-                <tbody id="tabelaHistoricoCompleto">
-                    <!-- Linhas geradas via JavaScript -->
-                </tbody>
-            </table>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th style="border-radius: 10px 0 0 0;">Data</th>
+                    <th>Descrição</th>
+                    <th>Categoria</th>
+                    <th>Conta</th>
+                    <th class="col-valor">Valor</th>
+                    <th class="col-acoes">Ações</th>
+                </tr>
+            </thead>
+            <tbody id="tabelaHistoricoCompleto">
+            </tbody>
+        </table>
+
+        <div class="loader-table">
+            <div class="loader"></div>
         </div>
+
         <div class="badge-info" id="badge-resultados">
             <p>Exibindo <span id="qtd-resultados">0</span> movimentações.</p>
         </div>
+
     </section>
 </main>

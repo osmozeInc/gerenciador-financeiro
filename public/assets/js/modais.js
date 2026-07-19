@@ -78,17 +78,17 @@ export function abrirModal(idModal) {
     travarRolagemDaPagina();
 }
 
-function abrirModalPorValue(idModal, value) {
-    abrirModal(idModal);
-    document.querySelector(`#${idModal} form`).setAttribute('data-idTransacao', value);
-}
-
 export function fecharModal(idModal, idFormulario) {
     document.getElementById(idModal).classList.remove('active');
 
     if (idFormulario) document.getElementById(idFormulario).reset();
 
     destravarRolagemDaPagina();
+}
+
+function abrirModalPorValue(idModal, value) {
+    abrirModal(idModal);
+    document.querySelector(`#${idModal} form`).setAttribute('data-idTransacao', value);
 }
 
 function abrirModalPorOption(idModal, tipo) {
@@ -106,6 +106,14 @@ function abrirModalPorOption(idModal, tipo) {
         select.appendChild(option);
         select.classList.add('bloqueado');
     }
+}
+
+export function abrirLoaderModal(idModal) {
+    document.querySelector(`#${idModal} .loader-modal-container`).classList.remove('hidden');
+}
+
+export function fecharLoaderModal(idModal) {
+    document.querySelector(`#${idModal} .loader-modal-container`).classList.add('hidden');
 }
 
 function toggleModal(idModalFechar, idModalAbrir) {

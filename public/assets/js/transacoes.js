@@ -1,5 +1,5 @@
 import { abrirModal, fecharModal } from "/assets/js/modais.js";
-import { apiFetch, feedbackPopup, removerPopupPeloX} from "/assets/js/utils.js";
+import * as utils from "/assets/js/utils.js";
 
 let formAtualizados = {
     'R': false,
@@ -13,19 +13,21 @@ let listaTransacoes = [];
 // Buscar dados ao carregar a página
 document.addEventListener('DOMContentLoaded', async function() {
     try {
-        const json = await apiFetch('/transacoes/selectDados100Transacoes');
+        const json = await utils.apiFetch('/transacoes/selectDados100Transacoes');
         listaTransacoes = json.transacoes;
 
         if (!json.resposta.sucesso) {
-            feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
+            utils.feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
             return;
         }
             
         preencherTransacoes(json.transacoes, null);
     }
     catch (erro) {
-        feedbackPopup('error', 'Ocorreu um erro ao buscar os dados.');
+        utils.feedbackPopup('error', 'Ocorreu um erro ao buscar os dados.');
     }
+
+    utils.esconderLoaderTabela();
 });
 
 // exibir os blocos corretos de acordo com o botão clicado
@@ -79,12 +81,12 @@ switchParcelado.addEventListener('change', function() {
 const btnAtualizarTabela = document.getElementById('btnRecarregarTabela');
 btnAtualizarTabela.addEventListener('click', async function() {
     try {
-        const json = await apiFetch('/transacoes/selectDados100Transacoes');
+        const json = await utils.apiFetch('/transacoes/selectDados100Transacoes');
         preencherTransacoes(json.transacoes, null);
-        feedbackPopup('success', 'Tabela atualizada.');
+        utils.feedbackPopup('success', 'Tabela atualizada.');
     }
     catch (erro) {
-        feedbackPopup('error', 'Ocorreu um erro ao buscar os dados.');
+        utils.feedbackPopup('error', 'Ocorreu um erro ao buscar os dados.');
     }
 });
 
@@ -106,20 +108,20 @@ document.getElementById('inputPesquisaTabela').addEventListener('input', functio
     preencherTransacoes(filtrados, null);
 });
 
-// Salvar nova categoria
+// Salvar nova categoria //usar Promise.all
 document.getElementById('novaCategoriaForm').addEventListener('submit', async function(evento) {
     evento.preventDefault();
 
     const copoForm = new FormData(this);
-    const jsonSalvar = await apiFetch('/categorias/salvar', 'POST', copoForm);
+    const jsonSalvar = await utils.apiFetch('/categorias/salvar', 'POST', copoForm);
     
     if (fecharModalExibirFeedback(jsonSalvar, 'modal-nova-categoria', this)) {
         const tipo = document.getElementById('modal-nova-categoria').getAttribute('data-tipo');
         
         let jsonCategorias;
         console.log (tipo);
-        if (tipo === 'R') jsonCategorias = await apiFetch('/categorias/selectDadosReceita');
-        if (tipo === 'D') jsonCategorias = await apiFetch('/categorias/selectDadosDespesa');
+        if (tipo === 'R') jsonCategorias = await utils.apiFetch('/categorias/selectDadosReceita');
+        if (tipo === 'D') jsonCategorias = await utils.apiFetch('/categorias/selectDadosDespesa');
         if (jsonCategorias && jsonCategorias.categorias) preencherCategorias(jsonCategorias.categorias, tipo);
     }
     
@@ -132,12 +134,12 @@ document.getElementById('novoPagamentoModalForm').addEventListener('submit', asy
     evento.preventDefault();
 
     const copoForm = new FormData(this);
-    const jsonSalvar = await apiFetch('/contaMetodo/salvar', 'POST', copoForm);
+    const jsonSalvar = await utils.apiFetch('/contaMetodo/salvar', 'POST', copoForm);
 
     if (fecharModalExibirFeedback(jsonSalvar, 'modal-novo-pagamento', this)) {
         const tipo = document.getElementById('modal-novo-pagamento').getAttribute('data-tipo');
 
-        const jsonMetodos = await apiFetch('/contaMetodo/selectDados');
+        const jsonMetodos = await utils.apiFetch('/contaMetodo/selectDados');
         if (jsonMetodos) preencherMetodos(jsonMetodos.metodos, tipo);
     }
 
@@ -152,12 +154,12 @@ document.getElementById('novaClasseModalForm').addEventListener('submit', async 
     evento.preventDefault();
 
     const copoForm = new FormData(this);
-    const json = await apiFetch('/classesInvestimento/salvar', 'POST', copoForm);
+    const json = await utils.apiFetch('/classesInvestimento/salvar', 'POST', copoForm);
 
     if (fecharModalExibirFeedback(json, 'modal-nova-classe', this)) {
         const tipo = document.getElementById('modal-novo-pagamento').getAttribute('data-tipo');
 
-        const classes = await apiFetch('/classesInvestimento/selectDados');
+        const classes = await utils.apiFetch('/classesInvestimento/selectDados');
         if (classes) preencherClasses(classes.classes, tipo);
 
         formAtualizados[tipo] = false;
@@ -169,10 +171,10 @@ document.getElementById('receitaForm').addEventListener('submit', async function
     evento.preventDefault();
 
     const copoForm = new FormData(this);
-    const jsonSalvar = await apiFetch('/transacoes/salvarReceita', 'POST', copoForm);
+    const jsonSalvar = await utils.apiFetch('/transacoes/salvarReceita', 'POST', copoForm);
 
     if (fecharModalExibirFeedback(jsonSalvar, null, this) /* && VERIFICAR SE O USUÁRIO QUER QUE ATUALIZE AUTOMATICAMENTE */) {
-        // const novosDados = await apiFetch('/transacoes/selectTransacoes');
+        // const novosDados = await utils.apiFetch('/transacoes/selectTransacoes');
         // if (novosDados) preencherTransacoes(novosDados.transacoes, 'R');
     }
     else {
@@ -187,10 +189,10 @@ document.getElementById('despesaForm').addEventListener('submit', async function
     evento.preventDefault();
 
     const copoForm = new FormData(this);
-    const jsonSalvar = await apiFetch('/transacoes/salvarDespesa', 'POST', copoForm);
+    const jsonSalvar = await utils.apiFetch('/transacoes/salvarDespesa', 'POST', copoForm);
 
     if (fecharModalExibirFeedback(jsonSalvar, null, this) /* && VERIFICAR SE O USUÁRIO QUER QUE ATUALIZE AUTOMATICAMENTE */) {
-        // const novosDados = await apiFetch('/transacoes/selectTransacoes');
+        // const novosDados = await utils.apiFetch('/transacoes/selectTransacoes');
         // if (novosDados) preencherTransacoes(novosDados.transacoes, 'D');
     }
     else {
@@ -205,10 +207,10 @@ document.getElementById('investimentoForm').addEventListener('submit', async fun
     evento.preventDefault();
 
     const copoForm = new FormData(this);
-    const jsonSalvar = await apiFetch('/transacoes/salvarInvestimento', 'POST', copoForm);
+    const jsonSalvar = await utils.apiFetch('/transacoes/salvarInvestimento', 'POST', copoForm);
 
     if (fecharModalExibirFeedback(jsonSalvar, null, this) /* && VERIFICAR SE O USUÁRIO QUER QUE ATUALIZE AUTOMATICAMENTE */) {
-        // const novosDados = await apiFetch('/transacoes/selectTransacoes');
+        // const novosDados = await utils.apiFetch('/transacoes/selectTransacoes');
         // if (novosDados) preencherTransacoes(novosDados.transacoes, 'I');
     }
     else {
@@ -223,10 +225,10 @@ document.getElementById('cofreForm').addEventListener('submit', async function(e
     evento.preventDefault();
 
     const copoForm = new FormData(this);
-    const jsonSalvar = await apiFetch('/transacoes/salvarNoCofre', 'POST', copoForm);
+    const jsonSalvar = await utils.apiFetch('/transacoes/salvarNoCofre', 'POST', copoForm);
 
     if (fecharModalExibirFeedback(jsonSalvar, null, this) /* && VERIFICAR SE O USUÁRIO QUER QUE ATUALIZE AUTOMATICAMENTE */) {
-        // const novosDados = await apiFetch('/transacoes/selectTransacoes');
+        // const novosDados = await utils.apiFetch('/transacoes/selectTransacoes');
         // if (novosDados) preencherTransacoes(novosDados.transacoes, 'C');
     }
     else {
@@ -241,8 +243,8 @@ document.getElementById('btnFiltrarTabela').addEventListener('click', async func
     if (formAtualizados['Modal']) return;
 
     try {
-        const jsonCat = await apiFetch('/categorias/selectDados');
-        const jsonMet = await apiFetch('/contaMetodo/selectDados');
+        const jsonCat = await utils.apiFetch('/categorias/selectDados');
+        const jsonMet = await utils.apiFetch('/contaMetodo/selectDados');
 
         if(jsonCat && jsonCat.resposta.sucesso) {
 
@@ -351,34 +353,34 @@ async function receberDadosDoBotao(botao) {
 
     try {
         if (tipo === 'R') {
-            const json = await apiFetch('/categorias/selectDadosReceita');
+            const json = await utils.apiFetch('/categorias/selectDadosReceita');
             preencherCategorias(json.categorias, tipo);
         } else if (tipo === 'D') {
-            const json = await apiFetch('/categorias/selectDadosDespesa');
+            const json = await utils.apiFetch('/categorias/selectDadosDespesa');
             preencherCategorias(json.categorias, tipo);
         } else if (tipo === 'I') {
-            const json = await apiFetch('/classesInvestimento/selectDados');
+            const json = await utils.apiFetch('/classesInvestimento/selectDados');
             preencherClasses(json.classes);
         } else if (tipo === 'C') {
-            const json = await apiFetch('/cofres/selectDados');
+            const json = await utils.apiFetch('/cofres/selectDados');
             preencherCofres(json.cofres);
         }
 
-        const jsonMetodos = await apiFetch('/contaMetodo/selectDados');
+        const jsonMetodos = await utils.apiFetch('/contaMetodo/selectDados');
         preencherMetodos(jsonMetodos.metodos, tipo);
         
         formAtualizados[tipo] = true;
     }
     catch (erro) {
         console.error(erro);
-        feedbackPopup('error', 'erro:' + erro);
+        utils.feedbackPopup('error', 'erro:' + erro);
     }
 }
 
 function fecharModalExibirFeedback(json, idModal, formulario) {
     if (!json) return false;
     
-    feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
+    utils.feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
 
     if (json.resposta.sucesso) {   
         
