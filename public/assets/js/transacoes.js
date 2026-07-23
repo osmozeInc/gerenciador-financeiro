@@ -25,6 +25,7 @@ document.addEventListener('DOMContentLoaded', async function() {
     }
     catch (erro) {
         utils.feedbackPopup('error', 'Ocorreu um erro ao buscar os dados.');
+        utils.feedbackPopup('error', erro);
     }
 
     utils.esconderLoaderTabela();
@@ -322,6 +323,33 @@ document.getElementById('btnLimparFiltrosModal').addEventListener('click', funct
     preencherTransacoes(listaTransacoes, null);
 });
 
+// excluir transação
+document.querySelector('#modal-excluir-transacao form').addEventListener('submit', async function(e) {
+    e.preventDefault();
+    fecharModal('modal-excluir-transacao');
+
+    document.getElementById('tabelaTransacoes').innerHTML = '';
+    utils.exibirLoaderTabela();
+
+    const id = this.getAttribute('data-idTransacao');
+
+    const jsonResposta = await utils.deletarTransacao(id);
+    if (!jsonResposta.resposta.sucesso) {
+        utils.feedbackPopup(jsonResposta.resposta.msgTipo, jsonResposta.resposta.mensagem);
+        return;
+    }
+    utils.feedbackPopup(jsonResposta.resposta.msgTipo, jsonResposta.resposta.mensagem);
+
+    const jsonTransacoes = await utils.apiFetch('/transacoes/selectDadosTransacoes');
+    if (!jsonTransacoes.resposta.sucesso) {
+        utils.feedbackPopup(jsonTransacoes.resposta.msgTipo, json.resposta.mensagem);
+        return;
+    }
+
+    utils.esconderLoaderTabela();
+    preencherTransacoes(jsonTransacoes.transacoes);
+})
+
 // altera a categoria de acordo com o tipo
 const selectTipo = document.getElementById('filtroTipoModal');
 selectTipo.addEventListener('change', function() {
@@ -458,22 +486,29 @@ function preencherTransacoes(transacoes, tipo) {
     tabela.innerHTML = ''; 
 
     transacoes.forEach(trans => {
-        // Previne erro se a data vier nula do banco
         if(!trans.data_transacao) return; 
 
         const [ano, mes, dia] = trans.data_transacao.split('-');
         const dataFormatada = `${dia}/${mes}/${ano}`;
 
+        const valorFormatado = parseFloat(trans.valor_total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
         const linha = tabela.insertRow();
         linha.insertCell().textContent = dataFormatada;
         linha.insertCell().textContent = trans.descricao;
         linha.insertCell().textContent = trans.categoria_nome;
-        linha.insertCell().textContent = trans.categoria_tipo;
-        linha.insertCell().textContent = trans.conta_nome || 'N/A'; // Pode ser nula no cofre
+        linha.insertCell().textContent = trans.conta_nome;
+
+        const tdValor = linha.insertCell();
+        tdValor.classList.add('col-valor', `tipo-${trans.categoria_tipo}`);
+        tdValor.textContent = `${trans.categoria_tipo === 'R' ? '+' : '-'} ${valorFormatado}`;
         
-        // Formatação profissional de moeda para os alunos verem
-        const valorFormatado = parseFloat(trans.valor_total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-        linha.insertCell().textContent = valorFormatado;
+        const tdAcoes = linha.insertCell();
+        tdAcoes.classList.add('col-acoes');
+        tdAcoes.innerHTML = `
+            <button value="${trans.id}" class="btn-linha edit js-abrir-modal-passando-tipo" data-tipo="${trans.categoria_tipo}" data-target="modal-editar-transacao" title="Editar"><i class="bi bi-pencil"></i></button>
+            <button value="${trans.id}" class="btn-linha delete js-abrir-modal-passando-value" data-target="modal-excluir-transacao" title="Excluir"><i class="bi bi-trash3"></i></button>
+        `;
     });
 
     atualizarDataAtual(tipo);

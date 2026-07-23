@@ -133,8 +133,13 @@ document.getElementById('btn-limpar-filtros')?.addEventListener('click', functio
     utils.feedbackPopup('info', 'Filtros removidos.');
 });
 
+// excluir transação
 document.querySelector('#modal-excluir-transacao form').addEventListener('submit', async function(e) {
     e.preventDefault();
+    fecharModal('modal-excluir-transacao');
+
+    document.getElementById('tabelaTransacoes').innerHTML = '';
+    utils.exibirLoaderTabela();
 
     const id = this.getAttribute('data-idTransacao');
 
@@ -150,10 +155,11 @@ document.querySelector('#modal-excluir-transacao form').addEventListener('submit
         utils.feedbackPopup(jsonTransacoes.resposta.msgTipo, json.resposta.mensagem);
         return;
     }
-    preencherTransacoes(jsonTransacoes.transacoes);
 
-    fecharModal('modal-excluir-transacao');
+    utils.esconderLoaderTabela();
+    preencherTransacoes(jsonTransacoes.transacoes);
 })
+
 
 
 function preencherTransacoes(transacoes) {
