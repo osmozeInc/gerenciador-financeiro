@@ -129,12 +129,12 @@
 
                 <div class="input-group">
                     <label for="quantidade">Quantidade</label>
-                    <input type="number" id="quantidade" name="quantidade" step="0.01" min="0.01" placeholder="0">
+                    <input type="number" id="quantidade" name="quantidade" step="any" min="0.00000001" placeholder="0">
                 </div>
 
                 <div class="input-group">
                     <label for="preco">Preço Unitário (R$)</label>
-                    <input type="number" id="preco" name="preco" step="0.01" min="0.01" placeholder="0.00">
+                    <input type="number" id="preco" name="preco" step="any" min="0.000001" placeholder="0.00">
                 </div>
             </div>
 
@@ -207,7 +207,7 @@
                     <th>Data</th>
                     <th>Descrição</th>
                     <th>Categoria</th>
-                    <th>Pagamento</th>
+                    <th>Conta</th>
                     <th>Valor</th>
                     <th>Ações</th>
                 </tr>

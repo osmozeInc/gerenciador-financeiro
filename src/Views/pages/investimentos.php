@@ -16,42 +16,21 @@
     </section>
 
     <section class="card">
-        <h2>Registrar Aporte / Compra</h2>
-        <form id="aporteForm">
-            <div class="form-grid">
-                <div class="input-group">
-                    <label for="ativo">Ativo (Ticker)</label>
-                    <input type="text" id="ativo" required placeholder="Ex: MXRF11, PETR4" style="text-transform: uppercase;">
-                </div>
-                
-                <div class="input-group">
-                    <label for="tipo">Classe</label>
-                    <select class="js-abrir-modal-select" id="tipo" data-target="modal-nova-classe" required>
-                        <option value="Ações">Ações</option>
-                        <option value="FIIs">FIIs</option>
-                        <option value="Renda Fixa">Renda Fixa</option>
-                        <option value="Cripto">Criptomoedas</option>
-                        <option value="new">+ Nova Classe</option>
-                    </select>
-                </div>
+        <div class="card-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem;">
+            <h2 style="margin: 0;">Alocação por Classe</h2>
+            <a href="/transacoes" class="btn-config-action" style="text-decoration: none; font-size: 0.85rem;">+ Novo Aporte</a>
+        </div>
+        
+        <!-- KPI Principal -->
+        <div class="resumo-carteira-kpi">
+            <span>Total Acumulado</span>
+            <h3 id="totalInvestidoDisplay">R$ 0,00</h3>
+        </div>
 
-                <div class="input-group">
-                    <label for="quantidade">Quantidade</label>
-                    <input type="number" id="quantidade" step="0.01" min="0.01" required placeholder="0">
-                </div>
-
-                <div class="input-group">
-                    <label for="precoCompra">Preço Unitário (R$)</label>
-                    <input type="number" id="precoCompra" step="0.01" min="0.01" required placeholder="0.00">
-                </div>
-
-                <div class="input-group">
-                    <label for="data_aporte">Data da Compra</label>
-                    <input type="date" id="data_aporte" required>
-                </div>
-            </div>
-            <button type="submit" class="btn-submit">Adicionar à Carteira</button>
-        </form>
+        <!-- Lista Dinâmica de Classes -->
+        <div class="alocacao-list" id="listaAlocacaoClasses">
+            <!-- O JS injetará as barras aqui -->
+        </div>
     </section>
 
     <section class="card">
@@ -68,13 +47,15 @@
                     <th>Rentabilidade</th>
                 </tr>
             </thead>
-            <tbody id="tabelaCarteira">
-                </tbody>
+            <tbody class="loader-table" id="tabelaCarteira">
+            </tbody>
         </table>
     </section>
 
 </main>
 
+
+<!--
 <script>
     // Setar data
     document.getElementById('data_aporte').valueAsDate = new Date();
@@ -160,3 +141,4 @@
     // Render inicial
     renderizarInterface();
 </script>
+-->

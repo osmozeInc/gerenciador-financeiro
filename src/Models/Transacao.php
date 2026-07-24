@@ -105,7 +105,7 @@ class Transacao extends Model {
 
             $idTransacao = $this->pdo->lastInsertId();
 
-            $sqlInvestimento = "INSERT INTO t_investimentos (id_transacao, ativo, classe, quantidade, preco_unitario_compra) VALUES (?, ?, ?, ?, ?)";
+            $sqlInvestimento = "INSERT INTO t_investimentos (id_transacao, ativo, classe, quantidade, preco_unitario) VALUES (?, ?, ?, ?, ?)";
                 $this->pdo->prepare($sqlInvestimento)->execute([
                     $idTransacao,
                     $dadosInvestimento['ativo'],

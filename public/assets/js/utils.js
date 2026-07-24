@@ -13,7 +13,7 @@ export async function apiFetch(url, metodo = 'GET', corpo = null) {
         return {
             resposta: {
                 sucesso: false,
-                msgTipo: 'danger',
+                msgTipo: 'error',
                 mensagem: 'Erro de comunicação com o servidor ou falha na rede.'
             }
         };
