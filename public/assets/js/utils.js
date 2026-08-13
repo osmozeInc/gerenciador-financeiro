@@ -20,6 +20,18 @@ export async function apiFetch(url, metodo = 'GET', corpo = null) {
     }
 }
 
+export async function sairDaSessao() {
+    console.log('Logout preparando...');
+    const json = await apiFetch('auth/sair', 'POST');
+    console.log(json);
+    
+    if (json && json.resposta) {
+        console.log('Logout realizado');
+        feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
+        window.location.href = 'auth/login';
+    }
+}
+
 export function feedbackPopup(tipo, mensagem) {
     const icones = {
         'success': '<i class="bi bi-check-circle"></i>',

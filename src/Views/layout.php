@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Gerenciador Financeiro</title>
-    <link rel="stylesheet" href="/assets/css/layout.css?v=<?php echo time(); ?>">
+    <link rel="stylesheet" href="/assets/css/layout.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     
 </head>
@@ -28,7 +28,7 @@
     <!-- Adiciona os modais na página, todos com display: none -->
     <?php require_once __DIR__ . '/partials/modais.php'; ?>
 
-    <script src="/assets/js/script.js?v=<?php echo time(); ?>" type="module"></script>
+    <script src="/assets/js/script.js" type="module"></script>
     <script type="module" src="/assets/js/<?= $view; ?>.js"></script>
 </body>
 </html>

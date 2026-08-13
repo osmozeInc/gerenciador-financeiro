@@ -1,0 +1,126 @@
+// Layout Full Screen (Ocupa a tela toda e centraliza o card)
+.login-page {
+    background-color: var(--bg-main); // Usa o cinza de fundo padrão do sistema
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    
+    .login-wrapper {
+        width: 100%;
+        max-width: 420px; // Trava a largura para não ficar esticado no PC
+        padding: 1.5rem;
+
+        .login-card {
+            background-color: var(--bg-padrao);
+            padding: 2.5rem 2rem;
+            border-radius: 12px;
+            box-shadow: 0 8px 30px var(--card-shadow-color);
+            border: 1px solid var(--divisor-color);
+
+            .login-header {
+                text-align: center;
+                margin-bottom: 2rem;
+
+                .logo-icon {
+                    font-size: 2.5rem;
+                    color: var(--text-especial);
+                    margin-bottom: 0.5rem;
+                }
+
+                h1 {
+                    font-size: 1.5rem;
+                    color: var(--text-primary);
+                    margin: 0 0 0.5rem 0;
+                    font-weight: 600;
+                }
+
+                p {
+                    font-size: 0.9rem;
+                    color: var(--text-secondary);
+                    margin: 0;
+                }
+            }
+
+            // Alerta de erro estilizado
+            .erro-msg {
+                display: flex;
+                align-items: center;
+                gap: 0.5rem;
+                background-color: rgba(239, 68, 68, 0.1); // Fundo vermelho translúcido
+                color: var(--text-danger, #ef4444);
+                padding: 0.8rem 1rem;
+                border-radius: 6px;
+                font-size: 0.9rem;
+                font-weight: 500;
+                margin-bottom: 1.5rem;
+                border: 1px solid rgba(239, 68, 68, 0.3);
+            }
+
+            // Reutilizando a estrutura do formulário
+            .form-simple {
+                display: flex;
+                flex-direction: column;
+                gap: 1.2rem;
+
+                .input-group {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.4rem;
+
+                    .label-row {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+
+                        .link-esqueceu {
+                            font-size: 0.85rem;
+                            color: var(--text-especial);
+                            text-decoration: none;
+                            font-weight: 500;
+                            transition: opacity 0.2s;
+
+                            &:hover { opacity: 0.7; }
+                        }
+                    }
+
+                    label {
+                        font-size: 0.9rem;
+                        color: var(--text-primary);
+                        font-weight: 500;
+                    }
+
+                    input {
+                        padding: 0.75rem 1rem;
+                        border: 1px solid var(--divisor-color);
+                        border-radius: 6px;
+                        background-color: var(--bg-padrao);
+                        color: var(--text-primary);
+                        font-size: 1rem;
+                        outline: none;
+                        transition: border-color 0.2s;
+
+                        &:focus { border-color: var(--text-especial); }
+                    }
+                }
+
+                .btn-submit {
+                    width: 100%;
+                    margin-top: 1rem;
+                    background-color: var(--text-especial);
+                    color: #fff;
+                    border: none;
+                    padding: 0.85rem;
+                    border-radius: 6px;
+                    font-size: 1rem;
+                    font-weight: 600;
+                    cursor: pointer;
+                    transition: opacity 0.2s;
+
+                    &:hover { opacity: 0.9; box-shadow: 0 4px 10px rgba(18, 141, 41, 0.2); }
+                }
+            }
+        }
+    }
+}

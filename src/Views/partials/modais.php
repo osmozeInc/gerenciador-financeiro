@@ -333,7 +333,7 @@
 
             <div class="user-group-login">
                 <h2>Login</h2>
-                <div class="user-config logout">
+                <div class="user-config logout" id="logoutModal">
                     <label>Sair</label>
                     <i class="bi bi-box-arrow-right"></i>
                 </div>
