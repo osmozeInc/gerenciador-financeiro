@@ -6,7 +6,7 @@ let listaTransacoes = [];
 // Buscar dados ao carregar a página
 document.addEventListener('DOMContentLoaded', async function() {
     try {
-        const json = await utils.apiFetch('/transacoes/selectDados100Transacoes');
+        const json = await utils.apiFetch('/investimentos/selectDadosAllInvestimentos');
         listaTransacoes = json.transacoes;
 
         if (!json.resposta.sucesso) {

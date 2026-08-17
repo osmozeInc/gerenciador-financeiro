@@ -475,7 +475,6 @@ header {
             h2 { font-size: 1.3rem; margin-bottom: 1.5rem; color: var(--text-primary); }
             form { display: none; }
             .switch { width: min-content; display: flex; align-items: center;}
-            .btn-submit { margin-top: 20px; }
             .btn-invest, .btn-cofre { background-color: var(--bg-btn-invest); }
     
             .card-header{
@@ -687,6 +686,71 @@ header {
             }
             
             .concluido { border-color: var(--text-especial);}
+        }
+
+        #cardResumoCofres {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+
+            .valores-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1rem;
+
+                .valor-box {
+                    display: flex;
+                    flex-direction: column;
+                    
+                    &.right { align-items: flex-end; text-align: right; }
+                    
+                    .label { font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 600; }
+                    strong { font-size: 1.4rem; color: var(--text-primary); margin-top: 0.2rem; }
+                    .text-destaque { color: var(--text-especial); }
+                }
+            }
+
+            .foco-gamificacao {
+                .foco-header {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+
+                    
+                    .badge-foco {
+                        background-color: var(--bg-badge-warning);
+                        color: var(--text-warning);
+                        padding: 0.2rem 0.6rem;
+                        border-radius: 99px;
+                        font-size: 0.75rem;
+                        font-weight: bold;
+                    }
+                }
+
+                .foco-mensagem, .foco-cofre {
+                    font-size: 0.95rem;
+                    color: var(--text-secondary);
+                    margin: 0;
+                    line-height: 1.4;
+                    
+                    strong { color: var(--text-primary); }
+                }
+                
+                .foco-cofre {
+                    font-size: 1.1rem;
+                    
+                }
+            }
+            
+            .btn-submit {
+                margin: 0;
+                box-sizing: border-box;
+                display: block;
+                text-align: center;
+                text-decoration: none;
+            }
+            
+            .hidden { display: none !important; }
         }
     }
 
