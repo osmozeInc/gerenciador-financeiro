@@ -667,26 +667,7 @@ header {
                     }
                 }
                 
-                .progress-container { width: 100%;
-                    background-color: var(--bg-progress);
-                    border-radius: 99px;
-                    height: 8px;
-                    overflow: hidden;
-                    
-                    .progress-bar { 
-                        height: 100%;
-                        background-color: var(--text-especial);
-                        transition: width 0.3s ease;
-                    }
-                }
-
-                .progress-text { 
-                    font-size: 0.75rem;
-                    color: var(--text-secondary);
-                    text-align: right;
-                    margin-top: 0.25rem;
-                    font-weight: bold;
-                }
+                
             }
             
             .concluido { border-color: var(--text-especial);}
@@ -1565,6 +1546,29 @@ input, select {
             a { color: var(--text-primary); font-weight: 600; text-decoration: underline; }
         }
     }
+
+}
+
+.progress-container { 
+    width: 100%;
+    background-color: var(--bg-progress);
+    border-radius: 99px;
+    height: 8px;
+    overflow: hidden;
+    
+    .progress-bar { 
+        height: 100%;
+        background-color: var(--text-especial);
+        transition: width 0.3s ease;
+    }
+}
+
+.progress-text { 
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-align: right;
+    margin-top: 0.25rem;
+    font-weight: bold;
 }
 
 .switch {

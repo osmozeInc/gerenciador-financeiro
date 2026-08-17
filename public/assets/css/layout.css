@@ -747,25 +747,6 @@ header nav a.active {
   font-size: 0.875rem;
   color: var(--text-secondary);
 }
-.conteudo-central .cofres-container .cofres-grid .cofre-card .progress-container {
-  width: 100%;
-  background-color: var(--bg-progress);
-  border-radius: 99px;
-  height: 8px;
-  overflow: hidden;
-}
-.conteudo-central .cofres-container .cofres-grid .cofre-card .progress-container .progress-bar {
-  height: 100%;
-  background-color: var(--text-especial);
-  transition: width 0.3s ease;
-}
-.conteudo-central .cofres-container .cofres-grid .cofre-card .progress-text {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  text-align: right;
-  margin-top: 0.25rem;
-  font-weight: bold;
-}
 .conteudo-central .cofres-container .cofres-grid .concluido {
   border-color: var(--text-especial);
 }
@@ -1862,6 +1843,27 @@ input::placeholder, select::placeholder {
   color: var(--text-primary);
   font-weight: 600;
   text-decoration: underline;
+}
+
+.progress-container {
+  width: 100%;
+  background-color: var(--bg-progress);
+  border-radius: 99px;
+  height: 8px;
+  overflow: hidden;
+}
+.progress-container .progress-bar {
+  height: 100%;
+  background-color: var(--text-especial);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-align: right;
+  margin-top: 0.25rem;
+  font-weight: bold;
 }
 
 .switch {

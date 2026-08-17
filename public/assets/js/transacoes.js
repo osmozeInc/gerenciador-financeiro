@@ -392,7 +392,7 @@ async function receberDadosDoBotao(botao) {
             'R': '/categorias/selectDadosReceita',
             'D': '/categorias/selectDadosDespesa',
             'I': '/classesInvestimento/selectDados',
-            'C': '/cofres/selectDados'
+            'C': '/cofres/selectNomesCofres'
         };
 
         const rotaAlvo = rotasEspecificas[tipo];
