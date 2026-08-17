@@ -1,7 +1,7 @@
 <?php
 
 class Controller {
-    protected $idUsuarioLogado = 1;
+    protected $idUsuarioLogado;
     protected $mensagensModel = [
         'categoria' => [
             'salvar' => [
@@ -96,6 +96,28 @@ class Controller {
                 ]
             ]
         ],
+        'conta' => [
+            'loginRealizado' => [
+                'sucesso' => true,
+                'msgTipo' => 'success', 
+                'mensagem' => 'Logado com sucesso!'
+            ],
+            'loginInvalido' => [
+                'sucesso' => false,
+                'msgTipo' => 'error', 
+                'mensagem' => 'Credenciais inválidas.'
+            ],
+            'logoutRealizado' => [
+                'sucesso' => true,
+                'msgTipo' => 'success', 
+                'mensagem' => 'Sessão encerrada com sucesso!'
+            ],
+            'erroDeSessao' => [
+                'sucesso' => false,
+                'msgTipo' => 'error', 
+                'mensagem' => 'Erro ao encerrar sessão.'
+            ]
+        ],
         'genericas' => [
             'formulario_incompleto' => [
                 'sucesso' => false,
@@ -129,7 +151,11 @@ class Controller {
         ]
     ];
 
-    protected function render($view) {
+    public function __construct() {
+        $this->idUsuarioLogado = $_SESSION['usuario_id'] ?? null;
+    }
+
+    protected function render($view, $usarLayout = true) {
 
         $viewPath = __DIR__ . "/../Views/pages/{$view}.php";
         $layoutPath = __DIR__ . '/../Views/layout.php';
@@ -138,10 +164,10 @@ class Controller {
             die("Erro de Arquitetura: A View '{$view}' não foi encontrada no sistema.");
         }
 
-        if (file_exists($layoutPath)) {
-            require_once $layoutPath;
-        } else {
-            die("Erro de Arquitetura: Arquivo de layout principal não encontrado.");
+        if ($usarLayout) {
+            if (file_exists($layoutPath)) require_once $layoutPath;
+            else die("Erro de Arquitetura: Arquivo de layout principal não encontrado.");
         }
+        else require_once $viewPath;   
     }
 }

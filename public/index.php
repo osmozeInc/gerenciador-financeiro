@@ -6,15 +6,20 @@ if (preg_match('/\.(?:png|jpg|jpeg|gif|webp|css|js|ico|svg|woff|woff2|ttf|eot)$/
     return false;
 }
 
-$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+session_start();
 
-if ($url === '/') {
-    $url = '/home';
-}
+$url = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+if ($url === '/') $url = '/home';
 
 $partesUrl = explode('/', trim($url, '/'));
-
 $rotaBase = $partesUrl[0]; 
+
+$rotasPublicas = ['auth', 'login'];
+
+if (!isset($_SESSION['usuario_id']) && !in_array($rotaBase, $rotasPublicas)) {
+    header('Location: /auth/login');
+    exit;
+}
 
 $metodoAcao = isset($partesUrl[1]) ? $partesUrl[1] : 'index'; 
 

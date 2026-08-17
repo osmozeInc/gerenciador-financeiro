@@ -1,4 +1,4 @@
-import { feedbackPopup, buscarTransacao } from "./utils.js";
+import { feedbackPopup, buscarTransacao, sairDaSessao } from "./utils.js";
 
 /* ESCUTAS DO JS */
 
@@ -37,6 +37,10 @@ document.body.addEventListener('click', (e) => {
     }
 });
 
+// sair da sessão
+document.getElementById('logoutModal').addEventListener('click', () => {
+    sairDaSessao();
+});
 
 // abrir modal dos selects
 const categoriaSelect = document.querySelectorAll('.js-abrir-modal-select');
@@ -170,3 +174,6 @@ export function definirVisibilidadeDeValores(visibilidade) {
         // mostrar os saldos
     }
 }
+
+
+/* OUTRAS FUNÇÕES */

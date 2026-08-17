@@ -72,13 +72,14 @@
   --tema-color: dark;
 }
 
+/* =========== BODY =========== */
 body {
   background-color: var(--bg-main);
   margin: 0;
   padding: 0;
 }
 
-/* ========= HEADER ========= */
+/* ========== HEADER ========== */
 header {
   position: fixed;
   display: flex;
@@ -134,7 +135,7 @@ header nav a.active {
   border-bottom: 2px solid var(--text-especial);
 }
 
-/* ========== ASIDE ========== */
+/* =========== ASIDE ========== */
 .aside-container {
   position: fixed;
   width: 250px;
@@ -1679,7 +1680,7 @@ header nav a.active {
   flex-direction: column-reverse;
 }
 
-/* ====== SUPER CLASSES ====== */
+/* ======= SUPER CLASSES ====== */
 .travar-scroll {
   overflow: hidden !important;
 }
@@ -1704,7 +1705,7 @@ header nav a.active {
   text-transform: uppercase !important;
 }
 
-/* ==== CLASSES GENÉRICAS ==== */
+/* ==== CLASSES GENÉRICAS ===== */
 .loader-table {
   display: flex;
   justify-content: center;
