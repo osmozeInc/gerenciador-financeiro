@@ -548,9 +548,6 @@ header nav a.active {
   display: flex;
   align-items: center;
 }
-.conteudo-central .transacoes-container .card .btn-submit {
-  margin-top: 20px;
-}
 .conteudo-central .transacoes-container .card .btn-invest, .conteudo-central .transacoes-container .card .btn-cofre {
   background-color: var(--bg-btn-invest);
 }
@@ -750,27 +747,75 @@ header nav a.active {
   font-size: 0.875rem;
   color: var(--text-secondary);
 }
-.conteudo-central .cofres-container .cofres-grid .cofre-card .progress-container {
-  width: 100%;
-  background-color: var(--bg-progress);
-  border-radius: 99px;
-  height: 8px;
-  overflow: hidden;
-}
-.conteudo-central .cofres-container .cofres-grid .cofre-card .progress-container .progress-bar {
-  height: 100%;
-  background-color: var(--text-especial);
-  transition: width 0.3s ease;
-}
-.conteudo-central .cofres-container .cofres-grid .cofre-card .progress-text {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  text-align: right;
-  margin-top: 0.25rem;
-  font-weight: bold;
-}
 .conteudo-central .cofres-container .cofres-grid .concluido {
   border-color: var(--text-especial);
+}
+.conteudo-central .cofres-container #cardResumoCofres {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.conteudo-central .cofres-container #cardResumoCofres .valores-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.conteudo-central .cofres-container #cardResumoCofres .valores-grid .valor-box {
+  display: flex;
+  flex-direction: column;
+}
+.conteudo-central .cofres-container #cardResumoCofres .valores-grid .valor-box.right {
+  align-items: flex-end;
+  text-align: right;
+}
+.conteudo-central .cofres-container #cardResumoCofres .valores-grid .valor-box .label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.conteudo-central .cofres-container #cardResumoCofres .valores-grid .valor-box strong {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  margin-top: 0.2rem;
+}
+.conteudo-central .cofres-container #cardResumoCofres .valores-grid .valor-box .text-destaque {
+  color: var(--text-especial);
+}
+.conteudo-central .cofres-container #cardResumoCofres .foco-gamificacao .foco-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.conteudo-central .cofres-container #cardResumoCofres .foco-gamificacao .foco-header .badge-foco {
+  background-color: var(--bg-badge-warning);
+  color: var(--text-warning);
+  padding: 0.2rem 0.6rem;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+.conteudo-central .cofres-container #cardResumoCofres .foco-gamificacao .foco-mensagem, .conteudo-central .cofres-container #cardResumoCofres .foco-gamificacao .foco-cofre {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.4;
+}
+.conteudo-central .cofres-container #cardResumoCofres .foco-gamificacao .foco-mensagem strong, .conteudo-central .cofres-container #cardResumoCofres .foco-gamificacao .foco-cofre strong {
+  color: var(--text-primary);
+}
+.conteudo-central .cofres-container #cardResumoCofres .foco-gamificacao .foco-cofre {
+  font-size: 1.1rem;
+}
+.conteudo-central .cofres-container #cardResumoCofres .btn-submit {
+  margin: 0;
+  box-sizing: border-box;
+  display: block;
+  text-align: center;
+  text-decoration: none;
+}
+.conteudo-central .cofres-container #cardResumoCofres .hidden {
+  display: none !important;
 }
 .conteudo-central .contas-container {
   padding: 0.5rem 2rem 2rem 2rem;
@@ -1798,6 +1843,27 @@ input::placeholder, select::placeholder {
   color: var(--text-primary);
   font-weight: 600;
   text-decoration: underline;
+}
+
+.progress-container {
+  width: 100%;
+  background-color: var(--bg-progress);
+  border-radius: 99px;
+  height: 8px;
+  overflow: hidden;
+}
+.progress-container .progress-bar {
+  height: 100%;
+  background-color: var(--text-especial);
+  transition: width 0.3s ease;
+}
+
+.progress-text {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-align: right;
+  margin-top: 0.25rem;
+  font-weight: bold;
 }
 
 .switch {

@@ -33,7 +33,7 @@ class AuthController extends Controller {
         // $user = $usuarioModel->autenticar($email, $senha);
         
         $usuarioDbSimulado = [
-            'id' => 2,
+            'id' => 1,
             'email' => 'admin@teste.com',
             'senha_hash' => password_hash('123', PASSWORD_DEFAULT) 
         ];
