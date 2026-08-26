@@ -1,113 +1,408 @@
-.login-page {
-  background-color: var(--bg-main);
+@charset "UTF-8";
+:root {
+  --bg-main: #f3f4f6;
+  --bg-padrao: #fff;
+  --bg-progress: #e5e7eb;
+  --bg-input: #f3f4f6;
+  --bg-btn-confirm: #128d29;
+  --bg-btn-delete: #ef4444;
+  --bg-btn-warning: #da9011;
+  --bg-btn-invest: #085ec1;
+  --bg-btn-hover: #f3f4f6;
+  --bg-info: #f0f0f0;
+  --divisor-color: #727272;
+  --border-color: #e5e7eb;
+  --text-primary: #000;
+  --text-secondary: #727272;
+  --text-contrast: #fff;
+  --text-especial: #128d29;
+  --text-danger: #ef4444;
+  --text-invest: #2079df;
+  --text-warning: #f59e0b;
+  --text-cofre: #8b5cf6;
+  --bg-badge-success: #d1fae5;
+  --bg-badge-danger: #fee2e2;
+  --bg-badge-invest: #e0e7ff;
+  --bg-badge-warning: #fef3c7;
+  --bg-badge: #e5e7eb;
+  --radius-card: 10px;
+  --radius-btn: 6px;
+  --radius-input: 4px;
+  --card-shadow-color: rgba(0, 0, 0, 0.3);
+  --bg-alert-success: #1bb815;
+  --bg-alert-error: #ff7b7b;
+  --bg-alert-warning: #fff679;
+  --bg-alert-info: #33c3e7;
+  --text-alert: #000000b0;
+  --loader: #333;
+  --tema-color: light;
+}
+
+.login-page-split {
+  margin: 0;
+  padding: 0;
+  font-family: "Segoe UI", system-ui, sans-serif;
+  background-color: var(--bg-padrao);
+}
+.login-page-split .split-layout {
+  display: flex;
+  min-height: 100vh;
+  width: 100vw;
+}
+.login-page-split {
+  /* COLUNA DA ESQUERDA: FORMULÁRIO */
+}
+.login-page-split .form-side {
+  flex: 1;
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  margin: 0;
-}
-.login-page .login-wrapper {
-  width: 100%;
-  max-width: 420px;
-  padding: 1.5rem;
-}
-.login-page .login-wrapper .login-card {
   background-color: var(--bg-padrao);
-  padding: 2.5rem 2rem;
-  border-radius: 12px;
-  box-shadow: 0 8px 30px var(--card-shadow-color);
-  border: 1px solid var(--divisor-color);
+  padding: 2rem;
 }
-.login-page .login-wrapper .login-card .login-header {
-  text-align: center;
-  margin-bottom: 2rem;
+.login-page-split .form-side .login-card {
+  width: 100%;
+  max-width: 400px;
 }
-.login-page .login-wrapper .login-card .login-header .logo-icon {
-  font-size: 2.5rem;
-  color: var(--text-especial);
-  margin-bottom: 0.5rem;
+.login-page-split .form-side .login-card .login-header {
+  margin-bottom: 2.5rem;
 }
-.login-page .login-wrapper .login-card .login-header h1 {
-  font-size: 1.5rem;
-  color: var(--text-primary);
-  margin: 0 0 0.5rem 0;
-  font-weight: 600;
-}
-.login-page .login-wrapper .login-card .login-header p {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-  margin: 0;
-}
-.login-page .login-wrapper .login-card .erro-msg {
+.login-page-split .form-side .login-card .login-header .logo-text {
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  background-color: rgba(239, 68, 68, 0.1);
-  color: var(--text-danger, #ef4444);
-  padding: 0.8rem 1rem;
-  border-radius: 6px;
-  font-size: 0.9rem;
-  font-weight: 500;
-  margin-bottom: 1.5rem;
-  border: 1px solid rgba(239, 68, 68, 0.3);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 2.5rem;
 }
-.login-page .login-wrapper .login-card .form-simple {
+.login-page-split .form-side .login-card .login-header .logo-text i {
+  color: var(--text-especial);
+  font-size: 1.8rem;
+}
+.login-page-split .form-side .login-card .login-header h1 {
+  font-size: 2rem;
+  color: var(--text-primary);
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+.login-page-split .form-side .login-card .login-header p {
+  font-size: 0.95rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+.login-page-split .form-side .login-card .login-header p a {
+  color: var(--text-especial);
+  font-weight: 600;
+  text-decoration: underline;
+}
+.login-page-split .form-side .login-card .login-header p a:hover {
+  opacity: 0.8;
+}
+.login-page-split .form-side .login-card .erro-msg {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  background-color: var(--bg-badge-danger);
+  color: var(--text-danger);
+  padding: 1rem;
+  border-radius: var(--radius-btn);
+  font-size: 0.9rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+}
+.login-page-split .form-side .login-card .form-extravagant {
   display: flex;
   flex-direction: column;
   gap: 1.2rem;
 }
-.login-page .login-wrapper .login-card .form-simple .input-group {
+.login-page-split .form-side .login-card .form-extravagant .input-group {
   display: flex;
   flex-direction: column;
-  gap: 0.4rem;
+  gap: 0.5rem;
 }
-.login-page .login-wrapper .login-card .form-simple .input-group .label-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.login-page .login-wrapper .login-card .form-simple .input-group .label-row .link-esqueceu {
+.login-page-split .form-side .login-card .form-extravagant .input-group label {
   font-size: 0.85rem;
-  color: var(--text-especial);
-  text-decoration: none;
-  font-weight: 500;
-  transition: opacity 0.2s;
-}
-.login-page .login-wrapper .login-card .form-simple .input-group .label-row .link-esqueceu:hover {
-  opacity: 0.7;
-}
-.login-page .login-wrapper .login-card .form-simple .input-group label {
-  font-size: 0.9rem;
-  color: var(--text-primary);
+  color: var(--text-secondary);
   font-weight: 500;
 }
-.login-page .login-wrapper .login-card .form-simple .input-group input {
-  padding: 0.75rem 1rem;
-  border: 1px solid var(--divisor-color);
-  border-radius: 6px;
+.login-page-split .form-side .login-card .form-extravagant .input-group input {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1.5px solid var(--border-color);
+  border-radius: 8px;
   background-color: var(--bg-padrao);
   color: var(--text-primary);
   font-size: 1rem;
   outline: none;
-  transition: border-color 0.2s;
+  transition: all 0.2s ease;
+  box-sizing: border-box;
 }
-.login-page .login-wrapper .login-card .form-simple .input-group input:focus {
+.login-page-split .form-side .login-card .form-extravagant .input-group input:focus {
   border-color: var(--text-especial);
+  box-shadow: 0 0 0 4px rgba(18, 141, 41, 0.1);
 }
-.login-page .login-wrapper .login-card .form-simple .btn-submit {
-  width: 100%;
+.login-page-split .form-side .login-card .form-extravagant .input-group .input-wrapper-password {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.login-page-split .form-side .login-card .form-extravagant .input-group .input-wrapper-password input {
+  padding-right: 3rem;
+}
+.login-page-split .form-side .login-card .form-extravagant .input-group .input-wrapper-password .btn-toggle-password {
+  position: absolute;
+  right: 1rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+  font-size: 1.1rem;
+  transition: color 0.2s;
+}
+.login-page-split .form-side .login-card .form-extravagant .input-group .input-wrapper-password .btn-toggle-password:hover {
+  color: var(--text-primary);
+}
+.login-page-split .form-side .login-card .form-extravagant .options-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 0.2rem;
+}
+.login-page-split .form-side .login-card .form-extravagant .options-row .remember-me {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.login-page-split .form-side .login-card .form-extravagant .options-row .remember-me input {
+  accent-color: var(--text-especial);
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+}
+.login-page-split .form-side .login-card .form-extravagant .options-row .remember-me label {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  cursor: pointer;
+}
+.login-page-split .form-side .login-card .form-extravagant .options-row .link-esqueceu {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+.login-page-split .form-side .login-card .form-extravagant .options-row .link-esqueceu:hover {
+  color: var(--text-especial);
+  text-decoration: underline;
+}
+.login-page-split .form-side .login-card .form-extravagant .btn-submit {
   margin-top: 1rem;
-  background-color: var(--text-especial);
-  color: #fff;
-  border: none;
-  padding: 0.85rem;
-  border-radius: 6px;
+  background-color: var(--bg-btn-confirm);
+  color: var(--text-contrast);
+  height: 50px;
+  border-radius: 8px;
+  border: 1px solid var(--border-color);
   font-size: 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: opacity 0.2s;
+  transition: 0.2s ease;
 }
-.login-page .login-wrapper .login-card .form-simple .btn-submit:hover {
-  opacity: 0.9;
-  box-shadow: 0 4px 10px rgba(18, 141, 41, 0.2);
+.login-page-split .form-side .login-card .form-extravagant .btn-submit:hover {
+  filter: brightness(1.1);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(18, 141, 41, 0.3);
+}
+.login-page-split .form-side .login-card .form-extravagant .divider {
+  text-align: center;
+  margin: 1rem 0;
+  color: var(--text-secondary);
+  font-size: 0.8rem;
+  font-weight: 500;
+  position: relative;
+}
+.login-page-split .form-side .login-card .form-extravagant .divider::before, .login-page-split .form-side .login-card .form-extravagant .divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 40%;
+  height: 1px;
+  background-color: var(--border-color);
+}
+.login-page-split .form-side .login-card .form-extravagant .divider::before {
+  left: 0;
+}
+.login-page-split .form-side .login-card .form-extravagant .divider::after {
+  right: 0;
+}
+.login-page-split .form-side .login-card .form-extravagant .social-login-column {
+  display: flex;
+  flex-direction: column;
+}
+.login-page-split .form-side .login-card .form-extravagant .social-login-column .btn-social {
+  height: 50px;
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 600;
+  font-size: 0.95rem;
+  gap: 0.8rem;
+  border: 1px solid var(--border-color);
+  background-color: var(--bg-padrao);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+.login-page-split .form-side .login-card .form-extravagant .social-login-column .btn-social svg {
+  width: 20px;
+  height: 20px;
+}
+.login-page-split .form-side .login-card .form-extravagant .social-login-column .btn-social:hover {
+  background-color: var(--bg-main);
+  border-color: var(--divisor-color);
+}
+.login-page-split {
+  /* COLUNA DA DIREITA: BRANDING (A Mágica do Solara) */
+}
+.login-page-split .branding-side {
+  flex: 1.2;
+  background: linear-gradient(135deg, #0e3d20 0%, #175430 100%);
+  padding: 4rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+}
+.login-page-split .branding-side::before {
+  content: "";
+  position: absolute;
+  top: -10%;
+  right: -10%;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.08) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+}
+.login-page-split .branding-side .branding-content {
+  position: relative;
+  z-index: 2;
+  max-width: 450px;
+  margin: 0 auto;
+}
+.login-page-split .branding-side .branding-content .feature-card-mockup {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  margin-bottom: 3rem;
+}
+.login-page-split .branding-side .branding-content .feature-card-mockup .mockup-header {
+  margin-bottom: 1.5rem;
+}
+.login-page-split .branding-side .branding-content .feature-card-mockup .mockup-header h2 {
+  font-size: 1.4rem;
+  color: #111;
+  margin: 0 0 0.5rem 0;
+  font-weight: 700;
+}
+.login-page-split .branding-side .branding-content .feature-card-mockup .mockup-header p {
+  font-size: 0.9rem;
+  color: #555;
+  margin: 0;
+  line-height: 1.4;
+}
+.login-page-split .branding-side .branding-content .feature-card-mockup .mockup-visual {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.login-page-split .branding-side .branding-content .feature-card-mockup .mockup-visual .mini-chart {
+  display: flex;
+  align-items: flex-end;
+  gap: 6px;
+  height: 60px;
+}
+.login-page-split .branding-side .branding-content .feature-card-mockup .mockup-visual .mini-chart .bar {
+  width: 14px;
+  background: #128d29;
+  border-radius: 4px 4px 0 0;
+}
+.login-page-split .branding-side .branding-content .feature-card-mockup .mockup-visual .mini-chart .bar-1 {
+  height: 40%;
+  opacity: 0.5;
+}
+.login-page-split .branding-side .branding-content .feature-card-mockup .mockup-visual .mini-chart .bar-2 {
+  height: 60%;
+  opacity: 0.7;
+}
+.login-page-split .branding-side .branding-content .feature-card-mockup .mockup-visual .mini-chart .bar-3 {
+  height: 30%;
+  opacity: 0.4;
+}
+.login-page-split .branding-side .branding-content .feature-card-mockup .mockup-visual .mini-chart .bar-4 {
+  height: 100%;
+}
+.login-page-split .branding-side .branding-content .feature-card-mockup .mockup-visual .mini-stats {
+  text-align: right;
+}
+.login-page-split .branding-side .branding-content .feature-card-mockup .mockup-visual .mini-stats span {
+  display: block;
+  font-size: 0.75rem;
+  color: #666;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+.login-page-split .branding-side .branding-content .feature-card-mockup .mockup-visual .mini-stats strong {
+  font-size: 1.5rem;
+  color: #128d29;
+}
+.login-page-split .branding-side .branding-content .presentation-text h3 {
+  font-size: 2rem;
+  color: #fff;
+  margin: 0 0 1rem 0;
+  font-weight: 600;
+}
+.login-page-split .branding-side .branding-content .presentation-text p {
+  font-size: 1.05rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 0;
+  line-height: 1.5;
+}
+.login-page-split {
+  /* RESPONSIVIDADE: A mágica no celular */
+}
+@media (max-width: 900px) {
+  .login-page-split .split-layout {
+    flex-direction: column;
+  }
+  .login-page-split .branding-side {
+    display: none;
+  }
+  .login-page-split .form-side {
+    padding: 1.5rem;
+  }
+  .login-page-split .form-side .login-card {
+    max-width: 100%;
+  }
+}
+
+/* Animações simples para dar vida */
+.fade-in {
+  animation: fadeIn 0.6s ease forwards;
+}
+
+.fade-in-delayed {
+  animation: fadeIn 0.8s ease forwards 0.2s;
+  opacity: 0;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }/*# sourceMappingURL=login.css.map */
