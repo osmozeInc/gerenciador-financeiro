@@ -682,6 +682,11 @@ header nav a.active {
   margin-bottom: 1.5rem;
   color: var(--text-primary);
 }
+.conteudo-central .cofres-container .foco-titulo {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+}
 .conteudo-central .cofres-container .actions-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -700,6 +705,87 @@ header nav a.active {
 }
 .conteudo-central .cofres-container .actions-grid .card .input-group {
   margin-bottom: 1rem;
+}
+.conteudo-central .cofres-container .actions-grid #cardResumoCofres {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.conteudo-central .cofres-container .actions-grid #cardResumoCofres .valores-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+.conteudo-central .cofres-container .actions-grid #cardResumoCofres .valores-grid .valor-box {
+  display: flex;
+  flex-direction: column;
+}
+.conteudo-central .cofres-container .actions-grid #cardResumoCofres .valores-grid .valor-box.right {
+  align-items: flex-end;
+  text-align: right;
+}
+.conteudo-central .cofres-container .actions-grid #cardResumoCofres .valores-grid .valor-box .label {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  font-weight: 600;
+}
+.conteudo-central .cofres-container .actions-grid #cardResumoCofres .valores-grid .valor-box strong {
+  font-size: 1.4rem;
+  color: var(--text-primary);
+  margin-top: 0.2rem;
+}
+.conteudo-central .cofres-container .actions-grid #cardResumoCofres .valores-grid .valor-box .text-destaque {
+  color: var(--text-especial);
+}
+.conteudo-central .cofres-container .actions-grid #cardResumoCofres .foco-gamificacao .foco-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.conteudo-central .cofres-container .actions-grid #cardResumoCofres .foco-gamificacao .foco-header h2 {
+  margin-bottom: 0.8rem;
+}
+.conteudo-central .cofres-container .actions-grid #cardResumoCofres .foco-gamificacao .foco-header .badge-foco {
+  padding: 0.2rem 0.6rem;
+  border-radius: 99px;
+  font-size: 0.75rem;
+  font-weight: bold;
+}
+.conteudo-central .cofres-container .actions-grid #cardResumoCofres .foco-gamificacao .foco-header .badge-foco.info {
+  background-color: var(--bg-badge-invest);
+  color: var(--text-invest);
+}
+.conteudo-central .cofres-container .actions-grid #cardResumoCofres .foco-gamificacao .foco-header .badge-foco.warning {
+  background-color: var(--bg-badge-warning);
+  color: var(--text-warning);
+}
+.conteudo-central .cofres-container .actions-grid #cardResumoCofres .foco-gamificacao .foco-header .badge-foco.success {
+  background-color: var(--bg-badge-success);
+  color: var(--text-especial);
+}
+.conteudo-central .cofres-container .actions-grid #cardResumoCofres .foco-gamificacao .foco-cofre {
+  font-size: 1.1rem;
+  letter-spacing: 1px;
+  font-weight: 700;
+  margin: 0 0 0.25rem 0;
+}
+.conteudo-central .cofres-container .actions-grid #cardResumoCofres .foco-gamificacao .foco-mensagem {
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.4;
+  margin: 0;
+  color: var(--text-secondary);
+}
+.conteudo-central .cofres-container .actions-grid #cardResumoCofres .foco-gamificacao .foco-mensagem strong {
+  color: var(--text-primary);
+}
+.conteudo-central .cofres-container .actions-grid #cardResumoCofres .btn-submit {
+  margin: 0;
+  box-sizing: border-box;
+  display: block;
+  text-align: center;
+  text-decoration: none;
 }
 .conteudo-central .cofres-container .cofres-grid {
   display: grid;
@@ -749,73 +835,6 @@ header nav a.active {
 }
 .conteudo-central .cofres-container .cofres-grid .concluido {
   border-color: var(--text-especial);
-}
-.conteudo-central .cofres-container #cardResumoCofres {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.conteudo-central .cofres-container #cardResumoCofres .valores-grid {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-}
-.conteudo-central .cofres-container #cardResumoCofres .valores-grid .valor-box {
-  display: flex;
-  flex-direction: column;
-}
-.conteudo-central .cofres-container #cardResumoCofres .valores-grid .valor-box.right {
-  align-items: flex-end;
-  text-align: right;
-}
-.conteudo-central .cofres-container #cardResumoCofres .valores-grid .valor-box .label {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  text-transform: uppercase;
-  font-weight: 600;
-}
-.conteudo-central .cofres-container #cardResumoCofres .valores-grid .valor-box strong {
-  font-size: 1.4rem;
-  color: var(--text-primary);
-  margin-top: 0.2rem;
-}
-.conteudo-central .cofres-container #cardResumoCofres .valores-grid .valor-box .text-destaque {
-  color: var(--text-especial);
-}
-.conteudo-central .cofres-container #cardResumoCofres .foco-gamificacao .foco-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-.conteudo-central .cofres-container #cardResumoCofres .foco-gamificacao .foco-header .badge-foco {
-  background-color: var(--bg-badge-warning);
-  color: var(--text-warning);
-  padding: 0.2rem 0.6rem;
-  border-radius: 99px;
-  font-size: 0.75rem;
-  font-weight: bold;
-}
-.conteudo-central .cofres-container #cardResumoCofres .foco-gamificacao .foco-mensagem, .conteudo-central .cofres-container #cardResumoCofres .foco-gamificacao .foco-cofre {
-  font-size: 0.95rem;
-  color: var(--text-secondary);
-  margin: 0;
-  line-height: 1.4;
-}
-.conteudo-central .cofres-container #cardResumoCofres .foco-gamificacao .foco-mensagem strong, .conteudo-central .cofres-container #cardResumoCofres .foco-gamificacao .foco-cofre strong {
-  color: var(--text-primary);
-}
-.conteudo-central .cofres-container #cardResumoCofres .foco-gamificacao .foco-cofre {
-  font-size: 1.1rem;
-}
-.conteudo-central .cofres-container #cardResumoCofres .btn-submit {
-  margin: 0;
-  box-sizing: border-box;
-  display: block;
-  text-align: center;
-  text-decoration: none;
-}
-.conteudo-central .cofres-container #cardResumoCofres .hidden {
-  display: none !important;
 }
 .conteudo-central .contas-container {
   padding: 0.5rem 2rem 2rem 2rem;
@@ -1666,6 +1685,24 @@ header nav a.active {
   overflow: hidden !important;
 }
 
+.loader-blur {
+  background-color: var(--border-color) !important;
+  color: transparent !important;
+  pointer-events: none !important;
+}
+
+.loader-blur::-moz-placeholder {
+  color: transparent !important;
+}
+
+.loader-blur::placeholder {
+  color: transparent !important;
+}
+
+.outline.loader-blur {
+  border: 1px solid var(--border-color) !important;
+}
+
 .hidden {
   display: none !important;
 }
@@ -1691,6 +1728,14 @@ header nav a.active {
   display: flex;
   justify-content: center;
   margin: 3rem 0;
+}
+
+.loader-card {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 3rem 0;
+  height: 100%;
 }
 
 .input-group {

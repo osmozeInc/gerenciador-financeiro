@@ -94,3 +94,7 @@ export function exibirLoaderTabela() {
 export function esconderLoaderTabela() {
     document.querySelector('.loader-table').classList.add('hidden');
 }
+
+export function esconderLoaderBlur() {
+    document.querySelectorAll('.loader-blur').forEach(loader => loader.classList.remove('loader-blur'));
+}

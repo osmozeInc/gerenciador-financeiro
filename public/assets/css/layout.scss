@@ -591,6 +591,7 @@ header {
         gap: 2rem;
         
         h2 { font-size: 1.25rem; margin-bottom: 1.5rem; color: var(--text-primary); }
+        .foco-titulo { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary); }
 
         .actions-grid {
             display: grid;
@@ -611,6 +612,75 @@ header {
         
                 .input-group { 
                     margin-bottom: 1rem;
+                }
+            }
+
+            #cardResumoCofres {
+                display: flex;
+                flex-direction: column;
+                justify-content: space-between;
+    
+                .valores-grid {
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 1rem;
+    
+                    .valor-box {
+                        display: flex;
+                        flex-direction: column;
+                        
+                        &.right { align-items: flex-end; text-align: right; }
+                        
+                        .label { font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 600; }
+                        strong { font-size: 1.4rem; color: var(--text-primary); margin-top: 0.2rem; }
+                        .text-destaque { color: var(--text-especial); }
+                    }
+                }
+    
+                .foco-gamificacao {
+                    .foco-header {
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        
+                        h2 { margin-bottom: .8rem; }
+                        
+                        .badge-foco {
+                            padding: 0.2rem 0.6rem;
+                            border-radius: 99px;
+                            font-size: 0.75rem;
+                            font-weight: bold;
+
+                            &.info { background-color: var(--bg-badge-invest); color: var(--text-invest); }
+                            &.warning { background-color: var(--bg-badge-warning); color: var(--text-warning); }
+                            &.success { background-color: var(--bg-badge-success); color: var(--text-especial); }
+                        }
+                    }
+    
+                    .foco-cofre {
+                        font-size: 1.1rem;
+                        letter-spacing: 1px;
+                        font-weight: 700;
+                        margin: 0 0 0.25rem 0;
+                    }
+                    
+                    .foco-mensagem {
+                        font-size: 1rem;
+                        font-weight: 500;
+                        line-height: 1.4;
+                        margin: 0;
+                        color: var(--text-secondary);
+                        
+                        strong { color: var(--text-primary); }
+                    }
+                }
+                
+                .btn-submit {
+                    margin: 0;
+                    box-sizing: border-box;
+                    display: block;
+                    text-align: center;
+                    text-decoration: none;
                 }
             }
         }
@@ -673,70 +743,6 @@ header {
             .concluido { border-color: var(--text-especial);}
         }
 
-        #cardResumoCofres {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-
-            .valores-grid {
-                display: grid;
-                grid-template-columns: 1fr 1fr;
-                gap: 1rem;
-
-                .valor-box {
-                    display: flex;
-                    flex-direction: column;
-                    
-                    &.right { align-items: flex-end; text-align: right; }
-                    
-                    .label { font-size: 0.8rem; color: var(--text-secondary); text-transform: uppercase; font-weight: 600; }
-                    strong { font-size: 1.4rem; color: var(--text-primary); margin-top: 0.2rem; }
-                    .text-destaque { color: var(--text-especial); }
-                }
-            }
-
-            .foco-gamificacao {
-                .foco-header {
-                    display: flex;
-                    justify-content: space-between;
-                    align-items: center;
-
-                    
-                    .badge-foco {
-                        background-color: var(--bg-badge-warning);
-                        color: var(--text-warning);
-                        padding: 0.2rem 0.6rem;
-                        border-radius: 99px;
-                        font-size: 0.75rem;
-                        font-weight: bold;
-                    }
-                }
-
-                .foco-mensagem, .foco-cofre {
-                    font-size: 0.95rem;
-                    color: var(--text-secondary);
-                    margin: 0;
-                    line-height: 1.4;
-                    
-                    strong { color: var(--text-primary); }
-                }
-                
-                .foco-cofre {
-                    font-size: 1.1rem;
-                    
-                }
-            }
-            
-            .btn-submit {
-                margin: 0;
-                box-sizing: border-box;
-                display: block;
-                text-align: center;
-                text-decoration: none;
-            }
-            
-            .hidden { display: none !important; }
-        }
     }
 
     .contas-container {
@@ -1399,6 +1405,9 @@ header {
 /* ======= SUPER CLASSES ====== */
 
 .travar-scroll { overflow: hidden !important; }
+.loader-blur { background-color: var(--border-color) !important; color: transparent !important; pointer-events: none !important; }
+.loader-blur::placeholder { color: transparent !important; }
+.outline.loader-blur { border: 1px solid var(--border-color) !important; }
 .hidden { display: none !important; }
 .visivel-block { display: block !important; }
 .visivel-flex { display: flex !important; }
@@ -1408,6 +1417,7 @@ header {
 /* ==== CLASSES GENÉRICAS ===== */
 
 .loader-table { display: flex; justify-content: center; margin: 3rem 0; }
+.loader-card { display: flex; justify-content: center; align-items: center; margin: 3rem 0; height: 100%; }
     
 .input-group {
     display: flex;

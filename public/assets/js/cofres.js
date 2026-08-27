@@ -14,16 +14,18 @@ document.addEventListener('DOMContentLoaded', async function() {
         }
 
         visaoGeralCofres(jsonCofres.cofres);
-        // cofreEmDestaque(cofres);
+        cofreEmDestaque(jsonCofres.cofres);
         listarCofres(jsonCofres.cofres);
 
     } catch (erro) {
         utils.feedbackPopup('error', 'Ocorreu um erro ao buscar os dados.');
         utils.feedbackPopup('error', erro);
     }
+
+    utils.esconderLoaderBlur();
 });
 
-
+// Função para exibir um resumo de todos os cofres e seu progresso no card lateral
 function visaoGeralCofres(cofres) {
     let [totalGuardado, metaGlobal] = [0, 0];
     cofres.forEach(cofre => {
@@ -40,11 +42,32 @@ function visaoGeralCofres(cofres) {
     document.getElementById('globalTexto').textContent = `${porcentagemGlobal.toFixed(1)}% do patrimônio planejado alcançado`;
 }
 
+// Função para escolher um cofre para destacar
 function cofreEmDestaque(cofres) {
-    // escolher um cofre não concluido mais perto de estar concluido
+    const cofreDestaque = cofres.reduce((cofreDestaque = null, cofreAtual) => {
+        const caFaltante = cofreAtual.valor_meta - cofreAtual.valor_total;
+        const cdFaltante = cofreDestaque ? cofreDestaque.valor_meta - cofreDestaque.valor_total : null; 
+        cofreDestaque = ( cofreDestaque == null || (caFaltante) < (cdFaltante) && (cdFaltante) != 0) ? cofreAtual : cofreDestaque;
+        
+        return cofreDestaque;
+    }, null);
 
+    const cdPercentFaltante = cofreDestaque ? ((cofreDestaque.valor_total / cofreDestaque.valor_meta) * 100).toFixed(1) : 0;
+
+    // Atualiza o conteúdo do cofre em destaque
+    const badge = document.getElementById('cofreBadge');
+    if (cdPercentFaltante >= 0 && cdPercentFaltante <= 40) {badge.textContent = 'Falta Muito!'; badge.className = 'badge-foco info';}
+    if (cdPercentFaltante > 40 && cdPercentFaltante <= 80) {badge.textContent = `Falta ${cdPercentFaltante}%!`; badge.className = 'badge-foco warning';}
+    if (cdPercentFaltante > 80) {badge.textContent = 'Quase Finalizado!'; badge.className = 'badge-foco success';}
+
+    const nome = document.getElementById('cofreNome');
+    nome.textContent = cofreDestaque ? cofreDestaque.nome : 'Nenhum cofre disponível';
+
+    const meta = document.getElementById('cofreMeta');
+    meta.innerHTML = `Falta <strong id="cofreFalta" class>${cofreDestaque ? (cofreDestaque.valor_meta - cofreDestaque.valor_total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '0,00'}</strong> para bater a meta de <strong id="cofreMeta">${cofreDestaque ? cofreDestaque.valor_meta.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '0,00'}</strong>`
 }
 
+// lista todos os cofres e seu progresso
 function listarCofres(cofres) {
     const gridCofres = document.getElementById('gridCofres');
     gridCofres.innerHTML = '';
