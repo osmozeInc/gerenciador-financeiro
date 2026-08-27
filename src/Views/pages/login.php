@@ -23,7 +23,7 @@
                         <!--i class="bi bi-wallet2"></i> <span>Sistema Fin</span-->
                     </div>
                     <h1>Acesse sua conta</h1>
-                    <p>Não tem uma conta? <a href="/cadastro">Cadastre-se grátis</a></p>
+                    <p>Não tem uma conta? <a href="/cadastro">Cadastre-se</a></p>
                 </div>
 
                 <?php if (isset($_SESSION['erro_login'])): ?>

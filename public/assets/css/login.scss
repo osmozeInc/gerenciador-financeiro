@@ -1,5 +1,5 @@
 :root {
-    --bg-main: #f3f4f6;
+    --bg-main: #f8f8f8;
     --bg-padrao: #fff;
     --bg-progress: #e5e7eb;
     --bg-input: #f3f4f6;
@@ -11,7 +11,7 @@
     --bg-info: #f0f0f0;
 
     --divisor-color: #727272;
-    --border-color: #e5e7eb;
+    --border-color: #d0d0d0;
     
     --text-primary: #000;
     --text-secondary: #727272;
@@ -150,7 +150,6 @@
 
                         &:focus {
                             border-color: var(--text-especial);
-                            box-shadow: 0 0 0 4px rgba(18, 141, 41, 0.1);
                         }
                     }
 
@@ -194,7 +193,7 @@
                         color: var(--text-primary);
                         font-weight: 600;
                         text-decoration: none;
-                        &:hover { color: var(--text-especial); text-decoration: underline; }
+                        &:hover { color: var(--text-especial); }
                     }
                 }
 

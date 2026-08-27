@@ -1,6 +1,6 @@
 @charset "UTF-8";
 :root {
-  --bg-main: #f3f4f6;
+  --bg-main: #f8f8f8;
   --bg-padrao: #fff;
   --bg-progress: #e5e7eb;
   --bg-input: #f3f4f6;
@@ -11,7 +11,7 @@
   --bg-btn-hover: #f3f4f6;
   --bg-info: #f0f0f0;
   --divisor-color: #727272;
-  --border-color: #e5e7eb;
+  --border-color: #d0d0d0;
   --text-primary: #000;
   --text-secondary: #727272;
   --text-contrast: #fff;
@@ -141,7 +141,6 @@
 }
 .login-page-split .form-side .login-card .form-extravagant .input-group input:focus {
   border-color: var(--text-especial);
-  box-shadow: 0 0 0 4px rgba(18, 141, 41, 0.1);
 }
 .login-page-split .form-side .login-card .form-extravagant .input-group .input-wrapper-password {
   position: relative;
@@ -192,7 +191,6 @@
 }
 .login-page-split .form-side .login-card .form-extravagant .options-row .link-esqueceu:hover {
   color: var(--text-especial);
-  text-decoration: underline;
 }
 .login-page-split .form-side .login-card .form-extravagant .btn-submit {
   margin-top: 1rem;
