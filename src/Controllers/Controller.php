@@ -96,6 +96,30 @@ class Controller {
                 ]
             ]
         ],
+        'cofre' => [
+            'salvar' => [
+                'salvo_com_sucesso' => [
+                    'sucesso' => true,
+                    'msgTipo' => 'success',
+                    'mensagem' => 'Cofre cadastrado com sucesso!'
+                ],
+                'cofre_invalido' => [
+                    'sucesso' => false,
+                    'msgTipo' => 'warning',
+                    'mensagem' => 'Revise as informações do cofre.'
+                ],
+                'cofre_repetido' => [
+                    'sucesso' => false,
+                    'msgTipo' => 'warning',
+                    'mensagem' => 'Cofre já cadastrado.'
+                ],
+                'erro_interno' => [
+                    'sucesso' => false,
+                    'msgTipo' => 'error', 
+                    'mensagem' => 'Erro ao salvar cofre.'
+                ]
+            ]
+        ],
         'conta' => [
             'loginRealizado' => [
                 'sucesso' => true,

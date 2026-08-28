@@ -51,4 +51,36 @@ class CofresController extends Controller {
         }
         exit;
     }
+
+    public function salvarCofre() {
+        header('Content-Type: application/json');
+
+        $nome = trim(filter_input(INPUT_POST, 'nomeCofre', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
+        $descricao = trim(filter_input(INPUT_POST, 'descricaoCofre', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
+        $meta = trim(filter_input(INPUT_POST, 'metaCofre', FILTER_SANITIZE_NUMBER_INT) ?? '');
+        $local = trim(filter_input(INPUT_POST, 'localCofre', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
+
+        $dados = [
+            'nome' => $nome,
+            'descricao' => $descricao,
+            'local' => $local,
+            'valor_meta' => $meta,
+            'data_criacao' => date('Y-m-d'),
+            'tenant_id' => $this->idUsuarioLogado
+        ];
+
+        try {
+            $cofreModel = new Cofre();
+            $cofreModel->salvarCofre($dados);
+
+            echo json_encode(['resposta' => $this->mensagensModel['cofre']['salvar']['salvo_com_sucesso']]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode([
+                'resposta' => $this->mensagensModel['cofre']['salvar']['erro_interno'],
+                'detalhes' => $e->getMessage()
+            ]);
+        }
+        exit;
+    }
 }

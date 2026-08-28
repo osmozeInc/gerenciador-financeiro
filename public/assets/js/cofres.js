@@ -25,6 +25,25 @@ document.addEventListener('DOMContentLoaded', async function() {
     utils.esconderLoaderBlur();
 });
 
+// Cria um novo cofre
+document.getElementById('formCriarCofre').addEventListener('submit', async function(evento) {
+    evento.preventDefault();
+
+    const corpoForm = new FormData(this);
+    const jsonSalvar = await utils.apiFetch('/cofres/salvarCofre', 'POST', corpoForm);
+    
+    if (jsonSalvar?.resposta) {
+        utils.feedbackPopup(jsonSalvar.resposta.msgTipo, jsonSalvar.resposta.mensagem);
+        
+        if (jsonSalvar.resposta.sucesso) {
+            const jsonCofres = await utils.apiFetch('/cofres/selectDados');
+            listarCofres(jsonCofres.cofres);
+        }
+    }
+});
+
+// Ver as transações relacionadas a um cofre
+
 // Função para exibir um resumo de todos os cofres e seu progresso no card lateral
 function visaoGeralCofres(cofres) {
     let [totalGuardado, metaGlobal] = [0, 0];
@@ -52,19 +71,27 @@ function cofreEmDestaque(cofres) {
         return cofreDestaque;
     }, null);
 
-    const cdPercentFaltante = cofreDestaque ? ((cofreDestaque.valor_total / cofreDestaque.valor_meta) * 100).toFixed(1) : 0;
+    // corrigir essa lógica
+    let cdPercentFaltante = cofreDestaque ? ((cofreDestaque.valor_total / cofreDestaque.valor_meta) * 100) : 0;
+
+    if (cdPercentFaltante == 0) cdPercentFaltante = 100;
 
     // Atualiza o conteúdo do cofre em destaque
     const badge = document.getElementById('cofreBadge');
-    if (cdPercentFaltante >= 0 && cdPercentFaltante <= 40) {badge.textContent = 'Falta Muito!'; badge.className = 'badge-foco info';}
-    if (cdPercentFaltante > 40 && cdPercentFaltante <= 80) {badge.textContent = `Falta ${cdPercentFaltante}%!`; badge.className = 'badge-foco warning';}
+    if (cdPercentFaltante >= 0 && cdPercentFaltante <= 60) {badge.textContent = `Falta ${cdPercentFaltante}%`; badge.className = 'badge-foco warning';}
+    if (cdPercentFaltante > 60 && cdPercentFaltante <= 80) {badge.textContent = 'Quase lá!'; badge.className = 'badge-foco warning';}
     if (cdPercentFaltante > 80) {badge.textContent = 'Quase Finalizado!'; badge.className = 'badge-foco success';}
 
     const nome = document.getElementById('cofreNome');
     nome.textContent = cofreDestaque ? cofreDestaque.nome : 'Nenhum cofre disponível';
 
     const meta = document.getElementById('cofreMeta');
-    meta.innerHTML = `Falta <strong id="cofreFalta" class>${cofreDestaque ? (cofreDestaque.valor_meta - cofreDestaque.valor_total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '0,00'}</strong> para bater a meta de <strong id="cofreMeta">${cofreDestaque ? cofreDestaque.valor_meta.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '0,00'}</strong>`
+    meta.innerHTML = `
+    Falta 
+    <strong id="cofreFalta" class>${cofreDestaque ? Number(cofreDestaque.valor_meta - cofreDestaque.valor_total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '0,00'}</strong> 
+    para bater a meta de 
+    <strong id="cofreMeta">${cofreDestaque ? Number(cofreDestaque.valor_meta).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' }) : '0,00'}</strong>
+    `;
 }
 
 // lista todos os cofres e seu progresso
@@ -75,14 +102,15 @@ function listarCofres(cofres) {
     cofres.forEach(cofre => {
         const card = document.createElement('div');
         card.className = 'cofre-card';
+        card.id = cofre.id;
         card.innerHTML = `
             <div class="cofre-header">
                 <span class="cofre-title">${cofre.nome}</span>
                 <span class="cofre-local">${cofre.local}</span>
             </div>
             <div class="cofre-valores">
-                <span class="valor-atual">${cofre.valor_total.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
-                <span class="valor-meta">/ ${cofre.valor_meta.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                <span class="valor-atual">${Number(cofre.valor_total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                <span class="valor-meta">/ ${Number(cofre.valor_meta).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
             </div>
             <div>
                 <div class="progress-container">

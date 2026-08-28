@@ -4,19 +4,29 @@
         <section class="card">
             <h2 class="loader-blur">Criar Novo Cofre</h2>
             <form id="formCriarCofre">
-                <div class="input-group">
-                    <label class="loader-blur">Objetivo / Nome</label>
-                    <input type="text" id="nomeCofre" class="loader-blur" required placeholder="Ex: Viagem, Câmera Nova">
+                <div class="input-double-group" style="grid-column: span 2;">
+                    <span>
+                        <label class="loader-blur">Objetivo / Nome</label>
+                        <input type="text" id="nomeCofre" name="nomeCofre" class="loader-blur" required placeholder="Ex: Viagem fim de ano">
+                    </span>
+
+                    <span>
+                        <label class="loader-blur">Meta (R$)</label>
+                        <input type="number" id="metaCofre" name="metaCofre" class="loader-blur" step="0.01" min="1" required placeholder="0.00">
+                    </span>
                 </div>
+
                 <div class="input-group">
-                    <label class="loader-blur">Meta (R$)</label>
-                    <input type="number" id="metaCofre" class="loader-blur" step="0.01" min="1" required placeholder="0.00">
+                    <label class="loader-blur">Descrição</label>
+                    <input type="text" id="descricaoCofre" name="descricaoCofre" class="loader-blur" required placeholder="Ex: Guardar dinheiro para viajar">
                 </div>
+
                 <div class="input-group">
                     <label class="loader-blur">Onde está guardado? (Descritivo)</label>
-                    <input type="text" id="localCofre" class="loader-blur" required placeholder="Ex: Caixinha Nubank, Conta Poupança, Cripto">
+                    <input type="text" id="localCofre" name="localCofre" class="loader-blur" required placeholder="Ex: Caixinha Nubank, Conta Poupança, Cripto">
                 </div>
-                <button type="submit" class="btn-submit outline loader-blur">Criar Meta</button>
+
+                <button type="submit" class="btn-submit outline loader-blur">Criar Cofre</button>
             </form>
         </section>
 
@@ -43,7 +53,7 @@
 
             <div id="cofreDestaque" class="foco-gamificacao">
                 <div class="foco-header">
-                    <h2 class="loader-blur">Cofre em Destaque</h2>
+                    <h2 class="loader-blur" style="margin-top: 0;">Cofre em Destaque</h2>
                     <span id="cofreBadge" class="badge-foco loader-blur">_ _ _ _ _ _ _ _ _ _ _ _ _</span>
                 </div>
                 
@@ -66,40 +76,6 @@
     <section>
         <h2 style="margin-bottom: 1rem;" class="loader-blur">Meus Cofres</h2>
         <div class="cofres-grid" id="gridCofres">
-
-            <div class="cofre-card loader-blur">
-                <div class="cofre-header ">
-                    <span class="cofre-title">.</span>
-                    <span class="cofre-local loader-blur">.</span>
-                </div>
-                <div class="cofre-valores">
-                    <span class="valor-atual loader-blur">.</span>
-                    <span class="valor-meta loader-blur">.</span>
-                </div>
-                <div>
-                    <div class="progress-container">
-                        <div class="progress-bar" style="width: 0%"></div>
-                    </div>
-                    <div class="progress-text loader-blur">.</div>
-                </div>
-            </div>
-
-            <div class="cofre-card loader-blur">
-                <div class="cofre-header ">
-                    <span class="cofre-title">.</span>
-                    <span class="cofre-local loader-blur">.</span>
-                </div>
-                <div class="cofre-valores">
-                    <span class="valor-atual loader-blur">.</span>
-                    <span class="valor-meta loader-blur">.</span>
-                </div>
-                <div>
-                    <div class="progress-container">
-                        <div class="progress-bar" style="width: 0%"></div>
-                    </div>
-                    <div class="progress-text loader-blur">.</div>
-                </div>
-            </div>
 
             <div class="cofre-card loader-blur">
                 <div class="cofre-header ">

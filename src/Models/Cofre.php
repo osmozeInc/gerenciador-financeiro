@@ -33,4 +33,20 @@ class Cofre extends Model {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC); 
     }
+
+    public function salvarCofre($dados) {
+        $query = "INSERT INTO cofres (nome, descricao, local, valor_meta, data_criacao, tenant_id)
+                  VALUES (:nome, :descricao, :local, :valor_meta, :data_criacao, :tenant_id)";
+        
+        $stmt = $this->pdo->prepare($query);
+
+        return $stmt->execute([
+            'nome' => $dados['nome'],
+            'descricao' => $dados['descricao'],
+            'local' => $dados['local'],
+            'valor_meta' => $dados['valor_meta'],
+            'data_criacao' => $dados['data_criacao'],
+            'tenant_id' => $dados['tenant_id']
+        ]);
+    }
 }
