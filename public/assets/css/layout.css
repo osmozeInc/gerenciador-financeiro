@@ -811,6 +811,7 @@ header nav a.active {
   display: flex;
   flex-direction: column;
   position: relative;
+  cursor: pointer;
 }
 .conteudo-central .cofres-container .cofres-grid .cofre-card .cofre-header {
   display: flex;

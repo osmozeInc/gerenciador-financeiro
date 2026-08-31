@@ -35,6 +35,14 @@ document.body.addEventListener('click', (e) => {
         abrirModalPorValue(idModal, value);
         return;
     }
+
+    const btnAbrirModalId = e.target.closest('.js-abrir-modal-passando-id');
+    if (btnAbrirModalId) {
+        const id = btnAbrirModalId.id;
+        const idModal = btnAbrirModalId.getAttribute('data-target');
+        abrirModalPorId(idModal, id);
+        return;
+    }
 });
 
 // sair da sessão
@@ -92,7 +100,12 @@ export function fecharModal(idModal, idFormulario) {
 
 function abrirModalPorValue(idModal, value) {
     abrirModal(idModal);
-    document.querySelector(`#${idModal} form`).setAttribute('data-idTransacao', value);
+    document.querySelector(`#${idModal} form`).setAttribute('data-value', value);
+}
+
+function abrirModalPorId(idModal, id) {
+    abrirModal(idModal);
+    document.querySelector(`#${idModal} form`).setAttribute('data-id', id);
 }
 
 function abrirModalPorOption(idModal, tipo) {

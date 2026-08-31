@@ -331,7 +331,7 @@ document.querySelector('#modal-excluir-transacao form').addEventListener('submit
     document.getElementById('tabelaTransacoes').innerHTML = '';
     utils.exibirLoaderTabela();
 
-    const id = this.getAttribute('data-idTransacao');
+    const id = this.getAttribute('data-value');
 
     const jsonResposta = await utils.deletarTransacao(id);
     if (!jsonResposta.resposta.sucesso) {
