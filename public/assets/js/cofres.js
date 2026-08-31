@@ -1,5 +1,6 @@
 // import { abrirModal, fecharModal } from "/assets/js/modais.js";
 import * as utils from "/assets/js/utils.js";
+import { abrirModal, abrirModalPorId } from "/assets/js/modais.js";
 
 let cofres = []; // Variável global para armazenar os cofres
 
@@ -42,7 +43,21 @@ document.getElementById('formCriarCofre').addEventListener('submit', async funct
     }
 });
 
+const gridCofres = document.getElementById('gridCofres');
 
+if (gridCofres) {
+    gridCofres.addEventListener('click', (e) => {
+        const btnAbrirModalId = e.target.closest('.js-abrir-modal-passando-cofre');
+        
+        if (btnAbrirModalId) {
+            const id = btnAbrirModalId.id;
+            const idModal = btnAbrirModalId.getAttribute('data-target');
+            
+            abrirModalPorId(idModal, id);
+            exibirCofreCorreto(id); 
+        }
+    });
+}
 
 // Função para exibir um resumo de todos os cofres e seu progresso no card lateral
 function visaoGeralCofres(cofres) {
@@ -101,8 +116,8 @@ function listarCofres(cofres) {
 
     cofres.forEach(cofre => {
         const card = document.createElement('div');
-        card.value = cofre.id;
-        card.className = 'cofre-card js-abrir-modal-passando-id';
+        card.id = cofre.id;
+        card.className = 'cofre-card js-abrir-modal-passando-cofre';
         card.dataset.target = 'modal-detalhes-cofre'
 
         card.innerHTML = `
@@ -126,73 +141,89 @@ function listarCofres(cofres) {
 }
 
 // Implementação da função que abre e popula o modal
-async function exibirCofreCompleto(idCofre) {
-    // 1. Encontra os dados base do cofre na memória[cite: 4]
-    const cofre = cofres.find(c => c.id === idCofre);
-    if (!cofre) return;
-
-    // 2. Popula as informações básicas no DOM do Modal
-    document.getElementById('detalhesCofreNome').textContent = cofre.nome;
-    document.getElementById('detalhesCofreDescricao').textContent = cofre.descricao || 'Sem descrição definida';
-    document.getElementById('detalhesCofreLocal').textContent = cofre.local;
-    
-    const dataFormatada = cofre.data_criacao ? new Date(cofre.data_criacao).toLocaleDateString('pt-BR') : 'Não registrada';
-    document.getElementById('detalhesCofreData').textContent = `Criado em: ${dataFormatada}`;
-
-    // Cálculos de porcentagem
-    const vTotal = parseFloat(cofre.valor_total || 0);
-    const vMeta = parseFloat(cofre.valor_meta || 0);
-    const pct = vMeta > 0 ? (vTotal / vMeta) * 100 : 0;
-
-    document.getElementById('detalhesCofreAtual').textContent = vTotal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    document.getElementById('detalhesCofreMeta').textContent = vMeta.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-    document.getElementById('detalhesCofreBarra').style.width = `${pct > 100 ? 100 : pct}%`;
-    document.getElementById('detalhesCofrePorcentagem').textContent = `${pct.toFixed(1)}% Alcançado`;
-
-    const tbody = document.getElementById('detalhesCofreTransacoes');
-    tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; padding: 1.5rem; color: var(--text-secondary);">Carregando histórico...</td></tr>';
-
-    // 3. Exibe o modal na tela usando a utilidade do seu projeto[cite: 4]
-    document.getElementById('modal-detalhes-cofre').classList.add('active');
-
+async function exibirCofreCorreto(idCofre) {    
     try {
-        // 4. Busca o histórico de transações atreladas a este cofre específico
-        // Nota: Assuma que você tenha ou criará esse endpoint na sua API
-        const jsonTransacoes = await utils.apiFetch(`/transacoes/selectPorCofre?id_cofre=${idCofre}`);
-        tbody.innerHTML = '';
+        const urlMetodos = '/cofres/selectCofre/' + idCofre;
+        let urlCategoria;
         
-        if (jsonTransacoes?.sucesso && jsonTransacoes.transacoes.length > 0) {
-            jsonTransacoes.transacoes.forEach(trans => {
-                const tr = document.createElement('tr');
-                tr.style.transition = 'background-color 0.1s';
-                
-                const tdData = document.createElement('td');
-                tdData.style.padding = '0.8rem 0.5rem';
-                tdData.style.borderBottom = '1px solid var(--divisor-color)';
-                tdData.textContent = new Date(trans.data_transacao).toLocaleDateString('pt-BR');
-                
-                const tdDesc = document.createElement('td');
-                tdDesc.style.padding = '0.8rem 0.5rem';
-                tdDesc.style.borderBottom = '1px solid var(--divisor-color)';
-                tdDesc.textContent = trans.descricao;
-                
-                const tdValor = document.createElement('td');
-                tdValor.style.padding = '0.8rem 0.5rem';
-                tdValor.style.borderBottom = '1px solid var(--divisor-color)';
-                tdValor.style.textAlign = 'right';
-                tdValor.style.fontWeight = '600';
-                tdValor.style.color = 'var(--text-especial)'; // Cor verde baseada no seu :root[cite: 2]
-                tdValor.textContent = '+ ' + parseFloat(trans.valor_total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        const [jsonTransacao, jsonMetodos, jsonCategoria] = await Promise.all([
+            utils.buscarTransacao(idTransacao),
+            utils.apiFetch(urlMetodos),
+            urlCategoria ? utils.apiFetch(urlCategoria) : Promise.resolve(null)
+        ]);
+        
+        
+        if (!jsonTransacao?.resposta?.sucesso) {
+            utils.feedbackPopup('error', 'Erro ao carregar dados para edição.');
+            return;
+        }
+        if (!jsonMetodos?.resposta?.sucesso) {
+            utils.feedbackPopup('error', 'Erro ao carregar formas de pagamento.');
+            return;
+        }
+        if (urlCategoria && !jsonCategoria?.resposta?.sucesso) {
+            utils.feedbackPopup('error', 'Erro ao carregar categorias.');
+            return;
+        }
 
-                tr.appendChild(tdData);
-                tr.appendChild(tdDesc);
-                tr.appendChild(tdValor);
-                tbody.appendChild(tr);
-            });
-        } else {
-            tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; padding: 1.5rem; color: var(--text-secondary);">Nenhuma movimentação registrada neste cofre ainda.</td></tr>';
+        if (urlCategoria) {
+            preencherCategoriasModal(jsonCategoria.categorias, `editCategorias${tipo}`);
+        }
+        preencherMetodosModal(jsonMetodos.metodos, `editMetodoConta${tipo}`);
+
+        const t = jsonTransacao.transacao;
+
+        const setVal = (seletor, valor) => {
+            const input = formAtivo.querySelector(seletor);
+            if (input && valor !== null && valor !== undefined) input.value = valor;
+        };
+
+        setVal('[name="id_transacao"]', t.id ?? t.id_transacao);
+        setVal('[name="descricao"]',    t.descricao);
+        setVal('[name="data"]',         t.data_transacao);
+        setVal('[name="valor"]',        t.valor_total ?? t.valor);
+        setVal('[name="conta_id"]',     t.metodo_nome ?? t.metodo_id);
+        setVal('[name="categoria_id"]', t.categoria_nome ?? t.categoria_id);
+
+        if (tipo === 'D') {
+            const checkParcelado = formAtivo.querySelector('[name="parcelado"]');
+            const divParcelas = document.getElementById('editInputParcelas');
+            
+            checkParcelado.checked = t.parcelado === 1 || t.parcelado === true || t.qtd_parcelas > 1;
+            divParcelas.classList.toggle('hidden', !checkParcelado.checked);
+            
+            if (checkParcelado.checked) setVal('[name="qtd_parcelas"]', t.qtd_parcelas);
+        } 
+        else if (tipo === 'I') {
+            const jsonClasses = await utils.apiFetch('/classesInvestimento/selectDados');
+            if (!jsonClasses || !jsonClasses.resposta.sucesso) {
+                utils.feedbackPopup('error', 'Erro ao carregar classes de investimento.');
+                return;
+            }
+            preencherClassesModal(jsonClasses.classes);
+
+            setVal('[name="ativo"]',      t.ativo);
+            setVal('[name="classe"]',     t.classe);
+            setVal('[name="quantidade"]', t.quantidade);
+            setVal('[name="preco"]',      t.preco_unitario); // Corrigido: no seu SQL é preco_unitario
+        } 
+        else if (tipo === 'C') {
+            const jsonCofres = await utils.apiFetch('/cofres/selectDados');
+            if (!jsonCofres || !jsonCofres.resposta.sucesso) {
+                utils.feedbackPopup('error', 'Erro ao carregar cofres.');
+                return;
+            }
+            preencherCofresModal(jsonCofres.cofres);
+
+            setVal('[name="id_cofre"]',   t.id_cofre);
         }
     } catch (error) {
-        tbody.innerHTML = '<tr><td colspan="3" style="text-align: center; padding: 1.5rem; color: var(--text-danger);">Falha ao carregar os dados.</td></tr>';
+        console.error(error);
+        utils.feedbackPopup('error', 'Erro ao carregar dados para edição.');
     }
+
+    abrirModal('modal-editar-transacao');
+    fecharLoaderModal('modal-editar-transacao')
+
+    formAtivo.classList.remove('hidden');
 }

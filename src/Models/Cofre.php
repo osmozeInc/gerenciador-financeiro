@@ -34,6 +34,35 @@ class Cofre extends Model {
         return $stmt->fetchAll(PDO::FETCH_ASSOC); 
     }
 
+    public function selectCofrePorId($id, $tenantId) {
+        $query = "
+            SELECT 
+                c.id, 
+                c.nome, 
+                c.descricao, 
+                c.local, 
+                c.valor_meta, 
+                c.data_criacao,
+                COALESCE(SUM(t.valor_total), 0) AS valor_total
+            FROM cofres c
+            LEFT JOIN t_cofres tc ON c.id = tc.id_cofre
+            LEFT JOIN transacoes t ON tc.id_transacao = t.id
+            WHERE c.id = :id AND c.tenant_id = :tenant_id
+            GROUP BY 
+                c.id, 
+                c.nome, 
+                c.descricao, 
+                c.local, 
+                c.valor_meta, 
+                c.data_criacao
+        ";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':id', $id);
+        $stmt->bindValue(':tenant_id', $tenantId);
+        $stmt->execute();
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+
     public function salvarCofre($dados) {
         $query = "INSERT INTO cofres (nome, descricao, local, valor_meta, data_criacao, tenant_id)
                   VALUES (:nome, :descricao, :local, :valor_meta, :data_criacao, :tenant_id)";

@@ -52,6 +52,34 @@ class CofresController extends Controller {
         exit;
     }
 
+    public function selectCofre($id) {
+        header('Content-Type: application/json');
+
+        try {
+            $cofreModel = new Cofre();
+            $cofre = $cofreModel->buscarCofrePorId($id, $this->idUsuarioLogado);
+            
+            if ($cofre) {
+                echo json_encode([
+                    'resposta' => ['sucesso' => true, 'msgTipo' => 'success', 'mensagem' => 'Cofre carregado.'],
+                    'cofre' => $cofre
+                ]);
+            } else {
+                echo json_encode([
+                    'resposta' => ['sucesso' => false, 'msgTipo' => 'warning', 'mensagem' => 'Cofre não encontrado.']
+                ]);
+            }
+
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode([
+                'resposta' => ['sucesso' => false, 'msgTipo' => 'error', 'mensagem' => 'Erro interno ao buscar cofre.'],
+                'detalhes' => $e->getMessage()
+            ]);
+        }
+        exit;
+    }
+
     public function salvarCofre() {
         header('Content-Type: application/json');
 

@@ -103,9 +103,10 @@ function abrirModalPorValue(idModal, value) {
     document.querySelector(`#${idModal} form`).setAttribute('data-value', value);
 }
 
-function abrirModalPorId(idModal, id) {
+export function abrirModalPorId(idModal, id) {
     abrirModal(idModal);
-    document.querySelector(`#${idModal} form`).setAttribute('data-id', id);
+    console.log(id);
+    document.querySelector(`#${idModal}`).setAttribute('data-id', id);
 }
 
 function abrirModalPorOption(idModal, tipo) {
