@@ -35,32 +35,48 @@ class Cofre extends Model {
     }
 
     public function selectCofrePorId($id, $tenantId) {
-        $query = "
+        $queryCofre = "
             SELECT 
-                c.id, 
-                c.nome, 
-                c.descricao, 
-                c.local, 
-                c.valor_meta, 
-                c.data_criacao,
+                c.id, c.nome, c.descricao, c.local, c.valor_meta, c.data_criacao,
                 COALESCE(SUM(t.valor_total), 0) AS valor_total
             FROM cofres c
             LEFT JOIN t_cofres tc ON c.id = tc.id_cofre
             LEFT JOIN transacoes t ON tc.id_transacao = t.id
             WHERE c.id = :id AND c.tenant_id = :tenant_id
             GROUP BY 
-                c.id, 
-                c.nome, 
-                c.descricao, 
-                c.local, 
-                c.valor_meta, 
-                c.data_criacao
+                c.id, c.nome, c.descricao, c.local, c.valor_meta, c.data_criacao
         ";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->bindValue(':id', $id);
-        $stmt->bindValue(':tenant_id', $tenantId);
-        $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        $stmtCofre = $this->pdo->prepare($queryCofre);
+        $stmtCofre->bindValue(':id', $id);
+        $stmtCofre->bindValue(':tenant_id', $tenantId);
+        $stmtCofre->execute();
+        
+        $cofre = $stmtCofre->fetch(PDO::FETCH_ASSOC);
+
+        if (!$cofre) {
+            return false; 
+        }
+
+        $queryTransacoes = "
+            SELECT 
+                t.id, t.valor_total, t.data_transacao, t.descricao
+            FROM transacoes t
+            INNER JOIN t_cofres tc ON t.id = tc.id_transacao
+            INNER JOIN cofres c ON tc.id_cofre = c.id
+            WHERE tc.id_cofre = :id AND c.tenant_id = :tenant_id
+            ORDER BY t.data_transacao DESC
+        ";
+
+        $stmtTrans = $this->pdo->prepare($queryTransacoes);
+        $stmtTrans->bindValue(':id', $id);
+        $stmtTrans->bindValue(':tenant_id', $tenantId); // Segurança multi-tenant
+        $stmtTrans->execute();
+
+        // 3. Acopla o array de transações dentro do array do cofre
+        $cofre['transacoes'] = $stmtTrans->fetchAll(PDO::FETCH_ASSOC);
+
+        return $cofre;
     }
 
     public function salvarCofre($dados) {

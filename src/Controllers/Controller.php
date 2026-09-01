@@ -118,6 +118,18 @@ class Controller {
                     'msgTipo' => 'error', 
                     'mensagem' => 'Erro ao salvar cofre.'
                 ]
+            ],
+            'buscar' => [
+                'busca_com_sucesso' => [
+                    'sucesso' => true,
+                    'msgTipo' => 'success', 
+                    'mensagem' => 'Dados do banco de dados carregados com sucesso!'
+                ],
+                'busca_vazia' => [
+                    'sucesso' => true,
+                    'msgTipo' => 'warning',
+                    'mensagem' => 'Nenhum dado encontrado.'
+                ]
             ]
         ],
         'conta' => [

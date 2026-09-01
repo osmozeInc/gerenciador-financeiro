@@ -52,28 +52,40 @@ class CofresController extends Controller {
         exit;
     }
 
-    public function selectCofre($id) {
+    public function selectCofre($id = null) {
         header('Content-Type: application/json');
+
+        if ($id === null || !is_numeric($id)) {
+            http_response_code(400);
+            echo json_encode([ 'resposta' => $this->mensagensModel['transacao']['deletar']['id_invalido'] ]);
+            return;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'GET') {
+            http_response_code(405);
+            echo json_encode([ 'resposta' => $this->mensagensModel['transacao']['deletar']['metodo_invalido'] ]);
+            return;
+        }
 
         try {
             $cofreModel = new Cofre();
-            $cofre = $cofreModel->buscarCofrePorId($id, $this->idUsuarioLogado);
+            $cofre = $cofreModel->selectCofrePorId($id, $this->idUsuarioLogado);
             
             if ($cofre) {
                 echo json_encode([
-                    'resposta' => ['sucesso' => true, 'msgTipo' => 'success', 'mensagem' => 'Cofre carregado.'],
+                    'resposta' => $this->mensagensModel['cofre']['buscar']['busca_com_sucesso'],
                     'cofre' => $cofre
                 ]);
             } else {
                 echo json_encode([
-                    'resposta' => ['sucesso' => false, 'msgTipo' => 'warning', 'mensagem' => 'Cofre não encontrado.']
+                    'resposta' => $this->mensagensModel['cofre']['buscar']['busca_vazia']
                 ]);
             }
 
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode([
-                'resposta' => ['sucesso' => false, 'msgTipo' => 'error', 'mensagem' => 'Erro interno ao buscar cofre.'],
+                'resposta' => $this->mensagensModel['genericas']['erro_interno'],
                 'detalhes' => $e->getMessage()
             ]);
         }
