@@ -98,3 +98,12 @@ export function esconderLoaderTabela() {
 export function esconderLoaderBlur() {
     document.querySelectorAll('.loader-blur').forEach(loader => loader.classList.remove('loader-blur'));
 }
+
+export function exibirLoaderBlurModal() {
+    document.querySelectorAll('.loader-blur-modal-inativo').forEach(loader => loader.classList.replace('loader-blur-modal-inativo', 'loader-blur-modal'));
+    document.querySelectorAll('.progress-bar-modal').forEach(bar => bar.style.width = '0%');
+}
+
+export function esconderLoaderBlurModal() {
+    document.querySelectorAll('.loader-blur-modal').forEach(loader => loader.classList.replace('loader-blur-modal', 'loader-blur-modal-inativo'));
+}

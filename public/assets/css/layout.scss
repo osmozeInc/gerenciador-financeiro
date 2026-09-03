@@ -756,7 +756,9 @@ header {
                     }
                 }
                 
-                
+                .progress-container {
+                    margin: .6rem 0 0 0;
+                }
             }
             
             .concluido { border-color: var(--text-especial);}
@@ -844,7 +846,7 @@ header {
                     
                     .progress-bar { 
                         height: 100%; 
-                        background-color: var(--text-danger); 
+                        background-color: var(--text-danger);
                     }
                 }
                 
@@ -1366,10 +1368,63 @@ header {
         .loader-modal-container { display: flex; justify-content: center; align-items: center; height: 100%; width: 100%; min-width: 100%; min-height: 450px; }
 
         .modal-content {
-            margin: 1.5rem 0;
+            margin: 1.2rem 0;
 
             p.assunto { font-size: 1.1rem; color: var(--text-primary); margin-bottom: 0.5rem; font-weight: 500; }
             p.corpo { font-size: 0.95rem; color: var(--text-secondary); }
+
+            .header-container {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+
+                h2 { margin: 0; color: var(--text-primary); font-size: 1.5rem; }
+                p { margin: 0.25rem 0 0 0; color: var(--text-secondary); font-size: 0.95rem; }
+                span { background-color: var(--bg-badge); color: var(--text-primary); padding: 0.25rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
+            }
+
+            .progresso-container {
+                margin: 2.2rem 0;
+
+                .progress-info, .progress-info-above {
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    margin-bottom: 0.5rem;
+                    font-size: 0.95rem;
+                    font-weight: 600;
+                    color: var(--text-secondary);
+
+                    #detalhesCofreAtual, #detalhesCofreMeta { color: var(--text-primary); font-size: 1.1rem; }
+                }
+
+                .progress-bar, .progress-bar-modal {
+                    width: 100%;
+                    background-color: var(--bg-progress);
+                    border-radius: 99px;
+                    height: 8px; overflow: hidden;
+
+                    #detalhesCofreBarra { width: 0; height: 100%; background-color: var(--text-especial); transition: width 0.4s ease;}
+                }
+
+                .progress-info-above {
+                    margin-top: 0.4rem;
+                    font-size: 0.85rem;
+                }
+            }
+
+            h3 { font-size: 1.1rem; color: var(--text-primary); border-bottom: 1px solid var(--divisor-color); padding-bottom: 0.5rem; margin-bottom: 0; }
+            .tabela-wrapper {
+                max-height: 250px; 
+                overflow-y: auto;
+
+                table {
+                    width: 100%; border-collapse: collapse; text-align: left;
+
+                    th { padding: 0.75rem; border-bottom: 1px solid var(--divisor-color); color: var(--text-secondary); font-size: 0.85rem; position: sticky; top: 0; background: var(--bg-padrao); }
+
+                }
+            }
         }
         .form-simple { gap: 1rem; }
         .form-flex { display: flex; width: 100%; gap: 1.5rem; }
@@ -1423,9 +1478,9 @@ header {
 /* ======= SUPER CLASSES ====== */
 
 .travar-scroll { overflow: hidden !important; }
-.loader-blur { background-color: var(--border-color) !important; color: transparent !important; pointer-events: none !important; }
-.loader-blur::placeholder { color: transparent !important; }
-.outline.loader-blur { border: 1px solid var(--border-color) !important; }
+.loader-blur, .loader-blur-modal { background-color: var(--border-color) !important; color: transparent !important; pointer-events: none !important; }
+.loader-blur::placeholder, .loader-blur-modal::placeholder { color: transparent !important; }
+.outline.loader-blur, .outline.loader-blur-modal { border: 1px solid var(--border-color) !important; }
 .hidden { display: none !important; }
 .visivel-block { display: block !important; }
 .visivel-flex { display: flex !important; }

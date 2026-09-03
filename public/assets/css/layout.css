@@ -849,6 +849,9 @@ header nav a.active {
   font-size: 0.875rem;
   color: var(--text-secondary);
 }
+.conteudo-central .cofres-container .cofres-grid .cofre-card .progress-container {
+  margin: 0.6rem 0 0 0;
+}
 .conteudo-central .cofres-container .cofres-grid .concluido {
   border-color: var(--text-especial);
 }
@@ -1600,7 +1603,7 @@ header nav a.active {
   min-height: 450px;
 }
 .modal-backdrop .modal-container-filter .modal-content, .modal-backdrop .modal-delete-container .modal-content {
-  margin: 1.5rem 0;
+  margin: 1.2rem 0;
 }
 .modal-backdrop .modal-container-filter .modal-content p.assunto, .modal-backdrop .modal-delete-container .modal-content p.assunto {
   font-size: 1.1rem;
@@ -1611,6 +1614,87 @@ header nav a.active {
 .modal-backdrop .modal-container-filter .modal-content p.corpo, .modal-backdrop .modal-delete-container .modal-content p.corpo {
   font-size: 0.95rem;
   color: var(--text-secondary);
+}
+.modal-backdrop .modal-container-filter .modal-content .header-container, .modal-backdrop .modal-delete-container .modal-content .header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.modal-backdrop .modal-container-filter .modal-content .header-container h2, .modal-backdrop .modal-delete-container .modal-content .header-container h2 {
+  margin: 0;
+  color: var(--text-primary);
+  font-size: 1.5rem;
+}
+.modal-backdrop .modal-container-filter .modal-content .header-container p, .modal-backdrop .modal-delete-container .modal-content .header-container p {
+  margin: 0.25rem 0 0 0;
+  color: var(--text-secondary);
+  font-size: 0.95rem;
+}
+.modal-backdrop .modal-container-filter .modal-content .header-container span, .modal-backdrop .modal-delete-container .modal-content .header-container span {
+  background-color: var(--bg-badge);
+  color: var(--text-primary);
+  padding: 0.25rem 0.6rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+.modal-backdrop .modal-container-filter .modal-content .progresso-container, .modal-backdrop .modal-delete-container .modal-content .progresso-container {
+  margin: 2.2rem 0;
+}
+.modal-backdrop .modal-container-filter .modal-content .progresso-container .progress-info, .modal-backdrop .modal-container-filter .modal-content .progresso-container .progress-info-above, .modal-backdrop .modal-delete-container .modal-content .progresso-container .progress-info, .modal-backdrop .modal-delete-container .modal-content .progresso-container .progress-info-above {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+.modal-backdrop .modal-container-filter .modal-content .progresso-container .progress-info #detalhesCofreAtual, .modal-backdrop .modal-container-filter .modal-content .progresso-container .progress-info #detalhesCofreMeta, .modal-backdrop .modal-container-filter .modal-content .progresso-container .progress-info-above #detalhesCofreAtual, .modal-backdrop .modal-container-filter .modal-content .progresso-container .progress-info-above #detalhesCofreMeta, .modal-backdrop .modal-delete-container .modal-content .progresso-container .progress-info #detalhesCofreAtual, .modal-backdrop .modal-delete-container .modal-content .progresso-container .progress-info #detalhesCofreMeta, .modal-backdrop .modal-delete-container .modal-content .progresso-container .progress-info-above #detalhesCofreAtual, .modal-backdrop .modal-delete-container .modal-content .progresso-container .progress-info-above #detalhesCofreMeta {
+  color: var(--text-primary);
+  font-size: 1.1rem;
+}
+.modal-backdrop .modal-container-filter .modal-content .progresso-container .progress-bar, .modal-backdrop .modal-container-filter .modal-content .progresso-container .progress-bar-modal, .modal-backdrop .modal-delete-container .modal-content .progresso-container .progress-bar, .modal-backdrop .modal-delete-container .modal-content .progresso-container .progress-bar-modal {
+  width: 100%;
+  background-color: var(--bg-progress);
+  border-radius: 99px;
+  height: 8px;
+  overflow: hidden;
+}
+.modal-backdrop .modal-container-filter .modal-content .progresso-container .progress-bar #detalhesCofreBarra, .modal-backdrop .modal-container-filter .modal-content .progresso-container .progress-bar-modal #detalhesCofreBarra, .modal-backdrop .modal-delete-container .modal-content .progresso-container .progress-bar #detalhesCofreBarra, .modal-backdrop .modal-delete-container .modal-content .progresso-container .progress-bar-modal #detalhesCofreBarra {
+  width: 0;
+  height: 100%;
+  background-color: var(--text-especial);
+  transition: width 0.4s ease;
+}
+.modal-backdrop .modal-container-filter .modal-content .progresso-container .progress-info-above, .modal-backdrop .modal-delete-container .modal-content .progresso-container .progress-info-above {
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+}
+.modal-backdrop .modal-container-filter .modal-content h3, .modal-backdrop .modal-delete-container .modal-content h3 {
+  font-size: 1.1rem;
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--divisor-color);
+  padding-bottom: 0.5rem;
+  margin-bottom: 0;
+}
+.modal-backdrop .modal-container-filter .modal-content .tabela-wrapper, .modal-backdrop .modal-delete-container .modal-content .tabela-wrapper {
+  max-height: 250px;
+  overflow-y: auto;
+}
+.modal-backdrop .modal-container-filter .modal-content .tabela-wrapper table, .modal-backdrop .modal-delete-container .modal-content .tabela-wrapper table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+.modal-backdrop .modal-container-filter .modal-content .tabela-wrapper table th, .modal-backdrop .modal-delete-container .modal-content .tabela-wrapper table th {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--divisor-color);
+  color: var(--text-secondary);
+  font-size: 0.85rem;
+  position: sticky;
+  top: 0;
+  background: var(--bg-padrao);
 }
 .modal-backdrop .modal-container-filter .form-simple, .modal-backdrop .modal-delete-container .form-simple {
   gap: 1rem;
@@ -1701,21 +1785,21 @@ header nav a.active {
   overflow: hidden !important;
 }
 
-.loader-blur {
+.loader-blur, .loader-blur-modal {
   background-color: var(--border-color) !important;
   color: transparent !important;
   pointer-events: none !important;
 }
 
-.loader-blur::-moz-placeholder {
+.loader-blur::-moz-placeholder, .loader-blur-modal::-moz-placeholder {
   color: transparent !important;
 }
 
-.loader-blur::placeholder {
+.loader-blur::placeholder, .loader-blur-modal::placeholder {
   color: transparent !important;
 }
 
-.outline.loader-blur {
+.outline.loader-blur, .outline.loader-blur-modal {
   border: 1px solid var(--border-color) !important;
 }
 

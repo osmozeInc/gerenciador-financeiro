@@ -43,6 +43,15 @@ document.getElementById('formCriarCofre').addEventListener('submit', async funct
     }
 });
 
+document.querySelectorAll('.js-fechar-modal').forEach(btnFechar => {
+    btnFechar.addEventListener('click', () => {
+        console.log('Fechando modal...');
+        utils.exibirLoaderBlurModal();
+        utils.exibirLoaderTabela();
+        document.getElementById('detalhesCofreTransacoes').innerHTML = '';
+    });
+});
+
 const gridCofres = document.getElementById('gridCofres');
 gridCofres.addEventListener('click', (e) => {
     const btnAbrirModalId = e.target.closest('.js-abrir-modal-passando-cofre');
@@ -140,7 +149,7 @@ function listarCofres(cofres) {
 }
 
 // Implementação da função que abre e popula o modal
-async function exibirCofreCorreto(idCofre) {    
+async function exibirCofreCorreto(idCofre) {
     try {
         const jsonCofre = await utils.apiFetch(`/cofres/selectCofre/${idCofre}`);
 
@@ -181,7 +190,7 @@ async function exibirCofreCorreto(idCofre) {
         const valorMeta = parseFloat(c.valor_meta) || 1; // Impede divisão fatal por zero se a meta for nula
         const porcentagem = (valorAtual / valorMeta) * 100;
         
-        setText('#detalhesCofrePorcentagem', `${porcentagem.toFixed(1)}%`);
+        setText('#detalhesCofrePorcentagem', `${porcentagem}%`);
         // Math.min(..., 100) impede que a barra visual "vaze" do container se o valor passar da meta
         modal.querySelector('#detalhesCofreBarra').style.width = `${Math.min(porcentagem, 100)}%`; 
 
@@ -215,16 +224,13 @@ async function exibirCofreCorreto(idCofre) {
                 </tr>`;
         }
 
-        // Abre o modal na tela (certifique-se de que utils.abrirModal ou equivalente existe)
-        document.getElementById('modal-detalhes-cofre').classList.add('active'); // Ajuste conforme sua lógica de modais
+        document.getElementById('modal-detalhes-cofre').classList.add('active');
 
     } catch (error) {
         console.error(error);
         utils.feedbackPopup('error', 'Erro interno ao exibir detalhes do cofre.');
-    } finally {
-        // O finally garante que o loader vai sumir mesmo se o bloco try falhar e estourar erro
-        if (typeof utils.esconderLoaderBlur === 'function') {
-            utils.esconderLoaderBlur();
-        }
     }
+
+    utils.esconderLoaderTabela();
+    utils.esconderLoaderBlurModal();
 }

@@ -708,59 +708,56 @@
 <!-- MODAL DE DETALHES DO COFRE -->
 
 <article class="modal-backdrop" id="modal-detalhes-cofre">
-    <!-- Usamos a classe container-filter pois ela acomoda melhor tabelas -->
-    <div class="modal-container-filter">
+    <div class="modal-container-filter" style="padding-bottom: 1rem;">
         <div class="modal-header">
-            <h1 style="margin: 0;">Detalhes do Cofre</h1>
-            <i class="bi bi-x-lg js-fechar-modal" data-target="modal-detalhes-cofre" style="cursor: pointer;"></i>
+            <h1>Detalhes do Cofre</h1>
+            <i class="bi bi-x-lg js-fechar-modal" data-target="modal-detalhes-cofre"></i>
         </div>
         <hr>
 
-        <div class="modal-content" style="margin-top: 1rem;">
-            <!-- Cabeçalho de Informações do Cofre -->
-            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.5rem;">
+        <div class="modal-content">
+            <div class="header-container">
                 <div>
-                    <h2 id="detalhesCofreNome" style="margin: 0; color: var(--text-primary); font-size: 1.5rem;">-</h2>
-                    <p id="detalhesCofreDescricao" style="margin: 0.25rem 0 0 0; color: var(--text-secondary); font-size: 0.95rem;">-</p>
+                    <h2 id="detalhesCofreNome" class="loader-blur-modal">----------------------------</h2>
+                    <p id="detalhesCofreDescricao" class="loader-blur-modal">-</p>
                 </div>
-                <span id="detalhesCofreLocal" style="background-color: var(--bg-badge); color: var(--text-primary); padding: 0.25rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600;">-</span>
+                <span id="detalhesCofreLocal" class="loader-blur-modal">-</span>
             </div>
 
             <!-- Progresso e Valores do Cofre -->
-            <div style="margin-bottom: 2rem;">
-                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 0.5rem;">
-                    <span>Acumulado: <strong id="detalhesCofreAtual" style="color: var(--text-primary); font-size: 1.2rem;">R$ 0,00</strong></span>
-                    <span>Meta: <strong id="detalhesCofreMeta" style="color: var(--text-primary);">R$ 0,00</strong></span>
+            <div class="progresso-container">
+                <div class="progress-info">
+                    <span class="loader-blur-modal">Acumulado: <span id="detalhesCofreAtual" class="loader-blur-modal">R$ 000,00</span></span>
+                    <span class="loader-blur-modal">Meta: <span id="detalhesCofreMeta" class="loader-blur-modal">R$ 000,00</span></span>
                 </div>
-                <div class="progress-container" style="width: 100%; background-color: var(--bg-progress); border-radius: 99px; height: 8px; overflow: hidden;">
-                    <div id="detalhesCofreBarra" class="progress-bar" style="height: 100%; background-color: var(--text-especial); transition: width 0.4s ease;"></div>
+                <div class="progress-bar">
+                    <div id="detalhesCofreBarra" class="progress-bar-modal"></div>
                 </div>
-                <div style="display: flex; justify-content: space-between; margin-top: 0.4rem; font-size: 0.8rem; color: var(--text-secondary);">
-                    <span id="detalhesCofreData">Criado em: --/--/----</span>
-                    <strong id="detalhesCofrePorcentagem">0%</strong>
+                <div class="progress-info-above">
+                    <span id="detalhesCofreData" class="loader-blur-modal">Criado em: --/--/----</span>
+                    <span id="detalhesCofrePorcentagem" class="loader-blur-modal">00%</span>
                 </div>
             </div>
 
             <!-- Tabela de Histórico de Transações -->
-            <h3 style="font-size: 1.1rem; color: var(--text-primary); border-bottom: 1px solid var(--divisor-color); padding-bottom: 0.5rem; margin-bottom: 0;">Histórico de Aportes</h3>
-            <div style="max-height: 250px; overflow-y: auto;">
-                <table style="width: 100%; border-collapse: collapse; text-align: left;">
+            <h3>Histórico de Aportes</h3>
+            <div class="tabela-wrapper">
+                <table>
                     <thead>
                         <tr>
-                            <th style="padding: 0.75rem; border-bottom: 1px solid var(--divisor-color); color: var(--text-secondary); font-size: 0.85rem; position: sticky; top: 0; background: var(--bg-padrao);">Data</th>
-                            <th style="padding: 0.75rem; border-bottom: 1px solid var(--divisor-color); color: var(--text-secondary); font-size: 0.85rem; position: sticky; top: 0; background: var(--bg-padrao);">Descrição</th>
-                            <th style="padding: 0.75rem; border-bottom: 1px solid var(--divisor-color); color: var(--text-secondary); font-size: 0.85rem; text-align: right; position: sticky; top: 0; background: var(--bg-padrao);">Valor</th>
+                            <th>Data</th>
+                            <th>Descrição</th>
+                            <th style="text-align: right;">Valor</th>
                         </tr>
                     </thead>
                     <tbody id="detalhesCofreTransacoes">
-                        <!-- O JS injetará as linhas aqui -->
                     </tbody>
                 </table>
+                
+                <div class="loader-table">
+                    <div class="loader"></div>
+                </div>
             </div>
-        </div>
-        
-        <div class="btn-container">
-            <button type="button" class="btn-fechar js-fechar-modal" data-target="modal-detalhes-cofre">Fechar</button>
         </div>
     </div>
 </article>
