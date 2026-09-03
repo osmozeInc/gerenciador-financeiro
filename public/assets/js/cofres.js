@@ -81,7 +81,7 @@ function visaoGeralCofres(cofres) {
     document.getElementById('totalGuardado').textContent = totalGuardado.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     document.getElementById('globalMeta').textContent = metaGlobal.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
     document.getElementById('globalBarra').style.width = `${pctGlobalBarra}%`;
-    document.getElementById('globalTexto').textContent = `${porcentagemGlobal.toFixed(1)}% do patrimônio planejado alcançado`;
+    document.getElementById('globalTexto').textContent = `${porcentagemGlobal.toFixed(0)}% do patrimônio planejado alcançado`;
 }
 
 // Função para escolher um cofre para destacar
@@ -141,7 +141,7 @@ function listarCofres(cofres) {
                 <div class="progress-container">
                     <div class="progress-bar" style="width: ${(cofre.valor_total / cofre.valor_meta) * 100}%"></div>
                 </div>
-                <div class="progress-text">${((cofre.valor_total / cofre.valor_meta) * 100).toFixed(1)}% Alcançado</div>
+                <div class="progress-text">${((cofre.valor_total / cofre.valor_meta) * 100).toFixed(0)}% Alcançado</div>
             </div>
         `;
         gridCofres.appendChild(card);
