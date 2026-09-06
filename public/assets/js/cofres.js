@@ -98,15 +98,13 @@ function cofreEmDestaque(cofres) {
         return cofreDestaque;
     }, null);
 
-    let cdPercentFaltante = cofreDestaque ? ((cofreDestaque.valor_total / cofreDestaque.valor_meta) * 100) : 0;
+    let cdPorcentalConcluido = cofreDestaque ? ((cofreDestaque.valor_total / cofreDestaque.valor_meta) * 100) : 0;
+    console.log(`Cofre em destaque: ${cofreDestaque ? cofreDestaque.nome : 'Nenhum cofre disponível'}, Progresso: ${cdPorcentalConcluido.toFixed(2)}%`);
 
-    if (cdPercentFaltante == 0) cdPercentFaltante = 100;
-
-    // Atualiza o conteúdo do cofre em destaque
     const badge = document.getElementById('cofreBadge');
-    if (cdPercentFaltante >= 0 && cdPercentFaltante <= 60) {badge.textContent = `Falta ${cdPercentFaltante}%`; badge.className = 'badge-foco warning';}
-    if (cdPercentFaltante > 60 && cdPercentFaltante <= 80) {badge.textContent = 'Quase lá!'; badge.className = 'badge-foco warning';}
-    if (cdPercentFaltante > 80) {badge.textContent = 'Quase Finalizado!'; badge.className = 'badge-foco success';}
+    if (cdPorcentalConcluido >= 0 && cdPorcentalConcluido <= 60) {badge.textContent = `Falta ${(100 - cdPorcentalConcluido).toFixed(0)}%`; badge.className = 'badge-foco warning';}
+    if (cdPorcentalConcluido > 60 && cdPorcentalConcluido <= 80) {badge.textContent = 'Quase lá!'; badge.className = 'badge-foco warning';}
+    if (cdPorcentalConcluido > 80) {badge.textContent = 'Quase Finalizado!'; badge.className = 'badge-foco success';}
 
     const nome = document.getElementById('cofreNome');
     nome.textContent = cofreDestaque ? cofreDestaque.nome : 'Nenhum cofre disponível';
