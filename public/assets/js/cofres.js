@@ -89,12 +89,15 @@ function cofreEmDestaque(cofres) {
     const cofreDestaque = cofres.reduce((cofreDestaque = null, cofreAtual) => {
         const caFaltante = cofreAtual.valor_meta - cofreAtual.valor_total;
         const cdFaltante = cofreDestaque ? cofreDestaque.valor_meta - cofreDestaque.valor_total : null; 
-        cofreDestaque = ( cofreDestaque == null || (caFaltante) < (cdFaltante) && (cdFaltante) != 0) ? cofreAtual : cofreDestaque;
+
+        if (cdFaltante == null || cofreDestaque == null) 
+            cofreDestaque = cofreAtual;
+        else if ((caFaltante) < (cdFaltante) && (caFaltante) > 0)
+            cofreDestaque = cofreAtual;
         
         return cofreDestaque;
     }, null);
 
-    // corrigir essa lógica
     let cdPercentFaltante = cofreDestaque ? ((cofreDestaque.valor_total / cofreDestaque.valor_meta) * 100) : 0;
 
     if (cdPercentFaltante == 0) cdPercentFaltante = 100;

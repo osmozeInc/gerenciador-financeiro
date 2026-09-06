@@ -768,6 +768,7 @@ header nav a.active {
   color: var(--text-especial);
 }
 .conteudo-central .cofres-container .actions-grid #cardResumoCofres .foco-gamificacao .foco-cofre {
+  color: var(--text-primary);
   font-size: 1.1rem;
   letter-spacing: 1px;
   font-weight: 700;
@@ -1623,7 +1624,8 @@ header nav a.active {
 .modal-backdrop .modal-container-filter .modal-content .header-container h2, .modal-backdrop .modal-delete-container .modal-content .header-container h2 {
   margin: 0;
   color: var(--text-primary);
-  font-size: 1.5rem;
+  font-size: 1.3rem;
+  font-weight: 600;
 }
 .modal-backdrop .modal-container-filter .modal-content .header-container p, .modal-backdrop .modal-delete-container .modal-content .header-container p {
   margin: 0.25rem 0 0 0;
@@ -1696,6 +1698,12 @@ header nav a.active {
   top: 0;
   background: var(--bg-padrao);
 }
+.modal-backdrop .modal-container-filter .modal-content .tabela-wrapper table td, .modal-backdrop .modal-delete-container .modal-content .tabela-wrapper table td {
+  padding: 0.75rem;
+  border-bottom: 1px solid var(--divisor-color);
+  font-size: 0.95rem;
+  color: var(--text-primary);
+}
 .modal-backdrop .modal-container-filter .form-simple, .modal-backdrop .modal-delete-container .form-simple {
   gap: 1rem;
 }
@@ -1718,6 +1726,10 @@ header nav a.active {
 }
 .modal-backdrop.active {
   display: flex;
+}
+.modal-backdrop .bi-x-lg {
+  color: var(--text-primary);
+  cursor: pointer;
 }
 
 .popup-feedback-container {
@@ -1858,6 +1870,10 @@ header nav a.active {
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
+}
+.input-double-group label {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
 }
 
 input, select {

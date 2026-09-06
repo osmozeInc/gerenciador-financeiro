@@ -663,6 +663,7 @@ header {
                     }
     
                     .foco-cofre {
+                        color: var(--text-primary);
                         font-size: 1.1rem;
                         letter-spacing: 1px;
                         font-weight: 700;
@@ -1378,7 +1379,7 @@ header {
                 justify-content: space-between;
                 align-items: center;
 
-                h2 { margin: 0; color: var(--text-primary); font-size: 1.5rem; }
+                h2 { margin: 0; color: var(--text-primary); font-size: 1.3rem; font-weight: 600; }
                 p { margin: 0.25rem 0 0 0; color: var(--text-secondary); font-size: 0.95rem; }
                 span { background-color: var(--bg-badge); color: var(--text-primary); padding: 0.25rem 0.6rem; border-radius: 4px; font-size: 0.8rem; font-weight: 600; }
             }
@@ -1422,6 +1423,7 @@ header {
                     width: 100%; border-collapse: collapse; text-align: left;
 
                     th { padding: 0.75rem; border-bottom: 1px solid var(--divisor-color); color: var(--text-secondary); font-size: 0.85rem; position: sticky; top: 0; background: var(--bg-padrao); }
+                    td { padding: 0.75rem; border-bottom: 1px solid var(--divisor-color); font-size: 0.95rem; color: var(--text-primary); }
 
                 }
             }
@@ -1441,6 +1443,8 @@ header {
     }
 
     &.active { display: flex; }
+
+    .bi-x-lg { color: var(--text-primary); cursor: pointer; }
 }
 
 .popup-feedback-container {
@@ -1509,11 +1513,8 @@ header {
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 1rem;
 
-    span {
-        display: flex;
-        flex-direction: column;
-        gap: 0.25rem;
-    }
+    span { display: flex; flex-direction: column; gap: 0.25rem; }
+    label { font-size: 0.875rem; color: var(--text-secondary); }
 }
 
 input, select {
