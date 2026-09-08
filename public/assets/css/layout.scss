@@ -16,6 +16,7 @@
 
     --divisor-color: #727272;
     --border-color: #e5e7eb;
+    --border-btn-color: #ccc;
     
     --text-primary: #000;
     --text-secondary: #727272;
@@ -1326,7 +1327,7 @@ header {
             }
         }
 
-        .btn-container{
+        .btn-container, .btn-container-cofre {
             width: 100%;
             display: flex;
             justify-content: end;
@@ -1337,7 +1338,7 @@ header {
                 background-color: transparent;
                 color: var(--text-primary);
                 border-radius: var(--radius-btn);
-                border: 1px solid var(--border-color);
+                border: 1px solid var(--border-btn-color);
                 padding: 0.6rem 4rem;
                 font-size: 1.25rem;
                 cursor: pointer;
@@ -1438,6 +1439,25 @@ header {
             .btn-salvar, .btn-fechar {
                 min-width: max-content;
                 width: 100%;
+            }
+        }
+
+        .btn-container-cofre {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+
+            .btn-row {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                gap: 1rem;
+
+                .btn-salvar, .btn-fechar {
+                    min-width: max-content;
+                    width: 100%;
+                }
             }
         }
     }

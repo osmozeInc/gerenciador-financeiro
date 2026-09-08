@@ -94,4 +94,14 @@ class Cofre extends Model {
             'tenant_id' => $dados['tenant_id']
         ]);
     }
+
+    public function alterarStatusPorId($id, $motivo, $tenantId) {
+        $query = "UPDATE cofres SET status = :status WHERE id = :id AND tenant_id = :tenant_id";
+        $stmt = $this->pdo->prepare($query);
+        return $stmt->execute([
+            'id' => $id,
+            'status' => $motivo,
+            'tenant_id' => $tenantId
+        ]);
+    }
 }

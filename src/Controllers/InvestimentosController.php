@@ -125,7 +125,7 @@ class InvestimentosController extends Controller {
         }
 
         $categoriaModel = new Categoria();
-        $categoria_id = $categoriaModel->getIdCategoriaCofre();
+        $categoria_id = $categoriaModel->getIdCategoriaCofre($this->idUsuarioLogado);
 
         $dadosTransacao = [
             'categoria_id' => $categoria_id,

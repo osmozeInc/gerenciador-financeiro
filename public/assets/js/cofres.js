@@ -43,6 +43,52 @@ document.getElementById('formCriarCofre').addEventListener('submit', async funct
     }
 });
 
+// exclui o cofre
+document.getElementById('btnExcluirCofre').addEventListener('click', async function() {
+    const idCofre = document.querySelector('#modal-detalhes-cofre').getAttribute('data-id');
+    const jsonExcluir = await utils.apiFetch(`/cofres/excluirCofre/${idCofre}`, 'DELETE');
+
+    if (jsonExcluir?.resposta) {
+        utils.feedbackPopup(jsonExcluir.resposta.msgTipo, jsonExcluir.resposta.mensagem);
+        
+        if (jsonExcluir.resposta.sucesso) {
+            const jsonCofres = await utils.apiFetch('/cofres/selectDados');
+            listarCofres(jsonCofres.cofres);
+        }
+    }
+});
+
+// resgata o saldo do cofre
+document.getElementById('btnResgatarSaldo').addEventListener('click', async function() {
+    const idCofre = document.querySelector('#modal-detalhes-cofre').getAttribute('data-id');
+    const jsonResgatar = await utils.apiFetch(`/cofres/resgatarSaldo/${idCofre}`, 'POST');
+
+    if (jsonResgatar?.resposta) {
+        utils.feedbackPopup(jsonResgatar.resposta.msgTipo, jsonResgatar.resposta.mensagem);
+        
+        if (jsonResgatar.resposta.sucesso) {
+            const jsonCofres = await utils.apiFetch('/cofres/selectDados');
+            listarCofres(jsonCofres.cofres);
+        }
+    }
+});
+
+// finaliza a meta do cofre
+document.getElementById('btnFinalizarMeta').addEventListener('click', async function() {
+    const idCofre = document.querySelector('#modal-detalhes-cofre').getAttribute('data-cofre-id');
+    const jsonFinalizar = await utils.apiFetch(`/cofres/finalizarMeta/${idCofre}`, 'POST');
+
+    if (jsonFinalizar?.resposta) {
+        utils.feedbackPopup(jsonFinalizar.resposta.msgTipo, jsonFinalizar.resposta.mensagem);
+        
+        if (jsonFinalizar.resposta.sucesso) {
+            const jsonCofres = await utils.apiFetch('/cofres/selectDados');
+            listarCofres(jsonCofres.cofres);
+        }
+    }
+});
+
+// Fechar modal de detalhes do cofre resetando informações
 document.querySelectorAll('.js-fechar-modal').forEach(btnFechar => {
     btnFechar.addEventListener('click', () => {
         console.log('Fechando modal...');
@@ -52,6 +98,7 @@ document.querySelectorAll('.js-fechar-modal').forEach(btnFechar => {
     });
 });
 
+// escuta a abertura do modal de detalhes do cofre e exibe informações corretas
 const gridCofres = document.getElementById('gridCofres');
 gridCofres.addEventListener('click', (e) => {
     const btnAbrirModalId = e.target.closest('.js-abrir-modal-passando-cofre');

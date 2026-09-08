@@ -128,7 +128,29 @@ class Controller {
                 'busca_vazia' => [
                     'sucesso' => true,
                     'msgTipo' => 'warning',
-                    'mensagem' => 'Nenhum dado encontrado.'
+                    'mensagem' => 'Nenhum cofre encontrado.'
+                ]
+            ],
+            'deletar' => [
+                'deletado_com_sucesso' => [
+                    'sucesso' => true,
+                    'msgTipo' => 'success',
+                    'mensagem' => 'Cofre deletado com sucesso!'
+                ],
+                'erro_ao_deletar' => [
+                    'sucesso' => false,
+                    'msgTipo' => 'error',
+                    'mensagem' => 'Erro ao deletar cofre'
+                ],
+                'id_invalido' => [
+                    'sucesso' => false,
+                    'msgTipo' => 'warning',
+                    'mensagem' => 'ID do cofre não foi informado ou é inválido.'
+                ],
+                'metodo_invalido' => [
+                    'sucesso' => false,
+                    'msgTipo' => 'warning',
+                    'mensagem' => 'Método de deleção inválido.'
                 ]
             ]
         ],
