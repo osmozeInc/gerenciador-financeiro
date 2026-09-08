@@ -56,9 +56,11 @@ class Categoria extends Model {
         return $categoria ? $categoria['id'] : null;
     }
 
-    public function getIdCategoriaCofre() {
-        $query = "SELECT id FROM categorias WHERE tipo = 'C' AND nome = 'Cofre' LIMIT 1";
-        $stmt = $this->pdo->query($query);
+    public function getIdCategoriaCofre($tenantId) {
+        $query = "SELECT id FROM categorias WHERE tipo = 'C' AND nome = 'Cofre' AND tenant_id = :tenant_id LIMIT 1";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':tenant_id', $tenantId);
+        $stmt->execute();
         $categoria = $stmt->fetch(PDO::FETCH_ASSOC);
         
         return $categoria ? $categoria['id'] : null;

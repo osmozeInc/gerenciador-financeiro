@@ -40,13 +40,14 @@ class Transacao extends Model {
     }
 
     public function salvarTransacaoReceita($dados) {
-        $query = "INSERT INTO transacoes (id_categoria, id_conta_metodo, descricao, data_transacao, valor_total, tenant_id) VALUES (:categoria, :conta, :descricao, :data, :valor, :tenant_id)";
+        $query = "INSERT INTO transacoes (id_categoria, id_conta_metodo, descricao, data_transacao, valor_total, tenant_id) 
+                  VALUES (:categoria, :conta, :descricao, :data, :valor, :tenant_id)";
         $stmt = $this->pdo->prepare($query);
-        $stmt->bindValue(':categoria', $dados['categoria_id']);
-        $stmt->bindValue(':conta', $dados['conta_id']);
+        $stmt->bindValue(':categoria', $dados['id_categoria']);
+        $stmt->bindValue(':conta', $dados['id_conta_metodo']);
         $stmt->bindValue(':descricao', $dados['descricao']);
-        $stmt->bindValue(':valor', $dados['valor']);
-        $stmt->bindValue(':data', $dados['data']);
+        $stmt->bindValue(':valor', $dados['valor_total']);
+        $stmt->bindValue(':data', $dados['data_transacao']);
         $stmt->bindValue(':tenant_id', $dados['tenant_id']);
         $stmt->execute();
     }
@@ -60,11 +61,11 @@ class Transacao extends Model {
             $stmtTransacao = $this->pdo->prepare($sqlTransacao);
             
             $stmtTransacao->execute([
-                ':categoria' => $dadosTransacao['categoria_id'],
-                ':conta'     => $dadosTransacao['conta_id'],
+                ':categoria' => $dadosTransacao['id_categoria'],
+                ':conta'     => $dadosTransacao['id_conta_metodo'],
                 ':descricao' => $dadosTransacao['descricao'],
-                ':valor'     => $dadosTransacao['valor'],
-                ':data'      => $dadosTransacao['data'],
+                ':valor'     => $dadosTransacao['valor_total'],
+                ':data'      => $dadosTransacao['data_transacao'],
                 ':tenant_id' => $dadosTransacao['tenant_id']
             ]);
 
@@ -95,11 +96,11 @@ class Transacao extends Model {
             $stmtTransacao = $this->pdo->prepare($sqlTransacao);
             
             $stmtTransacao->execute([
-                ':categoria' => $dadosTransacao['categoria_id'],
-                ':conta'     => $dadosTransacao['conta_id'],
+                ':categoria' => $dadosTransacao['id_categoria'],
+                ':conta'     => $dadosTransacao['id_conta_metodo'],
                 ':descricao' => $dadosTransacao['descricao'],
-                ':valor'     => $dadosTransacao['valor'],
-                ':data'      => $dadosTransacao['data'],
+                ':valor'     => $dadosTransacao['valor_total'],
+                ':data'      => $dadosTransacao['data_transacao'],
                 ':tenant_id' => $dadosTransacao['tenant_id']
             ]);
 
@@ -132,11 +133,11 @@ class Transacao extends Model {
             $stmtTransacao = $this->pdo->prepare($sqlTransacao);
             
             $stmtTransacao->execute([
-                ':categoria' => $dadosTransacao['categoria_id'],
-                ':conta'     => $dadosTransacao['conta_id'],
+                ':categoria' => $dadosTransacao['id_categoria'],
+                ':conta'     => $dadosTransacao['id_conta_metodo'],
                 ':descricao' => $dadosTransacao['descricao'],
-                ':valor'     => $dadosTransacao['valor'],
-                ':data'      => $dadosTransacao['data'],
+                ':valor'     => $dadosTransacao['valor_total'],
+                ':data'      => $dadosTransacao['data_transacao'],
                 ':tenant_id' => $dadosTransacao['tenant_id']
             ]);
 

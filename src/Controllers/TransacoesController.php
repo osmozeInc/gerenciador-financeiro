@@ -71,11 +71,11 @@ class TransacoesController extends Controller {
         }
 
         $dados = [
-            'categoria_id' => $categoria_id,
-            'conta_id'     => $conta_id,
+            'id_categoria' => $categoria_id,
+            'id_conta_metodo' => $conta_id,
             'descricao'    => $descricao,
-            'valor'        => $valor,
-            'data'         => $data,
+            'valor_total'  => $valor,
+            'data_transacao' => $data,
             'tenant_id'    => $this->idUsuarioLogado
         ];
 
@@ -111,11 +111,11 @@ class TransacoesController extends Controller {
         }
 
         $dadosTransacao = [
-            'categoria_id' => $categoria_id,
-            'conta_id'     => $conta_id,
+            'id_categoria' => $categoria_id,
+            'id_conta_metodo' => $conta_id,
             'descricao'    => $descricao,
-            'valor'        => $valor,
-            'data'         => $data,
+            'valor_total'  => $valor,
+            'data_transacao' => $data,
             'tenant_id'    => $this->idUsuarioLogado
         ];
 
@@ -164,11 +164,11 @@ class TransacoesController extends Controller {
         $categoria_id = $categoriaModel->getIdCategoriaInvestimento();
 
         $dadosTransacao = [
-            'categoria_id' => $categoria_id,
-            'conta_id'     => $conta_id,
+            'id_categoria' => $categoria_id,
+            'id_conta_metodo' => $conta_id,
             'descricao'    => $descricao,
-            'valor'        => $preco * $quantidade,
-            'data'         => $data,
+            'valor_total'  => $preco * $quantidade,
+            'data_transacao' => $data,
             'tenant_id'    => $this->idUsuarioLogado
         ];
 
@@ -212,14 +212,14 @@ class TransacoesController extends Controller {
         }
 
         $categoriaModel = new Categoria();
-        $categoria_id = $categoriaModel->getIdCategoriaCofre();
+        $categoria_id = $categoriaModel->getIdCategoriaCofre($this->idUsuarioLogado);
 
         $dadosTransacao = [
-            'categoria_id' => $categoria_id,
-            'conta_id'     => $conta_id,
+            'id_categoria' => $categoria_id,
+            'id_conta_metodo' => $conta_id,
             'descricao'    => $descricao,
-            'valor'        => $valor,
-            'data'         => $data,
+            'valor_total'  => $valor,
+            'data_transacao' => $data,
             'tenant_id'    => $this->idUsuarioLogado
         ];
 
@@ -273,7 +273,6 @@ class TransacoesController extends Controller {
                 ]);
         }
     }
-
 
     public function deletar($id = null) {
         header('Content-Type: application/json');
