@@ -12,6 +12,7 @@ class Transacao extends Model {
             INNER JOIN categorias c ON t.id_categoria = c.id 
             LEFT JOIN contas_metodos cm ON t.id_conta_metodo = cm.id 
             WHERE t.tenant_id = :tenant_id
+            AND t.id_conta_metodo IS NOT NULL
             ORDER BY t.data_transacao DESC
         ";
         
@@ -30,6 +31,7 @@ class Transacao extends Model {
             INNER JOIN categorias c ON t.id_categoria = c.id 
             LEFT JOIN contas_metodos cm ON t.id_conta_metodo = cm.id 
             WHERE t.tenant_id = :tenant_id
+            AND t.id_conta_metodo IS NOT NULL
             ORDER BY t.data_transacao DESC LIMIT 100
         ";
         
@@ -192,10 +194,18 @@ class Transacao extends Model {
     }
 
     public function deletarTransacao($id, $tenantId) {
-        $query = "DELETE FROM transacoes WHERE id = :id AND tenant_id = :tenant_id";
+        $query = "DELETE FROM transacoes 
+                  WHERE id = :id 
+                  AND tenant_id = :tenant_id 
+                  AND bloqueada = false";
+                  
         $stmt = $this->pdo->prepare($query);
         $stmt->bindValue(':id', $id);
         $stmt->bindValue(':tenant_id', $tenantId);
         $stmt->execute();
+
+        if ($stmt->rowCount() === 0) {
+            throw new Exception("A transação não pode ser excluída pois está bloqueada ou não existe.");
+        }
     }
 }

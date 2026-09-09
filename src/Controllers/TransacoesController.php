@@ -294,10 +294,23 @@ class TransacoesController extends Controller {
             $transacaoModel->deletarTransacao($id, $this->idUsuarioLogado);
 
             echo json_encode([ 'resposta' => $this->mensagensModel['transacao']['deletar']['deletado_com_sucesso'] ]);
-        } catch (Exception $e) {
+            
+        } catch (PDOException $e) {
+            // Erro real de infraestrutura/banco de dados
             http_response_code(500);
-            echo json_encode([ 'resposta' => $this->mensagensModel['transacao']['deletar']['erro_ao_deletar'] ]);
+            echo json_encode([ 
+                'resposta' => $this->mensagensModel['transacao']['deletar']['erro_ao_deletar'] 
+            ]);
+        } catch (Exception $e) {
+            http_response_code(400); 
+            echo json_encode([
+                'resposta' => [
+                    'sucesso' => false,
+                    'msgTipo' => 'error',
+                    'mensagem' => $e->getMessage() // Envia a string exata definida no Model
+                ]
+            ]);
         }
+        exit;
     }
 }
-

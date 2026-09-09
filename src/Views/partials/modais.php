@@ -761,12 +761,9 @@
         </div>
 
         <div class="btn-container-cofre">
-            <div class="btn-row">
-                <button id="btnExcluirCofre" class="btn-fechar js-fechar-modal" data-target="modal-detalhes-cofre">Excluir Cofre</button>
-                <button id="btnResgatarSaldo" class="btn-fechar js-fechar-modal" data-target="modal-detalhes-cofre">Resgatar Saldo</button>
-            </div>
-
-            <button id="btnFinalizarMeta" class="btn-salvar">Finalizar Meta</button>
+            <button id="btnExcluirCofre" class="btn-fechar loader-blur-modal" data-target="modal-detalhes-cofre">Excluir Cofre</button>
+            <button id="btnResgatarSaldo" class="btn-fechar hidden loader-blur-modal" data-target="modal-detalhes-cofre">Resgatar Saldo</button>
+            <button id="btnFinalizarMeta" class="btn-salvar loader-blur-modal">Finalizar Meta</button>
         </div>
     </div>
 </article>

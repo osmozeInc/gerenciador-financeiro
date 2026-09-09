@@ -4,7 +4,7 @@ require_once 'Model.php';
 class Categoria extends Model {
     
     public function selectAllCategorias($tenantId) {
-        $query = "SELECT id, nome, tipo FROM categorias WHERE tenant_id = :tenant_id";
+        $query = "SELECT id, nome, tipo FROM categorias WHERE tenant_id = :tenant_id AND is_sistema = false";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindValue(':tenant_id', $tenantId);
         $stmt->execute();
@@ -20,7 +20,7 @@ class Categoria extends Model {
     }
     
     public function selectCategoriasReceita($tenantId) {
-        $query = "select id, nome from categorias where tipo = 'R' and tenant_id = :tenant_id";
+        $query = "select id, nome from categorias where tipo = 'R' and tenant_id = :tenant_id AND is_sistema = false";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindValue(':tenant_id', $tenantId);
         $stmt->execute();
@@ -30,7 +30,7 @@ class Categoria extends Model {
     }
     
     public function selectCategoriasDespesa($tenantId) {
-        $query = "select id, nome from categorias where tipo = 'D' and tenant_id = :tenant_id";
+        $query = "select id, nome from categorias where tipo = 'D' and tenant_id = :tenant_id AND is_sistema = false";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindValue(':tenant_id', $tenantId);
         $stmt->execute();
@@ -49,7 +49,7 @@ class Categoria extends Model {
     }
 
     public function getIdCategoriaInvestimento() {
-        $query = "SELECT id FROM categorias WHERE tipo = 'I' AND nome = 'Investimento' LIMIT 1";
+        $query = "SELECT id FROM categorias WHERE tipo = 'I' AND nome = 'Investimento' AND is_sistema = false LIMIT 1";
         $stmt = $this->pdo->query($query);
         $categoria = $stmt->fetch(PDO::FETCH_ASSOC);
         
@@ -57,7 +57,17 @@ class Categoria extends Model {
     }
 
     public function getIdCategoriaCofre($tenantId) {
-        $query = "SELECT id FROM categorias WHERE tipo = 'C' AND nome = 'Cofre' AND tenant_id = :tenant_id LIMIT 1";
+        $query = "SELECT id FROM categorias WHERE tipo = 'C' AND nome = 'Cofre' AND tenant_id = :tenant_id AND is_sistema = false LIMIT 1";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':tenant_id', $tenantId);
+        $stmt->execute();
+        $categoria = $stmt->fetch(PDO::FETCH_ASSOC);
+        
+        return $categoria ? $categoria['id'] : null;
+    }
+   
+    public function getIdCategoriaResgateCofre($tenantId) {
+        $query = "SELECT id FROM categorias WHERE tipo = 'R' AND nome = 'Resgatado do cofre' AND tenant_id = :tenant_id AND is_sistema = true";
         $stmt = $this->pdo->prepare($query);
         $stmt->bindValue(':tenant_id', $tenantId);
         $stmt->execute();

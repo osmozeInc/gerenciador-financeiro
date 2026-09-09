@@ -1,22 +1,30 @@
 // import { abrirModal, fecharModal } from "/assets/js/modais.js";
 import * as utils from "/assets/js/utils.js";
-import { abrirModal, abrirModalPorId } from "/assets/js/modais.js";
+import { abrirModal, fecharModal, abrirModalPorId } from "/assets/js/modais.js";
 
 let cofres = []; // Variável global para armazenar os cofres
+let cofresAtivos = []; // Variável global para armazenar os cofres
 
 document.addEventListener('DOMContentLoaded', async function() {
     try {
-        const jsonCofres = await utils.apiFetch('/cofres/selectDados');
+        const [jsonCofres, jsonMetodos] = await Promise.all([
+            utils.apiFetch('/cofres/selectAllCofres'),
+            utils.apiFetch('/contaMetodo/selectDados')
+        ]);
+        
         cofres = jsonCofres.cofres;
+        cofresAtivos = jsonCofres.cofres.filter(cofre => cofre.status !== 'cancelado');
 
         if (!jsonCofres?.resposta?.sucesso) {
             utils.feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
             return;
         }
 
-        visaoGeralCofres(jsonCofres.cofres);
-        cofreEmDestaque(jsonCofres.cofres);
-        listarCofres(jsonCofres.cofres);
+        if (jsonMetodos) preencherMetodos(jsonMetodos.metodos);
+
+        visaoGeralCofres(cofresAtivos);
+        cofreEmDestaque(cofresAtivos);
+        listarCofres(cofresAtivos);
 
     } catch (erro) {
         utils.feedbackPopup('error', 'Ocorreu um erro ao buscar os dados.');
@@ -37,7 +45,7 @@ document.getElementById('formCriarCofre').addEventListener('submit', async funct
         utils.feedbackPopup(jsonSalvar.resposta.msgTipo, jsonSalvar.resposta.mensagem);
         
         if (jsonSalvar.resposta.sucesso) {
-            const jsonCofres = await utils.apiFetch('/cofres/selectDados');
+            const jsonCofres = await utils.apiFetch('/cofres/selectAllCofres');
             listarCofres(jsonCofres.cofres);
         }
     }
@@ -52,8 +60,10 @@ document.getElementById('btnExcluirCofre').addEventListener('click', async funct
         utils.feedbackPopup(jsonExcluir.resposta.msgTipo, jsonExcluir.resposta.mensagem);
         
         if (jsonExcluir.resposta.sucesso) {
-            const jsonCofres = await utils.apiFetch('/cofres/selectDados');
+            const jsonCofres = await utils.apiFetch('/cofres/selectAllCofres');
             listarCofres(jsonCofres.cofres);
+
+            fecharModal('modal-detalhes-cofre');
         }
     }
 });
@@ -67,8 +77,10 @@ document.getElementById('btnResgatarSaldo').addEventListener('click', async func
         utils.feedbackPopup(jsonResgatar.resposta.msgTipo, jsonResgatar.resposta.mensagem);
         
         if (jsonResgatar.resposta.sucesso) {
-            const jsonCofres = await utils.apiFetch('/cofres/selectDados');
+            const jsonCofres = await utils.apiFetch('/cofres/selectAllCofres');
             listarCofres(jsonCofres.cofres);
+
+            fecharModal('modal-detalhes-cofre');
         }
     }
 });
@@ -82,8 +94,10 @@ document.getElementById('btnFinalizarMeta').addEventListener('click', async func
         utils.feedbackPopup(jsonFinalizar.resposta.msgTipo, jsonFinalizar.resposta.mensagem);
         
         if (jsonFinalizar.resposta.sucesso) {
-            const jsonCofres = await utils.apiFetch('/cofres/selectDados');
+            const jsonCofres = await utils.apiFetch('/cofres/selectAllCofres');
             listarCofres(jsonCofres.cofres);
+
+            fecharModal('modal-detalhes-cofre');
         }
     }
 });
@@ -91,7 +105,6 @@ document.getElementById('btnFinalizarMeta').addEventListener('click', async func
 // Fechar modal de detalhes do cofre resetando informações
 document.querySelectorAll('.js-fechar-modal').forEach(btnFechar => {
     btnFechar.addEventListener('click', () => {
-        console.log('Fechando modal...');
         utils.exibirLoaderBlurModal();
         utils.exibirLoaderTabela();
         document.getElementById('detalhesCofreTransacoes').innerHTML = '';
@@ -146,7 +159,6 @@ function cofreEmDestaque(cofres) {
     }, null);
 
     let cdPorcentalConcluido = cofreDestaque ? ((cofreDestaque.valor_total / cofreDestaque.valor_meta) * 100) : 0;
-    console.log(`Cofre em destaque: ${cofreDestaque ? cofreDestaque.nome : 'Nenhum cofre disponível'}, Progresso: ${cdPorcentalConcluido.toFixed(2)}%`);
 
     const badge = document.getElementById('cofreBadge');
     if (cdPorcentalConcluido >= 0 && cdPorcentalConcluido <= 60) {badge.textContent = `Falta ${(100 - cdPorcentalConcluido).toFixed(0)}%`; badge.className = 'badge-foco warning';}
@@ -171,6 +183,8 @@ function listarCofres(cofres) {
     gridCofres.innerHTML = '';
 
     cofres.forEach(cofre => {
+        if (cofre.status !== 'ativo') return;
+
         const card = document.createElement('div');
         card.id = cofre.id;
         card.className = 'cofre-card js-abrir-modal-passando-cofre';
@@ -272,7 +286,18 @@ async function exibirCofreCorreto(idCofre) {
                 </tr>`;
         }
 
-        document.getElementById('modal-detalhes-cofre').classList.add('active');
+        // 6. Ajuste de Botões de Ação com base no status do cofre
+        const btnExcluir = modal.querySelector('#btnExcluirCofre');
+        const btnResgatar = modal.querySelector('#btnResgatarSaldo');
+
+        if (c.valor_total > 0) {
+            btnExcluir.classList.add('hidden');
+            btnResgatar.classList.remove('hidden');
+        } else {
+            btnExcluir.classList.remove('hidden');
+            btnResgatar.classList.add('hidden');
+        }
+
 
     } catch (error) {
         console.error(error);
@@ -281,4 +306,22 @@ async function exibirCofreCorreto(idCofre) {
 
     utils.esconderLoaderTabela();
     utils.esconderLoaderBlurModal();
+}
+
+function preencherMetodos(metodos) {
+    const select = document.getElementById('metodoContaResgate');
+
+    select.innerHTML = '<option value="">Selecione...</option>';
+
+    metodos.forEach(metodo => {
+        const option = document.createElement('option');
+        option.value = metodo.id;
+        option.textContent = metodo.nome;
+        select.appendChild(option);
+    });
+
+    const optionNovo = document.createElement('option');
+    optionNovo.value = 'new';
+    optionNovo.textContent = '+ Nova Conta';
+    select.appendChild(optionNovo);
 }

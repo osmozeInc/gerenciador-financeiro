@@ -364,7 +364,7 @@ async function exibirFormCorreto(tipo, idTransacao) {
             setVal('[name="preco"]',      t.preco_unitario); // Corrigido: no seu SQL é preco_unitario
         } 
         else if (tipo === 'C') {
-            const jsonCofres = await utils.apiFetch('/cofres/selectDados');
+            const jsonCofres = await utils.apiFetch('/cofres/selectAllCofres');
             if (!jsonCofres || !jsonCofres.resposta.sucesso) {
                 utils.feedbackPopup('error', 'Erro ao carregar cofres.');
                 return;

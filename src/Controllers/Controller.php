@@ -108,11 +108,6 @@ class Controller {
                     'msgTipo' => 'warning',
                     'mensagem' => 'Revise as informações do cofre.'
                 ],
-                'cofre_repetido' => [
-                    'sucesso' => false,
-                    'msgTipo' => 'warning',
-                    'mensagem' => 'Cofre já cadastrado.'
-                ],
                 'erro_interno' => [
                     'sucesso' => false,
                     'msgTipo' => 'error', 
@@ -151,6 +146,28 @@ class Controller {
                     'sucesso' => false,
                     'msgTipo' => 'warning',
                     'mensagem' => 'Método de deleção inválido.'
+                ],
+                'cofre_nao_vazio' => [
+                    'sucesso' => false,
+                    'msgTipo' => 'warning',
+                    'mensagem' => 'Resgate o saldo do cofre antes de deletar.'
+                ]
+            ],
+            'resgatar' => [
+                'resgate_com_sucesso' => [
+                    'sucesso' => true,
+                    'msgTipo' => 'success',
+                    'mensagem' => 'Resgate realizado com sucesso!'
+                ],
+                'cofre_vazio' => [
+                    'sucesso' => false,
+                    'msgTipo' => 'warning',
+                    'mensagem' => 'Não é possível realizar o resgate de um cofre vazio.'
+                ],
+                'erro_interno' => [
+                    'sucesso' => false,
+                    'msgTipo' => 'error', 
+                    'mensagem' => 'Erro interno ao realizar resgate do cofre.'
                 ]
             ]
         ],

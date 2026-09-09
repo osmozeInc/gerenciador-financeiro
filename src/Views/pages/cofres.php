@@ -21,9 +21,18 @@
                     <input type="text" id="descricaoCofre" name="descricaoCofre" class="loader-blur" required placeholder="Ex: Guardar dinheiro para viajar">
                 </div>
 
-                <div class="input-group">
-                    <label class="loader-blur">Onde está guardado? (Descritivo)</label>
-                    <input type="text" id="localCofre" name="localCofre" class="loader-blur" required placeholder="Ex: Caixinha Nubank, Conta Poupança, Cripto">
+                <div class="input-double-group">
+                    <span>
+                        <label class="loader-blur">Onde está guardado? (Descritivo)</label>
+                        <input type="text" id="localCofre" name="localCofre" class="loader-blur" required placeholder="Ex: Caixinha Nubank, Conta Poupança, Cripto">
+                    </span>
+                    
+                    <span>
+                        <label class="loader-blur">Conta de resgate</label>
+                        <select class="js-abrir-modal-select loader-blur" id="metodoContaResgate" name="metodoContaResgate" data-target="modal-novo-pagamento" required>
+                            <option value="" disabled selected>Selecione...</option>
+                        </select>
+                    </span>
                 </div>
 
                 <button type="submit" class="btn-submit outline loader-blur">Criar Cofre</button>

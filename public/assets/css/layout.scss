@@ -1447,13 +1447,6 @@ header {
             flex-direction: column;
             gap: 1rem;
 
-            .btn-row {
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
-                gap: 1rem;
-
                 .btn-salvar, .btn-fechar {
                     min-width: max-content;
                     width: 100%;

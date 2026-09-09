@@ -32,7 +32,7 @@ class CofresController extends Controller {
         exit;
     }
 
-    public function selectDados() {
+    public function selectAllCofres() {
         header('Content-Type: application/json');
 
         try {
@@ -101,6 +101,7 @@ class CofresController extends Controller {
         $descricao = trim(filter_input(INPUT_POST, 'descricaoCofre', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
         $meta = trim(filter_input(INPUT_POST, 'metaCofre', FILTER_SANITIZE_NUMBER_INT) ?? '');
         $local = trim(filter_input(INPUT_POST, 'localCofre', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
+        $contaMetodo = trim(filter_input(INPUT_POST, 'metodoContaResgate', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
 
         $dados = [
             'nome' => $nome,
@@ -108,7 +109,8 @@ class CofresController extends Controller {
             'local' => $local,
             'valor_meta' => $meta,
             'data_criacao' => date('Y-m-d'),
-            'tenant_id' => $this->idUsuarioLogado
+            'tenant_id' => $this->idUsuarioLogado,
+            'id_conta_resgate' => $contaMetodo  
         ];
 
         try {
@@ -155,22 +157,8 @@ class CofresController extends Controller {
                 $cofreModel->alterarStatusPorId($id, "cancelado", $this->idUsuarioLogado);
             }
             else if ($cofre['valor_total'] > 0) {
-                $cofreModel->alterarStatusPorId($id, "cancelado", $this->idUsuarioLogado);
-
-                $categoriaModel = new Categoria();
-                $categoria = $categoriaModel->getIdCategoriaCofre($this->idUsuarioLogado);
-
-                $dados = [
-                    'id_categoria' => $categoria,
-                    'id_conta_metodo' => 1,
-                    'descricao' => "Resgate do cofre: " . $cofre['nome'],
-                    'data_transacao' => date('Y-m-d'),
-                    'valor_total' => $cofre['valor_total'],
-                    'tenant_id' => $this->idUsuarioLogado
-                ];
-
-                $transacaoModel = new Transacao();
-                $transacaoModel->salvarTransacaoReceita($dados);
+                echo json_encode(['resposta' => $this->mensagensModel['cofre']['deletar']['cofre_nao_vazio']]);
+                return;
             }
 
             echo json_encode(['resposta' => $this->mensagensModel['cofre']['deletar']['deletado_com_sucesso']]);
@@ -193,7 +181,7 @@ class CofresController extends Controller {
             return;
         }
 
-        if ($_SERVER['REQUEST_METHOD'] !== 'DELETE') {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
             http_response_code(405);
             echo json_encode([ 'resposta' => $this->mensagensModel['cofre']['deletar']['metodo_invalido'] ]);
             return;
@@ -205,41 +193,45 @@ class CofresController extends Controller {
 
             if (!$cofre) {
                 http_response_code(404);
-                echo json_encode([ 'resposta' => $this->mensagensModel['cofre']['deletar']['id_invalido'] ]);
+                echo json_encode([ 'resposta' => $this->mensagensModel['cofre']['resgatar']['erro_interno'] ]);
                 return;
             }
-            else {
-                if ($cofre['valor_total'] == 0) {
-                    $cofreModel->excluirCofre($id, $this->idUsuarioLogado);
-                    echo json_encode(['resposta' => $this->mensagensModel['cofre']['deletar']['deletado_com_sucesso']]);
-                }
-                else if ($cofre['valor_total'] > 0) {
-                    $cofreModel->alterarStatusPorId($id, "cancelado", $this->idUsuarioLogado);
+            
+            if ($cofre['valor_total'] == 0) {
+                echo json_encode(['resposta' => $this->mensagensModel['cofre']['resgatar']['cofre_vazio']]);
+                return;
+            }
+            else if ($cofre['valor_total'] > 0) {
+                $categoriaModel = new Categoria();
+                $categoria = $categoriaModel->getIdCategoriaCofre($this->idUsuarioLogado);
+                $categoriaResgate = $categoriaModel->getIdCategoriaResgateCofre($this->idUsuarioLogado);
 
-                    $categoriaModel = new Categoria();
-                    $categoria = $categoriaModel->getIdCategoriaCofre($this->idUsuarioLogado);
+                $dadosTransacaoReceita = [
+                    'id_categoria' => $categoriaResgate,
+                    'id_conta_metodo' => $cofre['id_conta_resgate'],
+                    'descricao' => "Resgate do cofre: " . $cofre['nome'],
+                    'data_transacao' => date('Y-m-d'),
+                    'valor_total' => $cofre['valor_total'],
+                    'tenant_id' => $this->idUsuarioLogado
+                ];
 
-                    $dados = [
-                        'id_categoria' => $categoria,
-                        'id_conta_metodo' => 1,
-                        'descricao' => "Resgate do cofre: " . $cofre['nome'],
-                        'data_transacao' => date('Y-m-d'),
-                        'valor_total' => $cofre['valor_total'],
-                        'tenant_id' => $this->idUsuarioLogado
-                    ];
+                $dadosTransacaoCofre = [
+                    'id_categoria' => $categoriaResgate,
+                    'id_conta_metodo' => null,
+                    'descricao' => "Resgate do cofre: " . $cofre['nome'],
+                    'data_transacao' => date('Y-m-d'),
+                    'valor_total' => -abs($cofre['valor_total']),
+                    'tenant_id' => $this->idUsuarioLogado
+                ];
 
-                    $transacaoModel = new Transacao();
-                    $transacaoModel->salvarTransacaoReceita($dados);
-
-                    echo json_encode(['resposta' => $this->mensagensModel['cofre']['deletar']['deletado_com_sucesso']]);
-                }
+                $cofreModel->resgatarSaldoCofre($id, $dadosTransacaoReceita, $dadosTransacaoCofre, $this->idUsuarioLogado);
             }
 
-            echo json_encode(['resposta' => $this->mensagensModel['cofre']['deletar']['deletado_com_sucesso']]);
+            echo json_encode(['resposta' => $this->mensagensModel['cofre']['resgatar']['resgate_com_sucesso']]);
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode([
-                'resposta' => $this->mensagensModel['cofre']['deletar']['erro_interno'],
+                'resposta' => $this->mensagensModel['cofre']['resgatar']['erro_interno'],
                 'detalhes' => $e->getMessage()
             ]);
         }
