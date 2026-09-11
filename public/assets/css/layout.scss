@@ -1447,10 +1447,9 @@ header {
             flex-direction: column;
             gap: 1rem;
 
-                .btn-salvar, .btn-fechar {
-                    min-width: max-content;
-                    width: 100%;
-                }
+            .btn-salvar, .btn-fechar {
+                min-width: max-content;
+                width: 100%;
             }
         }
     }

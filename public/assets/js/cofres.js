@@ -263,7 +263,22 @@ async function exibirCofreCorreto(idCofre) {
         if (c.transacoes && c.transacoes.length > 0) {
             c.transacoes.forEach(t => {
                 const tr = document.createElement('tr');
-                tr.innerHTML = `
+
+                if (t.valor_total <= 0) {
+                    tr.innerHTML = `
+                    <td style="padding: 0.75rem; border-bottom: 1px solid var(--divisor-color); font-size: 0.85rem;">
+                        ${formatarData(t.data_transacao)}
+                    </td>
+                    <td style="padding: 0.75rem; border-bottom: 1px solid var(--divisor-color); font-size: 0.85rem;">
+                        ${t.descricao || 'Aporte'}
+                    </td>
+                    <td style="padding: 0.75rem; border-bottom: 1px solid var(--divisor-color); font-size: 0.85rem; text-align: right; color: var(--text-danger); font-weight: 600;">
+                        ${formatarMoeda(t.valor_total).replace('-', '- ')}
+                    </td>
+                    `;
+                }
+                else {
+                    tr.innerHTML = `
                     <td style="padding: 0.75rem; border-bottom: 1px solid var(--divisor-color); font-size: 0.85rem;">
                         ${formatarData(t.data_transacao)}
                     </td>
@@ -273,7 +288,8 @@ async function exibirCofreCorreto(idCofre) {
                     <td style="padding: 0.75rem; border-bottom: 1px solid var(--divisor-color); font-size: 0.85rem; text-align: right; color: var(--text-especial); font-weight: 600;">
                         + ${formatarMoeda(t.valor_total)}
                     </td>
-                `;
+                    `;
+                }
                 tbody.appendChild(tr);
             });
         } else {

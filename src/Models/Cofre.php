@@ -10,6 +10,14 @@ class Cofre extends Model {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC); 
     }
+   
+    public function selectNomesCofresAtivos($tenantId) {
+        $query = "SELECT id, nome FROM cofres where tenant_id = :tenant_id and status = 'ativo'";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':tenant_id', $tenantId);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); 
+    }
 
     public function selectAllCofres($tenantId) {
         $query = "
@@ -24,6 +32,30 @@ class Cofre extends Model {
             left join t_cofres tc on c.id = tc.id_cofre
             left join transacoes t on tc.id_transacao = t.id
             where c.tenant_id = :tenant_id
+            group by 
+                c.id,
+                c.nome,
+                c.valor_meta;
+            ";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->bindValue(':tenant_id', $tenantId);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC); 
+    }
+
+    public function selectAllCofresAtivos($tenantId) {
+        $query = "
+            select 
+                c.id,
+                c.nome,
+                c.valor_meta,
+                c.local,
+                c.status,
+                coalesce(SUM(t.valor_total), 0) as valor_total
+            from cofres c
+            left join t_cofres tc on c.id = tc.id_cofre
+            left join transacoes t on tc.id_transacao = t.id
+            where c.tenant_id = :tenant_id and c.status = 'ativo'
             group by 
                 c.id,
                 c.nome,
@@ -144,10 +176,10 @@ class Cofre extends Model {
                 'id_cofre'  => $idCofre,
                 'tenant_id' => $tenantId
             ]);
-
+                            
             // 4. Cria a transação de RECEITA (positiva) devolvendo o dinheiro
-            $queryTransacaoReceita = "INSERT INTO transacoes (id_categoria, id_conta_metodo, descricao, data_transacao, valor_total, tenant_id)
-                                    VALUES (:id_categoria, :id_conta_metodo, :descricao, :data_transacao, :valor_total, :tenant_id)";
+            $queryTransacaoReceita = "INSERT INTO transacoes (id_categoria, id_conta_metodo, descricao, data_transacao, valor_total, tenant_id, bloqueada)
+                                    VALUES (:id_categoria, :id_conta_metodo, :descricao, :data_transacao, :valor_total, :tenant_id, true)";
             $stmtReceita = $this->pdo->prepare($queryTransacaoReceita);
             $stmtReceita->execute([
                 'id_categoria'    => $dadosReceita['id_categoria'],

@@ -31,6 +31,28 @@ class CofresController extends Controller {
         }
         exit;
     }
+    
+    public function selectNomesCofresAtivos() {
+        header('Content-Type: application/json');
+
+        try {
+            $cofreModel = new Cofre();
+            $cofres = $cofreModel->selectNomesCofresAtivos($this->idUsuarioLogado);
+            
+            echo json_encode([
+                'resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['busca_com_sucesso'],
+                'cofres' => $cofres,
+            ]);
+
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode([
+                'resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['erro_interno'],
+                'detalhes' => $e->getMessage()
+            ]);
+        }
+        exit;
+    }
 
     public function selectAllCofres() {
         header('Content-Type: application/json');
