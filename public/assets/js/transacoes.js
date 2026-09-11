@@ -407,7 +407,7 @@ async function receberDadosDoBotao(botao) {
             'R': '/categorias/selectDadosReceita',
             'D': '/categorias/selectDadosDespesa',
             'I': '/classesInvestimento/selectDados',
-            'C': '/cofres/selectNomesCofres'
+            'C': '/cofres/selectNomesCofresAtivos'
         };
 
         const rotaAlvo = rotasEspecificas[tipo];
@@ -522,8 +522,10 @@ function preencherTransacoes(transacoes, tipo) {
         tdAcoes.classList.add('col-acoes');
         tdAcoes.innerHTML = `
             <button value="${trans.id}" class="btn-linha edit js-abrir-modal-passando-tipo" data-tipo="${trans.categoria_tipo}" data-target="modal-editar-transacao" title="Editar"><i class="bi bi-pencil"></i></button>
-            <button value="${trans.id}" class="btn-linha delete js-abrir-modal-passando-value" data-target="modal-excluir-transacao" title="Excluir"><i class="bi bi-trash3"></i></button>
+            ${trans.bloqueada == false ? '<button value="${trans.id}" class="btn-linha delete js-abrir-modal-passando-value" data-target="modal-excluir-transacao" title="Excluir"><i class="bi bi-trash3"></i></button>' : ''}
         `;
+
+        console.log(trans);
     });
 
     atualizarDataAtual(tipo);

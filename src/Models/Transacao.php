@@ -5,9 +5,9 @@ class Transacao extends Model {
     
     public function selectAllTransacoes($tenantId) {
         $query = "
-            SELECT t.id, t.data_transacao, t.descricao, t.valor_total, 
+            SELECT t.id, t.data_transacao, t.descricao, t.valor_total, t.bloqueada,
                    c.nome AS categoria_nome, c.tipo AS categoria_tipo, 
-                   cm.nome AS conta_nome 
+                   cm.nome AS conta_nome
             FROM transacoes t 
             INNER JOIN categorias c ON t.id_categoria = c.id 
             LEFT JOIN contas_metodos cm ON t.id_conta_metodo = cm.id 
@@ -24,7 +24,7 @@ class Transacao extends Model {
 
     public function select100Transacoes($tenantId) {
         $query = "
-            SELECT t.id, t.data_transacao, t.descricao, t.valor_total, 
+            SELECT t.id, t.data_transacao, t.descricao, t.valor_total, t.bloqueada,
                    c.nome AS categoria_nome, c.tipo AS categoria_tipo, 
                    cm.nome AS conta_nome 
             FROM transacoes t 
