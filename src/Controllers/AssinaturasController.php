@@ -1,6 +1,6 @@
 <?php
 require_once __DIR__ . '/Controller.php';
-require_once __DIR__ . '/../Models/Assinatura.php'; // Crie este model futuramente
+require_once __DIR__ . '/../Models/Assinatura.php';
 
 class AssinaturasController extends Controller {
 
@@ -10,6 +10,7 @@ class AssinaturasController extends Controller {
 
     public function selectAll() {
         header('Content-Type: application/json');
+
         try {
             $assinaturaModel = new Assinatura();
             $assinaturas = $assinaturaModel->selectAllAssinaturas($this->idUsuarioLogado);
@@ -18,6 +19,7 @@ class AssinaturasController extends Controller {
                 'resposta' => $this->mensagensModel['silenciosas']['selecionar_dados']['busca_com_sucesso'],
                 'assinaturas' => $assinaturas,
             ]);
+
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode([
@@ -31,10 +33,17 @@ class AssinaturasController extends Controller {
     public function salvar() {
         header('Content-Type: application/json');
 
+        // Sanitização e validação dos dados vindos do JS
         $nome = trim(filter_input(INPUT_POST, 'nomeAssinatura', FILTER_SANITIZE_SPECIAL_CHARS) ?? '');
-        $valor = trim(filter_input(INPUT_POST, 'valorAssinatura', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION) ?? '');
-        $dia = trim(filter_input(INPUT_POST, 'diaVencimento', FILTER_SANITIZE_NUMBER_INT) ?? '');
-        $conta_id = trim(filter_input(INPUT_POST, 'metodoContaAssinatura', FILTER_SANITIZE_NUMBER_INT) ?? '');
+        $valor = filter_input(INPUT_POST, 'valorAssinatura', FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
+        $dia = filter_input(INPUT_POST, 'diaVencimento', FILTER_SANITIZE_NUMBER_INT);
+        $conta_id = filter_input(INPUT_POST, 'metodoContaAssinatura', FILTER_SANITIZE_NUMBER_INT);
+
+        // Crítica de segurança: Impede gravação se algum campo essencial falhar na validação
+        if (empty($nome) || empty($valor) || empty($dia) || empty($conta_id)) {
+            echo json_encode(['resposta' => $this->mensagensModel['genericas']['formulario_incompleto']]);
+            return;
+        }
 
         $dados = [
             'nome' => $nome,
@@ -48,11 +57,14 @@ class AssinaturasController extends Controller {
         try {
             $assinaturaModel = new Assinatura();
             $assinaturaModel->salvarAssinatura($dados);
-            echo json_encode(['resposta' => ['sucesso' => true, 'msgTipo' => 'success', 'mensagem' => 'Assinatura registrada!']]);
+            
+            echo json_encode([
+                'resposta' => ['sucesso' => true, 'msgTipo' => 'success', 'mensagem' => 'Assinatura registrada!']
+            ]);
         } catch (Exception $e) {
             http_response_code(500);
             echo json_encode([
-                'resposta' => ['sucesso' => false, 'msgTipo' => 'error', 'mensagem' => 'Erro ao salvar.'],
+                'resposta' => ['sucesso' => false, 'msgTipo' => 'error', 'mensagem' => 'Erro ao salvar assinatura.'],
                 'detalhes' => $e->getMessage()
             ]);
         }
