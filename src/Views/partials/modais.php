@@ -770,6 +770,46 @@
 </article>
 
 
+<!-- MODAL DE DETALHES DA ASSINATURA -->
+ 
+<article class="modal-backdrop" id="modal-detalhes-assinatura">
+    <div class="modal-container-filter">
+        <div class="modal-header">
+            <h1 style="margin: 0;">Detalhes da Assinatura</h1>
+            <i class="bi bi-x-lg js-fechar-modal" data-target="modal-detalhes-assinatura"></i>
+        </div>
+        <hr>
+
+        <div class="modal-content">
+            <div class="header-container" style="margin-bottom: 1.5rem;">
+                <div>
+                    <h2 id="detalhesAssNome" class="loader-blur-modal-inativo" style="font-size: 1.4rem;">Nome da Assinatura</h2>
+                    <p id="detalhesAssVencimento" class="loader-blur-modal-inativo">Vence todo dia --</p>
+                </div>
+                <span id="detalhesAssStatus" class="loader-blur-modal-inativo">Status</span>
+            </div>
+
+            <div style="margin-bottom: 2rem; display: flex; justify-content: space-between; align-items: center; border: 1px solid var(--divisor-color); padding: 1.2rem; border-radius: 8px; background-color: var(--bg-input);">
+                <div>
+                    <span style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 0.2rem; font-weight: 600; text-transform: uppercase;">Valor Mensal</span>
+                    <strong id="detalhesAssValor" style="font-size: 1.6rem; color: var(--text-danger);" class="loader-blur-modal-inativo">R$ 0,00</strong>
+                </div>
+                <div style="text-align: right;">
+                    <span style="font-size: 0.85rem; color: var(--text-secondary); display: block; margin-bottom: 0.2rem; font-weight: 600; text-transform: uppercase;">Pagamento via</span>
+                    <strong id="detalhesAssConta" style="font-size: 1.1rem; color: var(--text-primary);" class="loader-blur-modal-inativo">Carregando...</strong>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Botões de Ação -->
+        <div class="btn-container-cofre">
+            <button type="button" id="btnAlternarStatusAssinatura" class="btn-salvar outline loader-blur-modal-inativo" style="width: 100%;">Cancelar Assinatura</button>
+            <button type="button" class="btn-fechar js-fechar-modal" data-target="modal-detalhes-assinatura">Fechar</button>
+        </div>
+    </div>
+</article>
+
+
 <!-- FEEDBACK POPUP -->
 <div class="popup-feedback-container" id="popup-feedback-container">
 </div>

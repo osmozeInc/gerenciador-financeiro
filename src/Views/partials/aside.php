@@ -27,6 +27,11 @@ $urlAtual = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
                 <p class="menu-item-text">Investimentos</p>
                 <i class="bi bi-chevron-right"></i>
             </a>
+            <a href="/assinaturas" class="menu-item <?= $urlAtual === '/assinaturas' ? 'active' : ''; ?>">
+                <i class="bi bi-list-check"></i>
+                <p class="menu-item-text">Assinaturas</p>
+                <i class="bi bi-chevron-right"></i>
+            </a>
             <a href="/cofres" class="menu-item <?= $urlAtual === '/cofres' ? 'active' : ''; ?>">
                 <i class="bi bi-piggy-bank"></i>
                 <p class="menu-item-text">Cofres</p>
