@@ -12,6 +12,7 @@
   --bg-btn-invest: #085ec1;
   --bg-btn-hover: #f3f4f6;
   --bg-info: #f0f0f0;
+  --bg-block: #e8e8e8;
   --divisor-color: #727272;
   --border-color: #e5e7eb;
   --border-btn-color: #ccc;
@@ -1730,14 +1731,7 @@ header nav a.active {
   flex-direction: column;
   gap: 1rem;
 }
-.modal-backdrop .modal-container-filter .btn-container-cofre .btn-row, .modal-backdrop .modal-delete-container .btn-container-cofre .btn-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  gap: 1rem;
-}
-.modal-backdrop .modal-container-filter .btn-container-cofre .btn-row .btn-salvar, .modal-backdrop .modal-container-filter .btn-container-cofre .btn-row .btn-fechar, .modal-backdrop .modal-delete-container .btn-container-cofre .btn-row .btn-salvar, .modal-backdrop .modal-delete-container .btn-container-cofre .btn-row .btn-fechar {
+.modal-backdrop .modal-container-filter .btn-container-cofre .btn-salvar, .modal-backdrop .modal-container-filter .btn-container-cofre .btn-fechar, .modal-backdrop .modal-delete-container .btn-container-cofre .btn-salvar, .modal-backdrop .modal-delete-container .btn-container-cofre .btn-fechar {
   min-width: -moz-max-content;
   min-width: max-content;
   width: 100%;
@@ -1847,6 +1841,12 @@ header nav a.active {
 
 .bloqueado {
   pointer-events: none !important;
+}
+
+.bloqueado-cinza {
+  cursor: not-allowed !important;
+  background-color: var(--bg-block) !important;
+  color: var(--text-secondary) !important;
 }
 
 .uppercase {

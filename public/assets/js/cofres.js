@@ -2,8 +2,9 @@
 import * as utils from "/assets/js/utils.js";
 import { abrirModal, fecharModal, abrirModalPorId } from "/assets/js/modais.js";
 
-let cofres = []; // Variável global para armazenar os cofres
-let cofresAtivos = []; // Variável global para armazenar os cofres
+let cofres = [];
+let cofresAtivos = [];
+let cofresConcluidos = [];
 
 document.addEventListener('DOMContentLoaded', async function() {
     try {
@@ -14,6 +15,7 @@ document.addEventListener('DOMContentLoaded', async function() {
         
         cofres = jsonCofres.cofres;
         cofresAtivos = jsonCofres.cofres.filter(cofre => cofre.status !== 'cancelado');
+        cofresConcluidos = jsonCofres.cofres.filter(cofre => cofre.status === 'completo' && cofre.status === 'concluido');
 
         if (!jsonCofres?.resposta?.sucesso) {
             utils.feedbackPopup(json.resposta.msgTipo, json.resposta.mensagem);
@@ -24,7 +26,8 @@ document.addEventListener('DOMContentLoaded', async function() {
 
         visaoGeralCofres(cofresAtivos);
         cofreEmDestaque(cofresAtivos);
-        listarCofres(cofresAtivos);
+        listarCofresAtivos(cofresAtivos);
+        listarCofresConcluidos(cofresConcluidos);
 
     } catch (erro) {
         utils.feedbackPopup('error', 'Ocorreu um erro ao buscar os dados.');
@@ -178,12 +181,54 @@ function cofreEmDestaque(cofres) {
 }
 
 // lista todos os cofres e seu progresso
-function listarCofres(cofres) {
-    const gridCofres = document.getElementById('gridCofres');
+function listarCofresAtivos(cofres) {
+    const gridCofres = document.getElementById('gridCofresAtivos');
     gridCofres.innerHTML = '';
 
     cofres.forEach(cofre => {
         if (cofre.status !== 'ativo') return;
+
+        const card = document.createElement('div');
+        card.id = cofre.id;
+        card.className = 'cofre-card js-abrir-modal-passando-cofre';
+        card.dataset.target = 'modal-detalhes-cofre'
+
+        card.innerHTML = `
+            <div class="cofre-header">
+                <span class="cofre-title">${cofre.nome}</span>
+                <span class="cofre-local">${cofre.local}</span>
+            </div>
+            <div class="cofre-valores">
+                <span class="valor-atual">${Number(cofre.valor_total).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+                <span class="valor-meta">/ ${Number(cofre.valor_meta).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })}</span>
+            </div>
+            <div>
+                <div class="progress-container">
+                    <div class="progress-bar" style="width: ${(cofre.valor_total / cofre.valor_meta) * 100}%"></div>
+                </div>
+                <div class="progress-text">${((cofre.valor_total / cofre.valor_meta) * 100).toFixed(0)}% Alcançado</div>
+            </div>
+        `;
+        gridCofres.appendChild(card);
+    });
+}
+
+// lista todos os cofres e seu progresso
+function listarCofresConcluidos(cofres) {
+    if (!cofres || cofres.length === 0) {
+    const secaoCofres = document.getElementById('sectionCofresConcluidos');
+        secaoCofres.classList.add('hidden');
+        return;
+    }
+
+    const secaoCofres = document.getElementById('sectionCofresConcluidos');
+    secaoCofres.classList.remove('hidden');
+
+    const gridCofres = document.getElementById('gridCofresConcluidos');
+    gridCofres.innerHTML = '';
+
+    cofres.forEach(cofre => {
+        if (cofre.status !== 'completo' && cofre.status !== 'concluido') return;
 
         const card = document.createElement('div');
         card.id = cofre.id;
@@ -216,7 +261,7 @@ async function exibirCofreCorreto(idCofre) {
         const jsonCofre = await utils.apiFetch(`/cofres/selectCofre/${idCofre}`);
 
         if (!jsonCofre || !jsonCofre.resposta || !jsonCofre.resposta.sucesso) {
-            utils.feedbackPopup('error', 'Erro ao carregar os detalhes do cofre.');
+            utils.feedbackPopup(jsonCofre.resposta.msgTipo, jsonCofre.resposta.mensagem);
             return;
         }
 
@@ -305,6 +350,7 @@ async function exibirCofreCorreto(idCofre) {
         // 6. Ajuste de Botões de Ação com base no status do cofre
         const btnExcluir = modal.querySelector('#btnExcluirCofre');
         const btnResgatar = modal.querySelector('#btnResgatarSaldo');
+        const btnFinalizar = modal.querySelector('#btnFinalizarMeta');
 
         if (c.valor_total > 0) {
             btnExcluir.classList.add('hidden');
@@ -312,6 +358,11 @@ async function exibirCofreCorreto(idCofre) {
         } else {
             btnExcluir.classList.remove('hidden');
             btnResgatar.classList.add('hidden');
+        }
+
+        if (c.valor_total <= c.valor_meta) {
+            btnFinalizar.classList.add('bloqueado-cinza');
+            btnFinalizar.innerHTML = '<i class="bi bi-lock-fill"></i> Finalizar Meta';
         }
 
 

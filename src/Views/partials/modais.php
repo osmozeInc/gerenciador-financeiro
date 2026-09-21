@@ -764,6 +764,7 @@
             <button id="btnExcluirCofre" class="btn-fechar loader-blur-modal" data-target="modal-detalhes-cofre">Excluir Cofre</button>
             <button id="btnResgatarSaldo" class="btn-fechar hidden loader-blur-modal" data-target="modal-detalhes-cofre">Resgatar Saldo</button>
             <button id="btnFinalizarMeta" class="btn-salvar loader-blur-modal">Finalizar Meta</button>
+            <button id="btnFinalizarResgatar" class="btn-salvar loader-blur-modal">Finalizar e Resgatar</button>
         </div>
     </div>
 </article>

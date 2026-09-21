@@ -259,4 +259,70 @@ class CofresController extends Controller {
         }
         exit;
     }
+
+    public function finalizarMeta($id = null) {
+        header('Content-Type: application/json');
+
+        if ($id === null || !is_numeric($id)) {
+            http_response_code(400);
+            echo json_encode([ 'resposta' => $this->mensagensModel['cofre']['buscar']['busca_vazia'] ]);
+            return;
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            http_response_code(405);
+            echo json_encode([ 'resposta' => $this->mensagensModel['cofre']['deletar']['metodo_invalido'] ]);
+            return;
+        }
+
+        try {
+            $cofreModel = new Cofre();
+            $cofre = $cofreModel->selectCofrePorId($id, $this->idUsuarioLogado);
+
+            if (!$cofre) {
+                http_response_code(404);
+                echo json_encode([ 'resposta' => $this->mensagensModel['cofre']['finalizar']['erro_interno'] ]);
+                return;
+            }
+
+            if ($cofre['valor_total'] < $cofre['valor_meta']) {
+                echo json_encode(['resposta' => $this->mensagensModel['cofre']['finalizar']['meta_nao_atingida']]);
+                return;
+            }
+            else if ($cofre['valor_total'] >= $cofre['valor_meta']) {
+                $categoriaModel = new Categoria();
+                $categoria = $categoriaModel->getIdCategoriaCofre($this->idUsuarioLogado);
+                $categoriaResgate = $categoriaModel->getIdCategoriaResgateCofre($this->idUsuarioLogado);
+
+                $dadosTransacaoReceita = [
+                    'id_categoria' => $categoriaResgate,
+                    'id_conta_metodo' => $cofre['id_conta_resgate'],
+                    'descricao' => "Resgate do cofre: " . $cofre['nome'],
+                    'data_transacao' => date('Y-m-d'),
+                    'valor_total' => $cofre['valor_total'],
+                    'tenant_id' => $this->idUsuarioLogado
+                ];
+
+                $dadosTransacaoCofre = [
+                    'id_categoria' => $categoriaResgate,
+                    'id_conta_metodo' => null,
+                    'descricao' => "Resgate do cofre: " . $cofre['nome'],
+                    'data_transacao' => date('Y-m-d'),
+                    'valor_total' => -abs($cofre['valor_total']),
+                    'tenant_id' => $this->idUsuarioLogado
+                ];
+
+                $cofreModel->resgatarSaldoCofre($id, $dadosTransacaoReceita, $dadosTransacaoCofre, $this->idUsuarioLogado);
+            }
+
+            echo json_encode(['resposta' => $this->mensagensModel['cofre']['finalizar']['finalizado_com_sucesso']]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode([
+                'resposta' => $this->mensagensModel['cofre']['resgatar']['erro_interno'],
+                'detalhes' => $e->getMessage()
+            ]);
+        }
+        exit;
+    }
 }

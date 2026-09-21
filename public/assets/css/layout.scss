@@ -13,6 +13,7 @@
     --bg-btn-invest: #085ec1;
     --bg-btn-hover: #f3f4f6;
     --bg-info: #f0f0f0;
+    --bg-block: #e8e8e8;
 
     --divisor-color: #727272;
     --border-color: #e5e7eb;
@@ -1501,6 +1502,7 @@ header {
 .visivel-block { display: block !important; }
 .visivel-flex { display: flex !important; }
 .bloqueado { pointer-events: none !important; }
+.bloqueado-cinza { cursor: not-allowed !important; background-color: var(--bg-block) !important; color: var(--text-secondary) !important; }
 .uppercase { text-transform: uppercase !important; }
 
 /* ==== CLASSES GENÉRICAS ===== */

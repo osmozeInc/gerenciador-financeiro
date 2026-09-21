@@ -169,6 +169,23 @@ class Controller {
                     'msgTipo' => 'error', 
                     'mensagem' => 'Erro interno ao realizar resgate do cofre.'
                 ]
+            ],
+            'finalizar' => [
+                'finalizado_com_sucesso' => [
+                    'sucesso' => true,
+                    'msgTipo' => 'success',
+                    'mensagem' => 'Meta finalizada com sucesso!'
+                ],
+                'meta_nao_atingida' => [
+                    'sucesso' => false,
+                    'msgTipo' => 'warning',
+                    'mensagem' => 'O cofre não atingiu o valor da meta.'
+                ],
+                'erro_interno' => [
+                    'sucesso' => false,
+                    'msgTipo' => 'error', 
+                    'mensagem' => 'Erro interno ao finalizar a meta do cofre.'
+                ]
             ]
         ],
         'conta' => [

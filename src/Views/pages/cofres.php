@@ -84,7 +84,48 @@
 
     <section>
         <h2 style="margin-bottom: 1rem;" class="loader-blur">Meus Cofres</h2>
-        <div class="cofres-grid" id="gridCofres">
+        <div class="cofres-grid" id="gridCofresAtivos">
+
+            <div class="cofre-card loader-blur">
+                <div class="cofre-header ">
+                    <span class="cofre-title">.</span>
+                    <span class="cofre-local loader-blur">.</span>
+                </div>
+                <div class="cofre-valores">
+                    <span class="valor-atual loader-blur">.</span>
+                    <span class="valor-meta loader-blur">.</span>
+                </div>
+                <div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-text loader-blur">.</div>
+                </div>
+            </div>
+
+            <div class="cofre-card loader-blur">
+                <div class="cofre-header ">
+                    <span class="cofre-title">.</span>
+                    <span class="cofre-local loader-blur">.</span>
+                </div>
+                <div class="cofre-valores">
+                    <span class="valor-atual loader-blur">.</span>
+                    <span class="valor-meta loader-blur">.</span>
+                </div>
+                <div>
+                    <div class="progress-container">
+                        <div class="progress-bar" style="width: 0%"></div>
+                    </div>
+                    <div class="progress-text loader-blur">.</div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="hidden" id="sectionCofresConcluidos">
+        <h2 style="margin-bottom: 1rem;" class="loader-blur">Cofres Concluidos</h2>
+        <div class="cofres-grid" id="gridCofresConcluidos">
 
             <div class="cofre-card loader-blur">
                 <div class="cofre-header ">
