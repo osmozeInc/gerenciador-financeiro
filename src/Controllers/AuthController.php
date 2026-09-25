@@ -12,6 +12,10 @@ class AuthController extends Controller {
         
         $this->render('login', false); 
     }
+    
+    public function cadastro() {
+        $this->render('cadastro', false); 
+    }
 
     public function processar() {
 
@@ -47,6 +51,14 @@ class AuthController extends Controller {
             header('Location: /auth/login');
         }
         exit;
+    }
+
+    public function registrar() {
+        if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+            header('Location: /auth/cadastro');
+            exit;
+        }
+        // A lógica de salvar no banco de dados entrará aqui
     }
 
     public function sair() {
