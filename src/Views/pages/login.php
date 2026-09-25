@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login - Gerenciador Financeiro</title>
+    <title>Login - Pro Gestão</title>
     
-    <!-- Puxa o seu CSS global para herdar as variáveis de cor -->
-    <link rel="stylesheet" href="/assets/css/style.css"> 
-    
+    <!-- CSS da página de autenticação -->
     <link rel="stylesheet" href="/assets/css/login.css">
-
+    
+    <!-- Bootstrap Icons CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
 </head>
 <body class="login-page-split">
     <div class="split-layout">
@@ -19,15 +19,13 @@
             <div class="login-card fade-in">
                 
                 <div class="login-header">
-                    <div class="logo-text">
-                        <!--i class="bi bi-wallet2"></i> <span>Sistema Fin</span-->
-                    </div>
+                    
                     <h1>Acesse sua conta</h1>
-                    <p>Não tem uma conta? <a href="/cadastro">Cadastre-se</a></p>
+                    <p>Não tem uma conta? <a href="/auth/cadastro">Cadastre-se</a></p>
                 </div>
 
                 <?php if (isset($_SESSION['erro_login'])): ?>
-                    <div class="erro-msg">
+                    <div class="erro-msg visivel">
                         <i class="bi bi-exclamation-triangle-fill"></i>
                         <?= htmlspecialchars($_SESSION['erro_login']); ?>
                     </div>
@@ -38,7 +36,7 @@
                     
                     <div class="input-group">
                         <label for="email">E-mail</label>
-                        <input type="email" id="email" name="email" required autocomplete="email" placeholder="exemplo@gmail.com">
+                        <input type="email" id="email" name="email" required autocomplete="email" placeholder="exemplo@email.com">
                     </div>
                     
                     <div class="input-group">
@@ -59,12 +57,10 @@
                     
                     <button type="submit" class="btn-submit">Entrar no Sistema</button>
                     
-                    <!-- Divisor Social -->
                     <div class="divider">
                         <span>OU</span>
                     </div>
 
-                    <!-- Botões Sociais -->
                     <div class="social-login-column">
                         <button type="button" class="btn-social">
                             <svg version="1.1" width="20" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
@@ -80,40 +76,42 @@
             </div>
         </main>
 
-        <!-- Lado da Marca e Benefícios (Direita) -->
+        <!-- Lado da Marca e Benefícios (Direita) com Glassmorphism -->
         <aside class="branding-side">
+            <div class="glow-orb orb-1"></div>
+            <div class="glow-orb orb-2"></div>
+
             <div class="branding-content fade-in-delayed">
                 
-                <!-- Mockup/Card Decorativo -->
-                <div class="feature-card-mockup">
-                    <div class="mockup-header">
-                        <h2>Alcance suas metas mais rápido</h2>
-                        <p>Acompanhe seus investimentos, organize seus cofres e não perca prazos.</p>
+                <!-- Mockup de Dashboard Glassmorphism -->
+                <div class="floating-dashboard">
+                    <div class="dash-header">
+                        <span class="dot"></span>
+                        <span class="dot"></span>
+                        <span class="dot"></span>
                     </div>
-                    <div class="mockup-visual">
-                        <!-- Gráfico simplificado com SCSS -->
-                        <div class="mini-chart">
+                    <div class="dash-body">
+                        <span class="dash-label">Rendimento Global</span>
+                        <h2 class="dash-value">+ 14.8%</h2>
+                        
+                        <div class="dash-chart">
                             <div class="bar bar-1"></div>
                             <div class="bar bar-2"></div>
                             <div class="bar bar-3"></div>
                             <div class="bar bar-4"></div>
-                        </div>
-                        <div class="mini-stats">
-                            <span>Rendimento Global</span>
-                            <strong>+ 14.8%</strong>
+                            <div class="bar bar-5"></div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Textos de Apresentação -->
                 <div class="presentation-text">
-                    <h3>Descubra o controle financeiro real.</h3>
-                    <p>Análises precisas e dashboards intuitivos para você tomar sempre a melhor decisão para o seu patrimônio.</p>
+                    <h3>Bem-vindo de volta<br>ao controle real.</h3>
                 </div>
                 
             </div>
         </aside>
 
     </div>
+    
 </body>
 </html>
